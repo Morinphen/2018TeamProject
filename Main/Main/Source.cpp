@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include<time.h>
 //‚ ‚ ‚ ‚ ‚ ‚ 
+//aaasdsada
 int main(void)
 {
 	srand((unsigned)time(NULL));
