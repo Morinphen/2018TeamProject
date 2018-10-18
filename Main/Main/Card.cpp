@@ -16,6 +16,8 @@ void CObjCard::Init()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	bango = sc->cardcou;
+
+	
 }
 
 //ƒAƒNƒVƒ‡ƒ“

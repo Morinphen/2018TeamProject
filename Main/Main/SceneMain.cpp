@@ -31,6 +31,9 @@ void CSceneMain::InitScene()
 
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 1);
+
+	CObjmouse* obj_mouse = new CObjmouse();
+	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
 }
 
 //ゲームメイン実行中メソッド
