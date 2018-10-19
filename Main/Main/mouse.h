@@ -16,5 +16,6 @@ class CObjmouse : public CObj
 		void Draw();
 
 	private:
-		POINT point;
+		float m_mouse_x;
+		float m_mouse_y;
 };
