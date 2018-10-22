@@ -4,22 +4,16 @@
 using namespace GameL;
 
 //オブジェクト　デッキ
-class CObjCard :public CObj
+class CObjMau :public CObj
 {
 public:
-	CObjCard(float x,float y);
-	~CObjCard() {};
+	CObjMau() {};
+	~CObjMau() {};
 	void Init();
 	void Action();
 	void Draw();
+
 private:
-
-	int m_x, m_y;
-	int basyo;
-	int bango;
-	int genba;
-	int test;
-	int taka;
-
-	int test2;
+	float m_x;		//主人公機のｘ方向移動変数
+	float m_y;		//主人公機のｙ方向移動用変数
 };

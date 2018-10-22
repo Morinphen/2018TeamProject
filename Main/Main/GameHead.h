@@ -8,6 +8,7 @@ enum OBJ_NAME
 	//OBJ_○○と表記
 	OBJ_DEKC,
 	OBJ_CARD,
+	OBJ_PLAYER,
 };
 //------------------------------------------------
 
@@ -27,6 +28,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLUE,
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
+	ELEMENT_CARD,
 };
 //------------------------------------------------
 
@@ -53,6 +55,7 @@ struct UserData
 //ゲームシーンオブジェクトヘッダ------------------
 #include"Deck.h"
 #include"Card.h"
+#include"testmau.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

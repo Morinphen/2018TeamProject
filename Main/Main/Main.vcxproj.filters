@@ -66,6 +66,9 @@
     <ClCompile Include="Card.cpp">
       <Filter>ソース ファイル\カード関連</Filter>
     </ClCompile>
+    <ClCompile Include="testmau.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>ソース ファイル\カード関連</Filter>
+    </ClInclude>
+    <ClInclude Include="testmau.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

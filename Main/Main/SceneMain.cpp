@@ -28,9 +28,13 @@ CSceneMain::~CSceneMain()
 void CSceneMain::InitScene()
 {
 	Draw::LoadImageW(L"image2.png", 0, TEX_SIZE_512);
+	Draw::LoadImageW(L"sakura.png", 1, TEX_SIZE_512);
 
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 1);
+
+	CObjMau*obja = new CObjMau();
+	Objs::InsertObj(obja, OBJ_PLAYER, 11);
 }
 
 //ゲームメイン実行中メソッド
