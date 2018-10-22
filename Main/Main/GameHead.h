@@ -8,6 +8,7 @@ enum OBJ_NAME
 	//OBJ_○○と表記
 	OBJ_DEKC,
 	OBJ_CARD,
+	OBJ_MAUSE,
 	OBJ_PLAYER,
 };
 //------------------------------------------------
@@ -55,6 +56,7 @@ struct UserData
 //ゲームシーンオブジェクトヘッダ------------------
 #include"Deck.h"
 #include"Card.h"
+#include"mouse.h"
 #include"testmau.h"
 //------------------------------------------------
 

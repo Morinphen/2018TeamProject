@@ -13,11 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\カード関連">
-      <UniqueIdentifier>{e76c95fd-60bf-453f-91e8-1e0ed38f4d5d}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Card.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -57,7 +63,7 @@
     <ClCompile Include="GameL\WinInputs.cpp">
       <Filter>リソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
+    <ClCompile Include="mouse.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Deck.cpp">
@@ -71,6 +77,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameHead.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
     <ClInclude Include="GameL\Audio.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
@@ -104,16 +116,16 @@
     <ClInclude Include="GameL\WinInputs.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="GameHead.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Card.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Deck.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Deck.h">
+    <ClInclude Include="mouse.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
@@ -122,10 +134,5 @@
     <ClInclude Include="testmau.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="GameL\Draw2DTex.hlsl">
-      <Filter>リソース ファイル</Filter>
-    </FxCompile>
   </ItemGroup>
 </Project>
