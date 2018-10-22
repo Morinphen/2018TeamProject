@@ -14,4 +14,5 @@ class CSceneMain:public CScene
 		void InitScene();//ゲームメインの初期化メソッド
 		void Scene();//ゲームメインのジッコウチュウメソッド
 	private:
+
 };

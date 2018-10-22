@@ -18,4 +18,6 @@ private:
 	int bango;
 	int genba;
 	int test;
+	int playertrun;
+	int enemytrun;
 };

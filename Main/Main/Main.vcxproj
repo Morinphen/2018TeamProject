@@ -128,10 +128,12 @@
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
     <ClCompile Include="mouse.cpp" />
+    <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
@@ -150,7 +152,9 @@
     <ClInclude Include="GameL\WinInputs.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="mouse.h" />
+    <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="SceneMain.h" />
+    <ClInclude Include="SceneTitle.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="GameL\Draw2DTex.hlsl" />

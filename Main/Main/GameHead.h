@@ -9,6 +9,8 @@ enum OBJ_NAME
 	OBJ_DEKC,
 	OBJ_CARD,
 	OBJ_MAUSE,
+
+	OBJ_TITLE,
 };
 //------------------------------------------------
 
@@ -55,13 +57,16 @@ struct UserData
 #include"Deck.h"
 #include"Card.h"
 #include"mouse.h"
+
+#include"ObjTitle.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include"SceneMain.h"
+#include"SceneTitle.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneTitle
 //-----------------------------------------------

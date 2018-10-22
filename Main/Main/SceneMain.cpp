@@ -5,6 +5,7 @@
 //GameLで使用するヘッダー
 #include"GameL\DrawTexture.h"
 #include"GameL\SceneObjManager.h"
+#include "GameL\DrawFont.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -34,6 +35,7 @@ void CSceneMain::InitScene()
 
 	CObjmouse* obj_mouse = new CObjmouse();
 	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
+
 }
 
 //ゲームメイン実行中メソッド
