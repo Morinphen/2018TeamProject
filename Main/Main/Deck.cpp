@@ -12,10 +12,10 @@
 //イニシャライズ
 void CObjDekc::Init()
 {
-	x = 700;
-	y = 480;
-	m_x = 300;
-	m_y = 480;
+	x = 900;
+	y = 630;
+	m_x = 500;
+	m_y = 630;
 	m_f = true;
 	stop = 0;
 	cardcou = 0;

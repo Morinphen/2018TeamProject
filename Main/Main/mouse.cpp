@@ -23,8 +23,8 @@ void CObjmouse::Init()
 void CObjmouse::Action()
 {
 	//マウス座標取得
-	m_mouse_x =(float) Input::GetPosX() - 16.0f;
-	m_mouse_y =(float) Input::GetPosY() - 16.0f;
+	m_mouse_x =(float) Input::GetPosX();
+	m_mouse_y =(float) Input::GetPosY();
 
 	//当たり判定更新
 	CHitBox*hit = Hits::GetHitBox(this);
