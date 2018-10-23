@@ -36,8 +36,8 @@ void CSceneMain::InitScene()
 	CObjmouse* obj_mouse = new CObjmouse();
 	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
 
-	CObjMau*obja = new CObjMau();
-	Objs::InsertObj(obja, OBJ_PLAYER, 11);
+	//CObjMau*obja = new CObjMau();
+	//Objs::InsertObj(obja, OBJ_PLAYER, 11);
 }
 
 //ゲームメイン実行中メソッド
