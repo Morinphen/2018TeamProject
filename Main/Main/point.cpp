@@ -38,13 +38,10 @@ void CObjpoint::Action()
 			m_point++;
 			m_p = false;
 		}
-
-
-		else
-		{
-			m_p = true;
-		}
-		m_p = false;
+	}
+	else
+	{
+		m_p = true;
 	}
 
 };
