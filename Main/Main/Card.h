@@ -20,4 +20,7 @@ private:
 	int test;
 	int playertrun;
 	int enemytrun;
+	int taka;
+
+	int test2;
 };

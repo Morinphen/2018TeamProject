@@ -33,7 +33,7 @@ void CObjpoint::Action()
 {
 	if (Input::GetVKey('P') == true)
 	{
-		if (m_p = true)
+		if (m_p == true)
 		{
 			m_point++;
 			m_p = false;

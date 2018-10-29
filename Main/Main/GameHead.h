@@ -9,6 +9,7 @@ enum OBJ_NAME
 	OBJ_DEKC,
 	OBJ_CARD,
 	OBJ_MAUSE,
+	OBJ_PLAYER,
 
 	OBJ_TITLE,
 	OBJ_POINT,
@@ -31,6 +32,7 @@ enum HIT_ELEMENTS
 	ELEMENT_BLUE,
 	ELEMENT_BLACK,
 	ELEMENT_WHITE,
+	ELEMENT_CARD,
 };
 //------------------------------------------------
 
@@ -58,6 +60,7 @@ struct UserData
 #include"Deck.h"
 #include"Card.h"
 #include"mouse.h"
+#include"testmau.h"
 
 #include"ObjTitle.h"
 //------------------------------------------------
