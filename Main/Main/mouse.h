@@ -16,6 +16,7 @@ class CObjmouse : public CObj
 		void Draw();
 
 	private:
-		float m_mouse_x;
-		float m_mouse_y;
+		float m_mouse_x;//マウスのX座標
+		float m_mouse_y;//マウスのY座標
+
 };

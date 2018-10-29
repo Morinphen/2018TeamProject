@@ -15,10 +15,16 @@ public:
 	void Draw();
 
 	int cardcou;
+	int Card;
 private:
 	int x, y;
 	int m_x, m_y;
-	bool m_f;
 
+	int Cardcount;
+	int stop;
+	int Deck[40];
+	int tehuda[40];
+
+	bool m_f;
 	bool Start;
 };

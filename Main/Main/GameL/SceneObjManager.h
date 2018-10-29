@@ -27,8 +27,8 @@ namespace GameL
 			int			 GetName();
 			void		 SetStatus(bool exe);			//オブジェクトの状態変更
 			bool		 GetStatus();
-		private:
 			unsigned int m_prio;		//描画優先順位
+		private:
 			int			 m_name;		//オブジェクトの名前ID
 			bool		 m_status;		//オブジェクトの状態
 	};
