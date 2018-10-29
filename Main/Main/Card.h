@@ -15,9 +15,9 @@ public:
 
 private:
 	int m_x, m_y;
-	int basyo;
+	int Setcard;
 	int Nanber;
-	int genba;
+	int Posicard;
 	int playertrun;
 	int enemytrun;
 

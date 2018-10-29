@@ -39,18 +39,18 @@ void CObjCard::Action()
 
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 
-	basyo = sc->Cnanber;//basyo カードの位置調整変更用
+	Setcard = sc->Cnanber;//basyo カードの位置調整変更用
 
-	genba = basyo - Nanber;//genba カードの位置調整変更用２
+	Posicard = Setcard - Nanber;//genba カードの位置調整変更用２
 
-	if(basyo<=5)
+	if(Setcard <=5)
 	{
-		m_x = 100+(90*genba);
+		m_x = 250+(90* Posicard);
 	}
 
 	else{
 
-		m_x = 100 + ((450 / (basyo))*genba);
+		m_x = 250 + ((450 / (Setcard))*Posicard);
 
 	}
 
