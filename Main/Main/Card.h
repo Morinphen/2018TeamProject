@@ -12,15 +12,16 @@ public:
 	void Init();
 	void Action();
 	void Draw();
+
 private:
 	int m_x, m_y;
 	int basyo;
-	int bango;
+	int Nanber;
 	int genba;
-	int test;
 	int playertrun;
 	int enemytrun;
-	int taka;
 
-	int test2;
+	int Opdraw;
+	int Updraw;
+	int Rotdraw;
 };

@@ -17,15 +17,18 @@ CObjCard::CObjCard(float x,float y)
 void CObjCard::Init()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
-	bango = sc->cardcou;
-	test = sc->Card;
-	taka = 0;
-	test2 = 0;
-	while(test>7)
+	Nanber = sc->Cnanber;//bango 引いたカードの順番の固定
+
+	Opdraw = sc->Card;//test カード番号の保存
+	Updraw = 0;//taka カードの描画位置の調整
+	Rotdraw = 0;//test2 カードの回転描画調整
+
+	while(Opdraw>7)
 	{
-		test -= 7;
-		taka++;
+		Opdraw -= 7;
+		Updraw++;
 	}
+
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 }
 
@@ -35,9 +38,10 @@ void CObjCard::Action()
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
-	basyo = sc->cardcou;
 
-	genba = basyo - bango;
+	basyo = sc->Cnanber;//basyo カードの位置調整変更用
+
+	genba = basyo - Nanber;//genba カードの位置調整変更用２
 
 	if(basyo<=5)
 	{
@@ -48,36 +52,16 @@ void CObjCard::Action()
 
 		m_x = 100 + ((450 / (basyo))*genba);
 
-		/*else if (bango == 1) {
-			m_x = 100;
-		}
-
-		else{
-			m_x = 550;
-		}*/
 	}
-
-	/*if (genba == 0) {
-
-		if (bango == 1) {
-			;
-		}
-		else {
-			m_x = 550;
-		}
-	}
-	else {
-		m_x = 550 - (genba * 90);
-	}*/
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
 	{
-		test2 = 3;
-		SetPrio(11);
+		Rotdraw = 3;//カードを３℃回転
+		SetPrio(11);//カードの描画優先度変更
 	}
 	else
 	{
-		test2 = 0;
+		Rotdraw = 0;
 		SetPrio(10);
 	}
 
@@ -90,15 +74,15 @@ void CObjCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	src.m_top = 0.0f+ (64.0f*taka);
-	src.m_left = 0.0f + (64.0f*test);
-	src.m_right = 64.0f + (64.0f*test);
-	src.m_bottom = 64.0f+ (64.0f*taka);
+	src.m_top = 0.0f+ (64.0f*Updraw);
+	src.m_left = 0.0f + (64.0f*Opdraw);
+	src.m_right = 64.0f + (64.0f*Opdraw);
+	src.m_bottom = 64.0f+ (64.0f*Updraw);
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
 	dst.m_right = 90.0f + m_x;
 	dst.m_bottom = 120.0f + m_y;
 
-	Draw::Draw(0, &src, &dst, c, test2);
+	Draw::Draw(0, &src, &dst, c, Rotdraw);
 }
