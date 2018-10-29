@@ -12,23 +12,37 @@
 //イニシャライズ
 void CObjDekc::Init()
 {
+	//x.yデッキの位置
 	x = 900;
 	y = 630;
+	//m_x,m_y カードの出現位置調整
 	m_x = 500;
 	m_y = 630;
+	//長押しの防止判定
 	m_f = true;
+
+	//stop 同じカードの出現阻止
 	stop = 0;
-	cardcou = 0;
+
+	//Cnanber カードの位置調整用
+	Cnanber = 0;
+
+	//Cardcount 現在ドローした枚数　現在プログラム作成中
 	Cardcount = 0;
+
+	//Start最初の５枚ドローのための変数
 	Start = false;
+
 	srand((unsigned)time(NULL));
 }
 
 //アクション
 void CObjDekc::Action()
 {
-	Card = rand() % 14+1;
+	Card = rand() % 14+1;//同じ番号のカード呼出
 	stop = 1;
+
+	//別のカードが出るまでループ
 	while(stop==1){
 		stop = 0;
 		Card = rand() % 14+1;
@@ -40,11 +54,13 @@ void CObjDekc::Action()
 				stop = 1;
 			}
 		}
+
 	}
 
+	//スタート処理
 	if(Start==false){
-		Deck[Cardcount] = Card;
-		cardcou++;
+		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
+		Cnanber++;
 		Cardcount++;
 		CObjCard* obj_b = new CObjCard(m_x,m_y);//カード作成
 		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
@@ -55,12 +71,12 @@ void CObjDekc::Action()
 		Start = true;
 	}
 
-	if (Input::GetVKey('Z') == true)
+	if (Input::GetVKey('Z') == true && Start == true)
 	{
 		if (m_f == true)
 		{
-			Deck[Cardcount] = Card;
-			cardcou++;
+			Deck[Cardcount] = Card;//デッキにドローしたカードを登録
+			Cnanber++;
 			Cardcount++;
 			//カード作成
 			CObjCard* obj_b = new CObjCard(300,m_y);//カード作成
@@ -73,6 +89,7 @@ void CObjDekc::Action()
 	else {
 		m_f = true;
 	}
+
 }
 
 //ドロー

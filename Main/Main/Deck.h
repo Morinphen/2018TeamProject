@@ -14,7 +14,7 @@ public:
 	void Action();
 	void Draw();
 
-	int cardcou;
+	int Cnanber;
 	int Card;
 private:
 	int x, y;
@@ -22,8 +22,8 @@ private:
 
 	int Cardcount;
 	int stop;
+
 	int Deck[40];
-	int tehuda[40];
 
 	bool m_f;
 	bool Start;
