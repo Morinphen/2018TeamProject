@@ -24,4 +24,7 @@ private:
 	int Opdraw;
 	int Updraw;
 	int Rotdraw;
+
+	bool m_r;
+	bool Summon;
 };

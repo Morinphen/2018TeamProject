@@ -1,6 +1,7 @@
 //シヨウスルヘッダーファイル
 #include"GameL\DrawTexture.h"
 #include"GameL\HitBoxManager.h"
+#include"GameL\WinInputs.h"
 #include"GameHead.h"
 #include"Card.h"
 
@@ -23,9 +24,11 @@ void CObjCard::Init()
 	Updraw = 0;//taka カードの描画位置の調整
 	Rotdraw = 0;//test2 カードの回転描画調整
 
+	Summon = false;
+
 	while(Opdraw>7)
 	{
-		Opdraw -= 7;
+		Opdraw -= 7;//x位置をずらす
 		Updraw++;
 	}
 
@@ -35,6 +38,8 @@ void CObjCard::Init()
 //アクション
 void CObjCard::Action()
 {
+	m_r = Input::GetMouButtonR();
+
 	CHitBox*hit = Hits::GetHitBox(this);
 
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
@@ -43,21 +48,26 @@ void CObjCard::Action()
 
 	Posicard = Setcard - Nanber;//genba カードの位置調整変更用２
 
-	if(Setcard <=5)
+	if(Setcard <=5 && Summon == false)
 	{
 		m_x = 250+(90* Posicard);
 	}
 
-	else{
+	else if(Summon == false){
 
 		m_x = 250 + ((450 / (Setcard))*Posicard);
-
 	}
 
-	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false)
 	{
 		Rotdraw = 3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
+		if (m_r == true)
+		{
+			Summon = true;
+			m_x = 450;
+			m_y = 400;
+		}
 	}
 	else
 	{
