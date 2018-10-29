@@ -63,7 +63,4 @@ void CObjCard::Draw()
 	dst.m_bottom = 192.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, 0.0f);
-
-	Font::StrDraw(L"00000", 700, 0, 32, c);
-	Font::StrDraw(L"É^Å[Éìêî ", 600, 30, 32, c);
 }

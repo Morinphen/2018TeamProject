@@ -6,7 +6,6 @@
 #include"GameL\DrawTexture.h"
 #include"GameL\SceneObjManager.h"
 #include "GameL\DrawFont.h"
-
 //使用するネームスペース
 using namespace GameL;
 //使用ヘッダー
@@ -28,6 +27,8 @@ CSceneMain::~CSceneMain()
 //ゲームメイン初期化メソッド
 void CSceneMain::InitScene()
 {
+	Font::SetStrTex(L"0123456789");
+
 	Draw::LoadImageW(L"image2.png", 0, TEX_SIZE_512);
 
 	CObjDekc*obj = new CObjDekc();
@@ -35,6 +36,9 @@ void CSceneMain::InitScene()
 
 	CObjmouse* obj_mouse = new CObjmouse();
 	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
+
+	CObjpoint* objt = new CObjpoint();
+	Objs::InsertObj(objt, OBJ_POINT, 11);
 
 }
 
