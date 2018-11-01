@@ -48,6 +48,11 @@ void CObjCard::Action()
 
 	Posicard = Setcard - Nanber;//genba カードの位置調整変更用２
 
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	L_position = pos->L_position;
+	S_position = pos->S_position;
+	R_position = pos->R_position;
+	
 	if(Setcard <=5 && Summon == false)
 	{
 		m_x = 250+(90* Posicard);
@@ -65,8 +70,32 @@ void CObjCard::Action()
 		if (m_r == true)
 		{
 			Summon = true;
-			m_x = 450;
-			m_y = 400;
+
+			if (L_position == false && S_position == false && R_position == false)
+			{
+				m_x = 200;
+				m_y = 200;
+
+				pos->L_position = true;
+			}
+			else if (L_position == true && S_position == false && R_position == false)
+			{
+				m_x = 400;
+				m_y = 200;
+
+				pos->S_position = true;
+			}
+			else if (L_position == true && S_position == true && R_position == false)
+			{
+				m_x = 600;
+				m_y = 200;
+
+				pos->R_position = true;
+			}
+			else
+			{
+				;
+			}
 		}
 	}
 	else

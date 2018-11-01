@@ -27,4 +27,8 @@ private:
 
 	bool m_r;
 	bool Summon;
+
+	bool L_position;
+	bool S_position;
+	bool R_position;
 };

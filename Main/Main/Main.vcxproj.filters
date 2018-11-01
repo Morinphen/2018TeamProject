@@ -78,6 +78,9 @@
     <ClCompile Include="point.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -138,6 +141,9 @@
       <Filter>ソース ファイル\Title</Filter>
     </ClInclude>
     <ClInclude Include="point.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
