@@ -77,6 +77,8 @@ void CObjCard::Action()
 				m_y = 200;
 
 				pos->L_position = true;
+
+				hit->SetPos(m_x, m_y);
 			}
 			else if (L_position == true && S_position == false && R_position == false)
 			{
@@ -84,6 +86,8 @@ void CObjCard::Action()
 				m_y = 200;
 
 				pos->S_position = true;
+
+				hit->SetPos(m_x, m_y);
 			}
 			else if (L_position == true && S_position == true && R_position == false)
 			{
@@ -91,10 +95,14 @@ void CObjCard::Action()
 				m_y = 200;
 
 				pos->R_position = true;
+
+				hit->SetPos(m_x, m_y);
 			}
 			else
 			{
-				;
+				hit->SetPos(m_x, m_y);
+
+				Summon = false;
 			}
 		}
 	}
