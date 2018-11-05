@@ -18,19 +18,24 @@ CObjCard::CObjCard(float x,float y)
 void CObjCard::Init()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	Nanber = sc->Cnanber;//bango 引いたカードの順番の固定
+	Nanber2 = han->hand[Nanber-1];
+	Nanber3 = Nanber;
 
 	Opdraw = sc->Card;//test カード番号の保存
 	Updraw = 0;//taka カードの描画位置の調整
 	Rotdraw = 0;//test2 カードの回転描画調整
 
 	Summon = false;
+	Shand = 0;
 
 	while(Opdraw>7)
 	{
 		Opdraw -= 7;//x位置をずらす
 		Updraw++;
 	}
+	m_f = false;
 
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 }
@@ -38,15 +43,33 @@ void CObjCard::Init()
 //アクション
 void CObjCard::Action()
 {
-	m_r = Input::GetMouButtonR();
+	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
+	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
+	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+	Setcard = sc->Cnanber;//Setcard カードの位置調整変更用
 
-	Setcard = sc->Cnanber;//basyo カードの位置調整変更用
+	Posicard = Setcard - Nanber;//Posicard カードの位置調整変更用２
 
-	Posicard = Setcard - Nanber;//genba カードの位置調整変更用２
+	/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
+	{
+		Reflag = true;
+		han->hensu -= 1;
+	}
+
+	if (Reflag == true)
+	{
+		Nanber3 = Nanber3;
+		Nanber--;
+		Reflag = false;
+	}*/
+
+	if (Nanber - han->hensu > 0)
+	{
+		Nanber2 = han->basyo[Nanber - Shand];
+	}
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
@@ -55,19 +78,31 @@ void CObjCard::Action()
 	
 	if(Setcard <=5 && Summon == false)
 	{
-		m_x = 250+(90* Posicard);
+		//m_x = 250+(90* Posicard);
+		for (int i = 0; i < Setcard; i++)
+		{
+			if (han->hand[i] == Nanber2)
+			{
+				m_x = 250 + (90 * i);
+			}
+		}
 	}
 
 	else if(Summon == false){
-
-		m_x = 250 + ((450 / (Setcard))*Posicard);
+		for (int i = 0; i < Setcard; i++)
+		{
+			if (han->hand[i] == Nanber2)
+			{
+				m_x = 250 + ((450 / (Setcard))*Posicard);
+			}
+		}
 	}
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false)
 	{
 		Rotdraw = 3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
-		if (m_r == true)
+		if (mou->m_r == true)
 		{
 			Summon = true;
 

@@ -16,14 +16,11 @@
     <Filter Include="ソース ファイル\Title">
       <UniqueIdentifier>{cbedf7e7-ce76-4863-b231-0ddcd2286d68}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Card">
+      <UniqueIdentifier>{805dca69-2e7c-40f4-84c6-abaaa7776081}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Card.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Deck.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneMain.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -78,6 +75,15 @@
     <ClCompile Include="point.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="HandCard.cpp">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
     <ClCompile Include="map.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -125,12 +131,6 @@
     <ClInclude Include="GameL\WinInputs.h">
       <Filter>リソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Card.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Deck.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SceneMain.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -151,6 +151,15 @@
     </ClInclude>
     <ClInclude Include="Cardlist.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="HandCard.h">
+      <Filter>ソース ファイル\Card</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@ enum OBJ_NAME
 	//OBJ_››‚Æ•\‹L
 	OBJ_DEKC,
 	OBJ_CARD,
+	OBJ_HAND,
 	OBJ_MAUSE,
 	OBJ_PLAYER,
 	OBJ_MAP,
@@ -62,6 +63,8 @@ struct UserData
 #include"Card.h"
 #include"mouse.h"
 #include"map.h"
+#include"testmau.h"
+#include"HandCard.h"
 #include"Cardlist.h"
 
 #include"ObjTitle.h"

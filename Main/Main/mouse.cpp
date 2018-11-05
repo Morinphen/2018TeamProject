@@ -12,6 +12,9 @@ using namespace GameL;
 //イニシャライズ
 void CObjmouse::Init()
 {
+	m_r = false;
+	m_f = false;
+
 	m_mouse_x = 0.0f;//マウスのX座標
 	m_mouse_y = 0.0f;//マウスのY座標
 
@@ -22,6 +25,8 @@ void CObjmouse::Init()
 //アクション
 void CObjmouse::Action()
 {
+	m_r = Input::GetMouButtonR();
+
 	//マウス座標取得
 	m_mouse_x =(float) Input::GetPosX();
 	m_mouse_y =(float) Input::GetPosY();
