@@ -16,6 +16,9 @@ public:
 
 	int Cnanber;
 	int Card;
+
+	int set;
+	int Recount;
 private:
 	int x, y;
 	int m_x, m_y;

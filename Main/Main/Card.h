@@ -17,9 +17,14 @@ private:
 	int m_x, m_y;
 	int Setcard;
 	int Nanber;
+	int Nanber2;
+	int Nanber3;
 	int Posicard;
+	int Reset;
 	int playertrun;
 	int enemytrun;
+
+	int Shand;
 
 	int Opdraw;
 	int Updraw;
@@ -27,4 +32,6 @@ private:
 
 	bool m_r;
 	bool Summon;
+	bool m_f;
+	bool Reflag;
 };

@@ -33,12 +33,16 @@ void CObjDekc::Init()
 	//Start最初の５枚ドローのための変数
 	Start = false;
 
+	set = 0;
+	Recount = 0;
+
 	srand((unsigned)time(NULL));
 }
 
 //アクション
 void CObjDekc::Action()
 {
+	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	Card = rand() % 14+1;//同じ番号のカード呼出
 	stop = 1;
 
@@ -60,6 +64,8 @@ void CObjDekc::Action()
 	//スタート処理
 	if(Start==false){
 		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
+		sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
+		sc->basyo[Cnanber] = Cnanber + 1;
 		Cnanber++;
 		Cardcount++;
 		CObjCard* obj_b = new CObjCard(m_x,m_y);//カード作成
@@ -76,6 +82,8 @@ void CObjDekc::Action()
 		if (m_f == true)
 		{
 			Deck[Cardcount] = Card;//デッキにドローしたカードを登録
+			sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
+			sc->basyo[Cnanber] = Cnanber + 1;
 			Cnanber++;
 			Cardcount++;
 			//カード作成
@@ -89,7 +97,6 @@ void CObjDekc::Action()
 	else {
 		m_f = true;
 	}
-
 }
 
 //ドロー

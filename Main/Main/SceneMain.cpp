@@ -35,6 +35,9 @@ void CSceneMain::InitScene()
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 1);
 
+	CObjHand*obj_hand = new CObjHand();
+	Objs::InsertObj(obj_hand, OBJ_HAND, 1);
+
 	CObjmouse* obj_mouse = new CObjmouse();
 	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
 
