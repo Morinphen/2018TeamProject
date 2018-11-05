@@ -34,4 +34,8 @@ private:
 	bool Summon;
 	bool m_f;
 	bool Reflag;
+
+	bool L_position;
+	bool S_position;
+	bool R_position;
 };

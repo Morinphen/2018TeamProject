@@ -71,6 +71,11 @@ void CObjCard::Action()
 		Nanber2 = han->basyo[Nanber - Shand];
 	}
 
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	L_position = pos->L_position;
+	S_position = pos->S_position;
+	R_position = pos->R_position;
+	
 	if(Setcard <=5 && Summon == false)
 	{
 		//m_x = 250+(90* Posicard);
@@ -99,22 +104,41 @@ void CObjCard::Action()
 		SetPrio(11);//カードの描画優先度変更
 		if (mou->m_r == true)
 		{
-			if (mou->m_f == false) {
-				Summon = true;
-				m_x = 450;
-				m_y = 400;
-				//han->hensu = Nanber-1;
-				//sc->Cnanber -= 1;
-				han->hand[Nanber - 1] = NULL;
-				han->basyo[Nanber - 1] = NULL;
-				han->hensu = Nanber - 1;
-				mou->m_f = true;
-				Shand++;
+			Summon = true;
+
+			if (L_position == false && S_position == false && R_position == false)
+			{
+				m_x = 200;
+				m_y = 200;
+
+				pos->L_position = true;
+
+				hit->SetPos(m_x, m_y);
 			}
-		}
-		else
-		{
-			mou->m_f = false;
+			else if (L_position == true && S_position == false && R_position == false)
+			{
+				m_x = 400;
+				m_y = 200;
+
+				pos->S_position = true;
+
+				hit->SetPos(m_x, m_y);
+			}
+			else if (L_position == true && S_position == true && R_position == false)
+			{
+				m_x = 600;
+				m_y = 200;
+
+				pos->R_position = true;
+
+				hit->SetPos(m_x, m_y);
+			}
+			else
+			{
+				hit->SetPos(m_x, m_y);
+
+				Summon = false;
+			}
 		}
 	}
 	else

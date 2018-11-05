@@ -11,6 +11,7 @@ enum OBJ_NAME
 	OBJ_HAND,
 	OBJ_MAUSE,
 	OBJ_PLAYER,
+	OBJ_MAP,
 
 	OBJ_TITLE,
 	OBJ_POINT,
@@ -61,6 +62,7 @@ struct UserData
 #include"Deck.h"
 #include"Card.h"
 #include"mouse.h"
+#include"map.h"
 #include"testmau.h"
 #include"HandCard.h"
 
