@@ -62,6 +62,7 @@ struct UserData
 #include"Card.h"
 #include"mouse.h"
 #include"map.h"
+#include"Cardlist.h"
 
 #include"ObjTitle.h"
 //------------------------------------------------
