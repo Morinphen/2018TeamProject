@@ -41,7 +41,7 @@ void CObjHand::Action()
 			}
 		}
 	}
-	if (hensu <= hensu2)
+	if (hensu <= hensu2)//ŽèŽD‚ð‚¸‚ç‚µI‚¦‚½‚çA‰Šú’l‚É–ß‚·
 	{
 		hensu = 99;
 		hensu2 = 0;

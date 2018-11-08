@@ -19,15 +19,13 @@ void CObjCard::Init()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	Nanber = sc->Cnanber;//bango 引いたカードの順番の固定
-	Nanber2 = han->hand[Nanber-1];
-	Nanber3 = han->basyo[Nanber - 1];
+	Nanber = sc->Cnanber;//引いたカードの順番の固定
+	Nanber2 = han->hand[Nanber-1];//カード番号の保存
+	Nanber3 = han->basyo[Nanber - 1];//手札の順番変数
 
-	Shaful = 1;
-
-	Opdraw = sc->Card;//test カード番号の保存
-	Updraw = 0;//taka カードの描画位置の調整
-	Rotdraw = 0;//test2 カードの回転描画調整
+	Opdraw = sc->Card;//カード番号の保存
+	Updraw = 0;//カードの描画位置の調整
+	Rotdraw = 0;//カードの回転描画調整
 
 	Summon = false;
 	Shand = 0;
@@ -51,9 +49,9 @@ void CObjCard::Action()
 
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	Setcard = sc->Cnanber;//Setcard カードの位置調整変更用
+	Setcard = sc->Cnanber;//カードの位置調整変更用
 
-	Posicard = Setcard - Nanber;//Posicard カードの位置調整変更用２
+	Posicard = Setcard - Nanber;//カードの位置調整変更用２
 	/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
 	{
 		Reflag = true;
@@ -67,14 +65,13 @@ void CObjCard::Action()
 		Reflag = false;
 	}*/
 
-	if (Nanber3 - han->hensu3 > 0 && han->hensu>0)
+	if (Nanber3 - han->hensu3 > 0 && han->hensu>0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
-		Nanber--;
+		Nanber--;//番号を１ずらす
 		han->hensu2++;
-		Shaful++;
 	}
 
-	Nanber3 = han->basyo[Nanber - 1];
+	Nanber3 = han->basyo[Nanber - 1];//手札の場所を更新
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
@@ -103,11 +100,6 @@ void CObjCard::Action()
 		}
 	}
 
-	if (1 == 1)
-	{
-		Nanber = Nanber;
-	}
-
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false)
 	{
 		Rotdraw = 3;//カードを３℃回転
@@ -116,11 +108,11 @@ void CObjCard::Action()
 		{
 			if (pos->m_f == false) {
 				Summon = true;
-				han->hand[Nanber3 - 1] = 0;
-				han->basyo[Nanber3 - 1] = 0;
-				han->hensu = Setcard - Nanber3;
-				han->hensu3 = Nanber3;
-				sc->Cnanber -= 1;
+				han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
+				han->basyo[Nanber3 - 1] = 0;//出したカードの場所情報を削除
+				han->hensu = Setcard - Nanber3;//手札の合計と出したカードの差分を保存
+				han->hensu3 = Nanber3;//出したカードの場所を保存
+				sc->Cnanber -= 1;//カードの合計枚数を１減らす
 				pos->m_f = true;
 
 				if (L_position == false && S_position == false && R_position == false)
@@ -152,6 +144,8 @@ void CObjCard::Action()
 				}
 				else
 				{
+					m_x = 0;
+					m_y = 0;
 					hit->SetPos(m_x, m_y);
 
 					Summon = false;

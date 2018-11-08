@@ -20,7 +20,6 @@ private:
 	int Nanber2;
 	int Nanber3;
 	int Posicard;
-	int Shaful;
 	int playertrun;
 	int enemytrun;
 
