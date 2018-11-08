@@ -20,7 +20,7 @@ private:
 	int Nanber2;
 	int Nanber3;
 	int Posicard;
-	int Reset;
+	int Shaful;
 	int playertrun;
 	int enemytrun;
 
@@ -33,7 +33,6 @@ private:
 	bool m_r;
 	bool Summon;
 	bool m_f;
-	bool Reflag;
 
 	bool L_position;
 	bool S_position;

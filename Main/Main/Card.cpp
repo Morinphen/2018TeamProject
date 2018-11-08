@@ -21,7 +21,9 @@ void CObjCard::Init()
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	Nanber = sc->Cnanber;//bango 引いたカードの順番の固定
 	Nanber2 = han->hand[Nanber-1];
-	Nanber3 = Nanber;
+	Nanber3 = han->basyo[Nanber - 1];
+
+	Shaful = 1;
 
 	Opdraw = sc->Card;//test カード番号の保存
 	Updraw = 0;//taka カードの描画位置の調整
@@ -52,7 +54,6 @@ void CObjCard::Action()
 	Setcard = sc->Cnanber;//Setcard カードの位置調整変更用
 
 	Posicard = Setcard - Nanber;//Posicard カードの位置調整変更用２
-
 	/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
 	{
 		Reflag = true;
@@ -66,10 +67,14 @@ void CObjCard::Action()
 		Reflag = false;
 	}*/
 
-	if (Nanber - han->hensu > 0)
+	if (Nanber3 - han->hensu3 > 0 && han->hensu>0)
 	{
-		Nanber2 = han->basyo[Nanber - Shand];
+		Nanber--;
+		han->hensu2++;
+		Shaful++;
 	}
+
+	Nanber3 = han->basyo[Nanber - 1];
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
@@ -98,47 +103,64 @@ void CObjCard::Action()
 		}
 	}
 
+	if (1 == 1)
+	{
+		Nanber = Nanber;
+	}
+
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false)
 	{
 		Rotdraw = 3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 		if (mou->m_r == true)
 		{
-			Summon = true;
+			if (pos->m_f == false) {
+				Summon = true;
+				han->hand[Nanber3 - 1] = 0;
+				han->basyo[Nanber3 - 1] = 0;
+				han->hensu = Setcard - Nanber3;
+				han->hensu3 = Nanber3;
+				sc->Cnanber -= 1;
+				pos->m_f = true;
 
-			if (L_position == false && S_position == false && R_position == false)
-			{
-				m_x = 200;
-				m_y = 200;
+				if (L_position == false && S_position == false && R_position == false)
+				{
+					m_x = 200;
+					m_y = 200;
 
-				pos->L_position = true;
+					pos->L_position = true;
 
-				hit->SetPos(m_x, m_y);
+					hit->SetPos(m_x, m_y);
+				}
+				else if (L_position == true && S_position == false && R_position == false)
+				{
+					m_x = 400;
+					m_y = 200;
+
+					pos->S_position = true;
+
+					hit->SetPos(m_x, m_y);
+				}
+				else if (L_position == true && S_position == true && R_position == false)
+				{
+					m_x = 600;
+					m_y = 200;
+
+					pos->R_position = true;
+
+					hit->SetPos(m_x, m_y);
+				}
+				else
+				{
+					hit->SetPos(m_x, m_y);
+
+					Summon = false;
+				}
 			}
-			else if (L_position == true && S_position == false && R_position == false)
-			{
-				m_x = 400;
-				m_y = 200;
-
-				pos->S_position = true;
-
-				hit->SetPos(m_x, m_y);
-			}
-			else if (L_position == true && S_position == true && R_position == false)
-			{
-				m_x = 600;
-				m_y = 200;
-
-				pos->R_position = true;
-
-				hit->SetPos(m_x, m_y);
-			}
-			else
-			{
-				hit->SetPos(m_x, m_y);
-
-				Summon = false;
-			}
+		}
+		else
+		{
+			pos->m_f = false;
 		}
 	}
 	else
