@@ -5,13 +5,17 @@
 #include"GameHead.h"
 #include"Card.h"
 
+#include"Cardlist.h"
+#include"Mcardlist.h"
+
 #include"GameL\DrawFont.h"
 
 //使用するネームスペース
-CObjCard::CObjCard(float x,float y)
+CObjCard::CObjCard(float x,float y,int z)
 {
 	m_x = x;
 	m_y = y;
+	Type = z;//カードの種類によってタイプを変える
 }
 
 //イニシャライズ
@@ -27,8 +31,11 @@ void CObjCard::Init()
 	Updraw = 0;//カードの描画位置の調整
 	Rotdraw = 0;//カードの回転描画調整
 
+	Hp = 0;
+	Atack = 0;
+	Guard = 0;
+
 	Summon = false;
-	Shand = 0;
 
 	while(Opdraw>7)
 	{
@@ -107,6 +114,9 @@ void CObjCard::Action()
 		if (mou->m_r == true)
 		{
 			if (pos->m_f == false) {
+				CObjCardlist* List = new CObjCardlist();//関数呼び出し
+				CObjMCardlist* Mlist = new CObjMCardlist();//関数呼び出し２
+
 				Summon = true;
 				han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
 				han->basyo[Nanber3 - 1] = 0;//出したカードの場所情報を削除
@@ -115,31 +125,39 @@ void CObjCard::Action()
 				sc->Cnanber -= 1;//カードの合計枚数を１減らす
 				pos->m_f = true;
 
-				if (L_position == false && S_position == false && R_position == false)
+				if (L_position == false && Type == 2)
 				{
+					Atack = List->Action(Type, Nanber, Atack);
 					m_x = 200;
 					m_y = 200;
 
 					pos->L_position = true;
 
+					delete List;
 					hit->SetPos(m_x, m_y);
 				}
-				else if (L_position == true && S_position == false && R_position == false)
+				else if (S_position == false && Type == 1)
 				{
+					Hp = List->Action(Type, Nanber, Hp);
+					Atack = Mlist->Action(Nanber, Atack);
+
 					m_x = 400;
 					m_y = 200;
 
 					pos->S_position = true;
 
+					delete List;
 					hit->SetPos(m_x, m_y);
 				}
-				else if (L_position == true && S_position == true && R_position == false)
+				else if (R_position == false && Type == 3)
 				{
+					Guard = List->Action(Type, Nanber, Guard);
 					m_x = 600;
 					m_y = 200;
 
 					pos->R_position = true;
 
+					delete List;
 					hit->SetPos(m_x, m_y);
 				}
 				else

@@ -5,15 +5,15 @@
 //使用するネームスペース
 using namespace GameL;
 
-class CObjCardlist : public CObj
+class CObjCardlist
 {
 	public:
 		CObjCardlist() {};
 		~CObjCardlist() {};
 		void Init();
-		void Action();
+		int Action(int x,int y,int a);
 		void Draw();
 
 	private:
-		int Cardlist[50];
+		//int Cardlist[50];
 };

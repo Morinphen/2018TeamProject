@@ -66,6 +66,7 @@ struct UserData
 #include"testmau.h"
 #include"HandCard.h"
 #include"Cardlist.h"
+#include"Mcardlist.h"
 
 #include"ObjTitle.h"
 //------------------------------------------------
