@@ -10,6 +10,7 @@ void CObjMap::Init()
 	L_position = false;
 	S_position = false;
 	R_position = false;
+	m_f = false;
 }
 
 void CObjMap::Action()

@@ -18,6 +18,7 @@ class CObjMap : public CObj
 		bool L_position;
 		bool S_position;
 		bool R_position;
+		bool m_f;
 	private:
 
 };

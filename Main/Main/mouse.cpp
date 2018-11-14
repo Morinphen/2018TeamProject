@@ -19,7 +19,7 @@ void CObjmouse::Init()
 	m_mouse_y = 0.0f;//マウスのY座標
 
 	//当たり判定作成
-	Hits::SetHitBox(this, m_mouse_x, m_mouse_y, 32, 32, ELEMENT_PLAYER, OBJ_PLAYER, 1);
+	Hits::SetHitBox(this, m_mouse_x, m_mouse_y, 2, 2, ELEMENT_PLAYER, OBJ_PLAYER, 1);
 }
 
 //アクション

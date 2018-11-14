@@ -33,9 +33,6 @@ void CObjDekc::Init()
 	//Start最初の５枚ドローのための変数
 	Start = false;
 
-	set = 0;
-	Recount = 0;
-
 	srand((unsigned)time(NULL));
 }
 
@@ -61,6 +58,22 @@ void CObjDekc::Action()
 
 	}
 
+	if (Card <= 7)
+	{
+		Ctype = monster;
+	}
+
+	else if (Card <= 11)
+	{
+		Ctype = weapon;
+	}
+
+	else
+	{
+		Ctype = shield;
+	}
+
+
 	//スタート処理
 	if(Start==false){
 		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
@@ -68,7 +81,7 @@ void CObjDekc::Action()
 		sc->basyo[Cnanber] = Cnanber + 1;
 		Cnanber++;
 		Cardcount++;
-		CObjCard* obj_b = new CObjCard(m_x,m_y);//カード作成
+		CObjCard* obj_b = new CObjCard(m_x,m_y,Ctype);//カード作成
 		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 	}
 
@@ -87,7 +100,7 @@ void CObjDekc::Action()
 			Cnanber++;
 			Cardcount++;
 			//カード作成
-			CObjCard* obj_b = new CObjCard(300,m_y);//カード作成
+			CObjCard* obj_b = new CObjCard(300,m_y, Ctype);//カード作成
 			Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 			m_f = false;
 		}
