@@ -119,6 +119,9 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Cardlist.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="EnemyCard.cpp" />
+    <ClCompile Include="EnemyDeck.cpp" />
+    <ClCompile Include="EnemyHand.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\DrawFont.cpp" />
@@ -148,6 +151,9 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="Cardlist.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="EnemyCard.h" />
+    <ClInclude Include="EnemyDeck.h" />
+    <ClInclude Include="EnemyHand.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
