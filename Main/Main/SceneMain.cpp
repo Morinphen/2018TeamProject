@@ -45,7 +45,7 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(obj_enemy_hand, OBJ_ENEMY_HAND, 1);
 
 	CObjmouse* obj_mouse = new CObjmouse();
-	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
+	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 100);
 
 //	CObjpoint* objt = new CObjpoint();
 //	Objs::InsertObj(objt, OBJ_POINT, 11);

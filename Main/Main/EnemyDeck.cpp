@@ -13,11 +13,11 @@
 void CObjEnemyDeck::Init()
 {
 	//x.yデッキの位置
-	x = 50;
-	y = 100;
+	x = 0;
+	y = 0;
 	//m_x,m_y カードの出現位置調整
 	m_x = 500;
-	m_y = 230;
+	m_y = 0;
 	//長押しの防止判定
 	m_f = true;
 
