@@ -194,6 +194,9 @@
     <ClInclude Include="Mcardlist.h">
       <Filter>ソース ファイル\Card</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>

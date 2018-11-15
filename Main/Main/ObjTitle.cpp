@@ -30,6 +30,10 @@ void CObjTitle::Action()
 			m_key_flag = false;
 		}
 	}
+	else if (Input::GetVKey(VK_SPACE))
+	{
+		exit(0);		//スペースキーで終了する
+	}
 
 }
 
@@ -40,4 +44,5 @@ void CObjTitle::Draw()
 	Font::StrDraw(L"Arma Batlle",430, 220, 32, c);
 
 	Font::StrDraw(L"Push'S'Key", 430, 400, 32, c);
+	Font::StrDraw(L"Exit SpaceKey", 410, 500, 32, c);
 }

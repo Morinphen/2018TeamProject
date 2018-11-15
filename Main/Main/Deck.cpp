@@ -136,10 +136,12 @@ void CObjDekc::Draw()
 	dst.m_right = 90.0f + x;
 	dst.m_bottom = 120.0f + y;
 
-	wchar_t str[128];
+	/*wchar_t str[128];
 
 	swprintf_s(str, L"%d", m_point);
 
-	Font::StrDraw(str, 10, 10, 20, c);
+	Font::StrDraw(str, 10, 10, 20, c);*/
+
+	Draw::Draw(0, &src, &dst, c, 0.0f);
 
 }

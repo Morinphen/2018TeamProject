@@ -33,13 +33,26 @@ private:
 	int Updraw;//カードの切取り位置２
 	int Rotdraw;//カードの角度調整
 
+	bool FSummon;
+	bool FSummon2;
+
+	bool Punch;
+
 	bool m_r;
 	bool Summon;//カードが召喚されたかどうか
 	bool m_f;
+	bool m_l;
+
+	int test;
 
 	bool Kstop;
 
 	bool L_position;
+	bool L_position2;
+	bool L_position3;
 	bool S_position;
+	bool S_position2;
 	bool R_position;
+	bool R_position2;
+	bool R_position3;
 };
