@@ -45,13 +45,16 @@ void CSceneMain::InitScene()
 	Objs::InsertObj(obj_enemy_hand, OBJ_ENEMY_HAND, 1);
 
 	CObjmouse* obj_mouse = new CObjmouse();
-	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
+	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 100);
 
 //	CObjpoint* objt = new CObjpoint();
 //	Objs::InsertObj(objt, OBJ_POINT, 11);
 
 	CObjMap* obj_map = new CObjMap();
 	Objs::InsertObj(obj_map, OBJ_MAP, 1);
+
+	CObjPlayer* obj_p = new CObjPlayer();
+	Objs::InsertObj(obj_p, OBJ_PLAYER, 1);
 }
 
 //ゲームメイン実行中メソッド

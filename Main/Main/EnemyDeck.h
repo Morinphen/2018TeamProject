@@ -26,7 +26,6 @@ private:
 	int e_Cardcount;
 	int stop;
 	int Rotdraw;
-	int m_point;
 
 	int EnemyDeck[40];
 

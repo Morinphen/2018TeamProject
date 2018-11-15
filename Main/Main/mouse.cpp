@@ -15,6 +15,8 @@ void CObjmouse::Init()
 	m_r = false;
 	m_f = false;
 
+	EChoice = false;
+
 	m_mouse_x = 0.0f;//マウスのX座標
 	m_mouse_y = 0.0f;//マウスのY座標
 
@@ -33,6 +35,16 @@ void CObjmouse::Action()
 
 	//当たり判定更新
 	CHitBox*hit = Hits::GetHitBox(this);
+	if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY) != nullptr)
+	{
+		EChoice = true;
+	}
+
+	else
+	{
+		EChoice = false;
+	}
+
 	hit->SetPos(m_mouse_x, m_mouse_y);
 }
 
