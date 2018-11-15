@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Cardlist.cpp" />
     <ClCompile Include="cost.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Cardlist.h" />
     <ClInclude Include="Deck.h" />

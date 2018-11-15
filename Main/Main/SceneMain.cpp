@@ -31,6 +31,7 @@ void CSceneMain::InitScene()
 
 	Draw::LoadImageW(L"image2.png", 0, TEX_SIZE_512);
 	Draw::LoadImageW(L"sakura.png", 1, TEX_SIZE_512);
+	Draw::LoadImageW(L"BackGround.png", 2, TEX_SIZE_2048);
 
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 1);
@@ -52,6 +53,9 @@ void CSceneMain::InitScene()
 
 	CObjMap* obj_map = new CObjMap();
 	Objs::InsertObj(obj_map, OBJ_MAP, 1);
+
+	CObjBackGround* obj_background = new CObjBackGround();
+	Objs::InsertObj(obj_background, OBJ_BACKGROUND, 1);
 }
 
 //ゲームメイン実行中メソッド
