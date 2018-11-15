@@ -5,9 +5,6 @@
 #include"GameHead.h"
 #include"Card.h"
 
-#include"Cardlist.h"
-#include"Mcardlist.h"
-
 #include"GameL\DrawFont.h"
 
 //使用するネームスペース
@@ -35,6 +32,9 @@ void CObjCard::Init()
 	Atack = 0;
 	Guard = 0;
 
+	test = 1;
+	Punch = false;
+
 	Summon = false;
 
 	while(Opdraw>7)
@@ -50,11 +50,21 @@ void CObjCard::Init()
 //アクション
 void CObjCard::Action()
 {
+	m_l = Input::GetMouButtonL();
+	CHitBox*hit = Hits::GetHitBox(this);
+
+	if (m_l == true)
+	{
+		if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+		{
+			test = 1;
+			Punch = false;
+		}
+	}
+
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
-
-	CHitBox*hit = Hits::GetHitBox(this);
 
 	Setcard = sc->Cnanber;//カードの位置調整変更用
 
@@ -82,8 +92,15 @@ void CObjCard::Action()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
+	L_position2 = pos->L_position2;
+	L_position3 = pos->L_position3;
+
 	S_position = pos->S_position;
+	S_position2 = pos->S_position2;
+
 	R_position = pos->R_position;
+	R_position2 = pos->R_position2;
+	R_position3 = pos->R_position3;
 	
 	if(Setcard <=5 && Summon == false)
 	{
@@ -127,7 +144,7 @@ void CObjCard::Action()
 
 				if (L_position == false && Type == 2)
 				{
-					Atack = List->Action(Type, Nanber, Atack);
+					Atack = List->Action(Type, Nanber, Atack);//カード番号に沿って攻撃力変動
 					m_x = 200;
 					m_y = 200;
 
@@ -136,22 +153,34 @@ void CObjCard::Action()
 					delete List;
 					hit->SetPos(m_x, m_y);
 				}
-				else if (S_position == false && Type == 1)
+				else if (S_position == false && Type == 1 || S_position2 == false && Type == 1)
 				{
-					Hp = List->Action(Type, Nanber, Hp);
-					Atack = Mlist->Action(Nanber, Atack);
+					Hp = List->Action(Type, Nanber, Hp);//カード番号に沿ってHP変動
+					Atack = Mlist->Action(Nanber, Atack);//カード番号に沿って攻撃力変動
 
-					m_x = 400;
-					m_y = 200;
-
-					pos->S_position = true;
+					if (S_position == false) {
+						m_x = 200;
+						m_y = 500;
+						pos->PCard2[0] = Hp;
+						pos->PCard2[1] = Atack;
+						pos->PCard2[3] = Opdraw + Updraw * 7;
+						pos->S_position = true;
+					}
+					else {
+						m_x = 700;
+						m_y = 500;
+						pos->PCard3[0] = Hp;
+						pos->PCard3[1] = Atack;
+						pos->PCard3[3] = Opdraw + Updraw * 7;
+						pos->S_position2 = true;
+					}
 
 					delete List;
 					hit->SetPos(m_x, m_y);
 				}
 				else if (R_position == false && Type == 3)
 				{
-					Guard = List->Action(Type, Nanber, Guard);
+					Guard = List->Action(Type, Nanber, Guard);//カード番号に沿って守備力変動
 					m_x = 600;
 					m_y = 200;
 
@@ -181,13 +210,37 @@ void CObjCard::Action()
 		SetPrio(10);
 	}
 
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true)
+	{
+		Rotdraw = -3;
+		SetPrio(11);
+		if (m_l == true)
+		{
+			test = 0;
+			Punch = true;
+		}
+	}
+	else
+	{
+		Rotdraw = 0;
+		SetPrio(10);
+	}
+
+	if (Summon == true)
+	{
+		if (Hp == 0)
+		{
+			this->SetStatus(false);
+		}
+	}
+
 	hit->SetPos(m_x, m_y);
 }
 
 //ドロー
 void CObjCard::Draw()
 {
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 1.0f,test,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 	src.m_top = 0.0f+ (64.0f*Updraw);

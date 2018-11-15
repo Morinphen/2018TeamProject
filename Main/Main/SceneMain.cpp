@@ -46,6 +46,9 @@ void CSceneMain::InitScene()
 
 	CObjMap* obj_map = new CObjMap();
 	Objs::InsertObj(obj_map, OBJ_MAP, 1);
+
+	CObjPlayer* obj_p = new CObjPlayer();
+	Objs::InsertObj(obj_p, OBJ_PLAYER, 1);
 }
 
 //ゲームメイン実行中メソッド
