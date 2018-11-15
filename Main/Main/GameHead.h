@@ -14,7 +14,7 @@ enum OBJ_NAME
 	OBJ_MAP,
 
 	OBJ_TITLE,
-	OBJ_POINT,
+	//OBJ_POINT,
 };
 //------------------------------------------------
 
@@ -74,7 +74,7 @@ struct UserData
 //ゲームシーンクラスヘッダ------------------------
 #include"SceneMain.h"
 #include"SceneTitle.h"
-#include"point.h"
+//#include"point.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

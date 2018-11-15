@@ -32,6 +32,8 @@ private:
 
 	int Deck[40];
 
+	int m_point;
+
 	bool m_f;
 	bool Start;
 };

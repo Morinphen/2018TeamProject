@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Cardlist.cpp" />
+    <ClCompile Include="cost.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
@@ -138,7 +139,9 @@
     <ClCompile Include="Mcardlist.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
-    <ClCompile Include="point.cpp" />
+    <ClCompile Include="point.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -169,7 +172,9 @@
     <ClInclude Include="Mcardlist.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="ObjTitle.h" />
-    <ClInclude Include="point.h" />
+    <ClInclude Include="point.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
   </ItemGroup>

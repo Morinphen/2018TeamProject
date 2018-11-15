@@ -41,8 +41,8 @@ void CSceneMain::InitScene()
 	CObjmouse* obj_mouse = new CObjmouse();
 	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
 
-	CObjpoint* objt = new CObjpoint();
-	Objs::InsertObj(objt, OBJ_POINT, 11);
+//	CObjpoint* objt = new CObjpoint();
+//	Objs::InsertObj(objt, OBJ_POINT, 11);
 
 	CObjMap* obj_map = new CObjMap();
 	Objs::InsertObj(obj_map, OBJ_MAP, 1);

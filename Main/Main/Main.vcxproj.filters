@@ -93,6 +93,9 @@
     <ClCompile Include="Mcardlist.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
+    <ClCompile Include="cost.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
