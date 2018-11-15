@@ -24,6 +24,9 @@ void CObjEnemyDeck::Init()
 	//stop 同じカードの出現阻止
 	stop = 0;
 
+	//カードの回転描画調整
+	Rotdraw = 0;
+
 	//Cnanber カードの位置調整用
 	Cnanber = 0;
 
@@ -42,6 +45,7 @@ void CObjEnemyDeck::Init()
 //アクション
 void CObjEnemyDeck::Action()
 {
+	Rotdraw = 180;//カードを180℃回転
 	CObjEnemyHand*sc = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
 	e_Card = rand() % 14 + 1;//同じ番号のカード呼出
 	stop = 1;
@@ -68,7 +72,7 @@ void CObjEnemyDeck::Action()
 		sc->basyo[Cnanber] = Cnanber + 1;
 		Cnanber++;
 		e_Cardcount++;
-		CObjCard* obj_b = new CObjCard(m_x, m_y);//カード作成
+		CObjEnemyCard* obj_b = new CObjEnemyCard(m_x, m_y);//カード作成
 		Objs::InsertObj(obj_b, OBJ_ENEMY_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 	}
 
@@ -77,7 +81,7 @@ void CObjEnemyDeck::Action()
 		Start = true;
 	}
 
-	if (Input::GetVKey('M') == true && Start == true)
+	if (Input::GetVKey('X') == true && Start == true)
 	{
 		if (m_f == true)
 		{
@@ -87,14 +91,14 @@ void CObjEnemyDeck::Action()
 			Cnanber++;
 			e_Cardcount++;
 			//カード作成
-			CObjCard* obj_b = new CObjCard(500, m_y);//カード作成
+			CObjEnemyCard* obj_b = new CObjEnemyCard(500, m_y);//カード作成
 			Objs::InsertObj(obj_b, OBJ_ENEMY_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 			m_f = false;
 		}
-
 	}
 
-	else {
+	else
+	{
 		m_f = true;
 	}
 }

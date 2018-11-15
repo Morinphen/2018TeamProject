@@ -43,6 +43,7 @@ void CObjEnemyCard::Init()
 //アクション
 void CObjEnemyCard::Action()
 {
+	Rotdraw = 180;//カードを180℃回転
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	CObjEnemyHand*han = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
 	CObjEnemyDeck*sc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
@@ -98,7 +99,7 @@ void CObjEnemyCard::Action()
 		}
 	}
 
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr && Summon == false)
+	/*if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr && Summon == false)
 	{
 		Rotdraw = 180;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
@@ -145,7 +146,7 @@ void CObjEnemyCard::Action()
 	{
 		Rotdraw = 0;
 		SetPrio(10);
-	}
+	}*/
 
 	hit->SetPos(m_x, m_y);
 }
@@ -156,10 +157,10 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	src.m_top = 0.0f + (64.0f*Updraw);
-	src.m_left = 0.0f + (64.0f*Opdraw);
-	src.m_right = 64.0f + (64.0f*Opdraw);
-	src.m_bottom = 64.0f + (64.0f*Updraw);
+	src.m_top = 0.0f;
+	src.m_left = 0.0f;
+	src.m_right = 64.0f;
+	src.m_bottom = 64.0f;
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
