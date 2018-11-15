@@ -4,35 +4,30 @@
 //使用するネームスペース
 using namespace GameL;
 
-enum type {
-	monster = 1,
-	weapon = 2,
-	shield = 3
-};
-
 //オブジェクト　デッキ
-class CObjDekc :public CObj
+class CObjEnemyDeck :public CObj
 {
 public:
-	CObjDekc() {};
-	~CObjDekc() {};
+	CObjEnemyDeck() {};
+	~CObjEnemyDeck() {};
 	void Init();
 	void Action();
 	void Draw();
 
 	int Cnanber;
-	int Card;
+	int e_Card;
+
+	int set;
+	int Recount;
 private:
 	int x, y;
 	int m_x, m_y;
-	int Ctype;
 
-	int Cardcount;
+	int e_Cardcount;
 	int stop;
+	int Rotdraw;
 
-	int Deck[40];
-
-	int m_point;
+	int EnemyDeck[40];
 
 	bool m_f;
 	bool Start;

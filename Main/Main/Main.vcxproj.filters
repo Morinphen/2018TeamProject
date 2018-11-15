@@ -19,6 +19,9 @@
     <Filter Include="ソース ファイル\Card">
       <UniqueIdentifier>{805dca69-2e7c-40f4-84c6-abaaa7776081}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Enemy">
+      <UniqueIdentifier>{cd864e4b-c518-4ec9-9a79-8483debf8e2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SceneMain.cpp">
@@ -93,6 +96,15 @@
     <ClCompile Include="Mcardlist.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyCard.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyDeck.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHand.cpp">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
@@ -163,6 +175,15 @@
     </ClInclude>
     <ClInclude Include="HandCard.h">
       <Filter>ソース ファイル\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyCard.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyDeck.h">
+      <Filter>ソース ファイル\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHand.h">
+      <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Cardlist.h">
       <Filter>ソース ファイル\Card</Filter>

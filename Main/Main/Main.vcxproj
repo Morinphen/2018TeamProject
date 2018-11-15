@@ -118,7 +118,11 @@
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Cardlist.cpp" />
+    <ClCompile Include="cost.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="EnemyCard.cpp" />
+    <ClCompile Include="EnemyDeck.cpp" />
+    <ClCompile Include="EnemyHand.cpp" />
     <ClCompile Include="GameL\Audio.cpp" />
     <ClCompile Include="GameL\DirectXDevice.cpp" />
     <ClCompile Include="GameL\DrawFont.cpp" />
@@ -138,6 +142,9 @@
     <ClCompile Include="Mcardlist.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="point.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="SceneMain.cpp" />
@@ -150,6 +157,9 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="Cardlist.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="EnemyCard.h" />
+    <ClInclude Include="EnemyDeck.h" />
+    <ClInclude Include="EnemyHand.h" />
     <ClInclude Include="GameHead.h" />
     <ClInclude Include="GameL\Audio.h" />
     <ClInclude Include="GameL\DirectXDevice.h" />
@@ -172,6 +182,9 @@
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="point.h" />
+    <ClInclude Include="point.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
   </ItemGroup>

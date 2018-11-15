@@ -7,14 +7,18 @@ enum OBJ_NAME
 	//ゲームで使うオブジェクトの名前
 	//OBJ_○○と表記
 	OBJ_DEKC,
+	OBJ_ENEMY_DECK,
 	OBJ_CARD,
+	OBJ_ENEMY_CARD,
 	OBJ_HAND,
+	OBJ_ENEMY_HAND,
 	OBJ_MAUSE,
 	OBJ_PLAYER,
+	OBJ_ENEMY,
 	OBJ_MAP,
 
 	OBJ_TITLE,
-	OBJ_POINT,
+	//OBJ_POINT,
 };
 //------------------------------------------------
 
@@ -60,7 +64,10 @@ struct UserData
 
 //ゲームシーンオブジェクトヘッダ------------------
 #include"Deck.h"
+#include"EnemyDeck.h"
+#include"EnemyHand.h"
 #include"Card.h"
+#include"EnemyCard.h"
 #include"mouse.h"
 #include"map.h"
 #include"testmau.h"
@@ -75,7 +82,7 @@ struct UserData
 //ゲームシーンクラスヘッダ------------------------
 #include"SceneMain.h"
 #include"SceneTitle.h"
-#include"point.h"
+//#include"point.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
