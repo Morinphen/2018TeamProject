@@ -19,8 +19,8 @@ void CObjTitle::Init()
 void CObjTitle::Action()
 {
 	
-	//エンターキーを押すとシーン変更
-	if (GetKeyState(VK_RETURN))
+	//Sキーを押すとシーン変更
+	if (Input::GetVKey('S'))
 	{
 		m_key_flag = true;
 
@@ -30,6 +30,10 @@ void CObjTitle::Action()
 			m_key_flag = false;
 		}
 	}
+	else if (Input::GetVKey(VK_SPACE))
+	{
+		exit(0);		//スペースキーで終了する
+	}
 
 }
 
@@ -37,7 +41,8 @@ void CObjTitle::Action()
 void CObjTitle::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	Font::StrDraw(L"Arma Batlle",310, 220, 32, c);
+	Font::StrDraw(L"Arma Batlle",430, 220, 32, c);
 
-	Font::StrDraw(L"PushRightclick", 300, 400, 32, c);
+	Font::StrDraw(L"Push'S'Key", 430, 400, 32, c);
+	Font::StrDraw(L"Exit SpaceKey", 410, 500, 32, c);
 }

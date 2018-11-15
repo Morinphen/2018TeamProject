@@ -4,11 +4,11 @@
 using namespace GameL;
 
 //オブジェクト　デッキ
-class CObjHand :public CObj
+class CObjEnemyHand :public CObj
 {
 public:
-	CObjHand() {};
-	~CObjHand() {};
+	CObjEnemyHand() {};
+	~CObjEnemyHand() {};
 	void Init();
 	void Action();
 	void Draw();
@@ -17,8 +17,6 @@ public:
 
 	int basyo[20];
 	int hensu;
-	int hensu2;
-	int hensu3;
 
 private:
 

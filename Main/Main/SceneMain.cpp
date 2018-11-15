@@ -35,14 +35,20 @@ void CSceneMain::InitScene()
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 1);
 
+	CObjEnemyDeck*obj_enemy = new CObjEnemyDeck();
+	Objs::InsertObj(obj_enemy, OBJ_ENEMY_DECK, 1);
+
 	CObjHand*obj_hand = new CObjHand();
 	Objs::InsertObj(obj_hand, OBJ_HAND, 1);
+
+	CObjEnemyHand*obj_enemy_hand = new CObjEnemyHand();
+	Objs::InsertObj(obj_enemy_hand, OBJ_ENEMY_HAND, 1);
 
 	CObjmouse* obj_mouse = new CObjmouse();
 	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 1);
 
-	CObjpoint* objt = new CObjpoint();
-	Objs::InsertObj(objt, OBJ_POINT, 11);
+//	CObjpoint* objt = new CObjpoint();
+//	Objs::InsertObj(objt, OBJ_POINT, 11);
 
 	CObjMap* obj_map = new CObjMap();
 	Objs::InsertObj(obj_map, OBJ_MAP, 1);

@@ -4,7 +4,7 @@
 #include "GameL\DrawFont.h"
 
 #include "GameHead.h"
-#include "point.h"
+#include "Deck.h"
 
 //使用するネームスペース
 using namespace GameL;
