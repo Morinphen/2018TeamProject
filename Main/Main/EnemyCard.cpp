@@ -114,8 +114,6 @@ void CObjEnemyCard::Action()
 		if (Nanber == 1) {
 			m_x = 543;
 			m_y = 195;
-			m_x = 200;
-			m_y = 200;
 			//HitBox‚Ì“ü‚ê‘Ö‚¦@‚±‚ê‚ÅUŒ‚‘ÎÛ‚É‘I‘ğ‚Å‚«‚é‚æ‚¤‚É
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY, 1);

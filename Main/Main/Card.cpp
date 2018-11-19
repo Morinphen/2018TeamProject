@@ -6,7 +6,6 @@
 #include"Card.h"
 
 #include"Cardlist.h"
-#include"Mcardlist.h"
 
 #include"GameL\DrawFont.h"
 
@@ -82,7 +81,7 @@ void CObjCard::Action()
 	//左クリックされたとき
 	if (m_l == true)
 	{
-		//右側のモンスターに触れているとき
+		//右側のモンスターに触れているとき武器を装備させる
 		if (mou->Choice[1] == 1 && Set == true) {
 
 			for (int i = 2; i < 4; i++) {
@@ -121,7 +120,7 @@ void CObjCard::Action()
 			}
 
 		}
-
+		//左側のモンスターに触れているとき武器を装備させる
 		if (mou->Choice[2] == 1 && Set == true){
 			for (int i = 4; i < 6; i++) {
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
