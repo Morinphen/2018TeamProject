@@ -5,6 +5,9 @@
 #include"GameHead.h"
 #include"Card.h"
 
+#include"Cardlist.h"
+#include"Mcardlist.h"
+
 #include"GameL\DrawFont.h"
 
 //使用するネームスペース
@@ -40,6 +43,8 @@ void CObjCard::Init()
 	SeedGuard = 2;
 
 	//召喚後カード位置制御初期化
+	CardHitCheck = false;
+
 	FSummon = false;
 	FSummon2 = false;
 	LWeapon = false;
@@ -249,7 +254,7 @@ void CObjCard::Action()
 		{
 			if (han->hand[i] == Nanber2)
 			{
-				m_x = 250 + (90 * i);
+				m_x = 927 - (90 * i);
 			}
 		}
 	}
@@ -259,13 +264,14 @@ void CObjCard::Action()
 		{
 			if (han->hand[i] == Nanber2)
 			{
-				m_x = 250 + ((450 / (Setcard))*Posicard);
+				m_x = 927 - ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false)
 	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 		Rotdraw = 3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 		if (m_l == true)
@@ -276,8 +282,8 @@ void CObjCard::Action()
 				/*if (L_position == false && Type == 2)
 				{
 					Atack = List->Action(Type, Nanber, Atack);//カード番号に沿って攻撃力変動
-					m_x = 200;
-					m_y = 200;
+					m_x = 543;
+					m_y = 586;
 
 					pos->L_position = true;
 
@@ -361,6 +367,7 @@ void CObjCard::Action()
 	//召喚されたモンスターに触れた場合
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type==1)
 	{
+		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
 		if (m_l == true)
@@ -371,6 +378,7 @@ void CObjCard::Action()
 	}
 	else
 	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 		Rotdraw = 0;
 		SetPrio(10);
 	}
@@ -476,6 +484,36 @@ void CObjCard::Draw()
 	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+	
+	//画面左上に拡大画像を表示させる
+	
+	if (CardHitCheck == true)
+	{
+
+		dst.m_top = 12.0f;
+		dst.m_left = 13.0f;
+		dst.m_right = 371.0f;
+		dst.m_bottom = 491.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+	else
+	{
+		
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
+
+		dst.m_top = 12.0f;
+		dst.m_left = 13.0f;
+		dst.m_right = 371.0f;
+		dst.m_bottom = 491.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+
+	
 
 	if (Summon == true) {
 		wchar_t str[128];

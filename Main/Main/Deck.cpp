@@ -14,11 +14,11 @@
 void CObjDekc::Init()
 {
 	//x.yデッキの位置
-	x = 900;
-	y = 630;
+	x = 1086;
+	y = 743;
 	//m_x,m_y カードの出現位置調整
-	m_x = 500;
-	m_y = 630;
+	m_x = 567;
+	m_y = 743;
 	//長押しの防止判定
 	m_f = true;
 
@@ -136,10 +136,12 @@ void CObjDekc::Draw()
 	dst.m_right = 90.0f + x;
 	dst.m_bottom = 120.0f + y;
 
-	wchar_t str[128];
+	/*wchar_t str[128];
 
 	swprintf_s(str, L"%d", m_point);
 
-	Font::StrDraw(str, 10, 10, 20, c);
+	Font::StrDraw(str, 10, 10, 20, c);*/
+
+	Draw::Draw(0, &src, &dst, c, 0.0f);
 
 }

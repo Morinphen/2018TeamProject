@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Cardlist.cpp" />
     <ClCompile Include="cost.cpp" />
@@ -141,8 +142,9 @@
     </ClCompile>
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="point.cpp" />
+    <ClCompile Include="point.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -150,6 +152,7 @@
     <ClCompile Include="SceneTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="Cardlist.h" />
     <ClInclude Include="Deck.h" />
@@ -175,8 +178,9 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="ObjTitle.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="point.h" />
+    <ClInclude Include="point.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
   </ItemGroup>

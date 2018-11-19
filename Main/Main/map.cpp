@@ -24,5 +24,5 @@ void CObjMap::Action()
 
 void CObjMap::Draw()
 {
-
+	
 }

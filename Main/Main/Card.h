@@ -34,6 +34,7 @@ private:
 
 	int Type;//カードの種類
 
+	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 	int Opdraw;//カードの切取り位置１
 	int Updraw;//カードの切取り位置２
 	int Rotdraw;//カードの角度調整
