@@ -93,9 +93,6 @@
     <ClCompile Include="Cardlist.cpp">
       <Filter>ソース ファイル\Card</Filter>
     </ClCompile>
-    <ClCompile Include="Mcardlist.cpp">
-      <Filter>ソース ファイル\Card</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyCard.cpp">
       <Filter>ソース ファイル\Enemy</Filter>
     </ClCompile>
@@ -107,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="cost.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,9 +186,6 @@
       <Filter>ソース ファイル\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Cardlist.h">
-      <Filter>ソース ファイル\Card</Filter>
-    </ClInclude>
-    <ClInclude Include="Mcardlist.h">
       <Filter>ソース ファイル\Card</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">

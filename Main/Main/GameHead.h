@@ -18,6 +18,10 @@ enum OBJ_NAME
 	OBJ_MAP,
 	OBJ_POINT,
 
+	OBJ_FIELD_PLAYER,
+	OBJ_FIELD_PLAYER2,
+	OBJ_FIELD_PLAYER3,
+
 	OBJ_FIELD_ENEMY,
 	OBJ_FIELD_ENEMY2,
 	OBJ_FIELD_ENEMY3,
@@ -79,9 +83,7 @@ struct UserData
 #include"testmau.h"
 #include"HandCard.h"
 #include"Cardlist.h"
-#include"Mcardlist.h"
 #include"Player.h"
-
 #include"ObjTitle.h"
 //------------------------------------------------
 

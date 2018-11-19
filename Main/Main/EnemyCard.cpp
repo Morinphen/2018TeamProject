@@ -110,29 +110,33 @@ void CObjEnemyCard::Action()
 		//han->hensu3 = Nanber3;//出したカードの場所を保存
 		//sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
+		//仮置きの敵召喚　手札の順番が１，２，３のカードを召喚
 		if (Nanber == 1) {
 			m_x = 200;
 			m_y = 200;
+			//HitBoxの入れ替え　これで攻撃対象に選択できるように
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY, 1);
-			pos->ECard[0] = 1; pos->ECard[1] = 1;
-			Hp = 1; Atack = 1;
+
+			//ECard[0]=HP,ECard[1]=Atack,ECard[2]=Guard
+			pos->ECard[0] = 1; pos->ECard[1] = 1; pos->ECard[2] = 0;
+			Hp = 1; Atack = 1; Guard = 0;
 		}
 		if (Nanber == 2) {
 			m_x = 450;
 			m_y = 200;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
-			pos->ECard2[0] = 3; pos->ECard2[1] = 2;
-			Hp = 3; Atack = 2;
+			pos->ECard2[0] = 3; pos->ECard2[1] = 2; pos->ECard2[2] = 0;
+			Hp = 3; Atack = 2; Guard = 0;
 		}
 		if (Nanber == 3) {
 			m_x = 700;
 			m_y = 200;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
-			pos->ECard3[0] = 5; pos->ECard3[1] = 2;
-			Hp = 5; Atack = 2;
+			pos->ECard3[0] = 5; pos->ECard3[1] = 4; pos->ECard3[2] = 2;
+			Hp = 5; Atack = 2; Guard = 2;
 		}
 	}
 
@@ -189,6 +193,7 @@ void CObjEnemyCard::Action()
 	{
 		if (Nanber == 1)
 		{
+			//Hpの更新
 			Hp = pos->ECard[0];
 		}
 		if (Nanber == 2)
@@ -201,6 +206,7 @@ void CObjEnemyCard::Action()
 		}
 		if (Hp <= 0)
 		{
+			//HPが０なら消滅
 			this->SetStatus(false);
 			Hits::DeleteHitBox(this);
 		}
@@ -235,4 +241,9 @@ void CObjEnemyCard::Draw()
 	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+	if (Summon == true) {
+		wchar_t str[128];
+		swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
+		Font::StrDraw(str, m_x + 10, m_y, 20, c);
+	}
 }

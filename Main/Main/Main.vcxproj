@@ -139,7 +139,6 @@
     <ClCompile Include="HandCard.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Mcardlist.cpp" />
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -174,7 +173,6 @@
     </ClInclude>
     <ClInclude Include="main.h" />
     <ClInclude Include="map.h" />
-    <ClInclude Include="Mcardlist.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="Player.h" />
