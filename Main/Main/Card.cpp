@@ -111,7 +111,6 @@ void CObjCard::Action()
 
 	Nanber3 = han->basyo[Nanber - 1];//手札の場所を更新
 
-	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
 	L_position2 = pos->L_position2;
 	L_position3 = pos->L_position3;
@@ -130,7 +129,7 @@ void CObjCard::Action()
 		{
 			if (han->hand[i] == Nanber2)
 			{
-				m_x = 250 + (90 * i);
+				m_x = 927 - (90 * i);
 			}
 		}
 	}
@@ -140,7 +139,7 @@ void CObjCard::Action()
 		{
 			if (han->hand[i] == Nanber2)
 			{
-				m_x = 250 + ((450 / (Setcard))*Posicard);
+				m_x = 927 - ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
@@ -166,8 +165,8 @@ void CObjCard::Action()
 				if (L_position == false && Type == 2)
 				{
 					Atack = List->Action(Type, Nanber, Atack);//カード番号に沿って攻撃力変動
-					m_x = 200;
-					m_y = 200;
+					m_x = 543;
+					m_y = 586;
 
 					pos->L_position = true;
 
@@ -204,8 +203,8 @@ void CObjCard::Action()
 				else if (R_position == false && Type == 3)
 				{
 					Guard = List->Action(Type, Nanber, Guard);//カード番号に沿って守備力変動
-					m_x = 600;
-					m_y = 200;
+					m_x = 951;
+					m_y = 586;
 
 					pos->R_position = true;
 
