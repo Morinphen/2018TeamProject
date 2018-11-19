@@ -86,7 +86,7 @@ void CObjEnemyCard::Action()
 		{
 			if (han->hand[i] == Nanber2)
 			{
-				m_x = 250 + (90 * i);
+				m_x = 927 - (90 * i);
 			}
 		}
 	}
@@ -96,7 +96,7 @@ void CObjEnemyCard::Action()
 		{
 			if (han->hand[i] == Nanber2)
 			{
-				m_x = 250 + ((450 / (Setcard))*Posicard);
+				m_x = 567 + ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
@@ -111,24 +111,24 @@ void CObjEnemyCard::Action()
 		//sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
 		if (Nanber == 1) {
-			m_x = 200;
-			m_y = 200;
+			m_x = 543;
+			m_y = 195;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY, 1);
 			pos->ECard[0] = 1; pos->ECard[1] = 1;
 			Hp = 1; Atack = 1;
 		}
 		if (Nanber == 2) {
-			m_x = 450;
-			m_y = 200;
+			m_x = 747;
+			m_y = 195;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
 			pos->ECard2[0] = 3; pos->ECard2[1] = 2;
 			Hp = 3; Atack = 2;
 		}
 		if (Nanber == 3) {
-			m_x = 700;
-			m_y = 200;
+			m_x = 951;
+			m_y = 195;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 			pos->ECard3[0] = 5; pos->ECard3[1] = 2;
