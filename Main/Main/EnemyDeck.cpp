@@ -68,7 +68,7 @@ void CObjEnemyDeck::Action()
 		sc->basyo[Cnanber] = Cnanber + 1;
 		Cnanber++;
 		e_Cardcount++;
-		CObjCard* obj_b = new CObjCard(m_x, m_y);//カード作成
+		CObjEnemyCard* obj_b = new CObjEnemyCard(m_x, m_y);//カード作成
 		Objs::InsertObj(obj_b, OBJ_ENEMY_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 	}
 
@@ -87,7 +87,7 @@ void CObjEnemyDeck::Action()
 			Cnanber++;
 			e_Cardcount++;
 			//カード作成
-			CObjCard* obj_b = new CObjCard(500, m_y);//カード作成
+			CObjEnemyCard* obj_b = new CObjEnemyCard(500, m_y);//カード作成
 			Objs::InsertObj(obj_b, OBJ_ENEMY_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 			m_f = false;
 		}
