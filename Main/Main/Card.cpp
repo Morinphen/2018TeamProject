@@ -111,7 +111,6 @@ void CObjCard::Action()
 
 	Nanber3 = han->basyo[Nanber - 1];//ŽèŽD‚ÌêŠ‚ðXV
 
-	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
 	L_position2 = pos->L_position2;
 	L_position3 = pos->L_position3;

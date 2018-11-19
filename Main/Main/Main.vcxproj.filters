@@ -111,6 +111,9 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="WatchCard.cpp">
+      <Filter>ソース ファイル\Card</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -194,11 +197,11 @@
     <ClInclude Include="Mcardlist.h">
       <Filter>ソース ファイル\Card</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ソース ファイル\Card</Filter>
-    </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="WatchCard.h">
+      <Filter>ソース ファイル\Card</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
