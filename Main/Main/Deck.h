@@ -22,6 +22,7 @@ public:
 
 	int Cnanber;
 	int Card;
+	int m_point;
 private:
 	int x, y;
 	int m_x, m_y;
@@ -32,7 +33,7 @@ private:
 
 	int Deck[40];
 
-	int m_point;
+	
 
 	bool m_f;
 	bool Start;

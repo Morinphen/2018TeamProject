@@ -81,9 +81,7 @@ struct UserData
 #include"HandCard.h"
 #include"Cardlist.h"
 #include"Mcardlist.h"
-#include"Player.h"
 #include"BackGround.h"
-
 #include"ObjTitle.h"
 //------------------------------------------------
 

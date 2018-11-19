@@ -4,7 +4,7 @@
 #include"GameL\WinInputs.h"
 #include"GameHead.h"
 #include"Card.h"
-
+#include"Deck.h"
 #include"Cardlist.h"
 #include"Mcardlist.h"
 
@@ -16,6 +16,7 @@ CObjCard::CObjCard(float x,float y,int z)
 	m_x = x;
 	m_y = y;
 	Type = z;//カードの種類によってタイプを変える
+
 }
 
 //イニシャライズ
@@ -26,7 +27,7 @@ void CObjCard::Init()
 	Nanber = sc->Cnanber;//引いたカードの順番の固定
 	Nanber2 = han->hand[Nanber-1];//カード番号の保存
 	Nanber3 = han->basyo[Nanber - 1];//手札の順番変数
-
+	
 	Opdraw = sc->Card;//カード番号の保存
 	Updraw = 0;//カードの描画位置の調整
 	Rotdraw = 0;//カードの回転描画調整
@@ -56,6 +57,9 @@ void CObjCard::Init()
 //アクション
 void CObjCard::Action()
 {
+	CObjDekc* m_point=(CObjDekc*)Objs::GetObj(OBJ_DEKC);
+
+
 	m_l = Input::GetMouButtonL();
 	CHitBox*hit = Hits::GetHitBox(this);
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
@@ -111,7 +115,7 @@ void CObjCard::Action()
 
 	Nanber3 = han->basyo[Nanber - 1];//手札の場所を更新
 
-	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	//CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
 	L_position2 = pos->L_position2;
 	L_position3 = pos->L_position3;
@@ -156,6 +160,7 @@ void CObjCard::Action()
 				CObjMCardlist* Mlist = new CObjMCardlist();//関数呼び出し２
 
 				Summon = true;
+				m_point--;
 				han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
 				han->basyo[Nanber3 - 1] = 0;//出したカードの場所情報を削除
 				han->hensu = Setcard - Nanber3;//手札の合計と出したカードの差分を保存
