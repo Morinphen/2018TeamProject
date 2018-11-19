@@ -20,20 +20,19 @@ public:
 	void Action();
 	void Draw();
 
-	int Cnanber;
-	int Card;
-	int m_point;
+	int Cnanber;//手札のカードの最大数
+	int Card;//引いたカードの番号
 private:
 	int x, y;
 	int m_x, m_y;
-	int Ctype;
+	int Ctype;//カードの種類
 
-	int Cardcount;
+	int Cardcount;//引いたカードの合計
 	int stop;
 
-	int Deck[40];
+	int Deck[40];//
 
-	
+	int m_point;
 
 	bool m_f;
 	bool Start;

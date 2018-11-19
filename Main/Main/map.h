@@ -15,13 +15,21 @@ class CObjMap : public CObj
 		void Action();
 		void Draw();
 
-		bool L_position, L_position2, L_position3;
+		bool L_position;
 		bool S_position,S_position2;
-		bool R_position, R_position2, R_position3;
+		bool R_position;
 		bool m_f;
 
-		int PCard[4], PCard2[4], PCard3[4];
-		int ECard[4], ECard2[4], ECard3[4];
+		//Pcard[0][i]=主人公の情報,Pcard[1][i]=右の味方の情報,Pcard[2][i]=左の味方の情報
+		//Pcard[i][0]=HP,Pcard[i][1]=ATACK,Pcard[i][2]=Guard,Pcard[i][3]=モンスター番号,Pcard[i][4]=武器のHP1,Pcard[i][5]=武器のナンバーその1,Pcard[i][6]=武器のHP2,Pcard[i][7]=武器のナンバーその2
+		int PCard[3][8];//プレイヤーのカード情報
+
+		int WPosition[6];//プレイヤーの武器の場所情報
+
+		//敵のカード情報（仮）
+		int ECard[6];
+		int	ECard2[6];
+		int	ECard3[6];
 	private:
 
 };

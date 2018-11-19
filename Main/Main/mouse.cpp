@@ -35,14 +35,49 @@ void CObjmouse::Action()
 
 	//“–‚½‚è”»’èXV
 	CHitBox*hit = Hits::GetHitBox(this);
-	if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY) != nullptr)
+
+	//ŽålŒö‚ÉG‚ê‚½‚Æ‚«
+	if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER) != nullptr)
+	{
+		Choice[0] = 1;
+	}
+
+	//‰E‘¤‚Ì–¡•û‚ÉG‚ê‚½‚Æ‚«
+	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER2) != nullptr)
+	{
+		Choice[1] = 1;
+	}
+	//¶‘¤‚Ì–¡•û‚ÉG‚ê‚½‚Æ‚«
+	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER3) != nullptr)
+	{
+		Choice[2] = 1;
+	}
+
+	//“G‚ÉG‚ê‚½‚Æ‚«
+	else if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY) != nullptr)
 	{
 		EChoice = true;
 	}
 
+	else if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY2) != nullptr)
+	{
+		EChoice2 = true;
+	}
+
+	else if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY3) != nullptr)
+	{
+		EChoice3 = true;
+	}
+
+	//‚Ç‚ê‚àŠY“–‚µ‚È‚¢ê‡A‚·‚×‚Ä‚O‚É‚µ‚Ä‚¨‚­
 	else
 	{
+		Choice[0] = 0;
+		Choice[1] = 0;
+		Choice[2] = 0;
 		EChoice = false;
+		EChoice2 = false;
+		EChoice3 = false;
 	}
 
 	hit->SetPos(m_mouse_x, m_mouse_y);

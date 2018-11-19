@@ -20,8 +20,8 @@ void CObjPlayer::Action()
 {
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	if (start == false) {
-		pos->PCard[0] = 20;
-		pos->PCard[1] = 1;
+		pos->PCard[0][0] = 20;
+		pos->PCard[0][1] = 1;
 	}
 	start = true;
 }
