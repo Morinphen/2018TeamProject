@@ -151,7 +151,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="SceneTitle.cpp" />
-    <ClCompile Include="WatchCard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
@@ -186,7 +185,6 @@
     </ClInclude>
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
-    <ClInclude Include="WatchCard.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="GameL\Draw2DTex.hlsl" />

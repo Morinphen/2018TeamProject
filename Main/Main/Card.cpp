@@ -35,6 +35,8 @@ void CObjCard::Init()
 	Atack = 0;
 	Guard = 0;
 
+	CardHitCheck = false;
+
 	FSummon = false;
 	FSummon2 = false;
 
@@ -146,6 +148,7 @@ void CObjCard::Action()
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false)
 	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 		Rotdraw = 3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 		if (mou->m_r == true)
@@ -229,6 +232,7 @@ void CObjCard::Action()
 
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type==1)
 	{
+		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
 		if (m_l == true)
@@ -239,6 +243,7 @@ void CObjCard::Action()
 	}
 	else
 	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 		Rotdraw = 0;
 		SetPrio(10);
 	}
@@ -281,4 +286,34 @@ void CObjCard::Draw()
 	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+	
+	//画面左上に拡大画像を表示させる
+	
+	if (CardHitCheck == true)
+	{
+
+		dst.m_top = 12.0f;
+		dst.m_left = 13.0f;
+		dst.m_right = 371.0f;
+		dst.m_bottom = 491.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+	else
+	{
+		
+		src.m_top = 0.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 64.0f;
+
+		dst.m_top = 12.0f;
+		dst.m_left = 13.0f;
+		dst.m_right = 371.0f;
+		dst.m_bottom = 491.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+
+	
 }

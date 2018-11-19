@@ -56,9 +56,6 @@ void CSceneMain::InitScene()
 
 	CObjBackGround* obj_background = new CObjBackGround();
 	Objs::InsertObj(obj_background, OBJ_BACKGROUND, 1);
-
-	CObjWatchCard* obj_watchcard = new CObjWatchCard();
-	Objs::InsertObj(obj_watchcard, OBJ_WATCHCARD, 2);
 }
 
 //ゲームメイン実行中メソッド

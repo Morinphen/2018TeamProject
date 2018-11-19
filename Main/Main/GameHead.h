@@ -18,7 +18,6 @@ enum OBJ_NAME
 	OBJ_MAP,
 	OBJ_POINT,
 	OBJ_BACKGROUND,
-	OBJ_WATCHCARD,
 
 	OBJ_FIELD_ENEMY,
 	OBJ_FIELD_ENEMY2,
@@ -83,7 +82,6 @@ struct UserData
 #include"Cardlist.h"
 #include"Mcardlist.h"
 #include"BackGround.h"
-#include"WatchCard.h"
 
 #include"ObjTitle.h"
 //------------------------------------------------
