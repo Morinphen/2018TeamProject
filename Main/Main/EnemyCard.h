@@ -24,6 +24,10 @@ private:
 	int playertrun;
 	int enemytrun;
 
+	int Hp;//カードのhp
+	int Atack;//カードの攻撃力
+	int Guard;//カードの防御力
+
 	int Shand;
 
 	int Opdraw;

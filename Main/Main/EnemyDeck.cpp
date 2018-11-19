@@ -13,8 +13,8 @@
 void CObjEnemyDeck::Init()
 {
 	//x.yデッキの位置
-	x = 50;
-	y = 100;
+	x = 100;
+	y = 50;
 	//m_x,m_y カードの出現位置調整
 	m_x = 500;
 	m_y = 230;
@@ -23,6 +23,9 @@ void CObjEnemyDeck::Init()
 
 	//stop 同じカードの出現阻止
 	stop = 0;
+
+	//カードの回転描画調整
+	Rotdraw = 0;
 
 	//Cnanber カードの位置調整用
 	Cnanber = 0;
@@ -42,6 +45,7 @@ void CObjEnemyDeck::Init()
 //アクション
 void CObjEnemyDeck::Action()
 {
+	Rotdraw = 180;//カードを180℃回転
 	CObjEnemyHand*sc = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
 	e_Card = rand() % 14 + 1;//同じ番号のカード呼出
 	stop = 1;
@@ -77,7 +81,7 @@ void CObjEnemyDeck::Action()
 		Start = true;
 	}
 
-	if (Input::GetVKey('M') == true && Start == true)
+	if (Input::GetVKey('X') == true && Start == true)
 	{
 		if (m_f == true)
 		{
@@ -91,10 +95,10 @@ void CObjEnemyDeck::Action()
 			Objs::InsertObj(obj_b, OBJ_ENEMY_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 			m_f = false;
 		}
-
 	}
 
-	else {
+	else
+	{
 		m_f = true;
 	}
 }
@@ -111,10 +115,10 @@ void CObjEnemyDeck::Draw()
 	src.m_right = 64.0f;
 	src.m_bottom = 64.0f;
 
-	dst.m_top = 0.0f + y;
-	dst.m_left = 0.0f + x;
-	dst.m_right = 90.0f + x;
-	dst.m_bottom = 120.0f + y;
+	dst.m_top = 120.0f + y;
+	dst.m_left = 90.0f + x;
+	dst.m_right = 0.0f + x;
+	dst.m_bottom = 0.0f + y;
 
 	Draw::Draw(0, &src, &dst, c, 0.0f);
 }
