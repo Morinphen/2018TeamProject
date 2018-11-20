@@ -4,7 +4,7 @@
 #include"GameL\WinInputs.h"
 #include"GameHead.h"
 #include"Card.h"
-
+#include"Deck.h"
 #include"Cardlist.h"
 
 #include"GameL\DrawFont.h"
@@ -77,6 +77,7 @@ void CObjCard::Action()
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjDekc* point = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 
 	//¶ƒNƒŠƒbƒN‚³‚ê‚½‚Æ‚«
 	if (m_l == true)
@@ -146,6 +147,7 @@ void CObjCard::Action()
 					test = 1;
 					Summon = true;
 					Set = false;
+					point--;
 					pos->WPosition[i] = Nanber4;
 				}
 
