@@ -375,12 +375,22 @@ void CObjCard::Action()
 			Punch = true;
 		}
 	}
+
+	//召喚された武器に触れた場合
+	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2)
+	{
+		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
+		Rotdraw = -3;
+		SetPrio(11);
+	}
+
 	else
 	{
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 		Rotdraw = 0;
 		SetPrio(10);
 	}
+
 
 	//カードが召喚されたとき
 	if (Summon == true && StopSm==false) {
