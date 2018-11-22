@@ -15,7 +15,6 @@ void CObjmouse::Init()
 	m_r = false;
 	m_f = false;
 
-	Touch = false;
 	EChoice = false;
 
 	m_mouse_x = 0.0f;//ƒ}ƒEƒX‚ÌXÀ•W
@@ -44,22 +43,19 @@ void CObjmouse::Action()
 	}
 
 	//ŽålŒö‚ÉG‚ê‚½‚Æ‚«
-	if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER) != nullptr)
+	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER) != nullptr)
 	{
-		Touch = true;
 		Choice[0] = 1;
 	}
 
 	//‰E‘¤‚Ì–¡•û‚ÉG‚ê‚½‚Æ‚«
 	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER2) != nullptr)
 	{
-		Touch = true;
 		Choice[1] = 1;
 	}
 	//¶‘¤‚Ì–¡•û‚ÉG‚ê‚½‚Æ‚«
 	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER3) != nullptr)
 	{
-		Touch = true;
 		Choice[2] = 1;
 	}
 

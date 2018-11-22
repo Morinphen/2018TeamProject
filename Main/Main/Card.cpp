@@ -213,7 +213,7 @@ void CObjCard::Action()
 			Punch = false;
 		}
 
-		else
+		else if(Type==1)
 		{
 			test = 1;
 			Punch = false;
@@ -274,7 +274,7 @@ void CObjCard::Action()
 		}
 	}
 
-	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false && pos->Wtouch ==false)
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false && pos->Wtouch == false)
 	{
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 		Rotdraw = 3;//カードを３℃回転
@@ -340,7 +340,7 @@ void CObjCard::Action()
 				}
 
 				//武器の場合
-				else if (Type==2 || Type==3)
+				else if (Type==2 && pos->Wtouch==false || Type==3 && pos->Wtouch == false)
 				{
 					for (int i = 0; i < 6; i++) {
 
