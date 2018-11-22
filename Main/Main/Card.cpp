@@ -4,7 +4,7 @@
 #include"GameL\WinInputs.h"
 #include"GameHead.h"
 #include"Card.h"
-
+#include"Deck.h"
 #include"Cardlist.h"
 
 #include"GameL\DrawFont.h"
@@ -77,6 +77,7 @@ void CObjCard::Action()
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjDekc* point = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 
 	//左クリックされたとき
 	if (m_l == true)
@@ -88,9 +89,9 @@ void CObjCard::Action()
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 				{
 
-					m_x = 155 + 90 * (i - 2);
+					m_x = 498 + 90 * (i - 2);
 
-					m_y = 380;
+					m_y = 466;
 					//モンスターのパラメータ強化
 					pos->PCard[i / 2][1] += Atack;
 					pos->PCard[i / 2][2] += Guard;
@@ -127,9 +128,9 @@ void CObjCard::Action()
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 				{
 
-					m_x = 655 + 90 * (i - 4);
+					m_x = 906 + 90 * (i - 4);
 
-					m_y = 380;
+					m_y = 466;
 					pos->PCard[i / 2][1] += Atack;
 					pos->PCard[i / 2][2] += Guard;
 
@@ -148,6 +149,7 @@ void CObjCard::Action()
 					Summon = true;
 					Set = false;
 					pos->Wtouch = false;
+					point--;
 					pos->WPosition[i] = Nanber4;
 				}
 
@@ -301,10 +303,10 @@ void CObjCard::Action()
 					Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
 					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って防御力変動
 
-					//右側のスペースが開いている場合
+					//左側のスペースが開いている場合
 					if (S_position == false) {
-						m_x = 200;
-						m_y = 500;
+						m_x = 543;
+						m_y = 586;
 						//Hitboxを更新し、フィールド内での処理ができるようにする
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
@@ -318,10 +320,10 @@ void CObjCard::Action()
 						FSummon = true;
 						Summon = true;
 					}
-					//そうでない場合、左に召喚
+					//そうでない場合、右に召喚
 					else {
-						m_x = 700;
-						m_y = 500;
+						m_x = 951;
+						m_y = 586;
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
 						pos->PCard[2][0] = Hp;
@@ -381,12 +383,22 @@ void CObjCard::Action()
 			Punch = true;
 		}
 	}
+
+	//召喚された武器に触れた場合
+	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2)
+	{
+		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
+		Rotdraw = -3;
+		SetPrio(11);
+	}
+
 	else
 	{
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 		Rotdraw = 0;
 		SetPrio(10);
 	}
+
 
 	//カードが召喚されたとき
 	if (Summon == true && StopSm==false) {
