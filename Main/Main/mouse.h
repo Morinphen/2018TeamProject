@@ -18,6 +18,9 @@ class CObjmouse : public CObj
 		bool m_r;
 		bool m_f;
 
+		bool Touch;//自分のカードに触れた場合trueになる
+		bool Wtouch;//手札の武器を選択した場合trueになる
+
 		int Choice[3];//自分のカードに触れたときの変数
 
 		//敵のカードに触れたときの変数

@@ -20,6 +20,8 @@ class CObjMap : public CObj
 		bool R_position;
 		bool m_f;
 
+		bool Wtouch;
+
 		//Pcard[0][i]=主人公の情報,Pcard[1][i]=右の味方の情報,Pcard[2][i]=左の味方の情報
 		//Pcard[i][0]=HP,Pcard[i][1]=ATACK,Pcard[i][2]=Guard,Pcard[i][3]=モンスター番号,Pcard[i][4]=武器のHP1,Pcard[i][5]=武器のナンバーその1,Pcard[i][6]=武器のHP2,Pcard[i][7]=武器のナンバーその2
 		int PCard[3][8];//プレイヤーのカード情報

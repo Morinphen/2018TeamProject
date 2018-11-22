@@ -15,6 +15,7 @@ void CObjMap::Init()
 	R_position = false;
 
 	m_f = false;
+	Wtouch = false;
 }
 
 void CObjMap::Action()

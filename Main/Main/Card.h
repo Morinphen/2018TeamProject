@@ -13,6 +13,9 @@ public:
 	void Action();
 	void Draw();
 
+	bool Punch;//モンスターの攻撃制御
+	bool Set;//武器の装備制御
+
 private:
 	int m_x, m_y;//カードの描画位置
 	int Setcard;//カードの場所
@@ -46,9 +49,6 @@ private:
 	//モンスターの位置を保存
 	bool FSummon;
 	bool FSummon2;
-
-	bool Punch;//モンスターの攻撃制御
-	bool Set;//武器の装備制御
 
 	bool m_r;
 	bool Summon;//カードが召喚されたかどうか

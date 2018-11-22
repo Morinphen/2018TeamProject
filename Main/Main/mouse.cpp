@@ -15,6 +15,7 @@ void CObjmouse::Init()
 	m_r = false;
 	m_f = false;
 
+	Touch = false;
 	EChoice = false;
 
 	m_mouse_x = 0.0f;//マウスのX座標
@@ -36,20 +37,29 @@ void CObjmouse::Action()
 	//当たり判定更新
 	CHitBox*hit = Hits::GetHitBox(this);
 
+	//手札のカードに触れたとき
+	if (hit->CheckObjNameHit(OBJ_CARD) != nullptr)
+	{
+		Touch = true;
+	}
+
 	//主人公に触れたとき
 	if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER) != nullptr)
 	{
+		Touch = true;
 		Choice[0] = 1;
 	}
 
 	//右側の味方に触れたとき
 	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER2) != nullptr)
 	{
+		Touch = true;
 		Choice[1] = 1;
 	}
 	//左側の味方に触れたとき
 	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER3) != nullptr)
 	{
+		Touch = true;
 		Choice[2] = 1;
 	}
 
@@ -72,6 +82,7 @@ void CObjmouse::Action()
 	//どれも該当しない場合、すべて０にしておく
 	else
 	{
+		Touch = false;
 		Choice[0] = 0;
 		Choice[1] = 0;
 		Choice[2] = 0;
