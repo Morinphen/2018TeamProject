@@ -64,4 +64,7 @@ private:
 	bool S_position2;
 
 	bool R_position;
+
+	//ƒRƒXƒg‚ðˆê’U•Û‘¶
+	int m_kos;
 };
