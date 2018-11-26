@@ -115,6 +115,8 @@ void CObjCard::Action()
 					//選択された情報を元に戻す
 					Set = false;
 					pos->Wtouch = false;
+					//武器を召喚した情報を登録
+					pos->WSummon = true;
 					//武器の位置を保存しておく
 					pos->WPosition[i] = Nanber4;
 				}
@@ -149,6 +151,7 @@ void CObjCard::Action()
 					Summon = true;
 					Set = false;
 					pos->Wtouch = false;
+					pos->WSummon = true;
 					point--;
 					pos->WPosition[i] = Nanber4;
 				}
@@ -377,7 +380,7 @@ void CObjCard::Action()
 		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
-		if (m_l == true)
+		if (m_l == true && pos->WSummon == false)
 		{
 			test = 0;
 			Punch = true;
