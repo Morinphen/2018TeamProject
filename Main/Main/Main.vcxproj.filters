@@ -61,29 +61,47 @@
     <ClCompile Include="cost.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="HandCard.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="map.cpp">
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="mouse.cpp">
       <Filter>main</Filter>
     </ClCompile>
-    <ClCompile Include="ObjTitle.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="point.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
       <Filter>main</Filter>
     </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="PHero.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EHero.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="HandCard.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="objClear.cpp">
+      <Filter>Scene\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneClear.cpp">
+      <Filter>Scene\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameover.cpp">
+      <Filter>Scene\Gameover</Filter>
+    </ClCompile>
+    <ClCompile Include="objGameover.cpp">
+      <Filter>Scene\Gameover</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +162,6 @@
     <ClInclude Include="GameHead.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="HandCard.h">
-      <Filter>main</Filter>
-    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>main</Filter>
     </ClInclude>
@@ -156,17 +171,38 @@
     <ClInclude Include="mouse.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="ObjTitle.h">
-      <Filter>main</Filter>
-    </ClInclude>
     <ClInclude Include="point.h">
       <Filter>main</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>main</Filter>
+    <ClInclude Include="PHero.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EHero.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="HandCard.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="objClear.h">
+      <Filter>Scene\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>Scene\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>Scene\Title</Filter>
     </ClInclude>
     <ClInclude Include="SceneTitle.h">
-      <Filter>main</Filter>
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameover.h">
+      <Filter>Scene\Gameover</Filter>
+    </ClInclude>
+    <ClInclude Include="objGameover.h">
+      <Filter>Scene\Gameover</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +217,21 @@
     </Filter>
     <Filter Include="リソースファイル">
       <UniqueIdentifier>{8beb4246-babb-43c3-9a8a-2a3af3b6470e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{6c32399c-da33-4499-a85b-5803c4c23b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Clear">
+      <UniqueIdentifier>{2db4d668-4f0a-454e-b35f-365b129e8bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{dc80db7b-0ec3-41b1-acee-6072f3cbcaec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Gameover">
+      <UniqueIdentifier>{3ed0f506-bd88-4cc5-8bd9-825e84c61594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Main">
+      <UniqueIdentifier>{6cc94bb1-724a-4f99-8aeb-f0aa257f9268}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

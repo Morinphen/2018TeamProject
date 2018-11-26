@@ -82,6 +82,49 @@ void CObjCard::Action()
 	//左クリックされたとき
 	if (m_l == true)
 	{
+		//主人公に触れているとき武器を装備させる
+		if (mou->Choice[0] == 1 && Set == true) {
+
+			for (int i = 0; i < 2; i++) {
+				if (pos->WPosition[i] <= 0  && Summon == false)
+				{
+
+					m_x = 703 + 90 * i;
+
+					m_y = 466;
+					//モンスターのパラメータ強化
+					pos->PCard[i / 2][1] += Atack;
+					pos->PCard[i / 2][2] += Guard;
+
+					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
+					if (i - 2 == 0) {
+						pos->PCard[i / 2][4] = Hp;
+						pos->PCard[i / 2][5] = Nanber4;
+						RWeapon = true;
+					}
+					else {
+						pos->PCard[i / 2][6] = Hp;
+						pos->PCard[i / 2][7] = Nanber4;
+						LWeapon = true;
+					}
+
+					//色を元に戻す
+					test = 1;
+					//召喚した扱いにする
+					Summon = true;
+					//選択された情報を元に戻す
+					Set = false;
+					pos->Wtouch = false;
+					//武器を召喚した情報を登録
+					pos->WSummon = true;
+					//武器の位置を保存しておく
+					pos->WPosition[i] = Nanber4;
+				}
+
+			}
+
+		}
+
 		//右側のモンスターに触れているとき武器を装備させる
 		if (mou->Choice[1] == 1 && Set == true) {
 
@@ -173,13 +216,20 @@ void CObjCard::Action()
 		{
 			//FSummon=右側の味方、違う場合は左側
 			if (FSummon == true) {
-				pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
-				pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+				if (pos->PCard[1][1] - pos->ECard[2] > 0) 
+					pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
+
+				if (pos->ECard[1] - pos->PCard[1][2] > 0) 
+					pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+				
 			}
 			else
 			{
-				pos->ECard[0] -= pos->PCard[2][1] - pos->ECard[2];
-				pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
+				if(pos->PCard[2][1] - pos->ECard[2]>0)
+					pos->ECard[0] -= pos->PCard[2][1] - pos->ECard[2];
+
+				if(pos->ECard[1] - pos->PCard[2][2]>0)
+					pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
 			}
 			//選択情報を元に戻す
 			test = 1;
@@ -189,12 +239,18 @@ void CObjCard::Action()
 		else if (mou->EChoice2 == true && Punch == true)
 		{
 			if (FSummon == true) {
-				pos->ECard2[0] -= pos->PCard[1][1] - pos->ECard2[2];
-				pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
+				if(pos->PCard[1][1] - pos->ECard2[2]>0)
+					pos->ECard2[0] -= pos->PCard[1][1] - pos->ECard2[2];
+
+				if (pos->ECard2[1] - pos->PCard[1][2]>0)
+					pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
 			}
 			else
 			{
-				pos->ECard2[0] -= pos->PCard[2][1] - pos->ECard2[2];
+				if(pos->PCard[2][1] - pos->ECard2[2]>0)
+					pos->ECard2[0] -= pos->PCard[2][1] - pos->ECard2[2];
+
+				if(pos->ECard2[1] - pos->PCard[2][2]>0)
 				pos->PCard[2][0] -= pos->ECard2[1] - pos->PCard[2][2];
 			}
 			test = 1;
@@ -204,13 +260,19 @@ void CObjCard::Action()
 		else if (mou->EChoice3 == true && Punch == true)
 		{
 			if (FSummon == true) {
-				pos->ECard3[0] -= pos->PCard[1][1] - pos->ECard3[2];
-				pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
+				if(pos->PCard[1][1] - pos->ECard3[2]>0)
+					pos->ECard3[0] -= pos->PCard[1][1] - pos->ECard3[2];
+
+				if(pos->ECard3[1] - pos->PCard[1][2]>0)
+					pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
 			}
 			else
 			{
-				pos->ECard3[0] -= pos->PCard[2][1] - pos->ECard3[2];
-				pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
+				if(pos->PCard[2][1] - pos->ECard3[2]>0)
+					pos->ECard3[0] -= pos->PCard[2][1] - pos->ECard3[2];
+
+				if(pos->ECard3[1] - pos->PCard[2][2]>0)
+					pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
 			}
 			test = 1;
 			Punch = false;
@@ -465,7 +527,7 @@ void CObjCard::Action()
 					pos->PCard[i][1] -= Atack;
 					pos->PCard[i][2] -= Guard;
 					pos->PCard[i][4] = 0;
-					pos->PCard[i][5] = 0;
+					//pos->PCard[i][5] = 0;
 
 					for (int j = 0; j < 6; j++) {
 						if (pos->WPosition[j] == Nanber4) {

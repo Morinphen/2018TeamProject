@@ -45,6 +45,12 @@ void CSceneMain::InitScene()
 	CObjEnemyHand*obj_enemy_hand = new CObjEnemyHand();
 	Objs::InsertObj(obj_enemy_hand, OBJ_ENEMY_HAND, 1);
 
+	CObjPHero*Hero = new CObjPHero();
+	Objs::InsertObj(Hero, OBJ_FIELD_PLAYER, 1);
+
+	CObjEHero*EHero = new CObjEHero();
+	Objs::InsertObj(EHero, OBJ_FIELD_ENEMY, 1);
+
 	CObjmouse* obj_mouse = new CObjmouse();
 	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 100);
 
