@@ -102,7 +102,7 @@ void CObjEnemyCard::Action()
 		}
 	}
 
-	if (Nanber < 4 && Summon==false)
+	if (Nanber < 4 && Nanber!=2 && Summon==false)
 	{
 		Summon = true;
 		//han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
@@ -117,27 +117,27 @@ void CObjEnemyCard::Action()
 			m_y = 195;
 			//HitBoxの入れ替え　これで攻撃対象に選択できるように
 			Hits::DeleteHitBox(this);
-			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY, 1);
+			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
 
 			//ECard[0]=HP,ECard[1]=Atack,ECard[2]=Guard
-			pos->ECard[0] = 1; pos->ECard[1] = 1; pos->ECard[2] = 0;
+			pos->ECard2[0] = 1; pos->ECard2[1] = 1; pos->ECard2[2] = 0;
 			Hp = 1; Atack = 1; Guard = 0;
 		}
-		if (Nanber == 2) {
+		/*if (Nanber == 2) {
 			m_x = 747;
 			m_y = 195;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
 			pos->ECard2[0] = 3; pos->ECard2[1] = 2; pos->ECard2[2] = 0;
 			Hp = 3; Atack = 2; Guard = 0;
-		}
+		}*/
 		if (Nanber == 3) {
 			m_x = 951;
 			m_y = 195;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 			pos->ECard3[0] = 5; pos->ECard3[1] = 4; pos->ECard3[2] = 2;
-			Hp = 5; Atack = 2; Guard = 2;
+			Hp = 5; Atack = 4; Guard = 2;
 		}
 	}
 
@@ -146,12 +146,12 @@ void CObjEnemyCard::Action()
 		if (Nanber == 1)
 		{
 			//Hpの更新
-			Hp = pos->ECard[0];
-		}
-		if (Nanber == 2)
-		{
 			Hp = pos->ECard2[0];
 		}
+		/*if (Nanber == 2)
+		{
+			Hp = pos->ECard2[0];
+		}*/
 		if (Nanber == 3)
 		{
 			Hp = pos->ECard3[0];
@@ -173,7 +173,7 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	if (Nanber < 4) {
+	if (Nanber < 4 && Nanber!=2) {
 		src.m_top = 0.0f + (Nanber + 1) * 64;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;

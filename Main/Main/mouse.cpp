@@ -37,8 +37,14 @@ void CObjmouse::Action()
 	//当たり判定更新
 	CHitBox*hit = Hits::GetHitBox(this);
 
+	//手札のカードに触れたとき
+	if (hit->CheckObjNameHit(OBJ_CARD) != nullptr)
+	{
+		Touch = true;
+	}
+
 	//主人公に触れたとき
-	if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER) != nullptr)
+	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER) != nullptr)
 	{
 		Choice[0] = 1;
 	}
@@ -73,6 +79,7 @@ void CObjmouse::Action()
 	//どれも該当しない場合、すべて０にしておく
 	else
 	{
+		Touch = false;
 		Choice[0] = 0;
 		Choice[1] = 0;
 		Choice[2] = 0;
