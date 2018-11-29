@@ -121,6 +121,7 @@
     <ClCompile Include="Cardlist.cpp" />
     <ClCompile Include="cost.cpp" />
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="EHero.cpp" />
     <ClCompile Include="EnemyCard.cpp" />
     <ClCompile Include="EnemyDeck.cpp" />
     <ClCompile Include="EnemyHand.cpp" />
@@ -141,10 +142,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="mouse.cpp" />
+    <ClCompile Include="objClear.cpp" />
+    <ClCompile Include="objGameover.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="PHero.cpp" />
     <ClCompile Include="point.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="SceneClear.cpp" />
+    <ClCompile Include="SceneGameover.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -156,6 +162,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="Cardlist.h" />
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="EHero.h" />
     <ClInclude Include="EnemyCard.h" />
     <ClInclude Include="EnemyDeck.h" />
     <ClInclude Include="EnemyHand.h" />
@@ -177,10 +184,15 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="mouse.h" />
+    <ClInclude Include="objClear.h" />
+    <ClInclude Include="objGameover.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="PHero.h" />
     <ClInclude Include="point.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="SceneClear.h" />
+    <ClInclude Include="SceneGameover.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneTitle.h" />
   </ItemGroup>

@@ -15,11 +15,21 @@ void CObjMap::Init()
 	R_position = false;
 
 	m_f = false;
+	Wtouch = false;
+	WSummon = false;
+	Cooltime = 0;
 }
 
 void CObjMap::Action()
 {
-
+	//•Ší‚ª¢Š«‚³‚ê‚½‚Æ‚«A
+	if (WSummon == true) {
+		Cooltime++;
+		if (Cooltime == 10){
+			Cooltime = 0;
+			WSummon = false;
+		}
+	}
 }
 
 void CObjMap::Draw()

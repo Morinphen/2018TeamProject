@@ -1,34 +1,52 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp" />
-    <ClCompile Include="cost.cpp" />
-    <ClCompile Include="GameL\Audio.cpp" />
-    <ClCompile Include="GameL\DirectXDevice.cpp" />
-    <ClCompile Include="GameL\DrawFont.cpp" />
-    <ClCompile Include="GameL\DrawTexture.cpp" />
-    <ClCompile Include="GameL\GameL_Main.cpp" />
-    <ClCompile Include="GameL\HitBoxManager.cpp" />
-    <ClCompile Include="GameL\MultiThread.cpp" />
-    <ClCompile Include="GameL\SceneManager.cpp" />
-    <ClCompile Include="GameL\SceneObjManager.cpp" />
-    <ClCompile Include="GameL\SetWindow.cpp" />
-    <ClCompile Include="GameL\UserData.cpp" />
-    <ClCompile Include="GameL\WinInputs.cpp" />
-    <ClCompile Include="map.cpp" />
-    <ClCompile Include="mouse.cpp" />
-    <ClCompile Include="ObjTitle.cpp" />
-    <ClCompile Include="point.cpp" />
-    <ClCompile Include="SceneMain.cpp" />
-    <ClCompile Include="test.cpp" />
-    <ClCompile Include="SceneTitle.cpp" />
-    <ClCompile Include="Deck.cpp">
-      <Filter>Player</Filter>
+    <ClCompile Include="GameL\Audio.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\DirectXDevice.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\DrawFont.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\DrawTexture.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\GameL_Main.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\HitBoxManager.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\MultiThread.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\SceneManager.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\SceneObjManager.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\SetWindow.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\UserData.cpp">
+      <Filter>リソースファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\WinInputs.cpp">
+      <Filter>リソースファイル</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="Cardlist.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="EnemyCard.cpp">
@@ -40,38 +58,96 @@
     <ClCompile Include="EnemyHand.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="cost.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="point.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="PHero.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EHero.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="HandCard.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="objClear.cpp">
+      <Filter>Scene\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneClear.cpp">
+      <Filter>Scene\Clear</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>Scene\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>Scene\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameover.cpp">
+      <Filter>Scene\Gameover</Filter>
+    </ClCompile>
+    <ClCompile Include="objGameover.cpp">
+      <Filter>Scene\Gameover</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h" />
-    <ClInclude Include="GameHead.h" />
-    <ClInclude Include="GameL\Audio.h" />
-    <ClInclude Include="GameL\DirectXDevice.h" />
-    <ClInclude Include="GameL\DrawFont.h" />
-    <ClInclude Include="GameL\DrawTexture.h" />
-    <ClInclude Include="GameL\HitBoxManager.h" />
-    <ClInclude Include="GameL\MultiThread.h" />
-    <ClInclude Include="GameL\SceneManager.h" />
-    <ClInclude Include="GameL\SceneObjManager.h" />
-    <ClInclude Include="GameL\SetWindow.h" />
-    <ClInclude Include="GameL\UserData.h" />
-    <ClInclude Include="GameL\WinInputs.h" />
-    <ClInclude Include="main.h" />
-    <ClInclude Include="map.h" />
-    <ClInclude Include="mouse.h" />
-    <ClInclude Include="ObjTitle.h" />
-    <ClInclude Include="point.h" />
-    <ClInclude Include="SceneMain.h" />
-    <ClInclude Include="SceneTitle.h" />
-    <ClInclude Include="Deck.h">
-      <Filter>Player</Filter>
+    <ClInclude Include="GameL\Audio.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\DirectXDevice.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\DrawFont.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\DrawTexture.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\HitBoxManager.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\MultiThread.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SceneManager.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SceneObjManager.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SetWindow.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\UserData.h">
+      <Filter>リソースファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\WinInputs.h">
+      <Filter>リソースファイル</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="Cardlist.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Deck.h">
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="EnemyCard.h">
@@ -83,16 +159,79 @@
     <ClInclude Include="EnemyHand.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="GameHead.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="point.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="PHero.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="EHero.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="HandCard.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="objClear.h">
+      <Filter>Scene\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneClear.h">
+      <Filter>Scene\Clear</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>Scene\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>Scene\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameover.h">
+      <Filter>Scene\Gameover</Filter>
+    </ClInclude>
+    <ClInclude Include="objGameover.h">
+      <Filter>Scene\Gameover</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Player">
-      <UniqueIdentifier>{2673106d-e69e-44d2-a190-51ed0f0fd67f}</UniqueIdentifier>
+      <UniqueIdentifier>{11094759-57a7-4713-bf06-e7245b00d98c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Enemy">
-      <UniqueIdentifier>{a345152b-f611-4100-bfcb-32bad005553e}</UniqueIdentifier>
+      <UniqueIdentifier>{ef8f8c19-8f93-4dbb-a307-a16966c43eb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{847994c3-a973-45a7-a4ba-dd469b9003b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソースファイル">
+      <UniqueIdentifier>{8beb4246-babb-43c3-9a8a-2a3af3b6470e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{6c32399c-da33-4499-a85b-5803c4c23b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Clear">
+      <UniqueIdentifier>{2db4d668-4f0a-454e-b35f-365b129e8bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Title">
+      <UniqueIdentifier>{dc80db7b-0ec3-41b1-acee-6072f3cbcaec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Gameover">
+      <UniqueIdentifier>{3ed0f506-bd88-4cc5-8bd9-825e84c61594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Main">
+      <UniqueIdentifier>{6cc94bb1-724a-4f99-8aeb-f0aa257f9268}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

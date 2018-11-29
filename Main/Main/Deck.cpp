@@ -44,6 +44,7 @@ void CObjDekc::Init()
 void CObjDekc::Action()
 {
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
+	CObjCard*point = (CObjCard*)Objs::GetObj(OBJ_CARD);
 	Card = rand() % 14+1;//同じ番号のカード呼出
 	stop = 1;
 
@@ -109,7 +110,7 @@ void CObjDekc::Action()
 			m_f = false;
 			
 			//ドローしたらポイント増加
-			m_point++;
+			point++;
 		}
 
 	}
