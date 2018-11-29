@@ -19,9 +19,9 @@ void CObjEnemyCard::Init()
 {
 	CObjEnemyDeck*sc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
 	CObjEnemyHand*han = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
-	Nanber = sc->Cnanber;//bango 引いたカードの順番の固定
-	Nanber2 = han->hand[Nanber - 1];
-	Nanber3 = Nanber;
+	Number = sc->Cnanber;//bango 引いたカードの順番の固定
+	Number2 = han->hand[Number - 1];
+	Number3 = Number;
 
 	Opdraw = sc->e_Card;//test カード番号の保存
 	Updraw = 0;//taka カードの描画位置の調整
@@ -54,7 +54,7 @@ void CObjEnemyCard::Action()
 
 	Setcard = sc->Cnanber;//Setcard カードの位置調整変更用
 
-	Posicard = Setcard - Nanber;//Posicard カードの位置調整変更用２
+	Posicard = Setcard - Number;//Posicard カードの位置調整変更用２
 
 								/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
 								{
@@ -69,9 +69,9 @@ void CObjEnemyCard::Action()
 								Reflag = false;
 								}*/
 
-	if (Nanber - han->hensu > 0)
+	if (Number - han->hensu > 0)
 	{
-		Nanber2 = han->basyo[Nanber - Shand];
+		Number2 = han->basyo[Number - Shand];
 	}
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
@@ -84,7 +84,7 @@ void CObjEnemyCard::Action()
 		//m_x = 250+(90* Posicard);
 		for (int i = 0; i < Setcard; i++)
 		{
-			if (han->hand[i] == Nanber2)
+			if (han->hand[i] == Number2)
 			{
 				m_x = 927 - (90 * i);
 			}
@@ -94,14 +94,14 @@ void CObjEnemyCard::Action()
 	else if (Summon == false) {
 		for (int i = 0; i < Setcard; i++)
 		{
-			if (han->hand[i] == Nanber2)
+			if (han->hand[i] == Number2)
 			{
 				m_x = 567 + ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
 
-	if (Nanber < 4 && Summon==false)
+	if (Number < 4 && Summon==false)
 	{
 		Summon = true;
 		//han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
@@ -111,7 +111,7 @@ void CObjEnemyCard::Action()
 		//sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
 		//仮置きの敵召喚　手札の順番が１，２，３のカードを召喚
-		if (Nanber == 1) {
+		if (Number == 1) {
 			m_x = 543;
 			m_y = 195;
 			//HitBoxの入れ替え　これで攻撃対象に選択できるように
@@ -122,7 +122,7 @@ void CObjEnemyCard::Action()
 			pos->ECard[0] = 1; pos->ECard[1] = 1; pos->ECard[2] = 0;
 			Hp = 1; Atack = 1; Guard = 0;
 		}
-		if (Nanber == 2) {
+		if (Number == 2) {
 			m_x = 747;
 			m_y = 195;
 			Hits::DeleteHitBox(this);
@@ -130,7 +130,7 @@ void CObjEnemyCard::Action()
 			pos->ECard2[0] = 3; pos->ECard2[1] = 2; pos->ECard2[2] = 0;
 			Hp = 3; Atack = 2; Guard = 0;
 		}
-		if (Nanber == 3) {
+		if (Number == 3) {
 			m_x = 951;
 			m_y = 195;
 			Hits::DeleteHitBox(this);
@@ -191,16 +191,16 @@ void CObjEnemyCard::Action()
 
 	if (Summon == true)
 	{
-		if (Nanber == 1)
+		if (Number == 1)
 		{
 			//Hpの更新
 			Hp = pos->ECard[0];
 		}
-		if (Nanber == 2)
+		if (Number == 2)
 		{
 			Hp = pos->ECard2[0];
 		}
-		if (Nanber == 3)
+		if (Number == 3)
 		{
 			Hp = pos->ECard3[0];
 		}
@@ -221,11 +221,11 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	if (Nanber < 4) {
-		src.m_top = 0.0f + (Nanber + 1) * 64;
+	if (Number < 4) {
+		src.m_top = 0.0f + (Number + 1) * 64;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
-		src.m_bottom = 64.0f + (Nanber + 1) * 64;
+		src.m_bottom = 64.0f + (Number + 1) * 64;
 	}
 	else
 	{
