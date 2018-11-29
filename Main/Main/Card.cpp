@@ -41,9 +41,10 @@ void CObjCard::Init()
 	SeedAtack = 1;
 	SeedGuard = 2;
 
-	//召喚後カード位置制御初期化
+	//マウス参照用変数初期化
 	CardHitCheck = false;
 
+	//召喚後カード位置制御初期化
 	FSummon = false;
 	FSummon2 = false;
 	LWeapon = false;

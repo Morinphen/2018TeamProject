@@ -46,11 +46,12 @@ void CObjEnemyCard::Init()
 void CObjEnemyCard::Action()
 {
 	Rotdraw = 180;//カードを180℃回転
-	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	CObjEnemyHand*han = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
 	CObjEnemyDeck*sc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
 
 	CHitBox*hit = Hits::GetHitBox(this);
+	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
+
 
 	Setcard = sc->Cnanber;//Setcard カードの位置調整変更用
 
@@ -140,55 +141,6 @@ void CObjEnemyCard::Action()
 		}
 	}
 
-	/*if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr && Summon == false)
-	{
-		Rotdraw = 180;//カードを３℃回転
-		SetPrio(11);//カードの描画優先度変更
-		if (mou->m_r == true)
-		{
-			Summon = true;
-
-			if (L_position == false && S_position == false && R_position == false)
-			{
-				m_x = 200;
-				m_y = 200;
-
-				pos->L_position = true;
-
-				hit->SetPos(m_x, m_y);
-			}
-			else if (L_position == true && S_position == false && R_position == false)
-			{
-				m_x = 400;
-				m_y = 200;
-
-				pos->S_position = true;
-
-				hit->SetPos(m_x, m_y);
-			}
-			else if (L_position == true && S_position == true && R_position == false)
-			{
-				m_x = 600;
-				m_y = 200;
-
-				pos->R_position = true;
-
-				hit->SetPos(m_x, m_y);
-			}
-			else
-			{
-				hit->SetPos(m_x, m_y);
-
-				Summon = false;
-			}
-		}
-	}
-	else
-	{
-		Rotdraw = 0;
-		SetPrio(10);
-	}*/
-
 	if (Summon == true)
 	{
 		if (Nanber == 1)
@@ -241,6 +193,7 @@ void CObjEnemyCard::Draw()
 	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+
 	if (Summon == true) {
 		wchar_t str[128];
 		swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
