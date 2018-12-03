@@ -16,6 +16,7 @@ void CObjMap::Init()
 
 	m_f = false;
 	Wtouch = false;
+	PTrun = false;
 	Cooltime = 0;
 }
 
