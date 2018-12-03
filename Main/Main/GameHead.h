@@ -28,6 +28,8 @@ enum OBJ_NAME
 	OBJ_FIELD_ENEMY3,
 
 	OBJ_TITLE,
+	OBJ_CLEAR,
+	OBJ_GAMEOVER,
 	//OBJ_POINT,
 };
 //------------------------------------------------
@@ -85,14 +87,20 @@ struct UserData
 #include"HandCard.h"
 #include"Cardlist.h"
 #include"BackGround.h"
+#include"PHero.h"
+#include"EHero.h"
 
 #include"Player.h"
 #include"ObjTitle.h"
+#include"ObjClear.h"
+#include"objGameover.h"
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
 #include"SceneMain.h"
 #include"SceneTitle.h"
+#include"SceneClear.h"
+#include"SceneGameover.h"
 //#include"point.h"
 //-----------------------------------------------
 

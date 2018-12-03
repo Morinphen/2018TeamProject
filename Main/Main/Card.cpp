@@ -23,10 +23,11 @@ void CObjCard::Init()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	Nanber = sc->Cnanber;//引いたカードの順番の固定
-	Nanber2 = han->hand[Nanber-1];//カード番号の保存
-	Nanber3 = han->basyo[Nanber - 1];//手札の順番変数
-	Nanber4 = sc->Card;
+	Number = sc->Cnanber;//引いたカードの順番の固定
+	Number2 = han->hand[Number -1];//カード番号の保存
+	Number3 = han->basyo[Number - 1];//手札の順番変数
+
+	Number4 = sc->Card;
 
 	Opdraw = sc->Card;//カード番号の保存
 	Updraw = 0;//カードの描画位置の調整
@@ -42,9 +43,10 @@ void CObjCard::Init()
 	SeedAtack = 1;
 	SeedGuard = 2;
 
-	//召喚後カード位置制御初期化
+	//マウス参照用変数初期化
 	CardHitCheck = false;
 
+	//召喚後カード位置制御初期化
 	FSummon = false;
 	FSummon2 = false;
 	LWeapon = false;
@@ -80,14 +82,14 @@ void CObjCard::Action()
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);	//左クリックされたとき
 	if (m_l == true)
 	{
-		//右側のモンスターに触れているとき武器を装備させる
-		if (mou->Choice[1] == 1 && Set == true) {
+		//主人公に触れているとき武器を装備させる
+		if (mou->Choice[0] == 1 && Set == true) {
 
-			for (int i = 2; i < 4; i++) {
-				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
+			for (int i = 0; i < 2; i++) {
+				if (pos->WPosition[i] <= 0  && Summon == false)
 				{
 
-					m_x = 498 + 90 * (i - 2);
+					m_x = 703 + 90 * i;
 
 					m_y = 466;
 					//モンスターのパラメータ強化
@@ -117,7 +119,49 @@ void CObjCard::Action()
 					pos->WSummon = true;
 					//武器の位置を保存しておく
 					pos->WPosition[i] = Nanber4;
+				}
 
+			}
+
+		}
+
+		//右側のモンスターに触れているとき武器を装備させる
+		if (mou->Choice[1] == 1 && Set == true) {
+
+			for (int i = 2; i < 4; i++) {
+				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
+				{
+
+					m_x = 498 + 90 * (i - 2);
+
+					m_y = 466;
+					//モンスターのパラメータ強化
+					pos->PCard[i / 2][1] += Atack;
+					pos->PCard[i / 2][2] += Guard;
+
+					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
+					if (i - 2 == 0) {
+						pos->PCard[i / 2][4] = Hp;
+						pos->PCard[i / 2][5] = Number4;
+						RWeapon = true;
+					}
+					else {
+						pos->PCard[i / 2][6] = Hp;
+						pos->PCard[i / 2][7] = Number4;
+						LWeapon = true;
+					}
+
+					//色を元に戻す
+					test = 1;
+					//召喚した扱いにする
+					Summon = true;
+					//選択された情報を元に戻す
+					Set = false;
+					pos->Wtouch = false;
+					//武器を召喚した情報を登録
+					pos->WSummon = true;
+					//武器の位置を保存しておく
+					pos->WPosition[i] = Nanber4;
 				}
 
 			}
@@ -137,12 +181,12 @@ void CObjCard::Action()
 
 					if (i - 4 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Nanber4;
+						pos->PCard[i / 2][5] = Number4;
 						RWeapon = true;
 					}
 					else  {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Nanber4;
+						pos->PCard[i / 2][7] = Number4;
 						LWeapon = true;
 					}
 
@@ -151,8 +195,8 @@ void CObjCard::Action()
 					Set = false;
 					pos->Wtouch = false;
 					pos->WSummon = true;
+					point--;
 					pos->WPosition[i] = Nanber4;
-
 				}
 
 			}
@@ -172,13 +216,20 @@ void CObjCard::Action()
 		{
 			//FSummon=右側の味方、違う場合は左側
 			if (FSummon == true) {
-				pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
-				pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+				if (pos->PCard[1][1] - pos->ECard[2] > 0) 
+					pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
+
+				if (pos->ECard[1] - pos->PCard[1][2] > 0) 
+					pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+				
 			}
 			else
 			{
-				pos->ECard[0] -= pos->PCard[2][1] - pos->ECard[2];
-				pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
+				if(pos->PCard[2][1] - pos->ECard[2]>0)
+					pos->ECard[0] -= pos->PCard[2][1] - pos->ECard[2];
+
+				if(pos->ECard[1] - pos->PCard[2][2]>0)
+					pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
 			}
 			//選択情報を元に戻す
 			test = 1;
@@ -188,12 +239,18 @@ void CObjCard::Action()
 		else if (mou->EChoice2 == true && Punch == true)
 		{
 			if (FSummon == true) {
-				pos->ECard2[0] -= pos->PCard[1][1] - pos->ECard2[2];
-				pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
+				if(pos->PCard[1][1] - pos->ECard2[2]>0)
+					pos->ECard2[0] -= pos->PCard[1][1] - pos->ECard2[2];
+
+				if (pos->ECard2[1] - pos->PCard[1][2]>0)
+					pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
 			}
 			else
 			{
-				pos->ECard2[0] -= pos->PCard[2][1] - pos->ECard2[2];
+				if(pos->PCard[2][1] - pos->ECard2[2]>0)
+					pos->ECard2[0] -= pos->PCard[2][1] - pos->ECard2[2];
+
+				if(pos->ECard2[1] - pos->PCard[2][2]>0)
 				pos->PCard[2][0] -= pos->ECard2[1] - pos->PCard[2][2];
 			}
 			test = 1;
@@ -203,13 +260,19 @@ void CObjCard::Action()
 		else if (mou->EChoice3 == true && Punch == true)
 		{
 			if (FSummon == true) {
-				pos->ECard3[0] -= pos->PCard[1][1] - pos->ECard3[2];
-				pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
+				if(pos->PCard[1][1] - pos->ECard3[2]>0)
+					pos->ECard3[0] -= pos->PCard[1][1] - pos->ECard3[2];
+
+				if(pos->ECard3[1] - pos->PCard[1][2]>0)
+					pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
 			}
 			else
 			{
-				pos->ECard3[0] -= pos->PCard[2][1] - pos->ECard3[2];
-				pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
+				if(pos->PCard[2][1] - pos->ECard3[2]>0)
+					pos->ECard3[0] -= pos->PCard[2][1] - pos->ECard3[2];
+
+				if(pos->ECard3[1] - pos->PCard[2][2]>0)
+					pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
 			}
 			test = 1;
 			Punch = false;
@@ -225,7 +288,7 @@ void CObjCard::Action()
 
 	Setcard = sc->Cnanber;//カードの位置調整変更用
 
-	Posicard = Setcard - Nanber;//カードの位置調整変更用２
+	Posicard = Setcard - Number;//カードの位置調整変更用２
 	/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
 	{
 		Reflag = true;
@@ -239,13 +302,13 @@ void CObjCard::Action()
 		Reflag = false;
 	}*/
 
-	if (Nanber3 - han->hensu3 > 0 && han->hensu>0)//現在の場所が出したカードよりも後の場合、ひとつずらす
+	if (Number3 - han->hensu3 > 0 && han->hensu>0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
-		Nanber--;//番号を１ずらす
+		Number--;//番号を１ずらす
 		han->hensu2++;
 	}
 
-	Nanber3 = han->basyo[Nanber - 1];//手札の場所を更新
+	Number3 = han->basyo[Number - 1];//手札の場所を更新
 
 	L_position = pos->L_position;
 
@@ -259,7 +322,7 @@ void CObjCard::Action()
 		//m_x = 250+(90* Posicard);
 		for (int i = 0; i < Setcard; i++)
 		{
-			if (han->hand[i] == Nanber2)
+			if (han->hand[i] == Number2)
 			{
 				m_x = 927 - (90 * i);
 			}
@@ -269,7 +332,7 @@ void CObjCard::Action()
 	else if(Summon == false){
 		for (int i = 0; i < Setcard; i++)
 		{
-			if (han->hand[i] == Nanber2)
+			if (han->hand[i] == Number2)
 			{
 				m_x = 927 - ((450 / (Setcard))*Posicard);
 			}
@@ -301,9 +364,9 @@ void CObjCard::Action()
 				//モンスターの場合
 				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true)
 				{
-					Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
-					Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って防御力変動
+					Hp = List->Action(Type, Number4, SeedHp);//カード番号に沿ってHP変動
+					Atack = List->Action(Type, Number4, SeedAtack);//カード番号に沿って攻撃力変動
+					Guard = List->Action(Type, Number4, SeedGuard);//カード番号に沿って防御力変動
 
 					//左側のスペースが開いている場合
 					if (S_position == false) {
@@ -404,10 +467,10 @@ void CObjCard::Action()
 
 	//カードが召喚されたとき
 	if (Summon == true && StopSm==false) {
-		han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
-		han->basyo[Nanber3 - 1] = 0;//出したカードの場所情報を削除
-		han->hensu = Setcard - Nanber3;//手札の合計と出したカードの差分を保存
-		han->hensu3 = Nanber3;//出したカードの場所を保存
+		han->hand[Number3 - 1] = 0;//出したカードのカード番号を削除
+		han->basyo[Number3 - 1] = 0;//出したカードの場所情報を削除
+		han->hensu = Setcard - Number3;//手札の合計と出したカードの差分を保存
+		han->hensu3 = Number3;//出したカードの場所を保存
 		sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
@@ -452,7 +515,7 @@ void CObjCard::Action()
 		for (int i = 0; i < 3; i++)
 		{
 			//カードの情報を探し出し、該当した場合処理開始
-			if (pos->PCard[i][5] == Nanber4 || pos->PCard[i][7] == Nanber4) {
+			if (pos->PCard[i][5] == Number4 || pos->PCard[i][7] == Number4) {
 				//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
 				if(RWeapon==true)
 					Hp = pos->PCard[i][4];
@@ -465,10 +528,10 @@ void CObjCard::Action()
 					pos->PCard[i][1] -= Atack;
 					pos->PCard[i][2] -= Guard;
 					pos->PCard[i][4] = 0;
-					pos->PCard[i][5] = 0;
+					//pos->PCard[i][5] = 0;
 
 					for (int j = 0; j < 6; j++) {
-						if (pos->WPosition[j] == Nanber4) {
+						if (pos->WPosition[j] == Number4) {
 							pos->WPosition[j] = 0;
 							break;
 						}
