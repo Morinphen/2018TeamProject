@@ -30,11 +30,18 @@ void CObjTitle::Action()
 			m_key_flag = false;
 		}
 	}
-	else if (Input::GetVKey(VK_SPACE))
+	else if (Input::GetVKey('E'))
 	{
-		exit(0);		//スペースキーで終了する
+		if (m_key_flag == false)
+		{
+			m_key_flag = true;
+			exit(0);		//Eキーで終了する			
+		}
+		else
+		{
+			m_key_flag = false;
+		}
 	}
-
 }
 
 //ドロー
@@ -44,5 +51,5 @@ void CObjTitle::Draw()
 	Font::StrDraw(L"Arma Batlle",430, 220, 32, c);
 
 	Font::StrDraw(L"Push'S'Key", 430, 400, 32, c);
-	Font::StrDraw(L"Exit SpaceKey", 410, 500, 32, c);
+	Font::StrDraw(L"Exit 'E'Key", 410, 500, 32, c);
 }

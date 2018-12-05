@@ -102,7 +102,7 @@ void CObjEnemyCard::Action()
 		}
 	}
 
-	if (Nanber < 4 && Nanber!=2 && Summon==false)
+	if (Number < 4 && Number!=2 && Summon==false)
 	{
 		Summon = true;
 		//han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
@@ -123,7 +123,7 @@ void CObjEnemyCard::Action()
 			pos->ECard2[0] = 1; pos->ECard2[1] = 1; pos->ECard2[2] = 0;
 			Hp = 1; Atack = 1; Guard = 0;
 		}
-		/*if (Nanber == 2) {
+		/*if (Number == 2) {
 			m_x = 747;
 			m_y = 195;
 			Hits::DeleteHitBox(this);
@@ -131,7 +131,7 @@ void CObjEnemyCard::Action()
 			pos->ECard2[0] = 3; pos->ECard2[1] = 2; pos->ECard2[2] = 0;
 			Hp = 3; Atack = 2; Guard = 0;
 		}*/
-		if (Nanber == 3) {
+		if (Number == 3) {
 			m_x = 951;
 			m_y = 195;
 			Hits::DeleteHitBox(this);
@@ -148,11 +148,11 @@ void CObjEnemyCard::Action()
 			//Hpの更新
 			Hp = pos->ECard2[0];
 		}
-		/*if (Nanber == 2)
+		/*if (Number == 2)
 		{
 			Hp = pos->ECard2[0];
 		}*/
-		if (Nanber == 3)
+		if (Number == 3)
 		{
 			Hp = pos->ECard3[0];
 		}
@@ -173,8 +173,8 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	if (Nanber < 4 && Nanber!=2) {
-		src.m_top = 0.0f + (Nanber + 1) * 64;
+	if (Number < 4 && Number!=2) {
+		src.m_top = 0.0f + (Number + 1) * 64;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
 		src.m_bottom = 64.0f + (Number + 1) * 64;

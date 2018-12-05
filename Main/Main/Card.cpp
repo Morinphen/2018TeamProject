@@ -101,12 +101,12 @@ void CObjCard::Action()
 					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
 					if (i - 2 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Nanber4;
+						pos->PCard[i / 2][5] = Number4;
 						RWeapon = true;
 					}
 					else {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Nanber4;
+						pos->PCard[i / 2][7] = Number4;
 						LWeapon = true;
 					}
 
@@ -120,7 +120,7 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -422,9 +422,9 @@ void CObjCard::Action()
 
 					}
 
-					Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
-					Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って守備力変動
+					Hp = List->Action(Type, Number, SeedHp);//カード番号に沿ってHP変動
+					Atack = List->Action(Type,Number, SeedAtack);//カード番号に沿って攻撃力変動
+					Guard = List->Action(Type, Number, SeedGuard);//カード番号に沿って守備力変動
 					//pos->m_f = true;
 					delete List;
 				}

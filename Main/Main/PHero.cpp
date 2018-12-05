@@ -59,7 +59,7 @@ void CObjPHero::Action()
 	}
 
 	Hp = pos->PCard[0][0];
-	if (Hp <= 0)
+	if (Hp <= 0 || Input::GetVKey('Q'))
 	{
 		Scene::SetScene(new CSceneGameover());
 	}
