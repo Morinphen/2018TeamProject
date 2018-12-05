@@ -22,6 +22,9 @@ void CObjDekc::Init()
 	//長押しの防止判定
 	m_f = true;
 
+	//ターン開始時
+	Turn = true;
+
 	//stop 同じカードの出現阻止
 	stop = 0;
 
@@ -43,8 +46,8 @@ void CObjDekc::Init()
 //アクション
 void CObjDekc::Action()
 {
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	CObjCard*point = (CObjCard*)Objs::GetObj(OBJ_CARD);
 	Card = rand() % 14+1;//同じ番号のカード呼出
 	stop = 1;
 
@@ -95,7 +98,7 @@ void CObjDekc::Action()
 		Start = true;
 	}
 
-	if (Input::GetVKey('Z') == true && Start == true)
+	if (Turn==true && Start == true)
 	{
 		if (m_f == true)
 		{
@@ -108,9 +111,11 @@ void CObjDekc::Action()
 			CObjCard* obj_b = new CObjCard(300,m_y, Ctype);//カード作成
 			Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 			m_f = false;
-			
+
+			Turn = false;
+			pos->PTrun = true;
 			//ドローしたらポイント増加
-			point++;
+			m_point++;
 		}
 
 	}
@@ -118,6 +123,17 @@ void CObjDekc::Action()
 	else {
 		m_f = true;
 	}
+
+	if(Input::GetVKey('Z')&&pos->PTrun==false)
+	{
+		Turn = true;
+	}
+
+	if (Input::GetVKey('E'))
+	{
+		pos->PTrun = false;
+	}
+
 }
 
 //ドロー

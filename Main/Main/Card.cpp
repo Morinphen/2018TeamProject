@@ -6,6 +6,7 @@
 #include"Card.h"
 #include"Deck.h"
 #include"Cardlist.h"
+#include"map.h"
 
 #include"GameL\DrawFont.h"
 
@@ -78,10 +79,7 @@ void CObjCard::Action()
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
-	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	CObjDekc* point = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
-
-	//左クリックされたとき
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);	//左クリックされたとき
 	if (m_l == true)
 	{
 		//主人公に触れているとき武器を装備させる
@@ -163,7 +161,7 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Number4;
+					pos->WPosition[i] = Nanber4;
 				}
 
 			}
@@ -198,7 +196,7 @@ void CObjCard::Action()
 					pos->Wtouch = false;
 					pos->WSummon = true;
 					point--;
-					pos->WPosition[i] = Number4;
+					pos->WPosition[i] = Nanber4;
 				}
 
 			}
@@ -214,7 +212,7 @@ void CObjCard::Action()
 		}
 
 		//モンスターが敵に攻撃したとき
-		if(mou->EChoice==true && Punch==true)
+		if(mou->EChoice==true && Punch==true&&pos->PTrun==true)
 		{
 			//FSummon=右側の味方、違う場合は左側
 			if (FSummon == true) {
@@ -364,7 +362,7 @@ void CObjCard::Action()
 				}*/
 
 				//モンスターの場合
-				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1)
+				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true)
 				{
 					Hp = List->Action(Type, Number4, SeedHp);//カード番号に沿ってHP変動
 					Atack = List->Action(Type, Number4, SeedAtack);//カード番号に沿って攻撃力変動
@@ -407,7 +405,7 @@ void CObjCard::Action()
 				}
 
 				//武器の場合
-				else if (Type==2 && pos->Wtouch==false || Type==3 && pos->Wtouch == false)
+				else if (Type==2 && pos->Wtouch==false || Type==3 && pos->Wtouch == false&&pos->PTrun==true)
 				{
 					for (int i = 0; i < 6; i++) {
 
@@ -476,6 +474,7 @@ void CObjCard::Action()
 		sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
+		sc->m_point--;//コスト減少
 	}
 
 	//召喚されたモンスターの処理
