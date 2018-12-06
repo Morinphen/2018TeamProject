@@ -42,7 +42,7 @@ void CObjCard::Init()
 	SeedGuard = 2;
 
 	//マウス参照用変数初期化
-	CardHitCheck = false;
+	//CardHitCheck = false;
 
 	//召喚後カード位置制御初期化
 	FSummon = false;
@@ -440,7 +440,7 @@ void CObjCard::Action()
 	//召喚されたモンスターに触れた場合
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type==1)
 	{
-		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
 		if (m_l == true && pos->WSummon == false)
@@ -453,7 +453,7 @@ void CObjCard::Action()
 	//召喚された武器に触れた場合
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2)
 	{
-		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
 	}
@@ -580,9 +580,9 @@ void CObjCard::Draw()
 
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
-	else
-	{
-		
+
+	/*else
+	{	
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
@@ -594,7 +594,7 @@ void CObjCard::Draw()
 		dst.m_bottom = 491.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
-	}
+	}*/
 
 	
 

@@ -27,6 +27,7 @@ void CObjEnemyCard::Init()
 	Updraw = 0;//taka カードの描画位置の調整
 	Rotdraw = 0;//test2 カードの回転描画調整
 
+	CardHitCheck = false;
 	Summon = false;
 	Shand = 0;
 
@@ -39,7 +40,7 @@ void CObjEnemyCard::Init()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ENEMY, OBJ_ENEMY_CARD, 1);
+	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 }
 
 //アクション
@@ -79,6 +80,15 @@ void CObjEnemyCard::Action()
 	L_position = pos->L_position;
 	S_position = pos->S_position;
 	R_position = pos->R_position;
+
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
+	}
+	else
+	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+	}
 
 	if (Setcard <= 5 && Summon == false)
 	{
@@ -179,6 +189,7 @@ void CObjEnemyCard::Draw()
 		src.m_right = 64.0f;
 		src.m_bottom = 64.0f + (Nanber + 1) * 64;
 	}
+
 	else
 	{
 		src.m_top = 0.0f;
@@ -193,6 +204,19 @@ void CObjEnemyCard::Draw()
 	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+
+	//画面左上に拡大画像を表示させる
+
+	if (CardHitCheck == true)
+	{
+		dst.m_top = 13.0f;
+		dst.m_left = 13.0f;
+		dst.m_right = 371.0f;
+		dst.m_bottom = 491.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+	
 
 	if (Summon == true) {
 		wchar_t str[128];

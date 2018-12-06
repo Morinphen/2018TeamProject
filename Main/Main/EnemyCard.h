@@ -28,6 +28,8 @@ private:
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
 
+	bool CardHitCheck;//マウスがカードと触れているか参照する変数
+
 	int Shand;
 
 	int Opdraw;
