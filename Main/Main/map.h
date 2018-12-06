@@ -20,6 +20,8 @@ class CObjMap : public CObj
 		bool R_position;
 		bool m_f;
 
+		bool PTrun;
+
 		bool Wtouch;//武器がクリックされたとき、オンになる
 
 		bool WSummon;//武器が召喚されたとき、オンになる
