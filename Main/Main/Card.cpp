@@ -7,6 +7,7 @@
 #include"Deck.h"
 #include"Cardlist.h"
 #include"map.h"
+#include"point.h"
 
 #include"GameL\DrawFont.h"
 
@@ -23,11 +24,11 @@ void CObjCard::Init()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	Number = sc->Cnanber;//引いたカードの順番の固定
-	Number2 = han->hand[Number -1];//カード番号の保存
-	Number3 = han->basyo[Number - 1];//手札の順番変数
+	Nanber = sc->Cnanber;//引いたカードの順番の固定
+	Number2 = han->hand[Nanber -1];//カード番号の保存
+	Number3 = han->basyo[Nanber - 1];//手札の順番変数
 
-	Number4 = sc->Card;
+	Nanber4 = sc->Card;
 
 	Opdraw = sc->Card;//カード番号の保存
 	Updraw = 0;//カードの描画位置の調整
@@ -80,10 +81,11 @@ void CObjCard::Action()
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);	//左クリックされたとき
+	CObjpoint* point=(CObjpoint*)Objs::GetObj(OBJ_POINT);
 	if (m_l == true)
 	{
 		//主人公に触れているとき武器を装備させる
-		if (mou->Choice[0] == 1 && Set == true) {
+		if (mou->Choice[0] == 1 && Set == true&&point->Cost>0) {
 
 			for (int i = 0; i < 2; i++) {
 				if (pos->WPosition[i] <= 0  && Summon == false)
@@ -126,7 +128,7 @@ void CObjCard::Action()
 		}
 
 		//右側のモンスターに触れているとき武器を装備させる
-		if (mou->Choice[1] == 1 && Set == true) {
+		if (mou->Choice[1] == 1 && Set == true&&point->Cost>0) {
 
 			for (int i = 2; i < 4; i++) {
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
@@ -142,12 +144,12 @@ void CObjCard::Action()
 					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
 					if (i - 2 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Number4;
+						pos->PCard[i / 2][5] = Nanber4;
 						RWeapon = true;
 					}
 					else {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Number4;
+						pos->PCard[i / 2][7] = Nanber4;
 						LWeapon = true;
 					}
 
@@ -168,7 +170,7 @@ void CObjCard::Action()
 
 		}
 		//左側のモンスターに触れているとき武器を装備させる
-		if (mou->Choice[2] == 1 && Set == true){
+		if (mou->Choice[2] == 1 && Set == true&&point->Cost>0){
 			for (int i = 4; i < 6; i++) {
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 				{
@@ -181,12 +183,12 @@ void CObjCard::Action()
 
 					if (i - 4 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Number4;
+						pos->PCard[i / 2][5] = Nanber4;
 						RWeapon = true;
 					}
 					else  {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Number4;
+						pos->PCard[i / 2][7] = Nanber4;
 						LWeapon = true;
 					}
 
@@ -195,7 +197,6 @@ void CObjCard::Action()
 					Set = false;
 					pos->Wtouch = false;
 					pos->WSummon = true;
-					point--;
 					pos->WPosition[i] = Nanber4;
 				}
 
@@ -215,7 +216,7 @@ void CObjCard::Action()
 		if(mou->EChoice==true && Punch==true&&pos->PTrun==true)
 		{
 			//FSummon=右側の味方、違う場合は左側
-			if (FSummon == true) {
+			if (FSummon == true&&pos->PTrun==true) {
 				if (pos->PCard[1][1] - pos->ECard[2] > 0) 
 					pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
 
@@ -223,7 +224,7 @@ void CObjCard::Action()
 					pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
 				
 			}
-			else
+			else if(pos->PTrun==true)
 			{
 				if(pos->PCard[2][1] - pos->ECard[2]>0)
 					pos->ECard[0] -= pos->PCard[2][1] - pos->ECard[2];
@@ -288,7 +289,7 @@ void CObjCard::Action()
 
 	Setcard = sc->Cnanber;//カードの位置調整変更用
 
-	Posicard = Setcard - Number;//カードの位置調整変更用２
+	Posicard = Setcard - Nanber;//カードの位置調整変更用２
 	/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
 	{
 		Reflag = true;
@@ -304,11 +305,11 @@ void CObjCard::Action()
 
 	if (Number3 - han->hensu3 > 0 && han->hensu>0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
-		Number--;//番号を１ずらす
+		Nanber--;//番号を１ずらす
 		han->hensu2++;
 	}
 
-	Number3 = han->basyo[Number - 1];//手札の場所を更新
+	Number3 = han->basyo[Nanber - 1];//手札の場所を更新
 
 	L_position = pos->L_position;
 
@@ -362,14 +363,14 @@ void CObjCard::Action()
 				}*/
 
 				//モンスターの場合
-				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true)
+				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
 				{
-					Hp = List->Action(Type, Number4, SeedHp);//カード番号に沿ってHP変動
-					Atack = List->Action(Type, Number4, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Number4, SeedGuard);//カード番号に沿って防御力変動
+					Hp = List->Action(Type, Nanber4, SeedHp);//カード番号に沿ってHP変動
+					Atack = List->Action(Type, Nanber4, SeedAtack);//カード番号に沿って攻撃力変動
+					Guard = List->Action(Type, Nanber4, SeedGuard);//カード番号に沿って防御力変動
 
 					//左側のスペースが開いている場合
-					if (S_position == false) {
+					if (S_position == false&&point->Cost>0&&pos->PTrun==true) {
 						m_x = 543;
 						m_y = 586;
 						//Hitboxを更新し、フィールド内での処理ができるようにする
@@ -386,7 +387,7 @@ void CObjCard::Action()
 						Summon = true;
 					}
 					//そうでない場合、右に召喚
-					else {
+					else if(point->Cost>0&&pos->PTrun==true){
 						m_x = 951;
 						m_y = 586;
 						Hits::DeleteHitBox(this);
@@ -474,7 +475,7 @@ void CObjCard::Action()
 		sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
-		sc->m_point--;//コスト減少
+		point->Cost--;//コスト減少
 	}
 
 	//召喚されたモンスターの処理
@@ -515,7 +516,7 @@ void CObjCard::Action()
 		for (int i = 0; i < 3; i++)
 		{
 			//カードの情報を探し出し、該当した場合処理開始
-			if (pos->PCard[i][5] == Number4 || pos->PCard[i][7] == Number4) {
+			if (pos->PCard[i][5] == Nanber4 || pos->PCard[i][7] == Nanber4) {
 				//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
 				if(RWeapon==true)
 					Hp = pos->PCard[i][4];
@@ -531,7 +532,7 @@ void CObjCard::Action()
 					//pos->PCard[i][5] = 0;
 
 					for (int j = 0; j < 6; j++) {
-						if (pos->WPosition[j] == Number4) {
+						if (pos->WPosition[j] == Nanber4) {
 							pos->WPosition[j] = 0;
 							break;
 						}

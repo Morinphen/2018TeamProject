@@ -30,7 +30,6 @@ enum OBJ_NAME
 	OBJ_TITLE,
 	OBJ_CLEAR,
 	OBJ_GAMEOVER,
-	//OBJ_POINT,
 };
 //------------------------------------------------
 
@@ -101,7 +100,7 @@ struct UserData
 #include"SceneTitle.h"
 #include"SceneClear.h"
 #include"SceneGameover.h"
-//#include"point.h"
+#include"point.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

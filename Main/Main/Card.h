@@ -20,10 +20,10 @@ private:
 	int m_x, m_y;//カードの描画位置
 	int Setcard;//カードの場所
 	int Posicard;//カードの場所２
-	int Number;//順番の固定
+	int Nanber;//順番の固定
 	int Number2;//手札のカード番号
 	int Number3;//カードの順番番号
-	int Number4;//カード情報番号
+	int Nanber4;//カード情報番号
 	int playertrun;
 	int enemytrun;
 

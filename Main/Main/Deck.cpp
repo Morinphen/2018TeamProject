@@ -21,7 +21,7 @@ void CObjDekc::Init()
 	m_y = 743;
 	//長押しの防止判定
 	m_f = true;
-
+	m_f2 = true;
 	//ターン開始時
 	Turn = true;
 
@@ -39,7 +39,8 @@ void CObjDekc::Init()
 
 	//初期ポイント
 	m_point = 1;
-
+	Cost = 0;
+	m_flag_point = false;
 	srand((unsigned)time(NULL));
 }
 
@@ -116,6 +117,7 @@ void CObjDekc::Action()
 			pos->PTrun = true;
 			//ドローしたらポイント増加
 			m_point++;
+
 		}
 
 	}
@@ -124,14 +126,24 @@ void CObjDekc::Action()
 		m_f = true;
 	}
 
-	if(Input::GetVKey('Z')&&pos->PTrun==false)
+	if(Input::GetVKey('Z')&&pos->PTrun==false&&m_f2==true)
 	{
 		Turn = true;
+		m_f2 = false;
+	}
+	else
+	{
+		m_f2 = true;
 	}
 
-	if (Input::GetVKey('E'))
+	if (Input::GetVKey('E')&&m_f2==true)
 	{
 		pos->PTrun = false;
+		m_f2 = false;
+	}
+	else
+	{
+		m_f2 = true;
 	}
 
 }
@@ -153,11 +165,11 @@ void CObjDekc::Draw()
 	dst.m_right = 90.0f + x;
 	dst.m_bottom = 120.0f + y;
 
-	/*wchar_t str[128];
+	wchar_t str[128];
 
-	swprintf_s(str, L"%d", m_point);
+	swprintf_s(str, L"%d", Cost);
 
-	Font::StrDraw(str, 10, 10, 20, c);*/
+	Font::StrDraw(str, 10, 10, 20, c);
 
 	Draw::Draw(0, &src, &dst, c, 0.0f);
 
