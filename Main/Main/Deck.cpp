@@ -92,6 +92,8 @@ void CObjDekc::Action()
 		Cardcount++;
 		CObjCard* obj_b = new CObjCard(m_x,m_y,Ctype);//カード作成
 		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
+		//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+		//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 	}
 
 	if(Cardcount==5)
@@ -111,6 +113,8 @@ void CObjDekc::Action()
 			//カード作成
 			CObjCard* obj_b = new CObjCard(300,m_y, Ctype);//カード作成
 			Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
+			//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+			//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 			m_f = false;
 
 			Turn = false;

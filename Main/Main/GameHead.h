@@ -19,6 +19,7 @@ enum OBJ_NAME
 	OBJ_POINT,
 	OBJ_BACKGROUND,
 
+
 	OBJ_FIELD_PLAYER,
 	OBJ_FIELD_PLAYER2,
 	OBJ_FIELD_PLAYER3,
@@ -93,6 +94,7 @@ struct UserData
 #include"ObjTitle.h"
 #include"ObjClear.h"
 #include"objGameover.h"
+
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------

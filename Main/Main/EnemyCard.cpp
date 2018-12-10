@@ -27,6 +27,7 @@ void CObjEnemyCard::Init()
 	Updraw = 0;//taka カードの描画位置の調整
 	Rotdraw = 0;//test2 カードの回転描画調整
 
+	CardHitCheck = false;
 	Summon = false;
 	Shand = 0;
 
@@ -39,7 +40,7 @@ void CObjEnemyCard::Init()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ENEMY, OBJ_ENEMY_CARD, 1);
+	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 }
 
 //アクション
@@ -80,6 +81,15 @@ void CObjEnemyCard::Action()
 	S_position = pos->S_position;
 	R_position = pos->R_position;
 
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
+	}
+	else
+	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+	}
+
 	if (Setcard <= 5 && Summon == false)
 	{
 		//m_x = 250+(90* Posicard);
@@ -102,7 +112,7 @@ void CObjEnemyCard::Action()
 		}
 	}
 
-	if (Number < 4 && Number !=2 && Summon==false)
+	if (Number < 4 && Number!=2 && Summon==false)
 	{
 		Summon = true;
 		//han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
@@ -123,7 +133,7 @@ void CObjEnemyCard::Action()
 			pos->ECard2[0] = 1; pos->ECard2[1] = 1; pos->ECard2[2] = 0;
 			Hp = 1; Atack = 1; Guard = 0;
 		}
-		/*if (Nanber == 2) {
+		/*if (Number == 2) {
 			m_x = 747;
 			m_y = 195;
 			Hits::DeleteHitBox(this);
@@ -148,7 +158,7 @@ void CObjEnemyCard::Action()
 			//Hpの更新
 			Hp = pos->ECard2[0];
 		}
-		/*if (Nanber == 2)
+		/*if (Number == 2)
 		{
 			Hp = pos->ECard2[0];
 		}*/
@@ -173,12 +183,13 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	if (Number < 4 && Number !=2) {
+	if (Number < 4 && Number!=2) {
 		src.m_top = 0.0f + (Number + 1) * 64;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
 		src.m_bottom = 64.0f + (Number + 1) * 64;
 	}
+
 	else
 	{
 		src.m_top = 0.0f;
@@ -193,6 +204,19 @@ void CObjEnemyCard::Draw()
 	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+
+	//画面左上に拡大画像を表示させる
+
+	if (CardHitCheck == true)
+	{
+		dst.m_top = 13.0f;
+		dst.m_left = 13.0f;
+		dst.m_right = 371.0f;
+		dst.m_bottom = 491.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+	
 
 	if (Summon == true) {
 		wchar_t str[128];
