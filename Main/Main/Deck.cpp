@@ -21,7 +21,7 @@ void CObjDekc::Init()
 	m_y = 743;
 	//長押しの防止判定
 	m_f = true;
-
+	m_f2 = true;
 	//ターン開始時
 	Turn = true;
 
@@ -39,7 +39,8 @@ void CObjDekc::Init()
 
 	//初期ポイント
 	m_point = 1;
-
+	Cost = 0;
+	m_flag_point = false;
 	srand((unsigned)time(NULL));
 }
 
@@ -93,12 +94,15 @@ void CObjDekc::Action()
 			//カード作成
 			CObjCard* obj_b = new CObjCard(300,m_y, Ctype);//カード作成
 			Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
+			//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+			//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 			m_f = false;
 
 			Turn = false;
 			pos->PTrun = true;
 			//ドローしたらポイント増加
 			m_point++;
+
 		}
 
 	}
@@ -126,11 +130,21 @@ void CObjDekc::Action()
 	if(Input::GetVKey('Z')&&pos->PTrun==false)
 	{
 		Turn = true;
+		m_f2 = false;
+	}
+	else
+	{
+		m_f2 = true;
 	}
 
-	if (Input::GetVKey('E'))
+	if (Input::GetVKey('E')&&m_f2==true)
 	{
 		pos->PTrun = false;
+		m_f2 = false;
+	}
+	else
+	{
+		m_f2 = true;
 	}
 
 }
@@ -152,11 +166,11 @@ void CObjDekc::Draw()
 	dst.m_right = 90.0f + x;
 	dst.m_bottom = 120.0f + y;
 
-	/*wchar_t str[128];
+	wchar_t str[128];
 
-	swprintf_s(str, L"%d", m_point);
+	swprintf_s(str, L"%d", Cost);
 
-	Font::StrDraw(str, 10, 10, 20, c);*/
+	Font::StrDraw(str, 10, 10, 20, c);
 
 	Draw::Draw(0, &src, &dst, c, 0.0f);
 
