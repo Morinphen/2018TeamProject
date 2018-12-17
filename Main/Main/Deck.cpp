@@ -83,24 +83,7 @@ void CObjDekc::Action()
 	}
 
 
-	//スタート処理
-	if(Start==false){
-		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
-		sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
-		sc->basyo[Cnanber] = Cnanber + 1;
-		Cnanber++;
-		Cardcount++;
-		CObjCard* obj_b = new CObjCard(m_x,m_y,Ctype);//カード作成
-		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
-		//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
-		//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
-	}
-
-	if(Cardcount==5)
-	{
-		Start = true;
-	}
-
+	
 	if (Turn==true && Start == true)
 	{
 		if (m_f == true)
@@ -128,6 +111,24 @@ void CObjDekc::Action()
 
 	else {
 		m_f = true;
+	}
+
+//スタート処理
+	if(Start==false){
+		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
+		sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
+		sc->basyo[Cnanber] = Cnanber + 1;
+		Cnanber++;
+		Cardcount++;
+		CObjCard* obj_b = new CObjCard(m_x,m_y,Ctype);//カード作成
+		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
+		//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+		//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
+	}
+
+	if(Cardcount==4)
+	{
+		Start = true;
 	}
 
 	if(Input::GetVKey('Z')&&pos->PTrun==false&&m_f2==true)
