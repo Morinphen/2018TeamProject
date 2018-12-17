@@ -58,9 +58,6 @@
     <ClCompile Include="EnemyHand.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="cost.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="map.cpp">
       <Filter>main</Filter>
     </ClCompile>

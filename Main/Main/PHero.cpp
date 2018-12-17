@@ -59,7 +59,7 @@ void CObjPHero::Action()
 	}
 
 	Hp = pos->PCard[0][0];
-	if (Hp <= 0)
+	if (Hp <= 0 || Input::GetVKey('Q'))
 	{
 		Scene::SetScene(new CSceneGameover());
 	}
@@ -113,7 +113,7 @@ void CObjPHero::Action()
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && pos->Wtouch == false)
 	{
-		CardHitCheck = true; //"マウスがカードに触れていない"状態にする
+		//CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
 		if (m_l == true && pos->WSummon == false)
@@ -125,7 +125,7 @@ void CObjPHero::Action()
 
 	else
 	{
-		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+		//CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 		Rotdraw = 0;
 		SetPrio(10);
 	}
@@ -154,7 +154,7 @@ void CObjPHero::Draw()
 
 	//画面左上に拡大画像を表示させる
 
-	if (CardHitCheck == true)
+	/*if (CardHitCheck == true)
 	{
 
 		dst.m_top = 12.0f;
@@ -178,7 +178,7 @@ void CObjPHero::Draw()
 		dst.m_bottom = 491.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
-	}
+	}*/
 
 
 	wchar_t str[128];

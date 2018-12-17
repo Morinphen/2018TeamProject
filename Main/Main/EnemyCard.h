@@ -16,9 +16,9 @@ public:
 private:
 	int m_x, m_y;
 	int Setcard;
-	int Nanber;
-	int Nanber2;
-	int Nanber3;
+	int Number;
+	int Number2;
+	int Number3;
 	int Posicard;
 	int Reset;
 	int playertrun;
@@ -27,6 +27,8 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+
+	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 
 	int Shand;
 

@@ -22,6 +22,7 @@ void CObjmouse::Init()
 
 	//“–‚½‚è”»’èì¬
 	Hits::SetHitBox(this, m_mouse_x, m_mouse_y, 2, 2, ELEMENT_PLAYER, OBJ_PLAYER, 1);
+	
 }
 
 //ƒAƒNƒVƒ‡ƒ“

@@ -20,6 +20,7 @@ enum OBJ_NAME
 	OBJ_BACKGROUND,
 	OBJ_LIST,
 
+
 	OBJ_FIELD_PLAYER,
 	OBJ_FIELD_PLAYER2,
 	OBJ_FIELD_PLAYER3,
@@ -31,7 +32,6 @@ enum OBJ_NAME
 	OBJ_TITLE,
 	OBJ_CLEAR,
 	OBJ_GAMEOVER,
-	//OBJ_POINT,
 };
 //------------------------------------------------
 
@@ -96,6 +96,7 @@ struct UserData
 #include"ObjTitle.h"
 #include"ObjClear.h"
 #include"objGameover.h"
+
 //------------------------------------------------
 
 //ゲームシーンクラスヘッダ------------------------
@@ -103,7 +104,7 @@ struct UserData
 #include"SceneTitle.h"
 #include"SceneClear.h"
 #include"SceneGameover.h"
-//#include"point.h"
+#include"point.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------

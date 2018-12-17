@@ -16,6 +16,7 @@ void CObjMap::Init()
 
 	m_f = false;
 	Wtouch = false;
+	PTrun = false;
 	WSummon = false;
 	Cooltime = 0;
 }
@@ -34,5 +35,5 @@ void CObjMap::Action()
 
 void CObjMap::Draw()
 {
-	
+
 }

@@ -119,7 +119,6 @@
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Cardlist.cpp" />
-    <ClCompile Include="cost.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="EHero.cpp" />
     <ClCompile Include="EnemyCard.cpp" />
@@ -148,7 +147,7 @@
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="PHero.cpp" />
     <ClCompile Include="point.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="SceneClear.cpp" />
     <ClCompile Include="SceneGameover.cpp" />
@@ -191,7 +190,7 @@
     <ClInclude Include="PHero.h" />
     <ClInclude Include="PList.h" />
     <ClInclude Include="point.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="SceneClear.h" />
     <ClInclude Include="SceneGameover.h" />

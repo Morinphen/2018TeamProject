@@ -19,9 +19,13 @@ public:
 	void Init();
 	void Action();
 	void Draw();
+	void SetpointFlag(bool b) { m_flag_point = b; }
 
 	int Cnanber;//手札のカードの最大数
 	int Card;//引いたカードの番号
+	int m_point;
+	int Cost;
+	bool Turn;
 private:
 	int x, y;
 	int m_x, m_y;
@@ -32,8 +36,10 @@ private:
 
 	int Deck[40];//
 
-	int m_point;
+	
 
 	bool m_f;
+	bool m_f2;
 	bool Start;
+	bool m_flag_point;
 };
