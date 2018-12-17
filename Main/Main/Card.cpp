@@ -127,8 +127,8 @@ void CObjCard::Action()
 
 		}
 
-		//右側のモンスターに触れているとき武器を装備させる
-		if (mou->Choice[1] == 1 && Set == true&&point->Cost>0) {
+		//左側のモンスターに触れているとき武器を装備させる
+		if (mou->Choice[1] == 1 && Set == true) {
 
 			for (int i = 2; i < 4; i++) {
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
@@ -163,14 +163,14 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
 
 		}
-		//左側のモンスターに触れているとき武器を装備させる
-		if (mou->Choice[2] == 1 && Set == true&&point->Cost>0){
+		//右側のモンスターに触れているとき武器を装備させる
+		if (mou->Choice[2] == 1 && Set == true){
 			for (int i = 4; i < 6; i++) {
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 				{
@@ -197,7 +197,8 @@ void CObjCard::Action()
 					Set = false;
 					pos->Wtouch = false;
 					pos->WSummon = true;
-					pos->WPosition[i] = Nanber4;
+					//point--;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -325,7 +326,7 @@ void CObjCard::Action()
 		{
 			if (han->hand[i] == Number2)
 			{
-				m_x = 927 - (90 * i);
+				m_x = 567 + (90 * i);
 			}
 		}
 	}
@@ -335,7 +336,7 @@ void CObjCard::Action()
 		{
 			if (han->hand[i] == Number2)
 			{
-				m_x = 927 - ((450 / (Setcard))*Posicard);
+				m_x = 567 + ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
