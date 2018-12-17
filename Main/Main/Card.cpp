@@ -47,10 +47,6 @@ void CObjCard::Init()
 
 	//召喚後カード位置制御初期化
 	CardHitCheck = false;
-	//ステータスの種　０でHPを、１で攻撃力を、２で守備力をカードごとに参照できる
-	SeedHp = 0;
-	SeedAtack = 1;
-	SeedGuard = 2;
 
 	//マウス参照用変数初期化
 	//CardHitCheck = false;
@@ -111,12 +107,12 @@ void CObjCard::Action()
 					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
 					if (i - 2 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Nanber4;
+						pos->PCard[i / 2][5] = Number4;
 						RWeapon = true;
 					}
 					else {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Nanber4;
+						pos->PCard[i / 2][7] = Number4;
 						LWeapon = true;
 					}
 
@@ -130,7 +126,7 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -173,7 +169,7 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -208,7 +204,7 @@ void CObjCard::Action()
 					pos->Wtouch = false;
 					pos->WSummon = true;
 					//point--;
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -374,7 +370,7 @@ void CObjCard::Action()
 					hit->SetPos(m_x, m_y);
 				}*/
 
-				PList->Action(&Name, Type, &Nanber, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				PList->Action(&Name, Type, &Number, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				FILE *fp;
 				char fname[] = "CardList.csv";
 				fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
