@@ -137,6 +137,7 @@
     <ClCompile Include="GameL\SetWindow.cpp" />
     <ClCompile Include="GameL\UserData.cpp" />
     <ClCompile Include="GameL\WinInputs.cpp" />
+    <ClCompile Include="PList.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="HandCard.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -188,6 +189,7 @@
     <ClInclude Include="objGameover.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="PHero.h" />
+    <ClInclude Include="PList.h" />
     <ClInclude Include="point.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>

@@ -30,10 +30,14 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+	char *Name;
+	char *Name2[3];
+	char *Text;
+	char name[256];
+	char text[256];
 
-	int SeedHp;//カードのhpのタネ
-	int SeedAtack;//カードの攻撃力のタネ
-	int SeedGuard;//カードの防御力のタネ
+	int aaaa;
+	int Nlist;
 
 	int Type;//カードの種類
 

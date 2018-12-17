@@ -7,6 +7,11 @@
 #include"Deck.h"
 #include"Cardlist.h"
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
 #include"GameL\DrawFont.h"
 
 //使用するネームスペース
@@ -35,11 +40,6 @@ void CObjCard::Init()
 	Hp = 0;
 	Atack = 0;
 	Guard = 0;
-
-	//ステータスの種　０でHPを、１で攻撃力を、２で守備力をカードごとに参照できる
-	SeedHp = 0;
-	SeedAtack = 1;
-	SeedGuard = 2;
 
 	//召喚後カード位置制御初期化
 	CardHitCheck = false;
@@ -348,6 +348,7 @@ void CObjCard::Action()
 		{
 			if (pos->m_f == false) {
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
+				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
 				/*if (L_position == false && Type == 2)
 				{
@@ -361,12 +362,28 @@ void CObjCard::Action()
 					hit->SetPos(m_x, m_y);
 				}*/
 
+				PList->Action(&Name, Type, &Nanber, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				FILE *fp;
+				char fname[] = "CardList.csv";
+				fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
+				int ret;
+
+				while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n] ,", name, &Nlist, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
+				{
+					if (Nlist == Type)
+					{
+						break;
+					}
+				}
+
+				fclose(fp); // ファイルを閉じる
+
 				//モンスターの場合
 				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1)
 				{
-					Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
+					/*Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
 					Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って防御力変動
+					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って防御力変動*/
 
 					//左側のスペースが開いている場合
 					if (S_position == false) {
@@ -399,7 +416,6 @@ void CObjCard::Action()
 						Summon = true;
 					}
 
-					delete List;
 					pos->m_f = true;
 					hit->SetPos(m_x, m_y);
 				}
@@ -420,13 +436,13 @@ void CObjCard::Action()
 
 					}
 
-					Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
-					Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って守備力変動
+					//Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
+					//Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
+					//Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って守備力変動
 					//pos->m_f = true;
-					delete List;
+					//PList->Action(&Name, Type, &Nanber, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				}
-
+				delete PList;
 			}
 		}
 
@@ -577,6 +593,11 @@ void CObjCard::Draw()
 		dst.m_right = 371.0f;
 		dst.m_bottom = 491.0f;
 
+		wchar_t atr[256];
+		mbstowcs(atr, name, 256);
+		Font::StrDraw(atr, 0, 600, 20, d);
+		mbstowcs(atr, text, 256);
+		Font::StrDraw(atr, 0, 650, 20, d);
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
 	else
