@@ -8,6 +8,7 @@
 #include"Cardlist.h"
 #include"map.h"
 #include"point.h"
+#include"GameL\Audio.h"
 
 #include"GameL\DrawFont.h"
 
@@ -70,6 +71,8 @@ void CObjCard::Init()
 	m_f = false;
 
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
+
+	Audio::LoadAudio(0, L"Audio\\召喚.wav", SOUND_TYPE::EFFECT);
 }
 
 //アクション
@@ -101,12 +104,12 @@ void CObjCard::Action()
 					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
 					if (i - 2 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Number4;
+						pos->PCard[i / 2][5] = Nanber4;
 						RWeapon = true;
 					}
 					else {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Number4;
+						pos->PCard[i / 2][7] = Nanber4;
 						LWeapon = true;
 					}
 
@@ -120,7 +123,7 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Number4;
+					pos->WPosition[i] = Nanber4;
 				}
 
 			}
@@ -128,7 +131,7 @@ void CObjCard::Action()
 		}
 
 		//左側のモンスターに触れているとき武器を装備させる
-		if (mou->Choice[1] == 1 && Set == true) {
+		if (mou->Choice[1] == 1 && Set == true && pos->PTrun == true && point->Cost>0) {
 
 			for (int i = 2; i < 4; i++) {
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
@@ -163,14 +166,14 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Number4;
+					pos->WPosition[i] = Nanber4;
 				}
 
 			}
 
 		}
 		//右側のモンスターに触れているとき武器を装備させる
-		if (mou->Choice[2] == 1 && Set == true){
+		if (mou->Choice[2] == 1 && Set == true && pos->PTrun == true && point->Cost>0){
 			for (int i = 4; i < 6; i++) {
 				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 				{
@@ -198,7 +201,7 @@ void CObjCard::Action()
 					pos->Wtouch = false;
 					pos->WSummon = true;
 					//point--;
-					pos->WPosition[i] = Number4;
+					pos->WPosition[i] = Nanber4;
 				}
 
 			}
@@ -238,7 +241,7 @@ void CObjCard::Action()
 			Punch = false;
 		}
 
-		else if (mou->EChoice2 == true && Punch == true)
+		else if (mou->EChoice2 == true && Punch == true && pos->PTrun == true)
 		{
 			if (FSummon == true) {
 				if(pos->PCard[1][1] - pos->ECard2[2]>0)
@@ -259,7 +262,7 @@ void CObjCard::Action()
 			Punch = false;
 		}
 
-		else if (mou->EChoice3 == true && Punch == true)
+		else if (mou->EChoice3 == true && Punch == true && pos->PTrun == true)
 		{
 			if (FSummon == true) {
 				if(pos->PCard[1][1] - pos->ECard3[2]>0)
@@ -422,9 +425,9 @@ void CObjCard::Action()
 
 					}
 
-					Hp = List->Action(Type, Number, SeedHp);//カード番号に沿ってHP変動
-					Atack = List->Action(Type,Number, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Number, SeedGuard);//カード番号に沿って守備力変動
+					Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
+					Atack = List->Action(Type, Nanber, SeedAtack);//カード番号に沿って攻撃力変動
+					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って守備力変動
 					//pos->m_f = true;
 					delete List;
 				}
@@ -476,7 +479,9 @@ void CObjCard::Action()
 		sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
+		Audio::Start(0);
 		point->Cost--;//コスト減少
+		
 	}
 
 	//召喚されたモンスターの処理

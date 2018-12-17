@@ -17,7 +17,7 @@ void CObjDekc::Init()
 	x = 1086;
 	y = 743;
 	//m_x,m_y カードの出現位置調整
-	//m_x = 567;
+	m_x = 567;
 	m_y = 743;
 	//長押しの防止判定
 	m_f = true;
@@ -82,6 +82,8 @@ void CObjDekc::Action()
 		Ctype = shield;
 	}
 
+
+	
 	if (Turn==true && Start == true)
 	{
 		if (m_f == true)
@@ -111,23 +113,25 @@ void CObjDekc::Action()
 		m_f = true;
 	}
 
-	//スタート処理
-	if (Start == false) {
+//スタート処理
+	if(Start==false){
 		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
 		sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
 		sc->basyo[Cnanber] = Cnanber + 1;
 		Cnanber++;
 		Cardcount++;
-		CObjCard* obj_b = new CObjCard(m_x, m_y, Ctype);//カード作成
+		CObjCard* obj_b = new CObjCard(m_x,m_y,Ctype);//カード作成
 		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
+		//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+		//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 	}
 
-	if (Cardcount == 4)
+	if(Cardcount==4)
 	{
 		Start = true;
 	}
 
-	if(Input::GetVKey('Z')&&pos->PTrun==false)
+	if(Input::GetVKey('Z')&&pos->PTrun==false&&m_f2==true)
 	{
 		Turn = true;
 		m_f2 = false;

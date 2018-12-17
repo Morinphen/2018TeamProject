@@ -183,7 +183,7 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
-	if (Number < 4 && Number!=2) {
+	if (Number < 4 && Number !=2) {
 		src.m_top = 0.0f + (Number + 1) * 64;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
