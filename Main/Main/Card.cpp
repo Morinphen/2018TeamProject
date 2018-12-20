@@ -71,6 +71,11 @@ void CObjCard::Init()
 		Opdraw -= 7;//x位置をずらす
 		Updraw++;
 	}
+
+	name[0] = '\0';
+
+	Tlong = 0;//テキストの文字列の長さを参照する変数
+
 	m_f = false;
 
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
@@ -352,6 +357,28 @@ void CObjCard::Action()
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 		Rotdraw = 3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
+
+		FILE *fp;
+		char fname[] = "CardList.csv";
+		fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
+		int ret;
+
+		while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n] ,", name, &Nlist, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
+		{
+			if (Nlist == Type)
+			{
+				Tlong = strlen(text);
+				for (int i = 0; i * 38 < Tlong; i++)
+				{
+					strncpy(text2[i], text + i * 38, 38);
+					text2[i][38] = '\0';
+				}
+				break;
+			}
+		}
+
+		fclose(fp); // ファイルを閉じる
+
 		if (m_l == true)
 		{
 			if (pos->m_f == false) {
@@ -371,20 +398,6 @@ void CObjCard::Action()
 				}*/
 
 				PList->Action(&Name, Type, &Number, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
-				FILE *fp;
-				char fname[] = "CardList.csv";
-				fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
-				int ret;
-
-				while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n] ,", name, &Nlist, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
-				{
-					if (Nlist == Type)
-					{
-						break;
-					}
-				}
-
-				fclose(fp); // ファイルを閉じる
 
 				//モンスターの場合
 				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
@@ -605,11 +618,19 @@ void CObjCard::Draw()
 		dst.m_bottom = 491.0f;
 
 		wchar_t atr[256];
-		mbstowcs(atr, name, 256);
-		Font::StrDraw(atr, 0, 600, 20, d);
-		mbstowcs(atr, text, 256);
-		Font::StrDraw(atr, 0, 650, 20, d);
+		wchar_t aatr[3][64];
+		mbstowcs(atr, name, 256);//マルチバイトをワイドに変換
+		Font::StrDraw(atr, 0, 600, 20, d);//テキストを表示
+
+		for (int i = 0; i * 38 < Tlong; i++) {
+			mbstowcs(aatr[i], text2[i], 64);
+			Font::StrDraw(aatr[i], 0, 650 + i * 20, 20, d);
+		}
+
 		Draw::Draw(0, &src, &dst, c, 0);
+		/*mbstowcs(atr, text, 256);
+		Font::StrDraw(atr, 0, 650, 20, d);
+		Draw::Draw(0, &src, &dst, c, 0);*/
 	}
 
 	/*else

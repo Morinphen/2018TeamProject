@@ -30,12 +30,16 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+
+	//カードテキストの表示
 	char *Name;
-	char *Name2[3];
 	char *Text;
 	char name[256];
 	char text[256];
+	char text2[3][64];
+	int Tlong;
 
+	//ダミーデータ
 	int aaaa;
 	int Nlist;
 
