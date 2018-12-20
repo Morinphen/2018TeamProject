@@ -81,6 +81,9 @@ void CObjCard::Init()
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 
 	Audio::LoadAudio(0, L"Audio\\召喚.wav", SOUND_TYPE::EFFECT);
+	Audio::LoadAudio(1, L"Audio\\ドロー.wav", SOUND_TYPE::EFFECT);
+
+	float Volume = Audio::VolumeMaster(0.5f);
 }
 
 //アクション
