@@ -48,8 +48,6 @@ char* CObjPlist::Action(char **name, int type, int *nanber, int *hp, int *atack,
 	{
 		if (a == type)
 		{
-			*name = str1;
-			*text = str2;
 			break;
 		}
 	}

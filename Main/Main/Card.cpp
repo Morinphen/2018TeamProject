@@ -366,12 +366,12 @@ void CObjCard::Action()
 		fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
 		int ret;
 
-		while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n] ,", name, &Nlist, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
+		while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n] ,", name, &Nlist, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
 		{
-			if (Nlist == Type)
+			if (Nlist == Type)//カード番号が一致したとき、処理開始
 			{
-				Tlong = strlen(text);
-				for (int i = 0; i * 38 < Tlong; i++)
+				Tlong = strlen(text);//テキストの長さを求める
+				for (int i = 0; i * 38 < Tlong; i++)//１９文字づつ改行していく
 				{
 					strncpy(text2[i], text + i * 38, 38);
 					text2[i][38] = '\0';
