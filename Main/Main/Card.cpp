@@ -10,6 +10,11 @@
 #include"point.h"
 #include"GameL\Audio.h"
 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
 #include"GameL\DrawFont.h"
 
 //使用するネームスペース
@@ -25,11 +30,11 @@ void CObjCard::Init()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	Nanber = sc->Cnanber;//引いたカードの順番の固定
-	Number2 = han->hand[Nanber -1];//カード番号の保存
-	Number3 = han->basyo[Nanber - 1];//手札の順番変数
+	Number = sc->Cnanber;//引いたカードの順番の固定
+	Number2 = han->hand[Number -1];//カード番号の保存
+	Number3 = han->basyo[Number - 1];//手札の順番変数
 
-	Nanber4 = sc->Card;
+	Number4 = sc->Card;
 
 	Opdraw = sc->Card;//カード番号の保存
 	Updraw = 0;//カードの描画位置の調整
@@ -40,10 +45,8 @@ void CObjCard::Init()
 	Atack = 0;
 	Guard = 0;
 
-	//ステータスの種　０でHPを、１で攻撃力を、２で守備力をカードごとに参照できる
-	SeedHp = 0;
-	SeedAtack = 1;
-	SeedGuard = 2;
+	//召喚後カード位置制御初期化
+	CardHitCheck = false;
 
 	//マウス参照用変数初期化
 	//CardHitCheck = false;
@@ -107,12 +110,12 @@ void CObjCard::Action()
 					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
 					if (i - 2 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Nanber4;
+						pos->PCard[i / 2][5] = Number4;
 						RWeapon = true;
 					}
 					else {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Nanber4;
+						pos->PCard[i / 2][7] = Number4;
 						LWeapon = true;
 					}
 
@@ -126,7 +129,7 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -150,12 +153,12 @@ void CObjCard::Action()
 					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
 					if (i - 2 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Nanber4;
+						pos->PCard[i / 2][5] = Number4;
 						RWeapon = true;
 					}
 					else {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Nanber4;
+						pos->PCard[i / 2][7] = Number4;
 						LWeapon = true;
 					}
 
@@ -169,7 +172,7 @@ void CObjCard::Action()
 					//武器を召喚した情報を登録
 					pos->WSummon = true;
 					//武器の位置を保存しておく
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -189,12 +192,12 @@ void CObjCard::Action()
 
 					if (i - 4 == 0) {
 						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Nanber4;
+						pos->PCard[i / 2][5] = Number4;
 						RWeapon = true;
 					}
 					else  {
 						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Nanber4;
+						pos->PCard[i / 2][7] = Number4;
 						LWeapon = true;
 					}
 
@@ -204,7 +207,7 @@ void CObjCard::Action()
 					pos->Wtouch = false;
 					pos->WSummon = true;
 					//point--;
-					pos->WPosition[i] = Nanber4;
+					pos->WPosition[i] = Number4;
 				}
 
 			}
@@ -296,7 +299,7 @@ void CObjCard::Action()
 
 	Setcard = sc->Cnanber;//カードの位置調整変更用
 
-	Posicard = Setcard - Nanber;//カードの位置調整変更用２
+	Posicard = Setcard - Number;//カードの位置調整変更用２
 	/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
 	{
 		Reflag = true;
@@ -312,11 +315,11 @@ void CObjCard::Action()
 
 	if (Number3 - han->hensu3 > 0 && han->hensu>0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
-		Nanber--;//番号を１ずらす
+		Number--;//番号を１ずらす
 		han->hensu2++;
 	}
 
-	Number3 = han->basyo[Nanber - 1];//手札の場所を更新
+	Number3 = han->basyo[Number - 1];//手札の場所を更新
 
 	L_position = pos->L_position;
 
@@ -356,6 +359,7 @@ void CObjCard::Action()
 		{
 			if (pos->m_f == false) {
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
+				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
 				/*if (L_position == false && Type == 2)
 				{
@@ -369,12 +373,28 @@ void CObjCard::Action()
 					hit->SetPos(m_x, m_y);
 				}*/
 
+				PList->Action(&Name, Type, &Number, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				FILE *fp;
+				char fname[] = "CardList.csv";
+				fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
+				int ret;
+
+				while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n] ,", name, &Nlist, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
+				{
+					if (Nlist == Type)
+					{
+						break;
+					}
+				}
+
+				fclose(fp); // ファイルを閉じる
+
 				//モンスターの場合
 				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
 				{
-					Hp = List->Action(Type, Nanber4, SeedHp);//カード番号に沿ってHP変動
-					Atack = List->Action(Type, Nanber4, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Nanber4, SeedGuard);//カード番号に沿って防御力変動
+					/*Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
+					Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
+					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って防御力変動*/
 
 					//左側のスペースが開いている場合
 					if (S_position == false&&point->Cost>0&&pos->PTrun==true) {
@@ -407,7 +427,6 @@ void CObjCard::Action()
 						Summon = true;
 					}
 
-					delete List;
 					pos->m_f = true;
 					hit->SetPos(m_x, m_y);
 				}
@@ -428,13 +447,13 @@ void CObjCard::Action()
 
 					}
 
-					Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
-					Atack = List->Action(Type, Nanber, SeedAtack);//カード番号に沿って攻撃力変動
-					Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って守備力変動
+					//Hp = List->Action(Type, Nanber, SeedHp);//カード番号に沿ってHP変動
+					//Atack = List->Action(Type,Nanber, SeedAtack);//カード番号に沿って攻撃力変動
+					//Guard = List->Action(Type, Nanber, SeedGuard);//カード番号に沿って守備力変動
 					//pos->m_f = true;
-					delete List;
+					//PList->Action(&Name, Type, &Nanber, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				}
-
+				delete PList;
 			}
 		}
 
@@ -525,7 +544,7 @@ void CObjCard::Action()
 		for (int i = 0; i < 3; i++)
 		{
 			//カードの情報を探し出し、該当した場合処理開始
-			if (pos->PCard[i][5] == Nanber4 || pos->PCard[i][7] == Nanber4) {
+			if (pos->PCard[i][5] == Number4 || pos->PCard[i][7] == Number4) {
 				//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
 				if(RWeapon==true)
 					Hp = pos->PCard[i][4];
@@ -541,7 +560,7 @@ void CObjCard::Action()
 					//pos->PCard[i][5] = 0;
 
 					for (int j = 0; j < 6; j++) {
-						if (pos->WPosition[j] == Nanber4) {
+						if (pos->WPosition[j] == Number4) {
 							pos->WPosition[j] = 0;
 							break;
 						}
@@ -588,6 +607,11 @@ void CObjCard::Draw()
 		dst.m_right = 371.0f;
 		dst.m_bottom = 491.0f;
 
+		wchar_t atr[256];
+		mbstowcs(atr, name, 256);
+		Font::StrDraw(atr, 0, 600, 20, d);
+		mbstowcs(atr, text, 256);
+		Font::StrDraw(atr, 0, 650, 20, d);
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
 
