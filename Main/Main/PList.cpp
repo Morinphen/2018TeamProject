@@ -44,12 +44,10 @@ char* CObjPlist::Action(char **name, int type, int *nanber, int *hp, int *atack,
 	int i = 0;
 	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
 
-	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n] ,", str1, &a, &b, hp, atack, guard, str2) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
+	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n]", str1, &a, &b, hp, atack, guard, str2) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
 	{
 		if (a == type)
 		{
-			*name = str1;
-			*text = str2;
 			break;
 		}
 	}
