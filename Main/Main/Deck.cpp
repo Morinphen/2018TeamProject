@@ -5,6 +5,7 @@
 #include"GameL\WinInputs.h"
 #include"GameL\HitBoxManager.h"
 #include"GameL\DrawFont.h"
+#include"GameL\Audio.h"
 #include<stdlib.h>
 #include<time.h>
 
@@ -104,7 +105,7 @@ void CObjDekc::Action()
 			pos->PTrun = true;
 			//ドローしたらポイント増加
 			m_point++;
-
+			Audio::Start(1);
 		}
 
 	}
