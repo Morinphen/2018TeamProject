@@ -614,6 +614,14 @@ void CObjCard::Draw()
 	
 	if (CardHitCheck == true)
 	{
+		//複数カードに触れているとテキストが２重になるため、仮置きの処置
+		//--------------------
+		dst.m_top = 491.0f;
+		dst.m_left = 0.0f;
+		dst.m_right = 383.0f;
+		dst.m_bottom = 800.0f;
+		Draw::Draw(1, &src, &dst, c, 0);
+		//--------------------
 
 		dst.m_top = 12.0f;
 		dst.m_left = 13.0f;
@@ -621,7 +629,7 @@ void CObjCard::Draw()
 		dst.m_bottom = 491.0f;
 
 		wchar_t atr[256];
-		wchar_t aatr[3][64];
+		wchar_t aatr[5][64];
 		mbstowcs(atr, name, 256);//マルチバイトをワイドに変換
 		Font::StrDraw(atr, 0, 600, 20, d);//テキストを表示
 
