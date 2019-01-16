@@ -36,7 +36,7 @@ private:
 	char *Text;
 	char name[256];
 	char text[256];
-	char text2[3][64];
+	char text2[5][64];
 	int Tlong;
 
 	//ダミーデータ
