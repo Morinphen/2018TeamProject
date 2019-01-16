@@ -80,11 +80,12 @@ void CObjCard::Init()
 
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 
-	Audio::LoadAudio(0, L"Audio\\召喚.wav", SOUND_TYPE::EFFECT);
-	Audio::LoadAudio(1, L"Audio\\ドロー.wav", SOUND_TYPE::EFFECT);
-	
+	Audio::LoadAudio(1, L"Audio\\召喚2.wav", EFFECT);
+	Audio::LoadAudio(2, L"Audio\\ドロー.wav", EFFECT);
+	Audio::LoadAudio(6, L"Audio\\装備.wav", EFFECT);
 
-	float Volume = Audio::VolumeMaster(0.1f);
+
+	//float Volume = Audio::VolumeMaster(0.1f);
 }
 
 //アクション
@@ -136,6 +137,8 @@ void CObjCard::Action()
 					pos->WSummon = true;
 					//武器の位置を保存しておく
 					pos->WPosition[i] = Number4;
+					Audio::Start(6);
+
 				}
 
 			}
@@ -179,6 +182,8 @@ void CObjCard::Action()
 					pos->WSummon = true;
 					//武器の位置を保存しておく
 					pos->WPosition[i] = Number4;
+					Audio::Start(6);
+
 				}
 
 			}
@@ -214,6 +219,8 @@ void CObjCard::Action()
 					pos->WSummon = true;
 					//point--;
 					pos->WPosition[i] = Number4;
+					Audio::Start(6);
+
 				}
 
 			}
@@ -515,7 +522,7 @@ void CObjCard::Action()
 		sc->Cnanber -= 1;//カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
-		Audio::Start(0);
+		Audio::Start(1);
 		point->Cost--;//コスト減少
 		
 	}
