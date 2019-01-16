@@ -32,6 +32,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"image2.png", 0, TEX_SIZE_512);
 	Draw::LoadImageW(L"sakura.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"BackGround.png", 2, TEX_SIZE_2048);
+	Draw::LoadImageW(L"image4.png", 3, TEX_SIZE_512);
 
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 1);

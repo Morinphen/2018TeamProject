@@ -38,6 +38,8 @@ void CObjDekc::Init()
 	//Start最初の５枚ドローのための変数
 	Start = false;
 
+	effect = false;
+
 	//初期ポイント
 	m_point = 1;
 	Cost = 0;
@@ -85,9 +87,9 @@ void CObjDekc::Action()
 
 
 	
-	if (Turn==true && Start == true)
+	if (Turn==true && Start == true || effect == true)
 	{
-		if (m_f == true)
+		if (m_f == true || effect == true)
 		{
 			Deck[Cardcount] = Card;//デッキにドローしたカードを登録
 			sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
@@ -100,6 +102,7 @@ void CObjDekc::Action()
 			//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
 			//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 			m_f = false;
+			effect = false;
 
 			Turn = false;
 			pos->PTrun = true;

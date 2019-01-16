@@ -26,6 +26,8 @@ public:
 	int m_point;
 	int Cost;
 	bool Turn;
+
+	bool effect;//ƒJ[ƒh‚ÌŒø‰Ê•Ï”
 private:
 	int x, y;
 	int m_x, m_y;

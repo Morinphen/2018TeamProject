@@ -28,8 +28,9 @@ class CObjmouse : public CObj
 		bool EChoice2;
 		bool EChoice3;
 
-	private:
 		float m_mouse_x;//マウスのX座標
 		float m_mouse_y;//マウスのY座標
+
+	private:
 
 };

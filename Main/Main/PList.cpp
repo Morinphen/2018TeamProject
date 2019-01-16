@@ -31,7 +31,7 @@ void CObjPlist::Init()
 	data data[5];*/
 }
 
-char* CObjPlist::Action(char **name, int type, int *nanber, int *hp, int *atack, int *guard, char **text)
+char* CObjPlist::Action(char **name, int type, int *nanber, float *ntnanber, int *hp, int *atack, int *guard, char **text)
 {
 	FILE *fp;
 	char fname[] = "CardList.csv";
@@ -40,11 +40,12 @@ char* CObjPlist::Action(char **name, int type, int *nanber, int *hp, int *atack,
 	char str1[256];
 	char str2[256];
 	int a, b, c, d, e;
+	float f;
 	float f1, f2, f3, f4;
 	int i = 0;
 	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
 
-	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%[^\n]", str1, &a, &b, hp, atack, guard, str2) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
+	while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n]", str1, &a, &ntnanber, &b, hp, atack, guard, str2) != EOF))//名前、カード番号、コスト、体力、攻撃力、防御力、テキストを入れる
 	{
 		if (a == type)
 		{
