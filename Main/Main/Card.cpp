@@ -119,144 +119,187 @@ void CObjCard::Action()
 
 	if (m_l == true)
 	{
-		//主人公に触れているとき武器を装備させる
+		//主人公に触れたとき
 		if (mou->Choice[0] == 1 && Set == true&&point->Cost>0) {
 
-			for (int i = 0; i < 2; i++) {
-				if (pos->WPosition[i] <= 0  && Summon == false)
-				{
+			//カードが武具の時
+			if (Type == 2 || Type == 3)
+			{
+				for (int i = 0; i < 2; i++) {
+					if (pos->WPosition[i] <= 0 && Summon == false)
+					{
 
-					m_x = 703 + 90 * i;
+						m_x = 703 + 90 * i;
 
-					m_y = 466;
-					//モンスターのパラメータ強化
-					pos->PCard[i / 2][1] += Atack;
-					pos->PCard[i / 2][2] += Guard;
+						m_y = 466;
+						//モンスターのパラメータ強化
+						pos->PCard[i / 2][1] += Atack;
+						pos->PCard[i / 2][2] += Guard;
 
-					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
-					if (i - 2 == 0) {
-						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Number4;
-						RWeapon = true;
+						//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
+						if (i - 2 == 0) {
+							pos->PCard[i / 2][4] = Hp;
+							pos->PCard[i / 2][5] = Number4;
+							RWeapon = true;
+						}
+						else {
+							pos->PCard[i / 2][6] = Hp;
+							pos->PCard[i / 2][7] = Number4;
+							LWeapon = true;
+						}
+
+						//効果関数呼び出し
+						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+
+						//色を元に戻す
+						test = 1;
+						//召喚した扱いにする
+						Summon = true;
+						//選択された情報を元に戻す
+						Set = false;
+						pos->Wtouch = false;
+						//武器を召喚した情報を登録
+						pos->WSummon = true;
+						//武器の位置を保存しておく
+						pos->WPosition[i] = Number4;
+						Audio::Start(6);
+
 					}
-					else {
-						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Number4;
-						LWeapon = true;
-					}
-
-					//効果関数呼び出し
-					Effect(Type, &WhenEfe, &PlayEfe, &InduEfe);
-
-					//色を元に戻す
-					test = 1;
-					//召喚した扱いにする
-					Summon = true;
-					//選択された情報を元に戻す
-					Set = false;
-					pos->Wtouch = false;
-					//武器を召喚した情報を登録
-					pos->WSummon = true;
-					//武器の位置を保存しておく
-					pos->WPosition[i] = Number4;
-					Audio::Start(6);
-
 				}
 
 			}
 
+			//道具の時
+			if (Type == 4)
+			{
+				//効果関数呼び出し
+				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,1);
+				//召喚した扱いにする
+				Summon = true;
+				Audio::Start(6);
+			}
+
 		}
 
-		//左側のモンスターに触れているとき武器を装備させる
+		//左側のモンスターに触れたとき
 		if (mou->Choice[1] == 1 && Set == true && pos->PTrun == true && point->Cost>0) {
 
-			for (int i = 2; i < 4; i++) {
-				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
-				{
+			//カードが武具の時
+			if (Type == 2 || Type == 3) 
+			{
+				for (int i = 2; i < 4; i++) {
+					if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
+					{
 
-					m_x = 498 + 90 * (i - 2);
+						m_x = 498 + 90 * (i - 2);
 
-					m_y = 466;
-					//モンスターのパラメータ強化
-					pos->PCard[i / 2][1] += Atack;
-					pos->PCard[i / 2][2] += Guard;
+						m_y = 466;
+						//モンスターのパラメータ強化
+						pos->PCard[i / 2][1] += Atack;
+						pos->PCard[i / 2][2] += Guard;
 
-					//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
-					if (i - 2 == 0) {
-						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Number4;
-						RWeapon = true;
+						//武器の位置の右か左かを判断し、武器のHPとカード情報を保存
+						if (i - 2 == 0) {
+							pos->PCard[i / 2][4] = Hp;
+							pos->PCard[i / 2][5] = Number4;
+							RWeapon = true;
+						}
+						else {
+							pos->PCard[i / 2][6] = Hp;
+							pos->PCard[i / 2][7] = Number4;
+							LWeapon = true;
+						}
+
+						//効果関数呼び出し
+						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+
+						//色を元に戻す
+						test = 1;
+						//召喚した扱いにする
+						Summon = true;
+						//選択された情報を元に戻す
+						Set = false;
+						pos->Wtouch = false;
+						//武器を召喚した情報を登録
+						pos->WSummon = true;
+						//武器の位置を保存しておく
+						pos->WPosition[i] = Number4;
+						Audio::Start(6);
+
 					}
-					else {
-						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Number4;
-						LWeapon = true;
-					}
-
-					//効果関数呼び出し
-					Effect(Type, &WhenEfe, &PlayEfe, &InduEfe);
-
-					//色を元に戻す
-					test = 1;
-					//召喚した扱いにする
-					Summon = true;
-					//選択された情報を元に戻す
-					Set = false;
-					pos->Wtouch = false;
-					//武器を召喚した情報を登録
-					pos->WSummon = true;
-					//武器の位置を保存しておく
-					pos->WPosition[i] = Number4;
-					Audio::Start(6);
-
 				}
 
 			}
 
+			//道具の時
+			if (Type == 4)
+			{
+				//効果関数呼び出し
+				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe, 2);
+				//召喚した扱いにする
+				Summon = true;
+				Audio::Start(6);
+			}
+
 		}
-		//右側のモンスターに触れているとき武器を装備させる
+		//右側のモンスターに触れたとき
 		if (mou->Choice[2] == 1 && Set == true && pos->PTrun == true && point->Cost>0){
-			for (int i = 4; i < 6; i++) {
-				if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
-				{
 
-					m_x = 906 + 90 * (i - 4);
+			//カードが武具の時
+			if (Type == 2 || Type == 3)
+			{
+				for (int i = 4; i < 6; i++) {
+					if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
+					{
 
-					m_y = 466;
-					pos->PCard[i / 2][1] += Atack;
-					pos->PCard[i / 2][2] += Guard;
+						m_x = 906 + 90 * (i - 4);
 
-					if (i - 4 == 0) {
-						pos->PCard[i / 2][4] = Hp;
-						pos->PCard[i / 2][5] = Number4;
-						RWeapon = true;
+						m_y = 466;
+						pos->PCard[i / 2][1] += Atack;
+						pos->PCard[i / 2][2] += Guard;
+
+						if (i - 4 == 0) {
+							pos->PCard[i / 2][4] = Hp;
+							pos->PCard[i / 2][5] = Number4;
+							RWeapon = true;
+						}
+						else {
+							pos->PCard[i / 2][6] = Hp;
+							pos->PCard[i / 2][7] = Number4;
+							LWeapon = true;
+						}
+
+						//効果関数呼び出し
+						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+
+						test = 1;
+						Summon = true;
+						Set = false;
+						pos->Wtouch = false;
+						pos->WSummon = true;
+						//point--;
+						pos->WPosition[i] = Number4;
+						Audio::Start(6);
+
 					}
-					else  {
-						pos->PCard[i / 2][6] = Hp;
-						pos->PCard[i / 2][7] = Number4;
-						LWeapon = true;
-					}
-
-					//効果関数呼び出し
-					Effect(Type, &WhenEfe, &PlayEfe, &InduEfe);
-
-					test = 1;
-					Summon = true;
-					Set = false;
-					pos->Wtouch = false;
-					pos->WSummon = true;
-					//point--;
-					pos->WPosition[i] = Number4;
-					Audio::Start(6);
-
 				}
 
+			}
+
+			//道具の時
+			if (Type == 4)
+			{
+				//効果関数呼び出し
+				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe, 3);
+				//召喚した扱いにする
+				Summon = true;
+				Audio::Start(6);
 			}
 
 		}
 
 		//武器が召喚されなかった場合元に戻す
-		if (Summon == false && mou->Touch == false && Type == 2 || Summon == false && mou->Touch == false && Type == 3)
+		if (Summon == false && mou->Touch == false && Type == 2 || Summon == false && mou->Touch == false && Type == 3 || Summon == false && mou->Touch == false && Type == 4)
 		{
 			test = 1;
 			Set = false;
@@ -351,7 +394,7 @@ void CObjCard::Action()
 					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48)
 				{
 
-					Effect(Type, &WhenEfe, &PlayEfe, &InduEfe);
+					Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
 					Button = false;
 					m_f = true;
 					if (Type == 1)
@@ -429,6 +472,7 @@ void CObjCard::Action()
 		}
 	}
 
+	//手札のカードに触れたとき
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false && pos->Wtouch == false)
 	{
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
@@ -540,6 +584,15 @@ void CObjCard::Action()
 					//pos->m_f = true;
 					//PList->Action(&Name, Type, &Nanber, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				}
+
+				//道具の場合
+				else if (Type == 4 && pos->Wtouch == false && pos->PTrun == true)
+				{
+					test = 0;
+					pos->Wtouch = true;
+					Set = true;
+				}
+
 				delete PList;
 			}
 		}
@@ -606,7 +659,11 @@ void CObjCard::Action()
 		StopSm = true;
 		Audio::Start(1);
 		point->Cost--;//コスト減少
-		
+		if (Type == 4)
+		{
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+		}
 	}
 
 	//召喚されたモンスターの処理
@@ -779,12 +836,15 @@ void CObjCard::Draw()
 
 //Effect関数
 //カードナンバー、召喚時効果、起動効果、誘発効果の変数をぶち込んで処理する
-void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu)
+//Positionは召喚されているカードの場所により、入れる数値が変わる
+//基本的に召喚されたモンスターなどに触れない場合は０を入れる
+void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu, int Position)
 {
+	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	if (_Cnanber == 2)
 	{
-		CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
-		CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 		//伝説の剣装備時、カードを１枚ドロー
 		if (*When == false)
 		{
@@ -802,5 +862,9 @@ void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu)
 			sc->Action();
 			han->Action();
 		}
+	}
+	if (_Cnanber == 4)
+	{
+		pos->PCard[Position - 1][0]+=2;
 	}
 }

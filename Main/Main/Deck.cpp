@@ -61,7 +61,7 @@ void CObjDekc::Action()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	Card = rand() % 14+1;//同じ番号のカード呼出
+	Card = rand() % 21+1;//同じ番号のカード呼出
 	stop = 1;
 
 
@@ -70,7 +70,7 @@ void CObjDekc::Action()
 	//別のカードが出るまでループ
 	while(stop==1){
 		stop = 0;
-		Card = rand() % 14+1;
+		Card = rand() % 21+1;
 
 		for(int i=0;i<Cardcount;i++)
 		{
@@ -92,11 +92,15 @@ void CObjDekc::Action()
 		Ctype = weapon;
 	}
 
-	else
+	else if (Card <= 14)
 	{
 		Ctype = shield;
 	}
 
+	else
+	{
+		Ctype = item;
+	}
 
 	
 	if (Turn==true && Start == true || effect == true)
@@ -116,10 +120,12 @@ void CObjDekc::Action()
 			m_f = false;
 			effect = false;
 
+			if (Turn == true) {
+				//ドローしたらポイント増加
+				m_point++;
+			}
 			Turn = false;
 			pos->PTrun = true;
-			//ドローしたらポイント増加
-			m_point++;
 			Audio::Start(2);
 		}
 

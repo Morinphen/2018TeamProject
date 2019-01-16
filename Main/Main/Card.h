@@ -17,7 +17,7 @@ public:
 	bool Set;//武器の装備制御
 
 private:
-	void Effect(int _Cnanber,bool *When,bool *Play,bool *Indu);
+	void Effect(int _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
 
 	int m_x, m_y;//カードの描画位置
 	int Setcard;//カードの場所
