@@ -1,5 +1,6 @@
 #pragma once
-#include "GameL\SceneObjManager.h"
+#include"GameL\SceneObjManager.h"
+
 //使用するネームスペース
 using namespace GameL;
 
@@ -11,6 +12,7 @@ public:
 	void Init();
 	void Action();
 	void Draw();
+	int Cost;	//カード使用のためのコスト
 
 	void SetpointFlag(bool b) { m_flag_point = b; }
 private:

@@ -100,6 +100,9 @@
     <ClCompile Include="objGameover.cpp">
       <Filter>Scene\Gameover</Filter>
     </ClCompile>
+    <ClCompile Include="PList.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -200,6 +203,9 @@
     </ClInclude>
     <ClInclude Include="objGameover.h">
       <Filter>Scene\Gameover</Filter>
+    </ClInclude>
+    <ClInclude Include="PList.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

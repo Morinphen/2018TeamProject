@@ -18,6 +18,7 @@ enum OBJ_NAME
 	OBJ_MAP,
 	OBJ_POINT,
 	OBJ_BACKGROUND,
+	OBJ_LIST,
 
 
 	OBJ_FIELD_PLAYER,
@@ -31,7 +32,6 @@ enum OBJ_NAME
 	OBJ_TITLE,
 	OBJ_CLEAR,
 	OBJ_GAMEOVER,
-	//OBJ_POINT,
 };
 //------------------------------------------------
 
@@ -90,6 +90,7 @@ struct UserData
 #include"BackGround.h"
 #include"PHero.h"
 #include"EHero.h"
+#include"PList.h"
 
 #include"Player.h"
 #include"ObjTitle.h"
@@ -103,7 +104,7 @@ struct UserData
 #include"SceneTitle.h"
 #include"SceneClear.h"
 #include"SceneGameover.h"
-//#include"point.h"
+#include"point.h"
 //-----------------------------------------------
 
 //シーンスタートクラス---------------------------
