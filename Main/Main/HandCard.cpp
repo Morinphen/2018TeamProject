@@ -36,7 +36,7 @@ void CObjHand::Action()
 			if (basyo[j] == NULL)
 			{
 				int ka = 0;
-				basyo[j] = basyo[j + 1]-1;
+				basyo[j] = basyo[j + 1] - 1;
 				basyo[j + 1] = ka;
 			}
 		}
