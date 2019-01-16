@@ -441,7 +441,7 @@ void CObjCard::Action()
 		han->hensu2++;
 	}
 
-	Number3 = han->basyo[Number + 1];//手札の場所を更新
+	Number3 = han->basyo[Number - 1];//手札の場所を更新
 
 	L_position = pos->L_position;
 
@@ -650,7 +650,7 @@ void CObjCard::Action()
 
 	//カードが召喚されたとき
 	if (Summon == true && StopSm==false) {
-		han->hand[Number3 + 1] = 0; //出したカードのカード番号を削除
+		han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除
 		han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
 		han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
 		han->hensu3 = Number3; //出したカードの場所を保存
