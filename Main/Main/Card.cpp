@@ -441,7 +441,7 @@ void CObjCard::Action()
 		han->hensu2++;
 	}
 
-	Number3 = han->basyo[Number - 1];//手札の場所を更新
+	Number3 = han->basyo[Number + 1];//手札の場所を更新
 
 	L_position = pos->L_position;
 
@@ -650,11 +650,11 @@ void CObjCard::Action()
 
 	//カードが召喚されたとき
 	if (Summon == true && StopSm==false) {
-		han->hand[Number3 - 1] = 0;//出したカードのカード番号を削除
-		han->basyo[Number3 - 1] = 0;//出したカードの場所情報を削除
-		han->hensu = Setcard - Number3;//手札の合計と出したカードの差分を保存
-		han->hensu3 = Number3;//出したカードの場所を保存
-		sc->Cnanber -= 1;//カードの合計枚数を１減らす
+		han->hand[Number3 + 1] = 0; //出したカードのカード番号を削除
+		han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
+		han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
+		han->hensu3 = Number3; //出したカードの場所を保存
+		sc->Cnanber -= 1; //カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
 		Audio::Start(1);
@@ -664,6 +664,8 @@ void CObjCard::Action()
 			Hits::DeleteHitBox(this);
 			this->SetStatus(false);
 		}
+		
+		sc->m_point--; //コスト減少
 	}
 
 	//召喚されたモンスターの処理
@@ -788,6 +790,7 @@ void CObjCard::Draw()
 		dst.m_bottom = 800.0f;
 		Draw::Draw(1, &src, &dst, e, 0);
 		//--------------------
+		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 		dst.m_top = 12.0f;
 		dst.m_left = 13.0f;
