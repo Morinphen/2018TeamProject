@@ -6,6 +6,7 @@
 #include"GameL\DrawTexture.h"
 #include"GameL\SceneObjManager.h"
 #include "GameL\DrawFont.h"
+#include"GameL\Audio.h"
 //使用するネームスペース
 using namespace GameL;
 //使用ヘッダー
@@ -33,6 +34,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"sakura.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"BackGround.png", 2, TEX_SIZE_2048);
 	Draw::LoadImageW(L"image4.png", 3, TEX_SIZE_512);
+
 
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 1);
