@@ -93,7 +93,8 @@ void CObjCard::Init()
 	Audio::LoadAudio(1, L"Audio\\召喚2.wav", EFFECT);
 	Audio::LoadAudio(2, L"Audio\\ドロー.wav", EFFECT);
 	Audio::LoadAudio(6, L"Audio\\装備.wav", EFFECT);
-
+	Audio::LoadAudio(7, L"Audio\\破壊.wav", EFFECT);
+	Audio::LoadAudio(8, L"Audio\\ダメージ.wav", EFFECT);
 
 	//float Volume = Audio::VolumeMaster(0.1f);
 }
@@ -330,6 +331,7 @@ void CObjCard::Action()
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Audio::Start(8);
 			}
 
 			else if (mou->EChoice2 == true && Punch == true && pos->PTrun == true)
@@ -351,6 +353,8 @@ void CObjCard::Action()
 				}
 				test = 1;
 				Punch = false;
+				Audio::Start(8);
+
 			}
 
 			else if (mou->EChoice3 == true && Punch == true && pos->PTrun == true)
@@ -372,12 +376,15 @@ void CObjCard::Action()
 				}
 				test = 1;
 				Punch = false;
+				Audio::Start(8);
+
 			}
 
 			else if (Type == 1)
 			{
 				test = 1;
 				Punch = false;
+
 			}
 		}
 
@@ -697,6 +704,7 @@ void CObjCard::Action()
 
 			Hits::DeleteHitBox(this);
 			this->SetStatus(false);
+			Audio::Start(7);
 		}
 	}
 
