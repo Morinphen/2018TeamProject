@@ -141,11 +141,13 @@ void CObjCard::Action()
 						if (i - 2 == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
+							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
+							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
@@ -203,11 +205,13 @@ void CObjCard::Action()
 						if (i - 2 == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
+							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
+							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
@@ -262,11 +266,13 @@ void CObjCard::Action()
 						if (i - 4 == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
+							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
+							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
@@ -313,15 +319,39 @@ void CObjCard::Action()
 			{
 				//FSummon=‰E‘¤‚Ì–¡•ûAˆá‚¤ê‡‚Í¶‘¤
 				if (FSummon == true && pos->PTrun == true) {
+
+					if (pos->PCard[1][4] > 0)
+					{
+						pos->PCard[1][4] -= 1;
+					}
+
+					if (pos->PCard[1][6] > 0)
+					{
+						pos->PCard[1][6] -= 1;
+					}
+
 					if (pos->PCard[1][1] - pos->ECard[2] > 0)
+					{				
 						pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
+					}
 
 					if (pos->ECard[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
 
 				}
+
 				else if (pos->PTrun == true)
 				{
+					if (pos->PCard[2][4] > 0)
+					{
+						pos->PCard[2][4] -= 1;
+					}
+
+					if (pos->PCard[2][6] > 0)
+					{
+						pos->PCard[2][6] -= 1;
+					}
+
 					if (pos->PCard[2][1] - pos->ECard[2] > 0)
 						pos->ECard[0] -= pos->PCard[2][1] - pos->ECard[2];
 
@@ -337,14 +367,37 @@ void CObjCard::Action()
 			else if (mou->EChoice2 == true && Punch == true && pos->PTrun == true)
 			{
 				if (FSummon == true) {
+
+					if (pos->PCard[1][4] > 0)
+					{
+						pos->PCard[1][4] -= 1;
+					}
+
+					if (pos->PCard[1][6] > 0)
+					{
+						pos->PCard[1][6] -= 1;
+					}
+
 					if (pos->PCard[1][1] - pos->ECard2[2] > 0)
+					{
 						pos->ECard2[0] -= pos->PCard[1][1] - pos->ECard2[2];
+					}
 
 					if (pos->ECard2[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
 				}
 				else
 				{
+					if (pos->PCard[2][4] > 0)
+					{
+						pos->PCard[2][4] -= 1;
+					}
+
+					if (pos->PCard[2][6] > 0)
+					{
+						pos->PCard[2][6] -= 1;
+					}
+
 					if (pos->PCard[2][1] - pos->ECard2[2] > 0)
 						pos->ECard2[0] -= pos->PCard[2][1] - pos->ECard2[2];
 
@@ -360,14 +413,37 @@ void CObjCard::Action()
 			else if (mou->EChoice3 == true && Punch == true && pos->PTrun == true)
 			{
 				if (FSummon == true) {
+
+					if (pos->PCard[1][4] > 0)
+					{
+						pos->PCard[1][4] -= 1;
+					}
+
+					if (pos->PCard[1][6] > 0)
+					{
+						pos->PCard[1][6] -= 1;
+					}
+
 					if (pos->PCard[1][1] - pos->ECard3[2] > 0)
+					{
 						pos->ECard3[0] -= pos->PCard[1][1] - pos->ECard3[2];
+					}
 
 					if (pos->ECard3[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
 				}
 				else
 				{
+					if (pos->PCard[2][4] > 0)
+					{
+						pos->PCard[2][4] -= 1;
+					}
+
+					if (pos->PCard[2][6] > 0)
+					{
+						pos->PCard[2][6] -= 1;
+					}
+
 					if (pos->PCard[2][1] - pos->ECard3[2] > 0)
 						pos->ECard3[0] -= pos->PCard[2][1] - pos->ECard3[2];
 
@@ -726,7 +802,10 @@ void CObjCard::Action()
 				{
 					pos->PCard[i][1] -= Atack;
 					pos->PCard[i][2] -= Guard;
-					pos->PCard[i][4] = 0;
+					if (RWeapon == true)
+						pos->PCard[i][4] = 0;
+					else
+						pos->PCard[i][6] = 0;
 					//pos->PCard[i][5] = 0;
 
 					for (int j = 0; j < 6; j++) {
