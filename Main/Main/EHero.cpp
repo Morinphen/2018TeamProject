@@ -11,8 +11,8 @@
 //使用するネームスペース
 CObjEHero::CObjEHero()
 {
-	m_x = 747;
-	m_y = 195;
+	m_x = 738;
+	m_y = 171;
 }
 
 //イニシャライズ
@@ -38,7 +38,7 @@ void CObjEHero::Init()
 
 	m_f = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY, 1);
+	Hits::SetHitBox(this, m_x, m_y, 108, 144, ELEMENT_ITEM, OBJ_FIELD_ENEMY, 1);
 }
 
 //アクション
@@ -73,6 +73,8 @@ void CObjEHero::Draw()
 	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
+	CHitBox*hit = Hits::GetHitBox(this);
+	Hits::DeleteHitBox(this);
 
 	src.m_top = 192.0f;
 	src.m_left = 0.0f;
@@ -81,8 +83,8 @@ void CObjEHero::Draw()
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
-	dst.m_right = 90.0f + m_x;
-	dst.m_bottom = 120.0f + m_y;
+	dst.m_right = 108.0f + m_x;
+	dst.m_bottom = 144.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
@@ -90,15 +92,14 @@ void CObjEHero::Draw()
 
 	if (CardHitCheck == true)
 	{
-
 		dst.m_top = 12.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
-	else
+	/*else
 	{
 
 		src.m_top = 0.0f;
@@ -112,10 +113,9 @@ void CObjEHero::Draw()
 		dst.m_bottom = 491.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
-	}
-
+	}*/
 
 	wchar_t str[128];
 	swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-	Font::StrDraw(str, m_x + 10, m_y + 100, 20, d);
+	Font::StrDraw(str, m_x + 15, m_y + 120, 20, d);
 }

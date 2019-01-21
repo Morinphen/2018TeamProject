@@ -880,9 +880,9 @@ void CObjCard::Draw()
 		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 		dst.m_top = 12.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
 
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
