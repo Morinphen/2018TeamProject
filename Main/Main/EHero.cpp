@@ -63,6 +63,15 @@ void CObjEHero::Action()
 		Scene::SetScene(new CSceneClear());
 	}
 
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
+	}
+	else
+	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+	}
+
 }
 
 //ドロー
