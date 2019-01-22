@@ -128,9 +128,9 @@ void CObjCard::Action()
 					if (pos->WPosition[i] <= 0 && Summon == false)
 					{
 
-						m_x = 703 + 90 * i;
+						m_x = 700 + 97 * i;
 
-						m_y = 466;
+						m_y = 462;
 						//モンスターのパラメータ強化
 						pos->PCard[i / 2][1] += Atack;
 						pos->PCard[i / 2][2] += Guard;
@@ -192,9 +192,9 @@ void CObjCard::Action()
 					if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 					{
 
-						m_x = 498 + 90 * (i - 2);
+						m_x = 496 + 97 * (i - 2);
 
-						m_y = 466;
+						m_y = 462;
 						//モンスターのパラメータ強化
 						pos->PCard[i / 2][1] += Atack;
 						pos->PCard[i / 2][2] += Guard;
@@ -255,9 +255,9 @@ void CObjCard::Action()
 					if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 					{
 
-						m_x = 906 + 90 * (i - 4);
+						m_x = 904 + 97 * (i - 4);
 
-						m_y = 466;
+						m_y = 462;
 						pos->PCard[i / 2][1] += Atack;
 						pos->PCard[i / 2][2] += Guard;
 
@@ -618,7 +618,7 @@ void CObjCard::Action()
 					//左側のスペースが開いている場合
 					if (S_position == false&&point->Cost>0&&pos->PTrun==true) {
 						m_x = 543;
-						m_y = 586;
+						m_y = 589;
 						//Hitboxを更新し、フィールド内での処理ができるようにする
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
@@ -635,7 +635,7 @@ void CObjCard::Action()
 					//そうでない場合、右に召喚
 					else if(point->Cost>0&&pos->PTrun==true){
 						m_x = 951;
-						m_y = 586;
+						m_y = 589;
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
 						pos->PCard[2][0] = Hp;

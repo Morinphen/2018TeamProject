@@ -13,7 +13,7 @@
 CObjPHero::CObjPHero()
 {
 	m_x = 738;
-	m_y = 586;
+	m_y = 590;
 }
 
 //イニシャライズ

@@ -123,9 +123,9 @@ void CObjDekc::Action()
 				m_point++;
 				car->Bat = 1;
 				car->Bat2 = 1;
-				//m_point++;
-				m_point = m_point + i * 10;
-				i++;
+				
+				//m_point = m_point + i * 10;
+				//i++;
 			}
 			Turn = false;
 			pos->PTrun = true;

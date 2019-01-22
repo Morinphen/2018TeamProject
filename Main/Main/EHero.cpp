@@ -12,7 +12,7 @@
 CObjEHero::CObjEHero()
 {
 	m_x = 738;
-	m_y = 171;
+	m_y = 166;
 }
 
 //イニシャライズ
