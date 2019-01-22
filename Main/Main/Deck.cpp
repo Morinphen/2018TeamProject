@@ -61,7 +61,8 @@ void CObjDekc::Action()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	Card = rand() % 21 + 1;//同じ番号のカード呼出
+	CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
+	Card = rand() % 21+1;//同じ番号のカード呼出
 	stop = 1;
 
 
@@ -123,10 +124,13 @@ void CObjDekc::Action()
 			if (Turn == true) {
 				//ドローしたらポイント増加
 				m_point++;
+				car->Bat = 1;
+				car->Bat2 = 1;
 			}
 			Turn = false;
 			pos->PTrun = true;
 			Audio::Start(2);
+
 		}
 
 	}

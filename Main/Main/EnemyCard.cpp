@@ -183,6 +183,7 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
+
 	if (Number < 4 && Number !=2) {
 		src.m_top = 0.0f + (Number + 1) * 64;
 		src.m_left = 0.0f;
@@ -209,10 +210,10 @@ void CObjEnemyCard::Draw()
 
 	if (CardHitCheck == true)
 	{
-		dst.m_top = 13.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
+		dst.m_top = 12.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
 	}

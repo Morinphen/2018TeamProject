@@ -5,13 +5,14 @@
 #include"PHero.h"
 #include"Deck.h"
 #include"Cardlist.h"
+#include"GameL\Audio.h"
 
 #include"GameL\DrawFont.h"
 
 //使用するネームスペース
 CObjPHero::CObjPHero()
 {
-	m_x = 747;
+	m_x = 738;
 	m_y = 586;
 }
 
@@ -38,7 +39,7 @@ void CObjPHero::Init()
 
 	m_f = false;
 
-	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER, 1);
+	Hits::SetHitBox(this, m_x, m_y, 108, 144, ELEMENT_GREEN, OBJ_FIELD_PLAYER, 1);
 }
 
 //アクション
@@ -77,6 +78,7 @@ void CObjPHero::Action()
 			//選択情報を元に戻す
 			test = 1;
 			Punch = false;
+			Audio::Start(8);
 		}
 
 		else if (mou->EChoice2 == true && Punch == true)
@@ -88,6 +90,7 @@ void CObjPHero::Action()
 				pos->PCard[0][0] -= pos->ECard2[1] - pos->PCard[0][2];
 			test = 1;
 			Punch = false;
+			Audio::Start(8);
 		}
 
 		else if (mou->EChoice3 == true && Punch == true)
@@ -101,6 +104,7 @@ void CObjPHero::Action()
 
 			test = 1;
 			Punch = false;
+			Audio::Start(8);
 		}
 
 		else
@@ -139,6 +143,7 @@ void CObjPHero::Draw()
 	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
+	CHitBox*hit = Hits::GetHitBox(this);
 
 	src.m_top = 64.0f;
 	src.m_left = 0.0f;
@@ -147,24 +152,23 @@ void CObjPHero::Draw()
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
-	dst.m_right = 90.0f + m_x;
-	dst.m_bottom = 120.0f + m_y;
+	dst.m_right = 108.0f + m_x;
+	dst.m_bottom = 144.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
 	//画面左上に拡大画像を表示させる
 
-	/*if (CardHitCheck == true)
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
 	{
-
 		dst.m_top = 12.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
-	else
+	/*else
 	{
 
 		src.m_top = 0.0f;
@@ -183,5 +187,5 @@ void CObjPHero::Draw()
 
 	wchar_t str[128];
 	swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-	Font::StrDraw(str, m_x + 10, m_y + 100, 20, d);
+	Font::StrDraw(str, m_x + 15, m_y + 115, 20, d);
 }
