@@ -5,6 +5,7 @@
 #include"PHero.h"
 #include"Deck.h"
 #include"Cardlist.h"
+#include"GameL\Audio.h"
 
 #include"GameL\DrawFont.h"
 
@@ -77,6 +78,7 @@ void CObjPHero::Action()
 			//‘I‘ðî•ñ‚ðŒ³‚É–ß‚·
 			test = 1;
 			Punch = false;
+			Audio::Start(8);
 		}
 
 		else if (mou->EChoice2 == true && Punch == true)
@@ -88,6 +90,7 @@ void CObjPHero::Action()
 				pos->PCard[0][0] -= pos->ECard2[1] - pos->PCard[0][2];
 			test = 1;
 			Punch = false;
+			Audio::Start(8);
 		}
 
 		else if (mou->EChoice3 == true && Punch == true)
@@ -101,6 +104,7 @@ void CObjPHero::Action()
 
 			test = 1;
 			Punch = false;
+			Audio::Start(8);
 		}
 
 		else

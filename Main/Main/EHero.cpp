@@ -83,7 +83,7 @@ void CObjEHero::Draw()
 	RECT_F src;
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
-	
+
 	src.m_top = 192.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;

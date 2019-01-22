@@ -76,6 +76,9 @@ void CObjCard::Init()
 	StopSm = false;
 	Summon = false;
 
+	Bat = 1;
+	Bat2 = 1;
+
 	while(Opdraw>7)
 	{
 		Opdraw -= 7;//x位置をずらす
@@ -90,11 +93,6 @@ void CObjCard::Init()
 
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 
-	Audio::LoadAudio(1, L"Audio\\召喚2.wav", EFFECT);
-	Audio::LoadAudio(2, L"Audio\\ドロー.wav", EFFECT);
-	Audio::LoadAudio(6, L"Audio\\装備.wav", EFFECT);
-	Audio::LoadAudio(7, L"Audio\\破壊.wav", EFFECT);
-	Audio::LoadAudio(8, L"Audio\\ダメージ.wav", EFFECT);
 
 	//float Volume = Audio::VolumeMaster(0.1f);
 }
@@ -338,8 +336,7 @@ void CObjCard::Action()
 
 					if (pos->ECard[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
-					Audio::Start(8);
-
+				
 				}
 
 				else if (pos->PTrun == true)
@@ -360,6 +357,7 @@ void CObjCard::Action()
 					if (pos->ECard[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
 					Audio::Start(8);
+				
 				}
 				//選択情報を元に戻す
 				test = 1;
@@ -390,9 +388,10 @@ void CObjCard::Action()
 					if (pos->ECard2[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
 					Audio::Start(8);
+				
 
 				}
-				else
+				else 
 				{
 					if (pos->PCard[2][4] > 0)
 					{
@@ -409,7 +408,8 @@ void CObjCard::Action()
 
 					if (pos->ECard2[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard2[1] - pos->PCard[2][2];
-										Audio::Start(8);
+					Audio::Start(8);
+				
 
 				}
 				test = 1;
@@ -418,7 +418,7 @@ void CObjCard::Action()
 
 			else if (mou->EChoice3 == true && Punch == true && pos->PTrun == true)
 			{
-				if (FSummon == true) {
+				if (FSummon == true ) {
 
 					if (pos->PCard[1][4] > 0)
 					{
@@ -437,7 +437,7 @@ void CObjCard::Action()
 
 					if (pos->ECard3[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
-
+				
 				}
 				else
 				{
@@ -456,6 +456,7 @@ void CObjCard::Action()
 
 					if (pos->ECard3[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
+				
 				}
 				test = 1;
 				Punch = false;
@@ -486,8 +487,8 @@ void CObjCard::Action()
 					m_f = true;
 					if (Type == 1)
 					{
-						test = 0;
-						Punch = true;
+							test = 0;
+							Punch = true;
 					}
 					m_l = false;
 
