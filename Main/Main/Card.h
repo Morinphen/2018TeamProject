@@ -14,7 +14,11 @@ public:
 	void Draw();
 
 	bool Punch;//ƒ‚ƒ“ƒXƒ^[‚ÌUŒ‚§Œä
+	bool Punch2;
 	bool Set;//•Ší‚Ì‘•”õ§Œä
+
+	int Bat;
+	int Bat2;
 
 private:
 	void Effect(int _Cnanber,bool *When,bool *Play,bool *Indu,int Position);

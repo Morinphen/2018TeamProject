@@ -46,13 +46,7 @@ void CObjDekc::Init()
 	m_flag_point = false;
 	srand((unsigned)time(NULL));
 
-	
-	Audio::LoadAudio(0, L"Audio\\Eden.wav", BACK_MUSIC);
-	Audio::LoadAudio(3, L"Audio\\Rock_ROLA.wav",BACK_MUSIC);
-	Audio::LoadAudio(4, L"Audio\\Runners_High.wav", BACK_MUSIC);
-	Audio::LoadAudio(5, L"Audio\\Super_Groove_1.wav", BACK_MUSIC);
 
-	Audio::Start(5);
 }
 
 //アクション
@@ -61,6 +55,7 @@ void CObjDekc::Action()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
+	CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
 	Card = rand() % 21+1;//同じ番号のカード呼出
 	stop = 1;
 
@@ -123,10 +118,13 @@ void CObjDekc::Action()
 			if (Turn == true) {
 				//ドローしたらポイント増加
 				m_point++;
+				car->Bat = 1;
+				car->Bat2 = 1;
 			}
 			Turn = false;
 			pos->PTrun = true;
 			Audio::Start(2);
+
 		}
 
 	}

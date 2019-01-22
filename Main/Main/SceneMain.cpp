@@ -65,6 +65,22 @@ void CSceneMain::InitScene()
 
 	CObjBackGround* obj_background = new CObjBackGround();
 	Objs::InsertObj(obj_background, OBJ_BACKGROUND, 1);
+
+
+	//SE・BGM
+	Audio::LoadAudio(0, L"Audio\\Eden.wav", BACK_MUSIC);
+	Audio::LoadAudio(1, L"Audio\\召喚2.wav", EFFECT);
+	Audio::LoadAudio(2, L"Audio\\ドロー.wav", EFFECT);
+	Audio::LoadAudio(3, L"Audio\\Rock_ROLA.wav", BACK_MUSIC);
+	Audio::LoadAudio(4, L"Audio\\Runners_High.wav", BACK_MUSIC);
+	Audio::LoadAudio(5, L"Audio\\Super_Groove_1.wav", BACK_MUSIC);
+	Audio::LoadAudio(6, L"Audio\\装備.wav", EFFECT);
+	Audio::LoadAudio(7, L"Audio\\破壊.wav", EFFECT);
+	Audio::LoadAudio(8, L"Audio\\ダメージ.wav", EFFECT);
+
+	Audio::Start(5);
+
+
 }
 
 //ゲームメイン実行中メソッド
