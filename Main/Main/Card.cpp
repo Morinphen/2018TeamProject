@@ -576,10 +576,10 @@ void CObjCard::Action()
 			if (Nlist == Type)//カード番号が一致したとき、処理開始
 			{
 				Tlong = strlen(text);//テキストの長さを求める
-				for (int i = 0; i * 38 < Tlong; i++)//１９文字づつ改行していく
+				for (int i = 0; i * 34 < Tlong; i++)//１９文字づつ改行していく
 				{
-					strncpy(text2[i], text + i * 38, 38);
-					text2[i][38] = '\0';
+					strncpy(text2[i], text + i * 34, 34);
+					text2[i][34] = '\0';
 				}
 				break;
 			}
@@ -895,7 +895,7 @@ void CObjCard::Draw()
 
 		for (int i = 0; i * 38 < Tlong; i++) {
 			mbstowcs(aatr[i], text2[i], 64);
-			Font::StrDraw(aatr[i], 0, 650 + i * 20, 20, d);
+			Font::StrDraw(aatr[i], 20, 650 + i * 20, 20, d);
 		}
 
 		Draw::Draw(0, &src, &dst, c, 0);

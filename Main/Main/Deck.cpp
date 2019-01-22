@@ -32,6 +32,8 @@ void CObjDekc::Init()
 	//Cnanber カードの位置調整用
 	Cnanber = 0;
 
+	i = 1;
+
 	//Cardcount 現在ドローした枚数　現在プログラム作成中
 	Cardcount = 0;
 
@@ -41,7 +43,8 @@ void CObjDekc::Init()
 	effect = false;
 
 	//初期ポイント
-	m_point = 1;
+	//m_point = 1;
+	m_point = 10;
 	Cost = 0;
 	m_flag_point = false;
 	srand((unsigned)time(NULL));
@@ -122,7 +125,9 @@ void CObjDekc::Action()
 
 			if (Turn == true) {
 				//ドローしたらポイント増加
-				m_point++;
+				//m_point++;
+				m_point = m_point + i * 10;
+				i++;
 			}
 			Turn = false;
 			pos->PTrun = true;
