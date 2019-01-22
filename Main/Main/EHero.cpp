@@ -63,6 +63,15 @@ void CObjEHero::Action()
 		Scene::SetScene(new CSceneClear());
 	}
 
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
+	}
+	else
+	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+	}
+
 }
 
 //ドロー
@@ -74,8 +83,7 @@ void CObjEHero::Draw()
 	RECT_F src;
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
-	Hits::DeleteHitBox(this);
-
+	
 	src.m_top = 192.0f;
 	src.m_left = 0.0f;
 	src.m_right = 64.0f;

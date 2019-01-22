@@ -157,7 +157,6 @@ void CObjPHero::Draw()
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
 	{
-
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
 		dst.m_right = 281.0f;
@@ -184,5 +183,5 @@ void CObjPHero::Draw()
 
 	wchar_t str[128];
 	swprintf_s(str, L"%dÅ@%dÅ@%d", Atack, Hp, Guard);
-	Font::StrDraw(str, m_x + 10, m_y + 100, 20, d);
+	Font::StrDraw(str, m_x + 15, m_y + 115, 20, d);
 }
