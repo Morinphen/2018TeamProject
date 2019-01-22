@@ -28,6 +28,8 @@ public:
 	int Cost;
 	bool Turn;
 
+	int i;
+
 	bool effect;//ƒJ[ƒh‚ÌŒø‰Ê•Ï”
 private:
 	int x, y;
