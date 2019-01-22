@@ -18,6 +18,7 @@ public:
 
 private:
 	void Effect(int _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
+	void Wwindow(bool *_set,bool _delete);
 
 	int m_x, m_y;//カードの描画位置
 	int Setcard;//カードの場所
@@ -26,6 +27,8 @@ private:
 	int Number2;//手札のカード番号
 	int Number3;//カードの順番番号
 	int Number4;//カード情報番号
+
+	bool ssss;
 
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
@@ -43,10 +46,10 @@ private:
 	//カードテキストの表示
 	char *Name;
 	char *Text;
-	char name[256];
 	char text[256];
-	char text2[5][64];
 	int Tlong;
+	//char name[256];
+	//char text2[5][64];
 
 	//ダミーデータ
 	int aaaa;
@@ -59,9 +62,20 @@ private:
 	int Rotdraw;//カードの角度調整
 
 	bool Button;//ボタン用変数
+	int BDraw;//ボタンdraw用変数
 	//ボタン用表示位置
-	int b_x;
-	int b_y;
+	float b_x;
+	float b_y;
+
+	//ウィンドウ用変数
+	bool Wset;
+	bool LDcard;
+	bool RDcard;
+	int WLcard;
+	int WRcard;
+	int WLupdraw;
+	int WRupdraw;
+	int Wcount;
 
 	//モンスターの位置を保存
 	bool FSummon;

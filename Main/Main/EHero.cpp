@@ -57,6 +57,15 @@ void CObjEHero::Action()
 		pos->ECard[3] = 0;
 	}
 
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
+	}
+	else
+	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+	}
+
 	Hp = pos->ECard[0];
 	if (Hp <= 0)
 	{

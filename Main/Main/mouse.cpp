@@ -16,6 +16,7 @@ void CObjmouse::Init()
 	m_f = false;
 
 	EChoice = false;
+	Flee = true;
 
 	m_mouse_x = 0.0f;//ƒ}ƒEƒX‚ÌXÀ•W
 	m_mouse_y = 0.0f;//ƒ}ƒEƒX‚ÌYÀ•W
@@ -41,39 +42,46 @@ void CObjmouse::Action()
 	if (hit->CheckObjNameHit(OBJ_CARD) != nullptr)
 	{
 		Touch = true;
+		Flee = false;
 	}
 
 	//ŽålŒö‚ÉG‚ê‚½‚Æ‚«
 	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER) != nullptr)
 	{
 		Choice[0] = 1;
+		Flee = false;
 	}
 
 	//‰E‘¤‚Ì–¡•û‚ÉG‚ê‚½‚Æ‚«
 	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER2) != nullptr)
 	{
 		Choice[1] = 1;
+		Flee = false;
 	}
 	//¶‘¤‚Ì–¡•û‚ÉG‚ê‚½‚Æ‚«
 	else if (hit->CheckObjNameHit(OBJ_FIELD_PLAYER3) != nullptr)
 	{
 		Choice[2] = 1;
+		Flee = false;
 	}
 
 	//“G‚ÉG‚ê‚½‚Æ‚«
 	else if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY) != nullptr)
 	{
 		EChoice = true;
+		Flee = false;
 	}
 
 	else if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY2) != nullptr)
 	{
 		EChoice2 = true;
+		Flee = false;
 	}
 
 	else if (hit->CheckObjNameHit(OBJ_FIELD_ENEMY3) != nullptr)
 	{
 		EChoice3 = true;
+		Flee = false;
 	}
 
 	//‚Ç‚ê‚àŠY“–‚µ‚È‚¢ê‡A‚·‚×‚Ä‚O‚É‚µ‚Ä‚¨‚­
@@ -86,6 +94,7 @@ void CObjmouse::Action()
 		EChoice = false;
 		EChoice2 = false;
 		EChoice3 = false;
+		Flee = true;
 	}
 
 	hit->SetPos(m_mouse_x, m_mouse_y);
