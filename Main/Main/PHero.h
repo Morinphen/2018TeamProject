@@ -26,6 +26,13 @@ private:
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
 
+	bool Button;//ボタン用変数
+	int BDraw;//ボタンdraw用変数
+
+	//ボタン用表示位置
+	float b_x;
+	float b_y;
+
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 	int Opdraw;//カードの切取り位置１
 	int Updraw;//カードの切取り位置２

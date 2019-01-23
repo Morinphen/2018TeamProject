@@ -21,6 +21,7 @@ public:
 	int Bat2;
 
 private:
+	void Cardname();
 	void Effect(int _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
 	void Wwindow(bool *_set,bool _delete);
 
@@ -31,8 +32,6 @@ private:
 	int Number2;//手札のカード番号
 	int Number3;//カードの順番番号
 	int Number4;//カード情報番号
-
-	bool ssss;
 
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
@@ -97,12 +96,12 @@ private:
 
 	int test;
 
-	bool L_position;
+	//bool L_position;
 
 	bool S_position;
 	bool S_position2;
 
-	bool R_position;
+	//bool R_position;
 
 	//コストを一旦保存
 	int m_kos;
