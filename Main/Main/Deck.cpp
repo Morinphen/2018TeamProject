@@ -50,12 +50,6 @@ void CObjDekc::Init()
 	srand((unsigned)time(NULL));
 
 
-	Audio::LoadAudio(0, L"Audio\\Eden.wav", BACK_MUSIC);
-	Audio::LoadAudio(3, L"Audio\\Rock_ROLA.wav", BACK_MUSIC);
-	Audio::LoadAudio(4, L"Audio\\Runners_High.wav", BACK_MUSIC);
-	Audio::LoadAudio(5, L"Audio\\Super_Groove_1.wav", BACK_MUSIC);
-
-	Audio::Start(5);
 }
 
 //ƒAƒNƒVƒ‡ƒ“
@@ -167,6 +161,7 @@ void CObjDekc::Action()
 	{
 		Turn = true;
 		m_f2 = false;
+
 	}
 	else
 	{
@@ -177,6 +172,7 @@ void CObjDekc::Action()
 	{
 		pos->PTrun = false;
 		m_f2 = false;
+
 	}
 	else
 	{
