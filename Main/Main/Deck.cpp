@@ -46,9 +46,9 @@ void CObjDekc::Init()
 	m_flag_point = false;
 	srand((unsigned)time(NULL));
 
-	
+
 	Audio::LoadAudio(0, L"Audio\\Eden.wav", BACK_MUSIC);
-	Audio::LoadAudio(3, L"Audio\\Rock_ROLA.wav",BACK_MUSIC);
+	Audio::LoadAudio(3, L"Audio\\Rock_ROLA.wav", BACK_MUSIC);
 	Audio::LoadAudio(4, L"Audio\\Runners_High.wav", BACK_MUSIC);
 	Audio::LoadAudio(5, L"Audio\\Super_Groove_1.wav", BACK_MUSIC);
 
@@ -61,20 +61,20 @@ void CObjDekc::Action()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	Card = rand() % 21+1;//同じ番号のカード呼出
+	Card = rand() % 21 + 1;//同じ番号のカード呼出
 	stop = 1;
 
 
-	
+
 
 	//別のカードが出るまでループ
-	while(stop==1){
+	while (stop == 1) {
 		stop = 0;
-		Card = rand() % 21+1;
+		Card = rand() % 21 + 1;
 
-		for(int i=0;i<Cardcount;i++)
+		for (int i = 0; i<Cardcount; i++)
 		{
-			if(Deck[i]==Card)
+			if (Deck[i] == Card)
 			{
 				stop = 1;
 			}
@@ -102,8 +102,8 @@ void CObjDekc::Action()
 		Ctype = item;
 	}
 
-	
-	if (Turn==true && Start == true || effect == true)
+
+	if (Turn == true && Start == true || effect == true)
 	{
 		if (m_f == true || effect == true)
 		{
@@ -113,10 +113,10 @@ void CObjDekc::Action()
 			Cnanber++;
 			Cardcount++;
 			//カード作成
-			CObjCard* obj_b = new CObjCard(300,m_y, Ctype);//カード作成
+			CObjCard* obj_b = new CObjCard(300, m_y, Ctype);//カード作成
 			Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
-			//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
-			//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
+												 //CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+												 //Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 			m_f = false;
 			effect = false;
 
@@ -135,25 +135,25 @@ void CObjDekc::Action()
 		m_f = true;
 	}
 
-//スタート処理
-	if(Start==false){
+	//スタート処理
+	if (Start == false) {
 		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
 		sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
 		sc->basyo[Cnanber] = Cnanber + 1;
 		Cnanber++;
 		Cardcount++;
-		CObjCard* obj_b = new CObjCard(m_x,m_y,Ctype);//カード作成
+		CObjCard* obj_b = new CObjCard(m_x, m_y, Ctype);//カード作成
 		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
-		//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
-		//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
+											 //CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+											 //Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 	}
 
-	if(Cardcount==4)
+	if (Cardcount == 4)
 	{
 		Start = true;
 	}
 
-	if(Input::GetVKey('Z')&&pos->PTrun==false&&m_f2==true)
+	if (Input::GetVKey('Z') && pos->PTrun == false && m_f2 == true)
 	{
 		Turn = true;
 		m_f2 = false;
@@ -163,7 +163,7 @@ void CObjDekc::Action()
 		m_f2 = true;
 	}
 
-	if (Input::GetVKey('E')&&m_f2==true)
+	if (Input::GetVKey('E') && m_f2 == true)
 	{
 		pos->PTrun = false;
 		m_f2 = false;
