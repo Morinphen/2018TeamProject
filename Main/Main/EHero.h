@@ -31,7 +31,7 @@ private:
 	int Updraw;//カードの切取り位置２
 	int Rotdraw;//カードの角度調整
 
-				//武器の位置を保存
+	//武器の位置を保存
 	bool LWeapon;
 	bool RWeapon;
 

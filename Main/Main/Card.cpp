@@ -92,23 +92,20 @@ void CObjCard::Init()
 	StopSm = false;
 	Summon = false;
 
+	Bat = 1;
+	Bat2 = 1;
+
 	while(Opdraw>7)
 	{
 		Opdraw -= 7;//x位置をずらす
 		Updraw++;
 	}
 
-	name[0] = '\0';
-
 	Tlong = 0;//テキストの文字列の長さを参照する変数
 
 	m_f = false;
 
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ENEMY, OBJ_CARD, 1);
-
-	Audio::LoadAudio(1, L"Audio\\召喚2.wav", EFFECT);
-	Audio::LoadAudio(2, L"Audio\\ドロー.wav", EFFECT);
-	Audio::LoadAudio(6, L"Audio\\装備.wav", EFFECT);
 
 
 	//float Volume = Audio::VolumeMaster(0.1f);
@@ -148,9 +145,9 @@ void CObjCard::Action()
 					if (pos->WPosition[i] <= 0 && Summon == false)
 					{
 
-						m_x = 703 + 90 * i;
+						m_x = 700 + 97 * i;
 
-						m_y = 466;
+						m_y = 462;
 						//モンスターのパラメータ強化
 						pos->PCard[i / 2][1] += Atack;
 						pos->PCard[i / 2][2] += Guard;
@@ -216,9 +213,9 @@ void CObjCard::Action()
 					if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 					{
 
-						m_x = 498 + 90 * (i - 2);
+						m_x = 496 + 97 * (i - 2);
 
-						m_y = 466;
+						m_y = 462;
 						//モンスターのパラメータ強化
 						pos->PCard[i / 2][1] += Atack;
 						pos->PCard[i / 2][2] += Guard;
@@ -283,9 +280,9 @@ void CObjCard::Action()
 					if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
 					{
 
-						m_x = 906 + 90 * (i - 4);
+						m_x = 904 + 97 * (i - 4);
 
-						m_y = 466;
+						m_y = 462;
 						pos->PCard[i / 2][1] += Atack;
 						pos->PCard[i / 2][2] += Guard;
 
@@ -348,6 +345,7 @@ void CObjCard::Action()
 			//モンスターが敵に攻撃したとき
 			if (mou->EChoice == true && Punch == true && pos->PTrun == true)
 			{
+
 				//FSummon=右側の味方、違う場合は左側
 				if (FSummon == true && pos->PTrun == true) {
 
@@ -368,7 +366,7 @@ void CObjCard::Action()
 
 					if (pos->ECard[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
-
+				
 				}
 
 				else if (pos->PTrun == true)
@@ -388,14 +386,18 @@ void CObjCard::Action()
 
 					if (pos->ECard[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
+					Audio::Start(8);
+				
 				}
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Audio::Start(8);
 			}
 
 			else if (mou->EChoice2 == true && Punch == true && pos->PTrun == true)
 			{
+
 				if (FSummon == true) {
 
 					if (pos->PCard[1][4] > 0)
@@ -415,8 +417,11 @@ void CObjCard::Action()
 
 					if (pos->ECard2[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
+					Audio::Start(8);
+				
+
 				}
-				else
+				else 
 				{
 					if (pos->PCard[2][4] > 0)
 					{
@@ -433,6 +438,9 @@ void CObjCard::Action()
 
 					if (pos->ECard2[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard2[1] - pos->PCard[2][2];
+					Audio::Start(8);
+				
+
 				}
 				test = 1;
 				Punch = false;
@@ -440,7 +448,7 @@ void CObjCard::Action()
 
 			else if (mou->EChoice3 == true && Punch == true && pos->PTrun == true)
 			{
-				if (FSummon == true) {
+				if (FSummon == true ) {
 
 					if (pos->PCard[1][4] > 0)
 					{
@@ -459,6 +467,7 @@ void CObjCard::Action()
 
 					if (pos->ECard3[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
+				
 				}
 				else
 				{
@@ -477,6 +486,7 @@ void CObjCard::Action()
 
 					if (pos->ECard3[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
+				
 				}
 				test = 1;
 				Punch = false;
@@ -507,8 +517,8 @@ void CObjCard::Action()
 					m_f = true;
 					if (Type == 1)
 					{
-						test = 0;
-						Punch = true;
+							test = 0;
+							Punch = true;
 					}
 					m_l = false;
 
@@ -594,15 +604,19 @@ void CObjCard::Action()
 		fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
 		int ret;
 
-		while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n] ,", name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
+		while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
 		{
 			if (Nlist == Type)//カード番号が一致したとき、処理開始
 			{
 				Tlong = strlen(text);//テキストの長さを求める
+				for (int j = 0; j < 6; j++)
+				{
+					pos->text2[j][0] = '\0';
+				}
 				for (int i = 0; i * 38 < Tlong; i++)//１９文字づつ改行していく
 				{
-					strncpy(text2[i], text + i * 38, 38);
-					text2[i][38] = '\0';
+					strncpy(pos->text2[i], text + i * 38, 38);
+					pos->text2[i][38] = '\0';
 				}
 				break;
 			}
@@ -640,7 +654,7 @@ void CObjCard::Action()
 					//左側のスペースが開いている場合
 					if (S_position == false&&point->Cost>0&&pos->PTrun==true) {
 						m_x = 543;
-						m_y = 586;
+						m_y = 589;
 						//Hitboxを更新し、フィールド内での処理ができるようにする
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
@@ -659,7 +673,7 @@ void CObjCard::Action()
 					//そうでない場合、右に召喚
 					else if(point->Cost>0&&pos->PTrun==true){
 						m_x = 951;
-						m_y = 586;
+						m_y = 589;
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
 						pos->PCard[2][0] = Hp;
@@ -820,6 +834,7 @@ void CObjCard::Action()
 
 			Hits::DeleteHitBox(this);
 			this->SetStatus(false);
+			Audio::Start(7);
 		}
 	}
 
@@ -967,6 +982,7 @@ void CObjCard::Draw()
 	
 	if (CardHitCheck == true)
 	{
+		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 		//複数カードに触れているとテキストが２重になるため、仮置きの処置
 		//--------------------
 		/*dst.m_top = 491.0f;
@@ -978,17 +994,17 @@ void CObjCard::Draw()
 		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 		dst.m_top = 12.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
 
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
-		mbstowcs(atr, name, 256);//マルチバイトをワイドに変換
+		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
 		Font::StrDraw(atr, 0, 600, 20, d);//テキストを表示
 
 		for (int i = 0; i * 38 < Tlong; i++) {
-			mbstowcs(aatr[i], text2[i], 64);
+			mbstowcs(aatr[i], pos->text2[i], 64);
 			Font::StrDraw(aatr[i], 0, 650 + i * 20, 20, d);
 		}
 

@@ -22,6 +22,10 @@ class CObjMap : public CObj
 
 		bool PTrun;
 
+		//カードテキスト表示用文字列
+		char name[256];
+		char text2[5][64];
+
 		bool Wtouch;//武器がクリックされたとき、オンになる
 
 		bool WSummon;//武器が召喚されたとき、オンになる

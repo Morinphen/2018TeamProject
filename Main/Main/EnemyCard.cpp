@@ -124,7 +124,7 @@ void CObjEnemyCard::Action()
 		//‰¼’u‚«‚Ì“G¢Š«@ŽèŽD‚Ì‡”Ô‚ª‚PC‚QC‚R‚ÌƒJ[ƒh‚ð¢Š«
 		if (Number == 1) {
 			m_x = 543;
-			m_y = 195;
+			m_y = 191;
 			//HitBox‚Ì“ü‚ê‘Ö‚¦@‚±‚ê‚ÅUŒ‚‘ÎÛ‚É‘I‘ð‚Å‚«‚é‚æ‚¤‚É
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
@@ -143,7 +143,7 @@ void CObjEnemyCard::Action()
 		}*/
 		if (Number == 3) {
 			m_x = 951;
-			m_y = 195;
+			m_y = 191;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 			pos->ECard3[0] = 5; pos->ECard3[1] = 4; pos->ECard3[2] = 2;
@@ -183,6 +183,7 @@ void CObjEnemyCard::Draw()
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
+
 	if (Number < 4 && Number !=2) {
 		src.m_top = 0.0f + (Number + 1) * 64;
 		src.m_left = 0.0f;
@@ -209,10 +210,10 @@ void CObjEnemyCard::Draw()
 
 	if (CardHitCheck == true)
 	{
-		dst.m_top = 13.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
+		dst.m_top = 12.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
 	}

@@ -14,7 +14,11 @@ public:
 	void Draw();
 
 	bool Punch;//モンスターの攻撃制御
+	bool Punch2;
 	bool Set;//武器の装備制御
+
+	int Bat;
+	int Bat2;
 
 private:
 	void Effect(int _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
@@ -46,10 +50,10 @@ private:
 	//カードテキストの表示
 	char *Name;
 	char *Text;
-	char name[256];
 	char text[256];
-	char text2[5][64];
 	int Tlong;
+	//char name[256];
+	//char text2[5][64];
 
 	//ダミーデータ
 	int aaaa;
