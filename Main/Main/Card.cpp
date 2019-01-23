@@ -529,6 +529,9 @@ void CObjCard::Action()
 	}
 
 	//ボタン出現時
+	if (test == 0)
+		Button = false;
+
 	if (Button == true)
 	{
 		SetPrio(12);
@@ -545,8 +548,8 @@ void CObjCard::Action()
 					m_f = true;
 					if (Type == 1)
 					{
-							test = 0;
-							Punch = true;
+						test = 0;
+						Punch = true;
 					}
 					m_l = false;
 
@@ -626,30 +629,8 @@ void CObjCard::Action()
 		Rotdraw = 3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 
-		FILE *fp;
-		char fname[] = "CardList.csv";
-		fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
-		int ret;
-
-		while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
-		{
-			if (Nlist == Type)//カード番号が一致したとき、処理開始
-			{
-				Tlong = strlen(text);//テキストの長さを求める
-				for (int j = 0; j < 6; j++)
-				{
-					pos->text2[j][0] = '\0';
-				}
-				for (int i = 0; i * 38 < Tlong; i++)//１９文字づつ改行していく
-				{
-					strncpy(pos->text2[i], text + i * 38, 38);
-					pos->text2[i][38] = '\0';
-				}
-				break;
-			}
-		}
-
-		fclose(fp); // ファイルを閉じる
+		//カードの名前とテキストを出現させる
+		Cardname();
 
 		if (m_l == true)
 		{
@@ -742,6 +723,9 @@ void CObjCard::Action()
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type==1
 		&& pos->WiSummon == false)
 	{
+		//カードの名前とテキストを出現させる
+		Cardname();
+
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 
 		if (Button == false) {
@@ -764,6 +748,9 @@ void CObjCard::Action()
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2
 		&& pos->WiSummon == false)
 	{
+		//カードの名前とテキストを出現させる
+		Cardname();
+
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 
 		if (Button == false) {
@@ -1093,4 +1080,36 @@ void CObjCard::Wwindow(bool *_set,bool _delete)
 			Wcount = 0;
 		}
 	}
+}
+
+//Cardname関数
+//Cardname()を入力すれば、カードに名前とテキストが表示されるようになる
+void CObjCard::Cardname()
+{
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	FILE *fp;
+	char fname[] = "CardList.csv";
+	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
+	int ret;
+
+	while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
+	{
+		if (Nlist == Type)//カード番号が一致したとき、処理開始
+		{
+			Tlong = strlen(text);//テキストの長さを求める
+			for (int j = 0; j < 6; j++)
+			{
+				pos->text2[j][0] = '\0';
+			}
+			for (int i = 0; i * 38 < Tlong; i++)//１９文字づつ改行していく
+			{
+				strncpy(pos->text2[i], text + i * 38, 38);
+				pos->text2[i][38] = '\0';
+			}
+			break;
+		}
+	}
+
+	fclose(fp); // ファイルを閉じる
 }
