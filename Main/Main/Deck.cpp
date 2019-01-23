@@ -118,8 +118,6 @@ void CObjDekc::Action()
 			if (Turn == true) {
 				//ドローしたらポイント増加
 				m_point++;
-				car->Bat = 1;
-				car->Bat2 = 1;
 			}
 			Turn = false;
 			pos->PTrun = true;
@@ -155,6 +153,7 @@ void CObjDekc::Action()
 	{
 		Turn = true;
 		m_f2 = false;
+
 	}
 	else
 	{
@@ -165,6 +164,7 @@ void CObjDekc::Action()
 	{
 		pos->PTrun = false;
 		m_f2 = false;
+
 	}
 	else
 	{

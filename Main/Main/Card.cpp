@@ -317,7 +317,7 @@ void CObjCard::Action()
 			{
 
 				//FSummon=右側の味方、違う場合は左側
-				if (FSummon == true && pos->PTrun == true) {
+				if (FSummon == true && pos->PTrun == true&&Bat==1) {
 
 					if (pos->PCard[1][4] > 0)
 					{
@@ -336,10 +336,11 @@ void CObjCard::Action()
 
 					if (pos->ECard[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
-				
+					Bat = 0;
+					Audio::Start(8);
 				}
 
-				else if (pos->PTrun == true)
+				else if (pos->PTrun == true&&Bat2==1)
 				{
 					if (pos->PCard[2][4] > 0)
 					{
@@ -357,18 +358,17 @@ void CObjCard::Action()
 					if (pos->ECard[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
 					Audio::Start(8);
-				
+					Bat2 = 0;
 				}
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
-				Audio::Start(8);
 			}
 
 			else if (mou->EChoice2 == true && Punch == true && pos->PTrun == true)
 			{
 
-				if (FSummon == true) {
+				if (FSummon == true&&Bat==1) {
 
 					if (pos->PCard[1][4] > 0)
 					{
@@ -388,10 +388,10 @@ void CObjCard::Action()
 					if (pos->ECard2[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
 					Audio::Start(8);
-				
+					Bat = 0;
 
 				}
-				else 
+				else if(Bat2==1)
 				{
 					if (pos->PCard[2][4] > 0)
 					{
@@ -409,7 +409,7 @@ void CObjCard::Action()
 					if (pos->ECard2[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard2[1] - pos->PCard[2][2];
 					Audio::Start(8);
-				
+					Bat2 = 0;
 
 				}
 				test = 1;
@@ -418,7 +418,7 @@ void CObjCard::Action()
 
 			else if (mou->EChoice3 == true && Punch == true && pos->PTrun == true)
 			{
-				if (FSummon == true ) {
+				if (FSummon == true&&Bat==1 ) {
 
 					if (pos->PCard[1][4] > 0)
 					{
@@ -437,9 +437,10 @@ void CObjCard::Action()
 
 					if (pos->ECard3[1] - pos->PCard[1][2] > 0)
 						pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
-				
+					Bat = 0;
+					Audio::Start(8);
 				}
-				else
+				else if(Bat2==1)
 				{
 					if (pos->PCard[2][4] > 0)
 					{
@@ -456,7 +457,8 @@ void CObjCard::Action()
 
 					if (pos->ECard3[1] - pos->PCard[2][2] > 0)
 						pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
-				
+					Bat2 = 0;
+					Audio::Start(8);
 				}
 				test = 1;
 				Punch = false;
@@ -828,6 +830,13 @@ void CObjCard::Action()
 	}
 
 	hit->SetPos(m_x, m_y);
+
+	if (sc->Turn == true)
+	{
+		Bat = 1;
+		Bat2 = 1;
+	}
+
 }
 
 //ドロー
