@@ -185,6 +185,7 @@ void CObjDekc::Draw()
 {
 	//カードの大きさは横３、縦４にする
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float d[4] = { 0.0f,0.0f,0.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 	src.m_top = 0.0f;
@@ -200,8 +201,12 @@ void CObjDekc::Draw()
 	wchar_t str[128];
 
 	swprintf_s(str, L"%d", Cost);
-
 	Font::StrDraw(str, 10, 10, 20, c);
-
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+	//"降参"の表示
+	/*swprintf_s(str,L"降 参");
+	Font::StrDraw(str, 40, 825, 40, d);*/
+	swprintf_s(str, L"リタイア");
+	Font::StrDraw(str, 28, 827, 30, d);
 }
