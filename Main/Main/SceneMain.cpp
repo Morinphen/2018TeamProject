@@ -66,6 +66,11 @@ void CSceneMain::InitScene()
 	CObjBackGround* obj_background = new CObjBackGround();
 	Objs::InsertObj(obj_background, OBJ_BACKGROUND, 1);
 
+	CObjBackGround2* obj_background2 = new CObjBackGround2();
+	Objs::InsertObj(obj_background2, OBJ_BACKGROUND2, 1);
+
+	CObjBackGround3* obj_background3 = new CObjBackGround3();
+	Objs::InsertObj(obj_background3, OBJ_BACKGROUND3, 0);
 
 	//SE・BGM
 	Audio::LoadAudio(0, L"Audio\\Eden.wav", BACK_MUSIC);
@@ -79,15 +84,6 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(8, L"Audio\\ダメージ.wav", EFFECT);
 
 	Audio::Start(5);
-
-
-	Objs::InsertObj(obj_background, OBJ_BACKGROUND, 2);
-
-	CObjBackGround2* obj_background2 = new CObjBackGround2();
-	Objs::InsertObj(obj_background2, OBJ_BACKGROUND2, 1);
-
-	CObjBackGround3* obj_background3 = new CObjBackGround3();
-	Objs::InsertObj(obj_background3, OBJ_BACKGROUND3, 0);
 }
 
 //ゲームメイン実行中メソッド

@@ -29,6 +29,12 @@ void CObjPHero::Init()
 	Atack = 1;
 	Guard = 0;
 
+	//ボタン用変数の初期化
+	BDraw = 1;
+	Button = false;
+	b_x = 0;
+	b_y = 0;
+
 	LWeapon = false;
 	RWeapon = false;
 
@@ -115,12 +121,49 @@ void CObjPHero::Action()
 
 		}
 
-		else
+		else if (mou->Flee==true)
 		{
 			test = 1;
 			Punch = false;
 		}
 
+	}
+
+	if (test == 0)
+		Button = false;
+
+	if (Button == true)
+	{
+		SetPrio(12);
+		if (m_f == false) {
+			if (m_l == true)
+			{
+				//ボタンがクリックされたとき
+				if (mou->m_mouse_x > b_x && mou->m_mouse_x < b_x + 64
+					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48)
+				{
+
+					Button = false;
+					m_f = true;
+
+					test = 0;
+					Punch = true;
+
+					m_l = false;
+
+				}
+
+				else
+				{
+					Button = false;
+				}
+
+			}
+		}
+		else
+		{
+			m_f = false;
+		}
 	}
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && pos->Wtouch == false)
@@ -130,8 +173,7 @@ void CObjPHero::Action()
 		SetPrio(11);
 		if (m_l == true && pos->WSummon == false)
 		{
-			test = 0;
-			Punch = true;
+			Button = true;
 		}
 	}
 
@@ -169,6 +211,25 @@ void CObjPHero::Draw()
 	dst.m_bottom = 144.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+
+	//ボタンの表示
+	if (Button == true)
+	{
+		b_x = m_x - 20.0;
+		b_y = m_y + 10.0;
+
+		src.m_top = 0.0f;
+		src.m_left = 0.0f + (BDraw * 64);
+		src.m_right = 64.0f + (BDraw * 64);
+		src.m_bottom = 64.0f;
+
+		dst.m_top = 0.0f + b_y;
+		dst.m_left = 0.0f + b_x;
+		dst.m_right = 64.0f + b_x;
+		dst.m_bottom = 64.0f + b_y;
+
+		Draw::Draw(3, &src, &dst, c, Rotdraw);
+	}
 
 	//画面左上に拡大画像を表示させる
 
