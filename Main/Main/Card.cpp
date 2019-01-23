@@ -1113,10 +1113,10 @@ void CObjCard::Cardname()
 			{
 				pos->text2[j][0] = '\0';
 			}
-			for (int i = 0; i * 38 < Tlong; i++)//‚P‚X•¶Žš‚Ã‚Â‰üs‚µ‚Ä‚¢‚­
+			for (int i = 0; i * 34 < Tlong; i++)//‚P‚X•¶Žš‚Ã‚Â‰üs‚µ‚Ä‚¢‚­
 			{
-				strncpy(pos->text2[i], text + i * 38, 38);
-				pos->text2[i][38] = '\0';
+				strncpy(pos->text2[i], text + i * 34, 34);
+				pos->text2[i][34] = '\0';
 			}
 			break;
 		}
