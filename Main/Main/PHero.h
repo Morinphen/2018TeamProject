@@ -33,6 +33,8 @@ private:
 	float b_x;
 	float b_y;
 
+	int Bat3;
+
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 	int Opdraw;//カードの切取り位置１
 	int Updraw;//カードの切取り位置２

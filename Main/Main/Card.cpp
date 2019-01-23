@@ -348,7 +348,6 @@ void CObjCard::Action()
 			if (mou->EChoice == true && Punch == true && pos->PTrun == true)
 			{
 
-
 				//FSummon=‰E‘¤‚Ì–¡•ûAˆá‚¤ê‡‚Í¶‘¤
 				if (FSummon == true && pos->PTrun == true&&Bat==1) {
 

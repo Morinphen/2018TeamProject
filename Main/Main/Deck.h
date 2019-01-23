@@ -34,6 +34,7 @@ public:
 private:
 	int x, y;
 	int m_x, m_y;
+	bool m_l; //マウスのクリック判定
 	int Ctype;//カードの種類
 
 	int Cardcount;//引いたカードの合計
