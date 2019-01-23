@@ -12,7 +12,7 @@
 CObjEHero::CObjEHero()
 {
 	m_x = 738;
-	m_y = 171;
+	m_y = 166;
 }
 
 //イニシャライズ
@@ -55,6 +55,15 @@ void CObjEHero::Action()
 		pos->ECard[1] = Atack;
 		pos->ECard[2] = Guard;
 		pos->ECard[3] = 0;
+	}
+
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
+	}
+	else
+	{
+		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 	}
 
 	Hp = pos->ECard[0];

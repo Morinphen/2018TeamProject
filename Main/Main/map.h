@@ -15,12 +15,22 @@ class CObjMap : public CObj
 		void Action();
 		void Draw();
 
+		//場にモンスターが出ているか判断する変数
+		bool S_position, S_position2;
+
 		bool L_position;
-		bool S_position,S_position2;
 		bool R_position;
+
 		bool m_f;
 
 		bool PTrun;
+
+		//ウィンドウが出ているか判断する変数
+		bool WiSummon;
+
+		//カードテキスト表示用文字列
+		char name[256];
+		char text2[5][64];
 
 		bool Wtouch;//武器がクリックされたとき、オンになる
 

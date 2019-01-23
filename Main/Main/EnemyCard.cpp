@@ -124,7 +124,7 @@ void CObjEnemyCard::Action()
 		//‰¼’u‚«‚Ì“G¢Š«@èD‚Ì‡”Ô‚ª‚PC‚QC‚R‚ÌƒJ[ƒh‚ğ¢Š«
 		if (Number == 1) {
 			m_x = 543;
-			m_y = 195;
+			m_y = 191;
 			//HitBox‚Ì“ü‚ê‘Ö‚¦@‚±‚ê‚ÅUŒ‚‘ÎÛ‚É‘I‘ğ‚Å‚«‚é‚æ‚¤‚É
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
@@ -143,7 +143,7 @@ void CObjEnemyCard::Action()
 		}*/
 		if (Number == 3) {
 			m_x = 951;
-			m_y = 195;
+			m_y = 191;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 			pos->ECard3[0] = 5; pos->ECard3[1] = 4; pos->ECard3[2] = 2;

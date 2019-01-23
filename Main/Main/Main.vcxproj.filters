@@ -103,6 +103,9 @@
     <ClCompile Include="PList.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -206,6 +209,9 @@
     </ClInclude>
     <ClInclude Include="PList.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
