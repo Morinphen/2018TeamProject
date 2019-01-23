@@ -49,13 +49,6 @@ void CObjDekc::Init()
 	m_flag_point = false;
 	srand((unsigned)time(NULL));
 
-
-	Audio::LoadAudio(0, L"Audio\\Eden.wav", BACK_MUSIC);
-	Audio::LoadAudio(3, L"Audio\\Rock_ROLA.wav", BACK_MUSIC);
-	Audio::LoadAudio(4, L"Audio\\Runners_High.wav", BACK_MUSIC);
-	Audio::LoadAudio(5, L"Audio\\Super_Groove_1.wav", BACK_MUSIC);
-
-	Audio::Start(5);
 }
 
 //アクション
@@ -65,10 +58,11 @@ void CObjDekc::Action()
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
+	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	Card = rand() % 21+1;//同じ番号のカード呼出
 	stop = 1;
 
-
+	m_l = Input::GetMouButtonL();
 
 
 	//別のカードが出るまでループ
@@ -163,7 +157,9 @@ void CObjDekc::Action()
 		Start = true;
 	}
 
-	if (Input::GetVKey('Z') && pos->PTrun == false && m_f2 == true)
+	if (mou->m_mouse_x>1083.0f&&mou->m_mouse_x<1175.0f 
+		&&mou->m_mouse_y<860.0f&&mou->m_mouse_y<860.0f&&
+		pos->PTrun == false && m_f2 == true&&m_l==true)
 	{
 		Turn = true;
 		m_f2 = false;
