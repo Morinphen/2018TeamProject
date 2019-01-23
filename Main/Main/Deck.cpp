@@ -44,7 +44,7 @@ void CObjDekc::Init()
 
 	//初期ポイント
 	//m_point = 1;
-	m_point = 10;
+	m_point = 100;
 	Cost = 0;
 	m_flag_point = false;
 	srand((unsigned)time(NULL));
@@ -126,12 +126,12 @@ void CObjDekc::Action()
 
 			if (Turn == true) {
 				//ドローしたらポイント増加
-				m_point++;
+				/*m_point++;
 				car->Bat = 1;
-				car->Bat2 = 1;
+				car->Bat2 = 1;*/
 				
-				//m_point = m_point + i * 10;
-				//i++;
+				m_point = m_point + i * 100;
+				i++;
 			}
 			Turn = false;
 			pos->PTrun = true;
@@ -182,7 +182,6 @@ void CObjDekc::Action()
 	{
 		m_f2 = true;
 	}
-
 }
 
 //ドロー
@@ -209,5 +208,4 @@ void CObjDekc::Draw()
 	Font::StrDraw(str, 10, 10, 20, c);
 
 	Draw::Draw(0, &src, &dst, c, 0.0f);
-
 }

@@ -595,7 +595,7 @@ void CObjCard::Action()
 	{
 		ssss = true;
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
-		Rotdraw = 3;//カードを３℃回転
+		Rotdraw = -3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 
 		FILE *fp;
@@ -612,10 +612,10 @@ void CObjCard::Action()
 				{
 					pos->text2[j][0] = '\0';
 				}
-				for (int i = 0; i * 38 < Tlong; i++)//１９文字づつ改行していく
+				for (int i = 0; i * 34 < Tlong; i++)//１９文字づつ改行していく
 				{
-					strncpy(pos->text2[i], text + i * 38, 38);
-					pos->text2[i][38] = '\0';
+					strncpy(pos->text2[i], text + i * 34, 34);
+					pos->text2[i][34] = '\0';
 				}
 				break;
 			}
@@ -884,6 +884,7 @@ void CObjCard::Draw()
 	float c[4] = { 1.0f,test,1.0f,1.0f };
 	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float e[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float f[4] = { 1.0f,1.0f,0.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 
@@ -999,11 +1000,11 @@ void CObjCard::Draw()
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 0, 600, 20, d);//テキストを表示
+		Font::StrDraw(atr, 20, 595, 20, f);//テキストを表示
 
-		for (int i = 0; i * 38 < Tlong; i++) {
+		for (int i = 0; i * 34 < Tlong; i++) {
 			mbstowcs(aatr[i], pos->text2[i], 64);
-			Font::StrDraw(aatr[i], 0, 650 + i * 20, 20, d);
+			Font::StrDraw(aatr[i], 20, 660 + i * 20, 20, f);
 		}
 
 		Draw::Draw(0, &src, &dst, c, 0);
