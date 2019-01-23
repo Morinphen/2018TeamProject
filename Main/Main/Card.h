@@ -32,8 +32,6 @@ private:
 	int Number3;//カードの順番番号
 	int Number4;//カード情報番号
 
-	bool ssss;
-
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
@@ -97,12 +95,12 @@ private:
 
 	int test;
 
-	bool L_position;
+	//bool L_position;
 
 	bool S_position;
 	bool S_position2;
 
-	bool R_position;
+	//bool R_position;
 
 	//コストを一旦保存
 	int m_kos;
