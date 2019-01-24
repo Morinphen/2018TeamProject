@@ -34,6 +34,8 @@ void CObjwindow::Init()
 //ƒAƒNƒVƒ‡ƒ“
 void CObjwindow::Action()
 {
+	SetPrio(20);
+
 	if (Wdelete == true)
 	{
 		Hits::DeleteHitBox(this);

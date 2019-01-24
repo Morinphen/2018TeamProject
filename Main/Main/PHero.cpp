@@ -185,7 +185,7 @@ void CObjPHero::Action()
 		//CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
-		if (m_l == true && pos->WSummon == false)
+		if (m_l == true && pos->WSummon == false && test!=0)
 		{
 			Button = true;
 		}
@@ -226,6 +226,18 @@ void CObjPHero::Draw()
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
+	//画面左上に拡大画像を表示させる
+
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		dst.m_top = 12.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+
 	//ボタンの表示
 	if (Button == true)
 	{
@@ -245,32 +257,6 @@ void CObjPHero::Draw()
 		Draw::Draw(3, &src, &dst, c, Rotdraw);
 	}
 
-	//画面左上に拡大画像を表示させる
-
-	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
-	{
-		dst.m_top = 12.0f;
-		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
-		dst.m_bottom = 371.0f;
-
-		Draw::Draw(0, &src, &dst, c, 0);
-	}
-	/*else
-	{
-
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
-
-		dst.m_top = 12.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
-
-		Draw::Draw(0, &src, &dst, c, 0);
-	}*/
 
 
 	wchar_t str[128];
