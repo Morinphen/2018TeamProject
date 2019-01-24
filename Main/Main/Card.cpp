@@ -166,7 +166,7 @@ void CObjCard::Action()
 						}
 
 						//効果関数呼び出し
-						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 						Wwindow(&Wset, 1);
 
 						//色を元に戻す
@@ -191,7 +191,7 @@ void CObjCard::Action()
 			if (Type == 4)
 			{
 				//効果関数呼び出し
-				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,1);
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,1);
 				Wwindow(&Wset, 1);
 				//召喚した扱いにする
 				Summon = true;
@@ -234,7 +234,7 @@ void CObjCard::Action()
 						}
 
 						//効果関数呼び出し
-						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 						Wwindow(&Wset, 1);
 
 						//色を元に戻す
@@ -259,7 +259,7 @@ void CObjCard::Action()
 			if (Type == 4)
 			{
 				//効果関数呼び出し
-				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe, 2);
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 2);
 				Wwindow(&Wset, 1);
 				//召喚した扱いにする
 				Summon = true;
@@ -300,7 +300,7 @@ void CObjCard::Action()
 						}
 
 						//効果関数呼び出し
-						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 						Wwindow(&Wset, 1);
 
 						test = 1;
@@ -321,7 +321,7 @@ void CObjCard::Action()
 			if (Type == 4)
 			{
 				//効果関数呼び出し
-				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe, 3);
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 3);
 				Wwindow(&Wset, 1);
 				//召喚した扱いにする
 				Summon = true;
@@ -545,7 +545,7 @@ void CObjCard::Action()
 					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48)
 				{
 
-					Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+					Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 					Button = false;
 					m_f = true;
 					if (Type == 1)
@@ -641,6 +641,7 @@ void CObjCard::Action()
 				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
 				PList->Action(&Name, Type, &Number, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				Cadata = NTcard;
 
 				//モンスターの場合
 				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
@@ -738,7 +739,7 @@ void CObjCard::Action()
 
 		if (m_l == true && pos->WSummon == false)
 		{
-			Button = true;
+			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
 			BDraw = 1;
 			b_x = mou->m_mouse_x;
@@ -761,9 +762,9 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true)
+		if (m_l == true && Button==false)
 		{
-			Button = true;
+			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
 			BDraw = 0;
 			b_x = mou->m_mouse_x;
@@ -914,6 +915,31 @@ void CObjCard::Draw()
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
+	//画面左上に拡大画像を表示させる
+
+	if (CardHitCheck == true)
+	{
+		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+		dst.m_top = 12.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
+
+		wchar_t atr[256];
+		wchar_t aatr[5][64];
+		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
+		Font::StrDraw(atr, 40, 595, 20, f);//テキストを表示
+
+		for (int i = 0; i * 30 < Tlong; i++) {
+			mbstowcs(aatr[i], pos->text2[i], 64);
+			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, f);
+		}
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+
 	//ボタンの表示
 	if (Button == true)
 	{
@@ -990,31 +1016,6 @@ void CObjCard::Draw()
 			Draw::Draw(0, &src, &dst, e, 0.0f);
 		}
 	}
-	
-	//画面左上に拡大画像を表示させる
-	
-	if (CardHitCheck == true)
-	{
-		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-		dst.m_top = 12.0f;
-		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
-		dst.m_bottom = 371.0f;
-
-		wchar_t atr[256];
-		wchar_t aatr[5][64];
-		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 40, 595, 20, f);//テキストを表示
-
-		for (int i = 0; i * 30 < Tlong; i++) {
-			mbstowcs(aatr[i], pos->text2[i], 64);
-			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, f);
-		}
-
-		Draw::Draw(0, &src, &dst, c, 0);
-	}
 
 	if (Summon == true) {
 		wchar_t str[128];
@@ -1027,12 +1028,13 @@ void CObjCard::Draw()
 //カードナンバー、召喚時効果、起動効果、誘発効果の変数をぶち込んで処理する
 //Positionは召喚されているカードの場所により、入れる数値が変わる
 //基本的に召喚されたモンスターなどに触れない場合は０を入れる
-void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu, int Position)
+void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Position)
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	if (_Cnanber == 2)
+
+	if (_Cnanber == 21)
 	{
 		//伝説の剣装備時、カードを１枚ドロー
 		if (*When == false)
@@ -1044,7 +1046,7 @@ void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu, int Posi
 		}
 
 		//伝説の剣を装備している場合、タップしたらカードを１枚ドロー
-		else if (*Play == false)
+		else if (*Play == false && Button == true)
 		{
 			*Play = true;
 			sc->effect = true;
@@ -1052,9 +1054,17 @@ void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu, int Posi
 			han->Action();
 		}
 	}
-	if (_Cnanber == 4)
+
+	else if (_Cnanber == 41)
 	{
 		pos->PCard[Position - 1][0]+=2;
+	}
+
+	if (Button == false && PlayEfe == false) {
+		if (_Cnanber != 31)
+		{
+			Button = true;
+		}
 	}
 }
 
