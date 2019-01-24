@@ -43,7 +43,6 @@ private:
 	int Deck[40];//
 
 	
-
 	bool m_f;
 	bool m_f2;
 	bool Start;
