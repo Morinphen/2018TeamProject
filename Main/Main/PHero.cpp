@@ -171,7 +171,7 @@ void CObjPHero::Action()
 		//CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
-		if (m_l == true && pos->WSummon == false)
+		if (m_l == true && pos->WSummon == false && test!=0)
 		{
 			Button = true;
 		}
