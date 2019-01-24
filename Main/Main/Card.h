@@ -3,7 +3,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト　デッキ
+//オブジェクト　カード
 class CObjCard :public CObj
 {
 public:

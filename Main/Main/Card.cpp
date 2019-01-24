@@ -775,8 +775,13 @@ void CObjCard::Action()
 	{
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 		Rotdraw = 0;
-		if(Button==false)
+		if(Button==false||Wset==false)
 			SetPrio(10);
+	}
+
+	if (Wset == true)
+	{
+		SetPrio(21);
 	}
 
 
