@@ -92,6 +92,19 @@ void CObjPHero::Action()
 	{
 		if (mou->EChoice == true && Punch == true&&Bat3==1)
 		{
+
+			//•Ší‚ğŠ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][4] > 0)
+			{
+				pos->PCard[0][4] -= 1;
+			}
+
+			//‚Q‚Â–Ú‚Ì•Ší‚ğŠ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][6] > 0)
+			{
+				pos->PCard[0][6] -= 1;
+			}
+
 			if (pos->PCard[0][1] - pos->ECard[2] > 0)
 				pos->ECard[0] -= pos->PCard[0][1] - pos->ECard[2];//“G‚ÌHP‚ğ©g‚ÌUŒ‚—Í-“G‚Ìç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ğ—^‚¦‚é
 
@@ -107,6 +120,18 @@ void CObjPHero::Action()
 
 		else if (mou->EChoice2 == true && Punch == true && Bat3 == 1)
 		{
+			//•Ší‚ğŠ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][4] > 0)
+			{
+				pos->PCard[0][4] -= 1;
+			}
+
+			//‚Q‚Â–Ú‚Ì•Ší‚ğŠ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][6] > 0)
+			{
+				pos->PCard[0][6] -= 1;
+			}
+
 			if (pos->PCard[0][1] - pos->ECard2[2]>0)
 				pos->ECard2[0] -= pos->PCard[0][1] - pos->ECard2[2];
 
@@ -121,6 +146,17 @@ void CObjPHero::Action()
 
 		else if (mou->EChoice3 == true && Punch == true && Bat3 == 1)
 		{
+			//•Ší‚ğŠ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][4] > 0)
+			{
+				pos->PCard[0][4] -= 1;
+			}
+
+			//‚Q‚Â–Ú‚Ì•Ší‚ğŠ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][6] > 0)
+			{
+				pos->PCard[0][6] -= 1;
+			}
 
 			if (pos->PCard[0][1] - pos->ECard3[2]>0)
 				pos->ECard3[0] -= pos->PCard[0][1] - pos->ECard3[2];

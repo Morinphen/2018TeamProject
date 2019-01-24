@@ -926,7 +926,6 @@ void CObjCard::Draw()
 	if (CardHitCheck == true)
 	{
 		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
@@ -936,14 +935,14 @@ void CObjCard::Draw()
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 40, 595, 20, f);//テキストを表示
+		Font::StrDraw(atr, 40, 595, 20, d);//テキストを表示
 
 		for (int i = 0; i * 30 < Tlong; i++) {
 			mbstowcs(aatr[i], pos->text2[i], 64);
-			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, f);
+			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
 		}
 
-		Draw::Draw(0, &src, &dst, c, 0);
+		Draw::Draw(0, &src, &dst, d, 0);
 	}
 
 	//ボタンの表示
