@@ -84,6 +84,7 @@ void CObjCard::Init()
 	test = 1;
 	//攻撃処理、装備処理初期化
 	Punch = false;
+	Pusave = false;
 	Set = false;
 
 	//召喚制御初期化
@@ -127,6 +128,7 @@ void CObjCard::Action()
 	if (sc->Turn == true)
 	{
 		PlayEfe = false;
+		Pusave = false;
 	}
 
 	//左クリックされたとき
@@ -401,6 +403,7 @@ void CObjCard::Action()
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Pusave = true;
 			}
 
 			//モンスターが糞梟に攻撃したとき
@@ -461,6 +464,7 @@ void CObjCard::Action()
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Pusave = true;
 			}
 
 			//モンスターがカム男に攻撃したとき
@@ -519,6 +523,7 @@ void CObjCard::Action()
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Pusave = true;
 			}
 
 			else if (Type == 1)
@@ -1078,7 +1083,7 @@ void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Po
 		pos->PCard[Position - 1][0]+=2;
 	}
 
-	if (Button == false && PlayEfe == false) {
+	if (Button == false && PlayEfe == false && Pusave == false) {
 		if (_Cnanber != 31)
 		{
 			Button = true;

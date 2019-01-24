@@ -13,8 +13,8 @@ public:
 	void Action();
 	void Draw();
 
-	bool Punch;//モンスターの攻撃制御
-	bool Punch2;
+	bool Punch;//モンスターの攻撃
+	bool Pusave;//モンスターの攻撃制御
 	bool Set;//武器の装備制御
 
 	int Bat;

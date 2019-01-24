@@ -28,6 +28,7 @@ void CObjPHero::Init()
 	Hp = 20;
 	Atack = 1;
 	Guard = 0;
+	Pusave = false;
 
 	//ボタン用変数の初期化
 	BDraw = 1;
@@ -58,6 +59,11 @@ void CObjPHero::Action()
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+
+	if (sc->Turn == true)
+	{
+		Pusave = false;
+	}
 
 	if (start == false)
 	{
@@ -114,6 +120,7 @@ void CObjPHero::Action()
 			//選択情報を元に戻す
 			test = 1;
 			Punch = false;
+			Pusave = true;
 			Audio::Start(8);
 			Bat3 = 0;
 		}
@@ -139,6 +146,7 @@ void CObjPHero::Action()
 				pos->PCard[0][0] -= pos->ECard2[1] - pos->PCard[0][2];
 			test = 1;
 			Punch = false;
+			Pusave = true;
 			Audio::Start(8);
 			Bat3 = 0;
 
@@ -166,6 +174,7 @@ void CObjPHero::Action()
 
 			test = 1;
 			Punch = false;
+			Pusave = true;
 			Audio::Start(8);
 			Bat3 = 0;
 
@@ -221,7 +230,7 @@ void CObjPHero::Action()
 		//CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
-		if (m_l == true && pos->WSummon == false && test!=0)
+		if (m_l == true && pos->WSummon == false && test!=0 && Pusave==false)
 		{
 			Button = true;
 		}
