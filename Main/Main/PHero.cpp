@@ -68,10 +68,24 @@ void CObjPHero::Action()
 		pos->PCard[0][3] = 0;
 	}
 
-	Hp = pos->PCard[0][0];
-	if (Hp <= 0 || Input::GetVKey('Q'))
+	Hp=pos->PCard[0][0];
+	Atack=pos->PCard[0][1];
+	Guard=pos->PCard[0][2];
+
+	//”s–kðŒEƒŠƒ^ƒCƒA
+	if (m_l == true)
 	{
-		Scene::SetScene(new CSceneGameover());
+		if (mou->m_mouse_x > 19 && mou->m_mouse_x < 162
+			&& mou->m_mouse_y > 809 && mou->m_mouse_y < 880
+			&& pos->PTrun == true || Hp <= 0)
+		{
+			Scene::SetScene(new CSceneGameover());
+			//m_l = false;
+		}
+		/*else
+		{
+			m_l = true;
+		}*/
 	}
 
 	if (m_l == true)

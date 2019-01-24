@@ -59,7 +59,7 @@ void CObjDekc::Action()
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
-	Card = rand() % 21+1;//同じ番号のカード呼出
+	Card = rand() % 21 + 1;//同じ番号のカード呼出
 	stop = 1;
 
 	m_l = Input::GetMouButtonL();
@@ -70,7 +70,7 @@ void CObjDekc::Action()
 		stop = 0;
 		Card = rand() % 21 + 1;
 
-		for (int i = 0; i<Cardcount; i++)
+		for (int i = 0; i < Cardcount; i++)
 		{
 			if (Deck[i] == Card)
 			{
@@ -123,7 +123,7 @@ void CObjDekc::Action()
 				/*m_point++;
 				car->Bat = 1;
 				car->Bat2 = 1;*/
-				
+
 				m_point = m_point + i * 100;
 				i++;
 			}
@@ -157,9 +157,10 @@ void CObjDekc::Action()
 		Start = true;
 	}
 
-	if (mou->m_mouse_x>1083.0f&&mou->m_mouse_x<1175.0f 
-		&&mou->m_mouse_y<860.0f&&mou->m_mouse_y<860.0f&&
-		pos->PTrun == false && m_f2 == true&&m_l==true)
+	//ターン開始時　デッキをクリックしてドロー
+	if (mou->m_mouse_x > 1083.0f&&mou->m_mouse_x < 1175.0f
+		&&mou->m_mouse_y < 860.0f&&mou->m_mouse_y < 860.0f&&
+		pos->PTrun == false && m_f2 == true && m_l == true)
 	{
 		Turn = true;
 		m_f2 = false;
@@ -170,15 +171,21 @@ void CObjDekc::Action()
 		m_f2 = true;
 	}
 
-	if (Input::GetVKey('E') && m_f2 == true)
+	//ターン終了ボタン
+	if (m_l == true)
 	{
-		pos->PTrun = false;
-		m_f2 = false;
-
-	}
-	else
-	{
-		m_f2 = true;
+		if (mou->m_mouse_x > 12 && mou->m_mouse_x < 275
+			&& mou->m_mouse_y > 391 && mou->m_mouse_y < 510
+			&& pos->PTrun == true && m_f2 == true)
+		{
+			pos->PTrun = false;
+			m_f2 = false;
+			m_l = false;
+		}
+		else
+		{
+			m_f2 = true;
+		}
 	}
 }
 

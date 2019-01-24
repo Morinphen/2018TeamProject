@@ -527,7 +527,6 @@ void CObjCard::Action()
 				Punch = false;
 			}
 		}
-
 	}
 
 	//ボタン出現時
@@ -887,13 +886,20 @@ void CObjCard::Draw()
 
 	float c[4] = { 1.0f,test,1.0f,1.0f };
 
-	//モンスター等のステータスの色
-	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
+	//左側のモンスター名、テキストの色
+	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	float e[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	//左側のモンスター名、テキストの色
-	float f[4] = { 1.0f,1.0f,1.0f,1.0f };
+	//モンスターのステータスの色
+	float f[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//武具耐久地の色
+	float g[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//武具強化値の色
+	float h[4] = { 1.0f,0.0f,0.0f,0.7f };
+
 	RECT_F src;
 	RECT_F dst;
 
@@ -1001,11 +1007,11 @@ void CObjCard::Draw()
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 40, 595, 20, f);//テキストを表示
+		Font::StrDraw(atr, 40, 595, 20, d);//テキストを表示
 
 		for (int i = 0; i * 30 < Tlong; i++) {
 			mbstowcs(aatr[i], pos->text2[i], 64);
-			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, f);
+			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, d);
 		}
 
 		Draw::Draw(0, &src, &dst, c, 0);
@@ -1013,8 +1019,21 @@ void CObjCard::Draw()
 
 	if (Summon == true) {
 		wchar_t str[128];
-		swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-		Font::StrDraw(str, m_x + 10, m_y + 100, 20, d);
+		if (Type == 1)
+		{
+			swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
+			Font::StrDraw(str, m_x + 10, m_y + 100, 20, f);
+		}
+		if (Type == 2 || Type == 3)
+		{
+			swprintf_s(str, L"%d　  %d", Atack, Guard);
+			Font::StrDraw(str, m_x + 15, m_y + 100, 20, h);
+		}
+		if (Type == 2 || Type == 3)
+		{
+			swprintf_s(str, L"　 %d", Hp);
+			Font::StrDraw(str, m_x + 10, m_y + 100, 20, g);
+		}
 	}
 }
 

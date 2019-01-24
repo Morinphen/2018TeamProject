@@ -46,6 +46,7 @@ private:
 
 	bool m_f;
 	bool m_l;
+	bool m_l2;
 
 	int test;
 
