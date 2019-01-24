@@ -154,16 +154,14 @@ void CObjCard::Action()
 						pos->PCard[i / 2][2] += Guard;
 
 						//武器の位置の右か左かを判断し、武器のHPとカード情報をフィールドに保存
-						if (i - 2 == 0) {
+						if (i == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
-							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
-							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
@@ -225,13 +223,11 @@ void CObjCard::Action()
 						if (i - 2 == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
-							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
-							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
@@ -291,13 +287,11 @@ void CObjCard::Action()
 						if (i - 4 == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
-							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
-							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
