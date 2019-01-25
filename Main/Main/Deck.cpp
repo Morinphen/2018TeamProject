@@ -157,12 +157,14 @@ void CObjDekc::Action()
 		Start = true;
 	}
 
-	if (mou->m_mouse_x>1083.0f&&mou->m_mouse_x<1175.0f 
-		&&mou->m_mouse_y<860.0f&&mou->m_mouse_y<860.0f&&
-		pos->PTrun == false && m_f2 == true&&m_l==true)
+	if (mou->m_mouse_x>1104.0f&&mou->m_mouse_x<1170.0f 
+		&&mou->m_mouse_y>700.0f&&mou->m_mouse_y<764.0f&&
+		pos->PTrun == false && m_f2 == true&&m_l==true
+		&&car->Button2==true)
 	{
 		Turn = true;
 		m_f2 = false;
+		car->Button2 = false;
 
 	}
 	else
@@ -174,6 +176,7 @@ void CObjDekc::Action()
 	{
 		pos->PTrun = false;
 		m_f2 = false;
+		car->Button2 = true;
 
 	}
 	else

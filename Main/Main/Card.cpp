@@ -923,6 +923,23 @@ void CObjCard::Draw()
 		Draw::Draw(3, &src, &dst, c, Rotdraw);
 	}
 
+	if (Button2 == true)
+	{
+
+
+		src.m_top = 128.0f;
+		src.m_left = 0.0f+ (BDraw * 64);
+		src.m_right = 64.0f + (BDraw * 64);
+		src.m_bottom = 192.0f;
+
+		dst.m_top = 700.0f;
+		dst.m_left = 1104.0f;
+		dst.m_right = 1170.0f;
+		dst.m_bottom = 764.0f;
+
+		Draw::Draw(3, &src, &dst, c, Rotdraw);
+	}
+
 	//ウィンドウの表示
 	if (Wset == true) {
 
