@@ -14,6 +14,7 @@ public:
 	void Draw();
 
 	bool Punch;//モンスターの攻撃制御
+	bool Pusave;
 	bool Set;//武器の装備制御
 
 private:
@@ -26,6 +27,15 @@ private:
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
 
+	bool Button;//ボタン用変数
+	int BDraw;//ボタンdraw用変数
+
+	//ボタン用表示位置
+	float b_x;
+	float b_y;
+
+	int Bat3;
+
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 	int Opdraw;//カードの切取り位置１
 	int Updraw;//カードの切取り位置２
@@ -37,6 +47,7 @@ private:
 
 	bool m_f;
 	bool m_l;
+	bool m_l2;
 
 	int test;
 

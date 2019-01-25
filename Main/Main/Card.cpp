@@ -84,6 +84,7 @@ void CObjCard::Init()
 	test = 1;
 	//攻撃処理、装備処理初期化
 	Punch = false;
+	Pusave = false;
 	Set = false;
 
 	//召喚制御初期化
@@ -127,6 +128,7 @@ void CObjCard::Action()
 	if (sc->Turn == true)
 	{
 		PlayEfe = false;
+		Pusave = false;
 	}
 
 	//左クリックされたとき
@@ -152,21 +154,19 @@ void CObjCard::Action()
 						pos->PCard[i / 2][2] += Guard;
 
 						//武器の位置の右か左かを判断し、武器のHPとカード情報をフィールドに保存
-						if (i - 2 == 0) {
+						if (i == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
-							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
-							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
 						//効果関数呼び出し
-						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 						Wwindow(&Wset, 1);
 
 						//色を元に戻す
@@ -191,7 +191,7 @@ void CObjCard::Action()
 			if (Type == 4)
 			{
 				//効果関数呼び出し
-				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,1);
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,1);
 				Wwindow(&Wset, 1);
 				//召喚した扱いにする
 				Summon = true;
@@ -223,18 +223,16 @@ void CObjCard::Action()
 						if (i - 2 == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
-							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
-							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
 						//効果関数呼び出し
-						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 						Wwindow(&Wset, 1);
 
 						//色を元に戻す
@@ -259,7 +257,7 @@ void CObjCard::Action()
 			if (Type == 4)
 			{
 				//効果関数呼び出し
-				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe, 2);
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 2);
 				Wwindow(&Wset, 1);
 				//召喚した扱いにする
 				Summon = true;
@@ -289,18 +287,16 @@ void CObjCard::Action()
 						if (i - 4 == 0) {
 							pos->PCard[i / 2][4] = Hp;
 							pos->PCard[i / 2][5] = Number4;
-							pos->PCard[i / 2][8] = Type;
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
 							pos->PCard[i / 2][7] = Number4;
-							pos->PCard[i / 2][9] = Type;
 							LWeapon = true;
 						}
 
 						//効果関数呼び出し
-						Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 						Wwindow(&Wset, 1);
 
 						test = 1;
@@ -321,7 +317,7 @@ void CObjCard::Action()
 			if (Type == 4)
 			{
 				//効果関数呼び出し
-				Effect(Type, &WhenEfe, &PlayEfe, &InduEfe, 3);
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 3);
 				Wwindow(&Wset, 1);
 				//召喚した扱いにする
 				Summon = true;
@@ -347,7 +343,6 @@ void CObjCard::Action()
 			//モンスターがスルトに攻撃したとき
 			if (mou->EChoice == true && Punch == true && pos->PTrun == true)
 			{
-
 
 				//FSummon=右側の味方、違う場合は左側
 				if (FSummon == true && pos->PTrun == true&&Bat==1) {
@@ -402,6 +397,7 @@ void CObjCard::Action()
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Pusave = true;
 			}
 
 			//モンスターが糞梟に攻撃したとき
@@ -462,6 +458,7 @@ void CObjCard::Action()
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Pusave = true;
 			}
 
 			//モンスターがカム男に攻撃したとき
@@ -520,6 +517,7 @@ void CObjCard::Action()
 				//選択情報を元に戻す
 				test = 1;
 				Punch = false;
+				Pusave = true;
 			}
 
 			else if (Type == 1)
@@ -528,10 +526,12 @@ void CObjCard::Action()
 				Punch = false;
 			}
 		}
-
 	}
 
 	//ボタン出現時
+	if (test == 0)
+		Button = false;
+
 	if (Button == true)
 	{
 		SetPrio(12);
@@ -543,13 +543,13 @@ void CObjCard::Action()
 					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48)
 				{
 
-					Effect(Type, &WhenEfe, &PlayEfe, &InduEfe,0);
+					Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
 					Button = false;
 					m_f = true;
 					if (Type == 1)
 					{
-							test = 0;
-							Punch = true;
+						test = 0;
+						Punch = true;
 					}
 					m_l = false;
 
@@ -626,33 +626,11 @@ void CObjCard::Action()
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false && pos->Wtouch == false)
 	{
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
-		Rotdraw = 3;//カードを３℃回転
+		Rotdraw = -3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 
-		FILE *fp;
-		char fname[] = "CardList.csv";
-		fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
-		int ret;
-
-		while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
-		{
-			if (Nlist == Type)//カード番号が一致したとき、処理開始
-			{
-				Tlong = strlen(text);//テキストの長さを求める
-				for (int j = 0; j < 6; j++)
-				{
-					pos->text2[j][0] = '\0';
-				}
-				for (int i = 0; i * 38 < Tlong; i++)//１９文字づつ改行していく
-				{
-					strncpy(pos->text2[i], text + i * 38, 38);
-					pos->text2[i][38] = '\0';
-				}
-				break;
-			}
-		}
-
-		fclose(fp); // ファイルを閉じる
+		//カードの名前とテキストを出現させる
+		Cardname();
 
 		if (m_l == true)
 		{
@@ -661,6 +639,7 @@ void CObjCard::Action()
 				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
 				PList->Action(&Name, Type, &Number, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				Cadata = NTcard;
 
 				//モンスターの場合
 				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
@@ -745,6 +724,9 @@ void CObjCard::Action()
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type==1
 		&& pos->WiSummon == false)
 	{
+		//カードの名前とテキストを出現させる
+		Cardname();
+
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 
 		if (Button == false) {
@@ -755,7 +737,7 @@ void CObjCard::Action()
 
 		if (m_l == true && pos->WSummon == false)
 		{
-			Button = true;
+			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
 			BDraw = 1;
 			b_x = mou->m_mouse_x;
@@ -767,6 +749,9 @@ void CObjCard::Action()
 	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2
 		&& pos->WiSummon == false)
 	{
+		//カードの名前とテキストを出現させる
+		Cardname();
+
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 
 		if (Button == false) {
@@ -775,9 +760,9 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true)
+		if (m_l == true && Button==false)
 		{
-			Button = true;
+			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
 			BDraw = 0;
 			b_x = mou->m_mouse_x;
@@ -789,8 +774,13 @@ void CObjCard::Action()
 	{
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 		Rotdraw = 0;
-		if(Button==false)
+		if(Button==false||Wset==false)
 			SetPrio(10);
+	}
+
+	if (Wset == true)
+	{
+		SetPrio(21);
 	}
 
 
@@ -900,8 +890,21 @@ void CObjCard::Draw()
 {
 
 	float c[4] = { 1.0f,test,1.0f,1.0f };
-	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//左側のモンスター名、テキストの色
+	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
+
 	float e[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	//モンスターのステータスの色
+	float f[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//武具耐久地の色
+	float g[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//武具強化値の色
+	float h[4] = { 1.0f,0.0f,0.0f,0.7f };
+
 	RECT_F src;
 	RECT_F dst;
 
@@ -916,6 +919,30 @@ void CObjCard::Draw()
 	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
+
+	//画面左上に拡大画像を表示させる
+
+	if (CardHitCheck == true)
+	{
+		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+		dst.m_top = 12.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
+
+		wchar_t atr[256];
+		wchar_t aatr[5][64];
+		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
+		Font::StrDraw(atr, 40, 595, 20, d);//テキストを表示
+
+		for (int i = 0; i * 30 < Tlong; i++) {
+			mbstowcs(aatr[i], pos->text2[i], 64);
+			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
+		}
+
+		Draw::Draw(0, &src, &dst, d, 0);
+	}
 
 	//ボタンの表示
 	if (Button == true)
@@ -993,36 +1020,24 @@ void CObjCard::Draw()
 			Draw::Draw(0, &src, &dst, e, 0.0f);
 		}
 	}
-	
-	//画面左上に拡大画像を表示させる
-	
-	if (CardHitCheck == true)
-	{
-		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-		dst.m_top = 12.0f;
-		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
-		dst.m_bottom = 371.0f;
-
-		wchar_t atr[256];
-		wchar_t aatr[5][64];
-		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 0, 600, 20, d);//テキストを表示
-
-		for (int i = 0; i * 38 < Tlong; i++) {
-			mbstowcs(aatr[i], pos->text2[i], 64);
-			Font::StrDraw(aatr[i], 0, 650 + i * 20, 20, d);
-		}
-
-		Draw::Draw(0, &src, &dst, c, 0);
-	}
 
 	if (Summon == true) {
 		wchar_t str[128];
-		swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-		Font::StrDraw(str, m_x + 10, m_y + 100, 20, d);
+		if (Type == 1)
+		{
+			swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
+			Font::StrDraw(str, m_x + 10, m_y + 100, 20, f);
+		}
+		if (Type == 2 || Type == 3)
+		{
+			swprintf_s(str, L"%d　  %d", Atack, Guard);
+			Font::StrDraw(str, m_x + 15, m_y + 100, 20, h);
+		}
+		if (Type == 2 || Type == 3)
+		{
+			swprintf_s(str, L"　 %d", Hp);
+			Font::StrDraw(str, m_x + 10, m_y + 100, 20, g);
+		}
 	}
 }
 
@@ -1030,12 +1045,13 @@ void CObjCard::Draw()
 //カードナンバー、召喚時効果、起動効果、誘発効果の変数をぶち込んで処理する
 //Positionは召喚されているカードの場所により、入れる数値が変わる
 //基本的に召喚されたモンスターなどに触れない場合は０を入れる
-void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu, int Position)
+void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Position)
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	if (_Cnanber == 2)
+
+	if (_Cnanber == 21)
 	{
 		//伝説の剣装備時、カードを１枚ドロー
 		if (*When == false)
@@ -1047,7 +1063,7 @@ void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu, int Posi
 		}
 
 		//伝説の剣を装備している場合、タップしたらカードを１枚ドロー
-		else if (*Play == false)
+		else if (*Play == false && Button == true)
 		{
 			*Play = true;
 			sc->effect = true;
@@ -1055,9 +1071,17 @@ void CObjCard::Effect(int _Cnanber, bool *When, bool *Play, bool *Indu, int Posi
 			han->Action();
 		}
 	}
-	if (_Cnanber == 4)
+
+	else if (_Cnanber == 41)
 	{
 		pos->PCard[Position - 1][0]+=2;
+	}
+
+	if (Button == false && PlayEfe == false && Pusave == false) {
+		if (_Cnanber != 31)
+		{
+			Button = true;
+		}
 	}
 }
 
@@ -1103,4 +1127,36 @@ void CObjCard::Wwindow(bool *_set,bool _delete)
 			Wcount = 0;
 		}
 	}
+}
+
+//Cardname関数
+//Cardname()を入力すれば、カードに名前とテキストが表示されるようになる
+void CObjCard::Cardname()
+{
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	FILE *fp;
+	char fname[] = "CardList.csv";
+	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
+	int ret;
+
+	while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
+	{
+		if (Nlist == Type)//カード番号が一致したとき、処理開始
+		{
+			Tlong = strlen(text);//テキストの長さを求める
+			for (int j = 0; j < 6; j++)
+			{
+				pos->text2[j][0] = '\0';
+			}
+			for (int i = 0; i * 30 < Tlong; i++)//15文字づつ改行していく
+			{
+				strncpy(pos->text2[i], text + i * 30, 30);
+				pos->text2[i][30] = '\0';
+			}
+			break;
+		}
+	}
+
+	fclose(fp); // ファイルを閉じる
 }
