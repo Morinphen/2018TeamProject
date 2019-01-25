@@ -3,7 +3,7 @@
 //使用するネームスペース
 using namespace GameL;
 
-//オブジェクト　デッキ
+//オブジェクト　カード
 class CObjCard :public CObj
 {
 public:
@@ -13,8 +13,8 @@ public:
 	void Action();
 	void Draw();
 
-	bool Punch;//モンスターの攻撃制御
-	bool Punch2;
+	bool Punch;//モンスターの攻撃
+	bool Pusave;//モンスターの攻撃制御
 	bool Set;//武器の装備制御
 
 	int Bat;
@@ -24,7 +24,7 @@ public:
 	 
 private:
 	void Cardname();
-	void Effect(int _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
+	void Effect(float _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
 	void Wwindow(bool *_set,bool _delete);
 
 	int m_x, m_y;//カードの描画位置
@@ -38,6 +38,9 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+
+	int NTcard;//カードデータ番号
+	int Cadata;//データ番号保存用変数
 
 	bool WhenEfe;//召喚時効果変数
 	bool PlayEfe;//起動効果変数
@@ -53,13 +56,10 @@ private:
 	char *Text;
 	char text[256];
 	int Tlong;
-	//char name[256];
-	//char text2[5][64];
 
 	//ダミーデータ
 	int aaaa;
 	int Nlist;
-	float NTcard;
 
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 	int Opdraw;//カードの切取り位置１

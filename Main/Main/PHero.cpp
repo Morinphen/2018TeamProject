@@ -28,6 +28,7 @@ void CObjPHero::Init()
 	Hp = 20;
 	Atack = 1;
 	Guard = 0;
+	Pusave = false;
 
 	//ƒ{ƒ^ƒ“—p•Ï”‚Ì‰Šú‰»
 	BDraw = 1;
@@ -59,6 +60,11 @@ void CObjPHero::Action()
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 
+	if (sc->Turn == true)
+	{
+		Pusave = false;
+	}
+
 	if (start == false)
 	{
 		start = true;
@@ -68,16 +74,43 @@ void CObjPHero::Action()
 		pos->PCard[0][3] = 0;
 	}
 
-	Hp = pos->PCard[0][0];
-	if (Hp <= 0 || Input::GetVKey('Q'))
+	Hp=pos->PCard[0][0];
+	Atack=pos->PCard[0][1];
+	Guard=pos->PCard[0][2];
+
+	//”s–kðŒEƒŠƒ^ƒCƒA
+	if (m_l == true)
 	{
-		Scene::SetScene(new CSceneGameover());
+		if (mou->m_mouse_x > 19 && mou->m_mouse_x < 162
+			&& mou->m_mouse_y > 809 && mou->m_mouse_y < 880
+			&& pos->PTrun == true || Hp <= 0)
+		{
+			Scene::SetScene(new CSceneGameover());
+			//m_l = false;
+		}
+		/*else
+		{
+			m_l = true;
+		}*/
 	}
 
 	if (m_l == true)
 	{
 		if (mou->EChoice == true && Punch == true&&Bat3==1)
 		{
+
+			//•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][4] > 0)
+			{
+				pos->PCard[0][4] -= 1;
+			}
+
+			//‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][6] > 0)
+			{
+				pos->PCard[0][6] -= 1;
+			}
+
 			if (pos->PCard[0][1] - pos->ECard[2] > 0)
 				pos->ECard[0] -= pos->PCard[0][1] - pos->ECard[2];//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
 
@@ -87,12 +120,25 @@ void CObjPHero::Action()
 			//‘I‘ðî•ñ‚ðŒ³‚É–ß‚·
 			test = 1;
 			Punch = false;
+			Pusave = true;
 			Audio::Start(8);
 			Bat3 = 0;
 		}
 
 		else if (mou->EChoice2 == true && Punch == true && Bat3 == 1)
 		{
+			//•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][4] > 0)
+			{
+				pos->PCard[0][4] -= 1;
+			}
+
+			//‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][6] > 0)
+			{
+				pos->PCard[0][6] -= 1;
+			}
+
 			if (pos->PCard[0][1] - pos->ECard2[2]>0)
 				pos->ECard2[0] -= pos->PCard[0][1] - pos->ECard2[2];
 
@@ -100,6 +146,7 @@ void CObjPHero::Action()
 				pos->PCard[0][0] -= pos->ECard2[1] - pos->PCard[0][2];
 			test = 1;
 			Punch = false;
+			Pusave = true;
 			Audio::Start(8);
 			Bat3 = 0;
 
@@ -107,6 +154,17 @@ void CObjPHero::Action()
 
 		else if (mou->EChoice3 == true && Punch == true && Bat3 == 1)
 		{
+			//•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][4] > 0)
+			{
+				pos->PCard[0][4] -= 1;
+			}
+
+			//‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[0][6] > 0)
+			{
+				pos->PCard[0][6] -= 1;
+			}
 
 			if (pos->PCard[0][1] - pos->ECard3[2]>0)
 				pos->ECard3[0] -= pos->PCard[0][1] - pos->ECard3[2];
@@ -116,6 +174,7 @@ void CObjPHero::Action()
 
 			test = 1;
 			Punch = false;
+			Pusave = true;
 			Audio::Start(8);
 			Bat3 = 0;
 
@@ -171,7 +230,7 @@ void CObjPHero::Action()
 		//CardHitCheck = true; //"ƒ}ƒEƒX‚ªƒJ[ƒh‚ÉG‚ê‚Ä‚¢‚È‚¢"ó‘Ô‚É‚·‚é
 		Rotdraw = -3;
 		SetPrio(11);
-		if (m_l == true && pos->WSummon == false)
+		if (m_l == true && pos->WSummon == false && test!=0 && Pusave==false)
 		{
 			Button = true;
 		}
@@ -212,6 +271,18 @@ void CObjPHero::Draw()
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
+	//‰æ–Ê¶ã‚ÉŠg‘å‰æ‘œ‚ð•\Ž¦‚³‚¹‚é
+
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	{
+		dst.m_top = 12.0f;
+		dst.m_left = 12.0f;
+		dst.m_right = 281.0f;
+		dst.m_bottom = 371.0f;
+
+		Draw::Draw(0, &src, &dst, c, 0);
+	}
+
 	//ƒ{ƒ^ƒ“‚Ì•\Ž¦
 	if (Button == true)
 	{
@@ -231,32 +302,6 @@ void CObjPHero::Draw()
 		Draw::Draw(3, &src, &dst, c, Rotdraw);
 	}
 
-	//‰æ–Ê¶ã‚ÉŠg‘å‰æ‘œ‚ð•\Ž¦‚³‚¹‚é
-
-	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
-	{
-		dst.m_top = 12.0f;
-		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
-		dst.m_bottom = 371.0f;
-
-		Draw::Draw(0, &src, &dst, c, 0);
-	}
-	/*else
-	{
-
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
-
-		dst.m_top = 12.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
-
-		Draw::Draw(0, &src, &dst, c, 0);
-	}*/
 
 
 	wchar_t str[128];

@@ -59,7 +59,7 @@ void CObjDekc::Action()
 	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
-	Card = rand() % 21+1;//同じ番号のカード呼出
+	Card = rand() % 21 + 1;//同じ番号のカード呼出
 	stop = 1;
 
 	m_l = Input::GetMouButtonL();
@@ -70,7 +70,7 @@ void CObjDekc::Action()
 		stop = 0;
 		Card = rand() % 21 + 1;
 
-		for (int i = 0; i<Cardcount; i++)
+		for (int i = 0; i < Cardcount; i++)
 		{
 			if (Deck[i] == Card)
 			{
@@ -123,7 +123,7 @@ void CObjDekc::Action()
 				/*m_point++;
 				car->Bat = 1;
 				car->Bat2 = 1;*/
-				
+
 				m_point = m_point + i * 100;
 				i++;
 			}
@@ -157,6 +157,7 @@ void CObjDekc::Action()
 		Start = true;
 	}
 
+	//ターン開始時　デッキをクリックしてドロー
 	if (mou->m_mouse_x>1104.0f&&mou->m_mouse_x<1170.0f 
 		&&mou->m_mouse_y>700.0f&&mou->m_mouse_y<764.0f&&
 		pos->PTrun == false && m_f2 == true&&m_l==true
@@ -172,16 +173,22 @@ void CObjDekc::Action()
 		m_f2 = true;
 	}
 
-	if (Input::GetVKey('E') && m_f2 == true)
+	//ターン終了ボタン
+	if (m_l == true)
 	{
-		pos->PTrun = false;
-		m_f2 = false;
-		car->Button2 = true;
-
-	}
-	else
-	{
-		m_f2 = true;
+		if (mou->m_mouse_x > 12 && mou->m_mouse_x < 275
+			&& mou->m_mouse_y > 391 && mou->m_mouse_y < 510
+			&& pos->PTrun == true && m_f2 == true)
+		{
+			pos->PTrun = false;
+			m_f2 = false;
+			m_l = false;
+			car->Button2 = true;
+		}
+		else
+		{
+			m_f2 = true;
+		}
 	}
 }
 
@@ -190,6 +197,7 @@ void CObjDekc::Draw()
 {
 	//カードの大きさは横３、縦４にする
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float d[4] = { 0.0f,0.0f,0.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 	src.m_top = 0.0f;
@@ -205,8 +213,12 @@ void CObjDekc::Draw()
 	wchar_t str[128];
 
 	swprintf_s(str, L"%d", Cost);
-
 	Font::StrDraw(str, 10, 10, 20, c);
-
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+	//"降参"の表示
+	/*swprintf_s(str,L"降 参");
+	Font::StrDraw(str, 40, 825, 40, d);*/
+	swprintf_s(str, L"リタイア");
+	Font::StrDraw(str, 28, 827, 30, d);
 }

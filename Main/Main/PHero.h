@@ -14,6 +14,7 @@ public:
 	void Draw();
 
 	bool Punch;//ƒ‚ƒ“ƒXƒ^[‚ÌUŒ‚§Œä
+	bool Pusave;
 	bool Set;//•Ší‚Ì‘•”õ§Œä
 
 private:
@@ -46,6 +47,7 @@ private:
 
 	bool m_f;
 	bool m_l;
+	bool m_l2;
 
 	int test;
 
