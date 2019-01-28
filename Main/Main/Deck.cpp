@@ -211,7 +211,7 @@ void CObjDekc::Action()
 	{
 		Turn = true;
 		m_f2 = false;
-		car->Button2 = false;
+		Button2 = false;
 
 		}
 		else
