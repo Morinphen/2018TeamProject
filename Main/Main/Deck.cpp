@@ -198,44 +198,45 @@ void CObjDekc::Action()
 												 //Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 		}
 
-		if (Cardcount == 4 && Turn==true|| Cardcount==5 && Turn==false)
+		if (Cardcount == 4 && Turn == true || Cardcount == 5 && Turn == false)
 		{
 			Start = true;
 		}
 
-	//ターン開始時　デッキをクリックしてドロー 
-		if(mou->m_mouse_x>1105.0f&&mou->m_mouse_x<1168.0f&&mou->m_mouse_y>700.0f&&mou->m_mouse_y<764.0f&&
-		pos->PTrun == false && m_f2 == true&&m_l==true
-		&&car->Button2==true)
-	{
-		Turn = true;
-		m_f2 = false;
-		car->Button2 = false;
-
-		}
-		else
+		//ターン開始時　デッキをクリックしてドロー 
+		if (mou->m_mouse_x > 1105.0f&&mou->m_mouse_x<1168.0f&&mou->m_mouse_y>700.0f&&mou->m_mouse_y < 764.0f&&
+			pos->PTrun == false && m_f2 == true && m_l == true
+			&& car->Button2 == true)
 		{
-			m_f2 = true;
-		}
-
-	//ターン終了ボタン
-	if (m_l == true)
-	{
-		if (mou->m_mouse_x > 12 && mou->m_mouse_x < 275
-			&& mou->m_mouse_y > 391 && mou->m_mouse_y < 510
-			&& pos->PTrun == true && m_f2 == true)
-		{
-			pos->PTrun = false;
+			Turn = true;
 			m_f2 = false;
-			m_l = false;
-			car->Button2 = true;
+			car->Button2 = false;
+
 		}
 		else
 		{
 			m_f2 = true;
 		}
-	}
 
+		//ターン終了ボタン
+		if (m_l == true)
+		{
+			if (mou->m_mouse_x > 12 && mou->m_mouse_x < 275
+				&& mou->m_mouse_y > 391 && mou->m_mouse_y < 510
+				&& pos->PTrun == true && m_f2 == true)
+			{
+				pos->PTrun = false;
+				m_f2 = false;
+				m_l = false;
+				car->Button2 = true;
+			}
+			else
+			{
+				m_f2 = true;
+			}
+		}
+
+	}
 }
 
 //ドロー
