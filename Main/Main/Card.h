@@ -20,6 +20,8 @@ public:
 	int Bat;
 	int Bat2;
 
+	bool Button2;
+	 
 private:
 	void Cardname();
 	void Effect(float _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
