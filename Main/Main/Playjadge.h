@@ -13,10 +13,10 @@ public:
 	void Action();
 	void Draw();
 private:
-	int Random;
-	int Stime;
+	int Random;//乱数
+	int Stime;//表示時間
 
-	bool GameStart;
-	bool First;
-	bool After;
+	bool GameStart;//ゲーム開始用変数
+	bool First;//1P側先攻
+	bool After;//1P側後攻
 };

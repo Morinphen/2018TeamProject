@@ -478,6 +478,7 @@ void CObjCard::Action()
 					{
 						pos->PCard[1][4] -= 1;
 					}
+
 					//‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
 					if (pos->PCard[1][6] > 0)
 					{
