@@ -30,8 +30,10 @@ public:
 	int m_point;
 	int Cost;
 	bool Turn;
-	bool Start;
-	bool StartG;
+	bool Start;//初期手札補充用変数
+	bool StartG;//ゲーム開始用変数
+
+	bool Button2;//ボタン出現用変数
 
 	int i;
 

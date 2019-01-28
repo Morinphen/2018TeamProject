@@ -19,8 +19,6 @@ public:
 
 	int Bat;
 	int Bat2;
-
-	bool Button2;
 	 
 private:
 	void Cardname();

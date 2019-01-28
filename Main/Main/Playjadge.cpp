@@ -62,11 +62,13 @@ void CObjJadge::Action()
 		if (First == true)
 		{
 			sc->Turn = true;
+			sc->Button2 = false;
 			sc->StartG = true;
 		}
 		else
 		{
 			sc->Turn = false;
+			sc->Button2 = true;
 			sc->StartG = true;
 		}
 

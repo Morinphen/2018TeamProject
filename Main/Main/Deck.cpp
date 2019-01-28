@@ -54,6 +54,7 @@ void CObjDekc::Init()
 
 	//Start最初の５枚ドローのための変数
 	Start = false;
+	Button2 = false;
 
 	effect = false;
 
@@ -159,8 +160,8 @@ void CObjDekc::Action()
 				//カード作成
 				CObjCard* obj_b = new CObjCard(300, m_y, Ctype);//カード作成
 				Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
-													 //CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
-													 //Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
+				//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+				//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 				m_f = false;
 				effect = false;
 
@@ -194,8 +195,8 @@ void CObjDekc::Action()
 			Cardcount++;
 			CObjCard* obj_b = new CObjCard(m_x, m_y, Ctype);//カード作成
 			Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
-												 //CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
-												 //Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
+			//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+			//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 		}
 
 		if (Cardcount == 4 && Turn == true || Cardcount == 5 && Turn == false)
@@ -206,11 +207,11 @@ void CObjDekc::Action()
 		//ターン開始時　デッキをクリックしてドロー 
 		if (mou->m_mouse_x > 1105.0f&&mou->m_mouse_x<1168.0f&&mou->m_mouse_y>700.0f&&mou->m_mouse_y < 764.0f&&
 			pos->PTrun == false && m_f2 == true && m_l == true
-			&& car->Button2 == true)
+			&& Button2 == true)
 		{
 			Turn = true;
 			m_f2 = false;
-			car->Button2 = false;
+			Button2 = false;
 
 		}
 		else
@@ -228,7 +229,7 @@ void CObjDekc::Action()
 				pos->PTrun = false;
 				m_f2 = false;
 				m_l = false;
-				car->Button2 = true;
+				Button2 = true;
 			}
 			else
 			{
@@ -262,6 +263,21 @@ void CObjDekc::Draw()
 	swprintf_s(str, L"%d", Cost);
 	Font::StrDraw(str, 10, 10, 20, c);
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+	if (Button2 == true)
+	{
+		src.m_top = 64.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 128.0f;
+
+		dst.m_top = 700.0f;
+		dst.m_left = 1104.0f;
+		dst.m_right = 1170.0f;
+		dst.m_bottom = 764.0f;
+
+		Draw::Draw(3, &src, &dst, c, 0);
+	}
 
 	//"降参"の表示
 	/*swprintf_s(str,L"降 参");
