@@ -22,6 +22,7 @@ enum OBJ_NAME
 	OBJ_BACKGROUND3,
 	OBJ_LIST,
 	OBJ_WINDOW,
+	OBJ_JADGE,
 
 
 	OBJ_FIELD_PLAYER,
@@ -95,6 +96,7 @@ struct UserData
 #include"EHero.h"
 #include"PList.h"
 #include"Window.h"
+#include"Playjadge.h"
 
 #include"Player.h"
 #include"ObjTitle.h"
