@@ -158,9 +158,9 @@ void CObjDekc::Action()
 	}
 
 	//ターン開始時　デッキをクリックしてドロー 
-		if(mou->m_mouse_x>1105.0f&&mou->m_mouse_x<1168.0f&&mou->m_mouse_y>700.0f&&mou->m_mouse_y<764.0f&&
-		pos->PTrun == false && m_f2 == true&&m_l==true
-		&&car->Button2==true)
+		if(mou->m_mouse_x>1105.0f&&mou->m_mouse_x<1168.0f
+			&&mou->m_mouse_y>700.0f&&mou->m_mouse_y<764.0f&&
+		pos->PTrun == false && m_f2 == true&&m_l==true)
 	{
 		Turn = true;
 		m_f2 = false;

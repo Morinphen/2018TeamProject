@@ -793,7 +793,7 @@ void CObjCard::Action()
 		sc->Cnanber -= 1; //カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
-		Audio::Start(1);
+		Audio::Start(11);
 		point->Cost--;//コスト減少
 		if (Type == 4)
 		{
