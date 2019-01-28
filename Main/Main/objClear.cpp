@@ -3,6 +3,7 @@
 #include"GameL\DrawTexture.h"
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
+#include"GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjClear.h"
@@ -14,11 +15,19 @@ using namespace GameL;
 void CObjClear::Init()
 {
 	m_key_flag = true;
+
+	Audio::LoadAudio(10, L"Audio\\勝利.wav", BACK_MUSIC);
+
+
+	Audio::Start(10);
 }
 
 //アクション
 void CObjClear::Action()
 {
+
+
+
 	//スペースキーを押すとシーン変更
 	if (Input::GetVKey(VK_SPACE))
 	{
