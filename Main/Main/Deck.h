@@ -24,9 +24,16 @@ public:
 
 	int Cnanber;//手札のカードの最大数
 	int Card;//引いたカードの番号
+	int Deck[40];//デッキの中のカード配列
+	int Pullc[40];
+
 	int m_point;
 	int Cost;
 	bool Turn;
+	bool Start;//初期手札補充用変数
+	bool StartG;//ゲーム開始用変数
+
+	bool Button2;//ボタン出現用変数
 
 	int i;
 
@@ -40,11 +47,7 @@ private:
 	int Cardcount;//引いたカードの合計
 	int stop;
 
-	int Deck[40];//
-
-	
 	bool m_f;
 	bool m_f2;
-	bool Start;
 	bool m_flag_point;
 };

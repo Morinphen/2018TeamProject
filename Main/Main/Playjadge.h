@@ -4,18 +4,19 @@
 //使用するネームスペース
 using namespace GameL;
 
-class CObjwindow :public CObj
+class CObjJadge :public CObj
 {
 public:
-	CObjwindow(int _x,int _y,int _z);
-	~CObjwindow();
+	CObjJadge();
+	~CObjJadge();
 	void Init();
 	void Action();
 	void Draw();
-	bool Wdelete;
 private:
-	int x;
-	int y;
+	int Random;
+	int Stime;
 
-	int OpenT;
+	bool GameStart;
+	bool First;
+	bool After;
 };

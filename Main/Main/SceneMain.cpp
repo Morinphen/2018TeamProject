@@ -63,6 +63,9 @@ void CSceneMain::InitScene()
 	CObjMap* obj_map = new CObjMap();
 	Objs::InsertObj(obj_map, OBJ_MAP, 1);
 
+	CObjJadge* obj_ja = new CObjJadge();
+	Objs::InsertObj(obj_ja, OBJ_JADGE, 20);
+
 	CObjBackGround* obj_background = new CObjBackGround();
 	Objs::InsertObj(obj_background, OBJ_BACKGROUND, 1);
 
