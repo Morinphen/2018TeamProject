@@ -862,7 +862,7 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true && pos->WSummon == false)
+		if (m_l == true && pos->WSummon == false && pos->PTrun == true)
 		{
 			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
@@ -887,7 +887,7 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true && Button==false)
+		if (m_l == true && Button==false && pos->PTrun == true)
 		{
 			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
