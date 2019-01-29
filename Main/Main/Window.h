@@ -7,7 +7,7 @@ using namespace GameL;
 class CObjwindow :public CObj
 {
 public:
-	CObjwindow(int _x,int _y);
+	CObjwindow(int _x,int _y,int _z);
 	~CObjwindow();
 	void Init();
 	void Action();
@@ -16,4 +16,6 @@ public:
 private:
 	int x;
 	int y;
+
+	int OpenT;
 };

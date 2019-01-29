@@ -39,6 +39,9 @@ void CObjPHero::Init()
 	LWeapon = false;
 	RWeapon = false;
 
+	Deadt = 90;
+	inviD = 1.0f;
+
 	test = 1;
 
 	Bat3 = 1;
@@ -83,7 +86,7 @@ void CObjPHero::Action()
 	{
 		if (mou->m_mouse_x > 19 && mou->m_mouse_x < 162
 			&& mou->m_mouse_y > 809 && mou->m_mouse_y < 880
-			&& pos->PTrun == true || Hp <= 0)
+			&& pos->PTrun == true)
 		{
 			Scene::SetScene(new CSceneGameover());
 			//m_l = false;
@@ -92,6 +95,16 @@ void CObjPHero::Action()
 		{
 			m_l = true;
 		}*/
+	}
+
+	if (Hp == 0)
+	{
+		Deadt--;
+		inviD = Deadt / 90;
+		if (Deadt == 0)
+		{
+			Scene::SetScene(new CSceneGameover());
+		}
 	}
 
 	if (m_l == true)
@@ -230,7 +243,8 @@ void CObjPHero::Action()
 		//CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
-		if (m_l == true && pos->WSummon == false && test!=0 && Pusave==false)
+		if (m_l == true && pos->WSummon == false && test!=0 && Pusave==false
+			&& pos->PTrun == true)
 		{
 			Button = true;
 		}
@@ -253,7 +267,7 @@ void CObjPHero::Action()
 void CObjPHero::Draw()
 {
 
-	float c[4] = { 1.0f,test,1.0f,1.0f };
+	float c[4] = { 1.0f,test,1.0f,inviD };
 	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;

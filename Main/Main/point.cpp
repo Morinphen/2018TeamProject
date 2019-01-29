@@ -28,7 +28,7 @@ void CObjpoint::Init()
 	m_point = 0;
 	m_flag_point = false;
 	m_p=true;
-	Cost = 1;
+	Cost = 100;
 };
 
 //ƒAƒNƒVƒ‡ƒ“

@@ -24,10 +24,25 @@ void CObjDekc::Init()
 	m_f = true;
 	m_f2 = true;
 	//ターン開始時
-	Turn = true;
+	Turn = false;
+
+	//ゲーム開始時
+	StartG = false;
 
 	//stop 同じカードの出現阻止
 	stop = 0;
+
+	for (int i = 0; i < 40; i++)
+	{
+		if(i<7)
+			Deck[i] = 11;
+		else if(i<11)
+			Deck[i] = 21;
+		else if (i<14)
+			Deck[i] = 31;
+		else if (i<40)
+			Deck[i] = 41;
+	}
 
 	//Cnanber カードの位置調整用
 	Cnanber = 0;
@@ -39,6 +54,7 @@ void CObjDekc::Init()
 
 	//Start最初の５枚ドローのための変数
 	Start = false;
+	Button2 = false;
 
 	effect = false;
 
@@ -54,138 +70,173 @@ void CObjDekc::Init()
 //アクション
 void CObjDekc::Action()
 {
+	if (StartG == true) {
 
-	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
-	CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
-	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
-	Card = rand() % 21 + 1;//同じ番号のカード呼出
-	stop = 1;
+		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+		CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
+		CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
+		CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
+		Card = rand() % 21 + 1;//同じ番号のカード呼出
+		stop = 1;
 
-	m_l = Input::GetMouButtonL();
+		m_l = Input::GetMouButtonL();
 
-
-	//別のカードが出るまでループ
-	while (stop == 1) {
-		stop = 0;
-		Card = rand() % 21 + 1;
-
-		for (int i = 0; i < Cardcount; i++)
+		if (Cardcount >= 22)
 		{
-			if (Deck[i] == Card)
-			{
-				stop = 1;
-			}
+			Scene::SetScene(new CSceneGameover());
 		}
 
-	}
+		//別のカードが出るまでループ
+		while (stop == 1) {
 
-	if (Card <= 7)
-	{
-		Ctype = monster;
-	}
+			stop = 0;
+			Card = rand() % 21 + 1;
 
-	else if (Card <= 11)
-	{
-		Ctype = weapon;
-	}
+			if (Cardcount >= 21)
+			{
+				break;
+			}
 
-	else if (Card <= 14)
-	{
-		Ctype = shield;
-	}
+			for (int i = 0; i < Cardcount; i++)
+			{
+				if (Pullc[Card - 1] == Deck[Card - 1])
+				{
+					stop = 1;
+				}
+			}
 
-	else
-	{
-		Ctype = item;
-	}
+		}
 
-
-	if (Turn == true && Start == true || effect == true)
-	{
-		if (m_f == true || effect == true)
+		/*if (Card <= 48)
 		{
-			Deck[Cardcount] = Card;//デッキにドローしたカードを登録
+			Ctype = monster;
+		}
+
+		else if (Card <= 94)
+		{
+			Ctype = weapon;
+		}
+
+		else if (Card <= 134)
+		{
+			Ctype = shield;
+		}
+
+		else
+		{
+			Ctype = item;
+		}*/
+
+		if (Card <= 7)
+		{
+			Ctype = monster;
+		}
+
+		else if (Card <= 11)
+		{
+			Ctype = weapon;
+		}
+
+		else if (Card <= 14)
+		{
+			Ctype = shield;
+		}
+
+		else
+		{
+			Ctype = item;
+		}
+
+
+		if (Turn == true && Start == true || effect == true)
+		{
+			if (m_f == true || effect == true)
+			{
+				Pullc[Card - 1] = Deck[Card - 1];//デッキにドローしたカードを登録
+				sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
+				sc->basyo[Cnanber] = Cnanber + 1;
+				Cnanber++;
+				Cardcount++;
+				//カード作成
+				CObjCard* obj_b = new CObjCard(300, m_y, Ctype);//カード作成
+				Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
+				//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+				//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
+				m_f = false;
+				effect = false;
+
+				if (Turn == true) {
+					//ドローしたらポイント増加
+					/*m_point++;
+					car->Bat = 1;
+					car->Bat2 = 1;*/
+
+					m_point = m_point + i * 100;
+					i++;
+				}
+				Turn = false;
+				pos->PTrun = true;
+				Audio::Start(2);
+
+			}
+
+		}
+
+		else {
+			m_f = true;
+		}
+
+		//スタート処理
+		if (Start == false) {
+			Pullc[Card - 1] = Deck[Card - 1];//デッキにドローしたカードを登録
 			sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
 			sc->basyo[Cnanber] = Cnanber + 1;
 			Cnanber++;
 			Cardcount++;
-			//カード作成
-			CObjCard* obj_b = new CObjCard(300, m_y, Ctype);//カード作成
+			CObjCard* obj_b = new CObjCard(m_x, m_y, Ctype);//カード作成
 			Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
-												 //CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
-												 //Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
-			m_f = false;
-			effect = false;
-
-			if (Turn == true) {
-				//ドローしたらポイント増加
-				/*m_point++;
-				car->Bat = 1;
-				car->Bat2 = 1;*/
-
-				m_point = m_point + i * 100;
-				i++;
-			}
-			Turn = false;
-			pos->PTrun = true;
-			Audio::Start(2);
-
+			//CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
+			//Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
 		}
 
-	}
+		if (Cardcount == 4 && Turn == true || Cardcount == 5 && Turn == false)
+		{
+			Start = true;
+		}
 
-	else {
-		m_f = true;
-	}
-
-	//スタート処理
-	if (Start == false) {
-		Deck[Cardcount] = Card;//デッキにドローしたカードを登録
-		sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
-		sc->basyo[Cnanber] = Cnanber + 1;
-		Cnanber++;
-		Cardcount++;
-		CObjCard* obj_b = new CObjCard(m_x, m_y, Ctype);//カード作成
-		Objs::InsertObj(obj_b, OBJ_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
-											 //CObjViewCard* obj_viewcard = new CObjViewCard(Ctype); //画面左上の観賞用カード作成
-											 //Objs::InsertObj(obj_viewcard, OBJ_VIEWCARD, 1); //作った観賞用カードをオブジェクトマネージャーに登録
-	}
-
-	if (Cardcount == 4)
-	{
-		Start = true;
-	}
-
-	//ターン開始時　デッキをクリックしてドロー
-	if (mou->m_mouse_x > 1083.0f&&mou->m_mouse_x < 1175.0f
-		&&mou->m_mouse_y < 860.0f&&mou->m_mouse_y < 860.0f&&
-		pos->PTrun == false && m_f2 == true && m_l == true)
+	//ターン開始時　デッキをクリックしてドロー 
+		if(mou->m_mouse_x>1105.0f&&mou->m_mouse_x<1168.0f
+			&&mou->m_mouse_y>700.0f&&mou->m_mouse_y<764.0f&&
+		pos->PTrun == false && m_f2 == true&&m_l==true)
 	{
 		Turn = true;
 		m_f2 = false;
+		Button2 = false;
 
-	}
-	else
-	{
-		m_f2 = true;
-	}
-
-	//ターン終了ボタン
-	if (m_l == true)
-	{
-		if (mou->m_mouse_x > 12 && mou->m_mouse_x < 275
-			&& mou->m_mouse_y > 391 && mou->m_mouse_y < 510
-			&& pos->PTrun == true && m_f2 == true)
-		{
-			pos->PTrun = false;
-			m_f2 = false;
-			m_l = false;
 		}
 		else
 		{
 			m_f2 = true;
 		}
+
+		//ターン終了ボタン
+		if (m_l == true)
+		{
+			if (mou->m_mouse_x > 12 && mou->m_mouse_x < 275
+				&& mou->m_mouse_y > 391 && mou->m_mouse_y < 510
+				&& pos->PTrun == true && m_f2 == true)
+			{
+				pos->PTrun = false;
+				m_f2 = false;
+				m_l = false;
+				Button2 = true;
+			}
+			else
+			{
+				m_f2 = true;
+			}
+		}
+
 	}
 }
 
@@ -212,6 +263,21 @@ void CObjDekc::Draw()
 	swprintf_s(str, L"%d", Cost);
 	Font::StrDraw(str, 10, 10, 20, c);
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+	if (Button2 == true)
+	{
+		src.m_top = 128.0f;
+		src.m_left = 0.0f;
+		src.m_right = 64.0f;
+		src.m_bottom = 172.0f;
+
+		dst.m_top = 700.0f;
+		dst.m_left = 1104.0f;
+		dst.m_right = 1170.0f;
+		dst.m_bottom = 764.0f;
+
+		Draw::Draw(3, &src, &dst, c, 0);
+	}
 
 	//"降参"の表示
 	/*swprintf_s(str,L"降 参");

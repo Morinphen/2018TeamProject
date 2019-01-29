@@ -35,7 +35,7 @@ void CObjCard::Init()
 	Number2 = han->hand[Number -1];//カード番号の保存
 	Number3 = han->basyo[Number - 1];//手札の順番変数
 
-	Number4 = sc->Card;
+	Number4 = sc->Deck[sc->Card - 1];
 
 	WhenEfe = false;
 	PlayEfe = false;
@@ -44,6 +44,7 @@ void CObjCard::Init()
 	BDraw = 0;
 
 	Opdraw = sc->Card;//カード番号の保存
+
 	Updraw = 0;//カードの描画位置の調整
 	Rotdraw = 0;//カードの回転描画調整
 
@@ -90,6 +91,8 @@ void CObjCard::Init()
 	//召喚制御初期化
 	StopSm = false;
 	Summon = false;
+	Wstop = false;
+	WSetting = 0;
 
 	Bat = 1;
 	Bat2 = 1;
@@ -155,13 +158,56 @@ void CObjCard::Action()
 
 						//武器の位置の右か左かを判断し、武器のHPとカード情報をフィールドに保存
 						if (i == 0) {
+
 							pos->PCard[i / 2][4] = Hp;
-							pos->PCard[i / 2][5] = Number4;
+							for (int k = 1; k < 7; k++)
+							{
+								Wstop = false;
+								for (int j = 0; j < 6; j++)
+								{
+									if (pos->WPosition[j] == k)
+									{
+										Wstop = true;
+									}
+								}
+								if(Wstop==true)
+								{
+									;
+								}
+								else
+								{
+									pos->PCard[i / 2][5] = k;
+									WSetting = k;
+									break;
+								}
+							}
+
 							RWeapon = true;
 						}
+
 						else {
 							pos->PCard[i / 2][6] = Hp;
-							pos->PCard[i / 2][7] = Number4;
+							for (int k = 1; k < 7; k++)
+							{
+								Wstop = false;
+								for (int j = 0; j < 6; j++)
+								{
+									if (pos->WPosition[j] == k)
+									{
+										Wstop = true;
+									}
+								}
+								if (Wstop == true)
+								{
+									;
+								}
+								else
+								{
+									pos->PCard[i / 2][7] = k;
+									WSetting = k;
+									break;
+								}
+							}
 							LWeapon = true;
 						}
 
@@ -179,7 +225,7 @@ void CObjCard::Action()
 						//武器を召喚した情報を登録
 						pos->WSummon = true;
 						//武器の位置を保存しておく
-						pos->WPosition[i] = Number4;
+						pos->WPosition[i] = WSetting;
 						Audio::Start(6);
 
 					}
@@ -222,12 +268,52 @@ void CObjCard::Action()
 						//武器の位置の右か左かを判断し、武器のHPとカード情報をフィールドに保存
 						if (i - 2 == 0) {
 							pos->PCard[i / 2][4] = Hp;
-							pos->PCard[i / 2][5] = Number4;
+							for (int k = 1; k < 7; k++)
+							{
+								Wstop = false;
+								for (int j = 0; j < 6; j++)
+								{
+									if (pos->WPosition[j] == k)
+									{
+										Wstop = true;
+									}
+								}
+								if (Wstop == true)
+								{
+									;
+								}
+								else
+								{
+									pos->PCard[i / 2][5] = k;
+									WSetting = k;
+									break;
+								}
+							}
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
-							pos->PCard[i / 2][7] = Number4;
+							for (int k = 1; k < 7; k++)
+							{
+								Wstop = false;
+								for (int j = 0; j < 6; j++)
+								{
+									if (pos->WPosition[j] == k)
+									{
+										Wstop = true;
+									}
+								}
+								if (Wstop == true)
+								{
+									;
+								}
+								else
+								{
+									pos->PCard[i / 2][7] = k;
+									WSetting = k;
+									break;
+								}
+							}
 							LWeapon = true;
 						}
 
@@ -245,7 +331,7 @@ void CObjCard::Action()
 						//武器を召喚した情報を登録
 						pos->WSummon = true;
 						//武器の位置を保存しておく
-						pos->WPosition[i] = Number4;
+						pos->WPosition[i] = WSetting;
 						Audio::Start(6);
 
 					}
@@ -286,12 +372,52 @@ void CObjCard::Action()
 						//武器の位置の右か左かを判断し、武器のHPとカード情報をフィールドに保存
 						if (i - 4 == 0) {
 							pos->PCard[i / 2][4] = Hp;
-							pos->PCard[i / 2][5] = Number4;
+							for (int k = 1; k < 7; k++)
+							{
+								Wstop = false;
+								for (int j = 0; j < 6; j++)
+								{
+									if (pos->WPosition[j] == k)
+									{
+										Wstop = true;
+									}
+								}
+								if (Wstop == true)
+								{
+									;
+								}
+								else
+								{
+									pos->PCard[i / 2][5] = k;
+									WSetting = k;
+									break;
+								}
+							}
 							RWeapon = true;
 						}
 						else {
 							pos->PCard[i / 2][6] = Hp;
-							pos->PCard[i / 2][7] = Number4;
+							for (int k = 1; k < 7; k++)
+							{
+								Wstop = false;
+								for (int j = 0; j < 6; j++)
+								{
+									if (pos->WPosition[j] == k)
+									{
+										Wstop = true;
+									}
+								}
+								if (Wstop == true)
+								{
+									;
+								}
+								else
+								{
+									pos->PCard[i / 2][7] = k;
+									WSetting = k;
+									break;
+								}
+							}
 							LWeapon = true;
 						}
 
@@ -305,7 +431,7 @@ void CObjCard::Action()
 						pos->Wtouch = false;
 						pos->WSummon = true;
 						//point--;
-						pos->WPosition[i] = Number4;
+						pos->WPosition[i] = WSetting;
 						Audio::Start(6);
 
 					}
@@ -352,6 +478,7 @@ void CObjCard::Action()
 					{
 						pos->PCard[1][4] -= 1;
 					}
+
 					//２つ目の武器を所持していた場合、耐久度減少
 					if (pos->PCard[1][6] > 0)
 					{
@@ -638,7 +765,7 @@ void CObjCard::Action()
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
 				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
-				PList->Action(&Name, Type, &Number, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				PList->Action(&Name, Number4, &Number, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				Cadata = NTcard;
 
 				//モンスターの場合
@@ -735,7 +862,7 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true && pos->WSummon == false)
+		if (m_l == true && pos->WSummon == false && pos->PTrun == true)
 		{
 			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
@@ -760,7 +887,7 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true && Button==false)
+		if (m_l == true && Button==false && pos->PTrun == true)
 		{
 			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
@@ -793,7 +920,7 @@ void CObjCard::Action()
 		sc->Cnanber -= 1; //カードの合計枚数を１減らす
 		pos->m_f = true;
 		StopSm = true;
-		Audio::Start(1);
+		Audio::Start(11);
 		point->Cost--;//コスト減少
 		if (Type == 4)
 		{
@@ -843,7 +970,7 @@ void CObjCard::Action()
 		for (int i = 0; i < 3; i++)
 		{
 			//カードの情報を探し出し、該当した場合処理開始
-			if (pos->PCard[i][5] == Number4 || pos->PCard[i][7] == Number4) {
+			if (pos->PCard[i][5] == WSetting || pos->PCard[i][7] == WSetting) {
 				//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
 				if(RWeapon==true)
 					Hp = pos->PCard[i][4];
@@ -851,7 +978,7 @@ void CObjCard::Action()
 					Hp = pos->PCard[i][6];
 
 				//装備モンスターがやられるか、武器の耐久が０になった場合消去
-				if (pos->PCard[i][0] <=0 || Hp==0)
+				if (pos->PCard[i][0] <=0 || Hp<=0)
 				{
 					pos->PCard[i][1] -= Atack;
 					pos->PCard[i][2] -= Guard;
@@ -1095,21 +1222,35 @@ void CObjCard::Wwindow(bool *_set,bool _delete)
 
 	if (*_set == false)
 	{
-		window = new CObjwindow(500, 350);
+		window = new CObjwindow(500, 350,Type);
 		Objs::InsertObj(window, OBJ_WINDOW, 10);
 		*_set = true;
 		pos->WiSummon = true;
 
 		if (pos->S_position == true)
 		{
-			WLcard = pos->PCard[1][3];
+			if (pos->PCard[1][3] < 100)
+			{
+				WLcard = pos->PCard[1][3] % 10;
+			}
+			else
+			{
+				WLcard = pos->PCard[1][3] % 100;
+			}
 			LDcard = true;
 			Wcount++;
 		}
 
 		if (pos->S_position2 == true)
 		{
-			WRcard = pos->PCard[2][3];
+			if (pos->PCard[2][3] < 100)
+			{
+				WRcard = pos->PCard[2][3] % 10;
+			}
+			else
+			{
+				WRcard = pos->PCard[2][3] % 100;
+			}
 			RDcard = true;
 			Wcount++;
 		}
@@ -1140,7 +1281,7 @@ void CObjCard::Cardname()
 	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
 	int ret;
 
-	while ((ret = fscanf(fp, "%[^,],%d,%f,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
+	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
 	{
 		if (Nlist == Type)//カード番号が一致したとき、処理開始
 		{

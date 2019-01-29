@@ -30,6 +30,9 @@ private:
 	bool Button;//ボタン用変数
 	int BDraw;//ボタンdraw用変数
 
+	float Deadt;//ゲームオーバー画面に移行するまでの時間
+	float inviD;//画像の透過度
+
 	//ボタン用表示位置
 	float b_x;
 	float b_y;
