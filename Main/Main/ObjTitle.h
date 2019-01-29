@@ -15,4 +15,6 @@ public:
 	void Draw();
 private:
 	bool m_key_flag;//キーフラッグ
+	bool m_l;
+	bool m_f2;
 };
