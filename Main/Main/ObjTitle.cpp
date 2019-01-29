@@ -3,6 +3,7 @@
 #include "GameL\DrawFont.h"
 #include "GameL\WinInputs.h"
 #include "GameL\SceneManager.h"
+#include "GameL\Audio.h"
 
 #include "GameHead.h"
 #include "ObjTitle.h"
@@ -14,6 +15,11 @@ using namespace GameL;
 void CObjTitle::Init()
 {
 	m_key_flag = false;
+
+	Audio::LoadAudio(12,L"Audio\\OP.wav", BACK_MUSIC);
+
+	Audio::Start(12);
+
 	m_l = true;
 	m_f2 = true;
 }
