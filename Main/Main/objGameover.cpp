@@ -31,14 +31,6 @@ void CObjGameover::Action()
 	m_l = Input::GetMouButtonL();
 
 	//スペースキーを押すとシーン変更
-	/*if (Input::GetVKey(VK_SPACE))
-	{
-		if (m_key_flag == true)
-		{
-			m_key_flag = false;
-			Scene::SetScene(new CSceneTitle());
-		}
-	}*/
 	if (m_l == true)
 	{
 		if (mou->m_mouse_x > 700 && mou->m_mouse_x < 994
