@@ -72,16 +72,9 @@ void CObjpoint::Draw()
 		Font::StrDraw(str, 355, 420, 60, c);
 	}
 
-	if (pos->PTrun==false)
+	/*if (pos->PTrun==false)
 	{
 		swprintf_s(str, L"end");
 		Font::StrDraw(str, 90, 150, 20, d);
-	}
-	
-	//Ž©ƒ^[ƒ“’†Trun End‚Ì•¶Žš‚ð•\Ž¦
-	if (pos->PTrun == true)
-	{
-		swprintf_s(str, L"Trun End");
-		Font::StrDraw(str, 40, 425, 50, d);
 	}
 };

@@ -254,6 +254,8 @@ void CObjDekc::Action()
 //ドロー
 void CObjDekc::Draw()
 {
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 	//カードの大きさは横３、縦４にする
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 	float d[4] = { 0.0f,0.0f,0.0f,1.0f };
@@ -288,11 +290,15 @@ void CObjDekc::Draw()
 		dst.m_bottom = 764.0f;
 
 		Draw::Draw(3, &src, &dst, c, 0);
-	}
+	}	
+	if (pos->PTrun == true)
+	{
+		//自ターン中Trun Endの文字を表示
+		swprintf_s(str, L"Trun End");
+		Font::StrDraw(str, 40, 425, 50, d);
 
-	//"降参"の表示
-	/*swprintf_s(str,L"降 参");
-	Font::StrDraw(str, 40, 825, 40, d);*/
-	swprintf_s(str, L"リタイア");
-	Font::StrDraw(str, 28, 827, 30, d);
+		//"降参"の表示
+		swprintf_s(str, L"リタイア");
+		Font::StrDraw(str, 28, 827, 30, d);
+	}
 }

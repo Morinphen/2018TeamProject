@@ -15,4 +15,5 @@ public:
 	void Draw();
 private:
 	bool m_key_flag;
+	bool m_l;
 };

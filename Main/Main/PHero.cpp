@@ -51,6 +51,9 @@ void CObjPHero::Init()
 
 	m_f = false;
 
+	//リタイアフラグ
+	r_f = false;
+
 	Hits::SetHitBox(this, m_x, m_y, 108, 144, ELEMENT_GREEN, OBJ_FIELD_PLAYER, 1);
 }
 
@@ -88,13 +91,24 @@ void CObjPHero::Action()
 			&& mou->m_mouse_y > 809 && mou->m_mouse_y < 880
 			&& pos->PTrun == true)
 		{
-			Scene::SetScene(new CSceneGameover());
-			//m_l = false;
+			r_f = true;
 		}
-		/*else
+	}
+	if (r_f == true)
+	{
+		if (m_l == true)
 		{
-			m_l = true;
-		}*/
+			if (mou->m_mouse_x > 600 && mou->m_mouse_x < 672
+				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
+			{
+				Scene::SetScene(new CSceneGameover());
+			}
+			else if (mou->m_mouse_x > 900 && mou->m_mouse_x < 972
+				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
+			{
+				r_f = false;
+			}
+		}
 	}
 
 	if (Hp == 0)
@@ -315,10 +329,30 @@ void CObjPHero::Draw()
 
 		Draw::Draw(3, &src, &dst, c, Rotdraw);
 	}
-
-
-
 	wchar_t str[128];
 	swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
 	Font::StrDraw(str, m_x + 15, m_y + 115, 20, d);
+
+	//リタイア確認
+	if (r_f == true)
+	{
+		src.m_top = 64.0f;
+		src.m_left = 0.0f;
+		src.m_right = 189.0f;
+		src.m_bottom = 121.0f;
+
+		dst.m_top = 300.0f;
+		dst.m_left = 500.0f;
+		dst.m_right = 1100.0f;
+		dst.m_bottom = 500.0f;
+
+		Draw::Draw(3, &src, &dst, c, 0.0f);
+
+		swprintf_s(str, L"本当にリタイアしますか？");
+		Font::StrDraw(str, 595, 330, 36, c);
+		swprintf_s(str, L"はい");
+		Font::StrDraw(str, 600, 420, 36, c);
+		swprintf_s(str, L"いいえ");
+		Font::StrDraw(str, 900, 420, 36, c);
+	}
 }

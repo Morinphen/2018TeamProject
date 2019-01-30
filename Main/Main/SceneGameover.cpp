@@ -30,11 +30,14 @@ void CSceneGameover::InitScene()
 {
 	//出力させる文字のグラフィックを作成
 	Font::SetStrTex(L"Arma Batlle");
-	Draw::LoadImageW(L"image2.png", 0, TEX_SIZE_512);
+	Draw::LoadImageW(L"Game Over.png", 5, TEX_SIZE_1024);
 
 	CObjGameover* obj = new CObjGameover();	//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_GAMEOVER, 10);//主人公オブジェクト登録
 
+	//マウスオブジェクト作成
+	CObjmouse* obj_mouse = new CObjmouse();
+	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 100);
 }
 
 //ゲームメイン実行中メソッド
