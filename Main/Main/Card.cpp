@@ -757,7 +757,6 @@ void CObjCard::Action()
 				//モンスターの場合
 				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
 				{
-
 					//左側のスペースが開いている場合
 					if (S_position == false&&point->Cost>0&&pos->PTrun==true) {
 						m_x = 543;
@@ -912,8 +911,7 @@ void CObjCard::Action()
 		{
 			Hits::DeleteHitBox(this);
 			this->SetStatus(false);
-		}
-		
+		}		
 		sc->m_point--; //コスト減少
 	}
 
@@ -989,7 +987,6 @@ void CObjCard::Action()
 							break;
 						}
 					}
-
 					Hits::DeleteHitBox(this);
 					this->SetStatus(false);
 				}
@@ -1004,7 +1001,6 @@ void CObjCard::Action()
 		Bat = 1;
 		Bat2 = 1;
 	}
-
 }
 
 //ドロー
