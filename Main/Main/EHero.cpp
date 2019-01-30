@@ -93,14 +93,14 @@ void CObjEHero::Draw()
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	src.m_top = 192.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
+	src.m_top = 128.0f;
+	src.m_left = 128.0f;
+	src.m_right = 256.0f;
 	src.m_bottom = 256.0f;
 
 	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x;
-	dst.m_right = 108.0f + m_x;
+	dst.m_left = 0.0f + m_x - 36;
+	dst.m_right = 144.0f + m_x - 36;
 	dst.m_bottom = 144.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
@@ -111,7 +111,7 @@ void CObjEHero::Draw()
 	{
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
+		dst.m_right = 371.0f;
 		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);

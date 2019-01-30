@@ -39,6 +39,7 @@ private:
 	bool Wstop;//武器の装備制御変数
 	int WSetting;//武器を装備した際に決める変数
 
+	int TextD;//テキストデータ保存用変数
 	int NTcard;//カードデータ番号
 	int Cadata;//データ番号保存用変数
 
@@ -56,10 +57,6 @@ private:
 	char *Text;
 	char text[256];
 	int Tlong;
-
-	//ダミーデータ
-	int aaaa;
-	int Nlist;
 
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 	int Opdraw;//カードの切取り位置１

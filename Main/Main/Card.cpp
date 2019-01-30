@@ -43,7 +43,7 @@ void CObjCard::Init()
 
 	BDraw = 0;
 
-	Opdraw = sc->Card;//カード番号の保存
+	Opdraw = sc->Deck[sc->Card - 1];//カード番号の保存
 
 	Updraw = 0;//カードの描画位置の調整
 	Rotdraw = 0;//カードの回転描画調整
@@ -97,9 +97,12 @@ void CObjCard::Init()
 	Bat = 1;
 	Bat2 = 1;
 
-	while(Opdraw>7)
+	Opdraw--;
+	Opdraw = Opdraw / 10;
+
+	while(Opdraw>15)
 	{
-		Opdraw -= 7;//x位置をずらす
+		Opdraw -= 15;//x位置をずらす
 		Updraw++;
 	}
 
@@ -108,7 +111,6 @@ void CObjCard::Init()
 	m_f = false;
 
 	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ENEMY, OBJ_CARD, 1);
-
 
 	//float Volume = Audio::VolumeMaster(0.1f);
 }
@@ -667,7 +669,8 @@ void CObjCard::Action()
 			{
 				//ボタンがクリックされたとき
 				if (mou->m_mouse_x > b_x && mou->m_mouse_x < b_x + 64
-					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48)
+					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48
+					&& Type==1)
 				{
 
 					Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
@@ -698,18 +701,6 @@ void CObjCard::Action()
 	Setcard = sc->Cnanber;//カードの位置調整変更用
 
 	Posicard = Setcard - Number;//カードの位置調整変更用２
-	/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
-	{
-		Reflag = true;
-		han->hensu -= 1;
-	}
-
-	if (Reflag == true)
-	{
-		Nanber3 = Nanber3;
-		Nanber--;
-		Reflag = false;
-	}*/
 
 	if (Number3 - han->hensu3 > 0 && han->hensu>0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
@@ -722,14 +713,9 @@ void CObjCard::Action()
 	//モンスターの位置更新
 	S_position = pos->S_position;
 	S_position2 = pos->S_position2;
-
-	//L_position = pos->L_position;
-
-	//R_position = pos->R_position;
 	
 	if(Setcard <=5 && Summon == false)
 	{
-		//m_x = 250+(90* Posicard);
 		for (int i = 0; i < Setcard; i++)
 		{
 			if (han->hand[i] == Number2)
@@ -934,14 +920,18 @@ void CObjCard::Action()
 	//召喚されたモンスターの処理
 	if (Summon == true && Type==1)
 	{
-		//右側、左側のモンスターのHP更新
+		//右側、左側のモンスターのステータス更新
 		if (FSummon == true)
 		{
 			Hp = pos->PCard[1][0];
+			Atack = pos->PCard[1][1];
+			Guard = pos->PCard[1][2];
 		}
 		else
 		{
 			Hp = pos->PCard[2][0];
+			Atack = pos->PCard[2][1];
+			Guard = pos->PCard[2][2];
 		}
 
 		//HPが０になった場合、位置情報を更新し、消去
@@ -983,13 +973,18 @@ void CObjCard::Action()
 					pos->PCard[i][1] -= Atack;
 					pos->PCard[i][2] -= Guard;
 					if (RWeapon == true)
+					{
 						pos->PCard[i][4] = 0;
+						RWeapon = false;
+					}
 					else
+					{
 						pos->PCard[i][6] = 0;
-					//pos->PCard[i][5] = 0;
+						LWeapon = false;
+					}
 
 					for (int j = 0; j < 6; j++) {
-						if (pos->WPosition[j] == Number4) {
+						if (pos->WPosition[j] == WSetting) {
 							pos->WPosition[j] = 0;
 							break;
 						}
@@ -1035,15 +1030,15 @@ void CObjCard::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	src.m_top = 0.0f+ (64.0f*Updraw);
-	src.m_left = 0.0f + (64.0f*Opdraw);
-	src.m_right = 64.0f + (64.0f*Opdraw);
-	src.m_bottom = 64.0f+ (64.0f*Updraw);
+	src.m_top = 0.0f+ (128.0f*Updraw);
+	src.m_left = 0.0f + (128.0f*Opdraw);
+	src.m_right = 128.0f + (128.0f*Opdraw);
+	src.m_bottom = 128.0f+ (128.0f*Updraw);
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
-	dst.m_right = 90.0f + m_x;
-	dst.m_bottom = 120.0f + m_y;
+	dst.m_right = 128.0f + m_x;
+	dst.m_bottom = 128.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
@@ -1055,7 +1050,7 @@ void CObjCard::Draw()
 
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
+		dst.m_right = 371.0f;
 		dst.m_bottom = 371.0f;
 
 		wchar_t atr[256];
@@ -1093,56 +1088,56 @@ void CObjCard::Draw()
 	//ウィンドウの表示
 	if (Wset == true) {
 
-		src.m_top = 64.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
+		src.m_top = 0.0f;
+		src.m_left = 128.0f;
+		src.m_right = 256.0f;
 		src.m_bottom = 128.0f;
 
 		dst.m_top = 0.0f + 400;
 		dst.m_left = 0.0f + 550;
-		dst.m_right = 90.0f + 550;
-		dst.m_bottom = 120.0f + 400;
+		dst.m_right = 128.0f + 550;
+		dst.m_bottom = 128.0f + 400;
 
 		Draw::Draw(0, &src, &dst, e, 0.0f);
 
 		if (LDcard == true)
 		{
-			while (WLcard > 7)
+			while (WLcard > 15)
 			{
-				WLcard -= 7;
+				WLcard -= 15;
 				WLupdraw++;
 			}
 
-			src.m_top = 0.0f + (64.0f*WLupdraw);
-			src.m_left = 0.0f + (64.0f*WLcard);
-			src.m_right = 64.0f + (64.0f*WLcard);
-			src.m_bottom = 64.0f + (64.0f*WLupdraw);
+			src.m_top = 0.0f + (128.0f*WLupdraw);
+			src.m_left = 0.0f + (128.0f*WLcard);
+			src.m_right = 128.0f + (128.0f*WLcard);
+			src.m_bottom = 128.0f + (128.0f*WLupdraw);
 
 			dst.m_top = 0.0f + 400;
 			dst.m_left = 0.0f + 700;
-			dst.m_right = 90.0f + 700;
-			dst.m_bottom = 120.0f + 400;
+			dst.m_right = 128.0f + 700;
+			dst.m_bottom = 128.0f + 400;
 
 			Draw::Draw(0, &src, &dst, e, 0.0f);
 		}
 
 		if (RDcard == true)
 		{
-			while (WRcard > 7)
+			while (WRcard > 15)
 			{
-				WRcard -= 7;
+				WRcard -= 15;
 				WRupdraw++;
 			}
 
-			src.m_top = 0.0f + (64.0f*WRupdraw);
-			src.m_left = 0.0f + (64.0f*WRcard);
-			src.m_right = 64.0f + (64.0f*WRcard);
-			src.m_bottom = 64.0f + (64.0f*WRupdraw);
+			src.m_top = 0.0f + (128.0f*WRupdraw);
+			src.m_left = 0.0f + (128.0f*WRcard);
+			src.m_right = 128.0f + (128.0f*WRcard);
+			src.m_bottom = 128.0f + (128.0f*WRupdraw);
 
 			dst.m_top = 0.0f + 400;
 			dst.m_left = 0.0f + 850;
-			dst.m_right = 90.0f + 850;
-			dst.m_bottom = 120.0f + 400;
+			dst.m_right = 128.0f + 850;
+			dst.m_bottom = 128.0f + 400;
 
 			Draw::Draw(0, &src, &dst, e, 0.0f);
 		}
@@ -1199,16 +1194,13 @@ void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Po
 		}
 	}
 
-	else if (_Cnanber == 41)
+	else if (_Cnanber == 1351)
 	{
 		pos->PCard[Position - 1][0]+=2;
 	}
 
 	if (Button == false && PlayEfe == false && Pusave == false) {
-		if (_Cnanber != 31)
-		{
-			Button = true;
-		}
+		Button=true;
 	}
 }
 
@@ -1220,6 +1212,7 @@ void CObjCard::Wwindow(bool *_set,bool _delete)
 	CObjwindow* window = (CObjwindow*)Objs::GetObj(OBJ_WINDOW);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);	
 
+	//ウィンドウが存在しない場合、ウィンドウしゅつげん
 	if (*_set == false)
 	{
 		window = new CObjwindow(500, 350,Type);
@@ -1227,30 +1220,20 @@ void CObjCard::Wwindow(bool *_set,bool _delete)
 		*_set = true;
 		pos->WiSummon = true;
 
+		//左側にモンスターがいる場合、選択肢に追加
 		if (pos->S_position == true)
 		{
-			if (pos->PCard[1][3] < 100)
-			{
-				WLcard = pos->PCard[1][3] % 10;
-			}
-			else
-			{
-				WLcard = pos->PCard[1][3] % 100;
-			}
+			WLcard = pos->PCard[1][3] - 1;
+			WLcard = WLcard / 10;
 			LDcard = true;
 			Wcount++;
 		}
 
+		//左側にモンスターがいる場合、選択肢に追加
 		if (pos->S_position2 == true)
 		{
-			if (pos->PCard[2][3] < 100)
-			{
-				WRcard = pos->PCard[2][3] % 10;
-			}
-			else
-			{
-				WRcard = pos->PCard[2][3] % 100;
-			}
+			WRcard = pos->PCard[2][3] - 1;
+			WRcard = WRcard / 10;
 			RDcard = true;
 			Wcount++;
 		}
@@ -1265,6 +1248,8 @@ void CObjCard::Wwindow(bool *_set,bool _delete)
 			pos->WiSummon = false;
 			LDcard = false;
 			RDcard = false;
+			WLupdraw = 0;
+			WRupdraw = 0;
 			Wcount = 0;
 		}
 	}
@@ -1280,10 +1265,11 @@ void CObjCard::Cardname()
 	char fname[] = "CardList.csv";
 	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
 	int ret;
+	int aaaa;//ダミーデータ
 
-	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%d,%[^\n] ,", pos->name, &Nlist, &NTcard, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
+	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%d,%[^\n] ,", pos->name, &aaaa, &TextD, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
 	{
-		if (Nlist == Type)//カード番号が一致したとき、処理開始
+		if (TextD == Number4)//カード番号が一致したとき、処理開始
 		{
 			Tlong = strlen(text);//テキストの長さを求める
 			for (int j = 0; j < 6; j++)

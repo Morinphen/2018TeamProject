@@ -32,16 +32,28 @@ void CObjDekc::Init()
 	//stop 同じカードの出現阻止
 	stop = 0;
 
+	srand((unsigned)time(NULL));
+
 	for (int i = 0; i < 40; i++)
 	{
-		if(i<7)
-			Deck[i] = 11;
+		/*if(i<7)
+			Deck[i] = 401;
 		else if(i<11)
-			Deck[i] = 21;
+			Deck[i] = 491;
 		else if (i<14)
-			Deck[i] = 31;
+			Deck[i] = 951;
 		else if (i<40)
-			Deck[i] = 41;
+			Deck[i] = 1351;*/
+
+		Data = rand() % 1531 + 10;
+
+		Data = Data - (Data % 10);
+
+		Data++;
+
+
+		Deck[i] = Data;//同じ番号のカード呼出
+
 	}
 
 	//Cnanber カードの位置調整用
@@ -63,7 +75,6 @@ void CObjDekc::Init()
 	m_point = 100;
 	Cost = 0;
 	m_flag_point = false;
-	srand((unsigned)time(NULL));
 
 }
 
@@ -107,17 +118,17 @@ void CObjDekc::Action()
 
 		}
 
-		/*if (Card <= 48)
+		if (Deck[Card - 1] <= 481)
 		{
 			Ctype = monster;
 		}
 
-		else if (Card <= 94)
+		else if (Deck[Card - 1] <= 941)
 		{
 			Ctype = weapon;
 		}
 
-		else if (Card <= 134)
+		else if (Deck[Card - 1] <= 1341)
 		{
 			Ctype = shield;
 		}
@@ -125,9 +136,9 @@ void CObjDekc::Action()
 		else
 		{
 			Ctype = item;
-		}*/
+		}
 
-		if (Card <= 7)
+		/*if (Card <= 7)
 		{
 			Ctype = monster;
 		}
@@ -145,7 +156,7 @@ void CObjDekc::Action()
 		else
 		{
 			Ctype = item;
-		}
+		}*/
 
 
 		if (Turn == true && Start == true || effect == true)
@@ -250,13 +261,13 @@ void CObjDekc::Draw()
 	RECT_F dst;
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 128.0f;
 
 	dst.m_top = 0.0f + y;
 	dst.m_left = 0.0f + x;
-	dst.m_right = 90.0f + x;
-	dst.m_bottom = 120.0f + y;
+	dst.m_right = 128.0f + x;
+	dst.m_bottom = 128.0f + y;
 
 	wchar_t str[128];
 

@@ -46,6 +46,7 @@ private:
 
 	int Cardcount;//引いたカードの合計
 	int stop;
+	int Data;//デッキに登録するカードデータ
 
 	bool m_f;
 	bool m_f2;
