@@ -40,7 +40,7 @@ void CObjEnemyCard::Init()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
+	Hits::SetHitBox(this, m_x, m_y, 128, 128, ELEMENT_CARD, OBJ_CARD, 1);
 }
 
 //ƒAƒNƒVƒ‡ƒ“
@@ -185,24 +185,24 @@ void CObjEnemyCard::Draw()
 	RECT_F dst;
 
 	if (Number < 4 && Number !=2) {
-		src.m_top = 0.0f + (Number + 1) * 64;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f + (Number + 1) * 64;
+		src.m_top = 0.0f + (Number + 1) * 128;
+		src.m_left = 128.0f;
+		src.m_right = 256.0f;
+		src.m_bottom = 128.0f + (Number + 1) * 128;
 	}
 
 	else
 	{
 		src.m_top = 0.0f;
 		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
+		src.m_right = 128.0f;
+		src.m_bottom = 128.0f;
 	}
 
 	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x;
-	dst.m_right = 90.0f + m_x;
-	dst.m_bottom = 120.0f + m_y;
+	dst.m_left = 0.0f + m_x - 36;
+	dst.m_right = 128.0f + m_x - 36;
+	dst.m_bottom = 128.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
@@ -212,7 +212,7 @@ void CObjEnemyCard::Draw()
 	{
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
+		dst.m_right = 371.0f;
 		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
