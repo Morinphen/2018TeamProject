@@ -50,4 +50,5 @@ private:
 	bool m_f;
 	bool m_f2;
 	bool m_flag_point;
+	bool r_f;
 };

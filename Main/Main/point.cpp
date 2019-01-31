@@ -71,10 +71,4 @@ void CObjpoint::Draw()
 		swprintf_s(str, L"%d", Cost);
 		Font::StrDraw(str, 355, 420, 60, c);
 	}
-
-	/*if (pos->PTrun==false)
-	{
-		swprintf_s(str, L"end");
-		Font::StrDraw(str, 90, 150, 20, d);
-	}
-};
+}

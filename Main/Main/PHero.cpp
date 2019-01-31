@@ -85,7 +85,7 @@ void CObjPHero::Action()
 	Guard=pos->PCard[0][2];
 
 	//敗北条件・リタイア
-	if (m_l == true)
+	/*if (m_l == true)
 	{
 		if (mou->m_mouse_x > 19 && mou->m_mouse_x < 162
 			&& mou->m_mouse_y > 809 && mou->m_mouse_y < 880
@@ -109,7 +109,7 @@ void CObjPHero::Action()
 				r_f = false;
 			}
 		}
-	}
+	}*/
 
 	if (Hp == 0)
 	{
@@ -334,7 +334,7 @@ void CObjPHero::Draw()
 	Font::StrDraw(str, m_x + 15, m_y + 115, 20, d);
 
 	//リタイア確認
-	if (r_f == true)
+	/*if (r_f == true)
 	{
 		src.m_top = 64.0f;
 		src.m_left = 0.0f;
@@ -354,5 +354,5 @@ void CObjPHero::Draw()
 		Font::StrDraw(str, 600, 420, 36, c);
 		swprintf_s(str, L"いいえ");
 		Font::StrDraw(str, 900, 420, 36, c);
-	}
+	}*/
 }
