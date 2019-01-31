@@ -895,7 +895,6 @@ void CObjCard::Action()
 		SetPrio(21);
 	}
 
-
 	//カードが召喚されたとき
 	if (Summon == true && StopSm==false) {
 		han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除

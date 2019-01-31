@@ -145,7 +145,6 @@ void CObjPHero::Action()
 				pos->PCard[0][0] -= pos->ECard[1] - pos->PCard[0][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
 
 			//選択情報を元に戻す
-			test = 1;
 			Punch = false;
 			Pusave = true;
 			Audio::Start(8);
@@ -281,8 +280,22 @@ void CObjPHero::Action()
 void CObjPHero::Draw()
 {
 
-	float c[4] = { 1.0f,test,1.0f,inviD };
-	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float c[4] = { 1.0f,1.0f,1.0f,inviD };
+
+	//HP
+	float h[4]  = { 0.0f,1.0f,0.0f,1.0f };
+	float h2[4] = { 0.7f,1.0f,0.0f,1.0f };
+
+	//Atack
+	float a[4]  = { 1.0f,0.5f,0.7f,1.0f };
+	float a2[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//Guard
+	float g[4]  = { 0.0f,1.0f,1.0f,1.0f };
+	float g2[4] = { 0.0f,0.0f,1.0f,1.0f };
+
+	wchar_t str[128];
+
 	RECT_F src;
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -329,9 +342,63 @@ void CObjPHero::Draw()
 
 		Draw::Draw(3, &src, &dst, c, Rotdraw);
 	}
-	wchar_t str[128];
+	/*wchar_t str[128];
 	swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-	Font::StrDraw(str, m_x + 15, m_y + 115, 20, d);
+	Font::StrDraw(str, m_x + 15, m_y + 115, 20, d);*/
+	if (Atack == 1)
+	{
+		swprintf_s(str, L"%d", Atack);
+		Font::StrDraw(str, 753, 701, 24, a);
+	}
+	else if (Atack != 1)
+	{
+		if (Atack >= 10)
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, 746, 701, 24, a2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, 753, 701, 24, a2);
+		}
+	}
+	if (Hp == 20)
+	{
+		swprintf_s(str, L"%d", Hp);
+		Font::StrDraw(str, 779, 701, 24, h);
+	}
+	else if (Hp != 20)
+	{
+		if (Hp >= 10)
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, 779, 701, 24, h2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, 786, 701, 24, h2);
+		}
+	}
+	if (Guard == 0)
+	{
+		swprintf_s(str, L"%d", Guard);
+		Font::StrDraw(str, 817, 701, 24, g);
+	}
+	else if (Guard != 0)
+	{
+		if (Guard >= 10)
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, 810, 701, 24, g2);;
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, 817, 701, 24, g2);
+		}
+	}
 
 	//リタイア確認
 	/*if (r_f == true)
