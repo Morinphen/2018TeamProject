@@ -287,10 +287,10 @@ void CObjPHero::Draw()
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	src.m_top = 0.0f;
-	src.m_left = 128.0f;
-	src.m_right = 128.0f*2;
-	src.m_bottom = 128.0f;
+	src.m_top = 0.0f + (128 * 10);
+	src.m_left = 0.0f + (128 * 5);
+	src.m_right = 128.0f + (128 * 5);
+	src.m_bottom = 128.0f + (128 * 10);
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;

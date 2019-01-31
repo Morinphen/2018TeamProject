@@ -36,6 +36,7 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+	int Ccost;//カードのコスト
 	bool Wstop;//武器の装備制御変数
 	int WSetting;//武器を装備した際に決める変数
 
