@@ -254,7 +254,6 @@ void CObjPHero::Action()
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && pos->Wtouch == false)
 	{
-		//CardHitCheck = true; //"マウスがカードに触れていない"状態にする
 		Rotdraw = -3;
 		SetPrio(11);
 		if (m_l == true && pos->WSummon == false && test!=0 && Pusave==false
@@ -283,14 +282,15 @@ void CObjPHero::Draw()
 
 	float c[4] = { 1.0f,test,1.0f,inviD };
 	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
+	float e[4] = { 1.0f,1.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	src.m_top = 0.0f;
-	src.m_left = 128.0f;
-	src.m_right = 128.0f*2;
-	src.m_bottom = 128.0f;
+	src.m_top = 0.0f + (128 * 10);
+	src.m_left = 0.0f + (128 * 5);
+	src.m_right = 128.0f + (128 * 5);
+	src.m_bottom = 128.0f + (128 * 10);
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
@@ -303,10 +303,23 @@ void CObjPHero::Draw()
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
 	{
+		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+		Cardname();
+
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
 		dst.m_right = 371.0f;
 		dst.m_bottom = 371.0f;
+
+		wchar_t atr[256];
+		wchar_t aatr[5][64];
+		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
+		Font::StrDraw(atr, 40, 595, 20, e);//テキストを表示
+
+		for (int i = 0; i * 30 < Tlong; i++) {
+			mbstowcs(aatr[i], pos->text2[i], 64);
+			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
+		}
 
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
@@ -355,4 +368,37 @@ void CObjPHero::Draw()
 		swprintf_s(str, L"いいえ");
 		Font::StrDraw(str, 900, 420, 36, c);
 	}*/
+}
+
+//Cardname関数
+//Cardname()を入力すれば、カードに名前とテキストが表示されるようになる
+void CObjPHero::Cardname()
+{
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	FILE *fp;
+	char fname[] = "CardList.csv";
+	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
+	int ret;
+	int aaaa;//ダミーデータ
+
+	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%d,%[^\n] ,", pos->name, &aaaa, &TextD, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
+	{
+		if (TextD == 1551)//カード番号が一致したとき、処理開始
+		{
+			Tlong = strlen(text);//テキストの長さを求める
+			for (int j = 0; j < 6; j++)
+			{
+				pos->text2[j][0] = '\0';
+			}
+			for (int i = 0; i * 30 < Tlong; i++)//15文字づつ改行していく
+			{
+				strncpy(pos->text2[i], text + i * 30, 30);
+				pos->text2[i][30] = '\0';
+			}
+			break;
+		}
+	}
+
+	fclose(fp); // ファイルを閉じる
 }

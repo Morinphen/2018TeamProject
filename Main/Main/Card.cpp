@@ -752,76 +752,78 @@ void CObjCard::Action()
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
 				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
-				PList->Action(&Name, Number4, &Number, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				Cadata = NTcard;
 
-				//モンスターの場合
-				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
+				if (point->Cost > Ccost)
 				{
-					//左側のスペースが開いている場合
-					if (S_position == false&&point->Cost>0&&pos->PTrun==true) {
-						m_x = 543;
-						m_y = 589;
-						//Hitboxを更新し、フィールド内での処理ができるようにする
-						Hits::DeleteHitBox(this);
-						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
+					//モンスターの場合
+					if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1 && pos->PTrun == true && point->Cost > 0)
+					{
+						//左側のスペースが開いている場合
+						if (S_position == false && point->Cost > 0 && pos->PTrun == true) {
+							m_x = 543;
+							m_y = 589;
+							//Hitboxを更新し、フィールド内での処理ができるようにする
+							Hits::DeleteHitBox(this);
+							Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
 
-						//フィールドにカード情報を登録
-						pos->PCard[1][0] = Hp;
-						pos->PCard[1][1] = Atack;
-						pos->PCard[1][2] = Guard;
-						pos->PCard[1][3] = Number4;
-						//召喚された情報を登録
-						pos->S_position = true;
-						FSummon = true;
-						Summon = true;
-					}
-
-					//そうでない場合、右に召喚
-					else if(point->Cost>0&&pos->PTrun==true){
-						m_x = 951;
-						m_y = 589;
-						Hits::DeleteHitBox(this);
-						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
-						pos->PCard[2][0] = Hp;
-						pos->PCard[2][1] = Atack;
-						pos->PCard[2][2] = Guard;
-						pos->PCard[2][3] = Number4;
-						pos->S_position2 = true;
-						FSummon2 = true;
-						Summon = true;
-					}
-
-					pos->m_f = true;
-					hit->SetPos(m_x, m_y);
-				}
-
-				//武器の場合
-				else if (Type==2 && pos->Wtouch==false || Type==3 && pos->Wtouch == false&&pos->PTrun==true)
-				{
-					for (int i = 0; i < 6; i++) {
-
-						//武器を装備できる見方がいる場合、選択できるようにする
-						if (pos->WPosition[i]<=0)
-						{
-							Wwindow(&Wset, 0);
-							test = 0;
-							Set = true;
-							pos->Wtouch = true;
-							break;
+							//フィールドにカード情報を登録
+							pos->PCard[1][0] = Hp;
+							pos->PCard[1][1] = Atack;
+							pos->PCard[1][2] = Guard;
+							pos->PCard[1][3] = Number4;
+							//召喚された情報を登録
+							pos->S_position = true;
+							FSummon = true;
+							Summon = true;
 						}
 
-					}
-				}
+						//そうでない場合、右に召喚
+						else if (point->Cost > 0 && pos->PTrun == true) {
+							m_x = 951;
+							m_y = 589;
+							Hits::DeleteHitBox(this);
+							Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
+							pos->PCard[2][0] = Hp;
+							pos->PCard[2][1] = Atack;
+							pos->PCard[2][2] = Guard;
+							pos->PCard[2][3] = Number4;
+							pos->S_position2 = true;
+							FSummon2 = true;
+							Summon = true;
+						}
 
-				//道具の場合
-				else if (Type == 4 && pos->Wtouch == false && pos->PTrun == true)
-				{
-					Wwindow(&Wset, 0);
-					test = 0;
-					pos->Wtouch = true;
-					Set = true;
-				}
+						pos->m_f = true;
+						hit->SetPos(m_x, m_y);
+					}
+
+					//武器の場合
+					else if (Type == 2 && pos->Wtouch == false || Type == 3 && pos->Wtouch == false && pos->PTrun == true)
+					{
+						for (int i = 0; i < 6; i++) {
+
+							//武器を装備できる見方がいる場合、選択できるようにする
+							if (pos->WPosition[i] <= 0)
+							{
+								Wwindow(&Wset, 0);
+								test = 0;
+								Set = true;
+								pos->Wtouch = true;
+								break;
+							}
+
+						}
+					}
+
+					//道具の場合
+					else if (Type == 4 && pos->Wtouch == false && pos->PTrun == true)
+					{
+						Wwindow(&Wset, 0);
+						test = 0;
+						pos->Wtouch = true;
+						Set = true;
+					}
 
 				m_c = false; //クリック制御
 				delete PList;
@@ -911,13 +913,12 @@ void CObjCard::Action()
 		pos->m_f = true;
 		StopSm = true;
 		Audio::Start(11);
-		point->Cost--;//コスト減少
+		point->Cost-=Ccost;//コスト減少
 		if (Type == 4)
 		{
 			Hits::DeleteHitBox(this);
 			this->SetStatus(false);
 		}		
-		sc->m_point--; //コスト減少
 	}
 
 	//召喚されたモンスターの処理
