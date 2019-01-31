@@ -747,7 +747,8 @@ void CObjCard::Action()
 
 		if (m_l == true)
 		{
-			if (pos->m_f == false && point->Cost>0) {
+			if (pos->m_f == false && point->Cost > 0 && m_c == true) {
+
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
 				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
@@ -822,10 +823,14 @@ void CObjCard::Action()
 					Set = true;
 				}
 
+				m_c = false; //クリック制御
 				delete PList;
 			}
+			else
+			{
+				m_c = true; //クリック制御
+			}
 		}
-
 		else
 		{
 			pos->m_f = false;
