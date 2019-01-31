@@ -204,15 +204,18 @@ void CObjDekc::Action()
 			Start = true;
 		}
 
-	//ターン開始時　デッキをクリックしてドロー 
-		if(mou->m_mouse_x>1105.0f&&mou->m_mouse_x<1168.0f
-			&&mou->m_mouse_y>700.0f&&mou->m_mouse_y<764.0f&&
-		pos->PTrun == false && m_f2 == true&&m_l==true)
-	{
-		Turn = true;
-		m_f2 = false;
-		Button2 = false;
-
+		//ターン開始時　デッキをクリックしてドロー 
+		if (mou->m_mouse_x > 1105.0f&&
+			mou->m_mouse_x<1168.0f&&
+			mou->m_mouse_y>700.0f&&
+			mou->m_mouse_y < 764.0f&&
+			pos->PTrun == false &&
+			m_f2 == true &&
+			m_l == true)
+		{
+			Turn = true;
+			m_f2 = false;
+			Button2 = false;
 		}
 		else
 		{
@@ -222,9 +225,13 @@ void CObjDekc::Action()
 		//ターン終了ボタン
 		if (m_l == true)
 		{
-			if (mou->m_mouse_x > 12 && mou->m_mouse_x < 275
-				&& mou->m_mouse_y > 391 && mou->m_mouse_y < 510
-				&& pos->PTrun == true && m_f2 == true)
+			if (mou->m_mouse_x > 12 &&
+				mou->m_mouse_x < 275 &&
+				mou->m_mouse_y > 391 &&
+				mou->m_mouse_y < 510 &&
+				pos->PTrun == true &&
+				m_f2 == true &&
+				m_f3 == true)
 			{
 				pos->PTrun = false;
 				m_f2 = false;
@@ -235,8 +242,12 @@ void CObjDekc::Action()
 			{
 				m_f2 = true;
 			}
+			m_f3 = false;
 		}
-
+		else
+		{
+			m_f3 = true;
+		}
 	}
 }
 
