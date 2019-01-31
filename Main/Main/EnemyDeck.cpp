@@ -112,12 +112,12 @@ void CObjEnemyDeck::Draw()
 	RECT_F dst;
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 128.0f;
 
-	dst.m_top = 120.0f + y;
-	dst.m_left = 90.0f + x;
-	dst.m_right = 0.0f + x;
+	dst.m_top = 128.0f + y;
+	dst.m_left = 128.0f + x - 36;
+	dst.m_right = 0.0f + x - 36;
 	dst.m_bottom = 0.0f + y;
 
 	Draw::Draw(0, &src, &dst, c, 0.0f);

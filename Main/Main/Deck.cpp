@@ -32,16 +32,28 @@ void CObjDekc::Init()
 	//stop 同じカードの出現阻止
 	stop = 0;
 
+	srand((unsigned)time(NULL));
+
 	for (int i = 0; i < 40; i++)
 	{
-		if(i<7)
-			Deck[i] = 11;
+		/*if(i<7)
+			Deck[i] = 401;
 		else if(i<11)
-			Deck[i] = 21;
+			Deck[i] = 491;
 		else if (i<14)
-			Deck[i] = 31;
+			Deck[i] = 951;
 		else if (i<40)
-			Deck[i] = 41;
+			Deck[i] = 1351;*/
+
+		Data = rand() % 1531 + 10;
+
+		Data = Data - (Data % 10);
+
+		Data++;
+
+
+		Deck[i] = Data;//同じ番号のカード呼出
+
 	}
 
 	//Cnanber カードの位置調整用
@@ -63,19 +75,20 @@ void CObjDekc::Init()
 	m_point = 100;
 	Cost = 0;
 	m_flag_point = false;
-	srand((unsigned)time(NULL));
 
 }
 
 //アクション
 void CObjDekc::Action()
 {
-	if (StartG == true) {
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+	CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
+	CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
+	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 
-		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-		CObjHand*sc = (CObjHand*)Objs::GetObj(OBJ_HAND);
-		CObjCard*car = (CObjCard*)Objs::GetObj(OBJ_CARD);
-		CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
+	if (StartG == true)
+	{
+		
 		Card = rand() % 21 + 1;//同じ番号のカード呼出
 		stop = 1;
 
@@ -107,17 +120,17 @@ void CObjDekc::Action()
 
 		}
 
-		/*if (Card <= 48)
+		if (Deck[Card - 1] <= 481)
 		{
 			Ctype = monster;
 		}
 
-		else if (Card <= 94)
+		else if (Deck[Card - 1] <= 941)
 		{
 			Ctype = weapon;
 		}
 
-		else if (Card <= 134)
+		else if (Deck[Card - 1] <= 1341)
 		{
 			Ctype = shield;
 		}
@@ -125,9 +138,9 @@ void CObjDekc::Action()
 		else
 		{
 			Ctype = item;
-		}*/
+		}
 
-		if (Card <= 7)
+		/*if (Card <= 7)
 		{
 			Ctype = monster;
 		}
@@ -145,7 +158,7 @@ void CObjDekc::Action()
 		else
 		{
 			Ctype = item;
-		}
+		}*/
 
 
 		if (Turn == true && Start == true || effect == true)
@@ -248,6 +261,32 @@ void CObjDekc::Action()
 		{
 			m_f3 = true;
 		}
+		//敗北条件・リタイア
+		if (m_l == true)
+		{
+			if (mou->m_mouse_x > 19 && mou->m_mouse_x < 162
+				&& mou->m_mouse_y > 809 && mou->m_mouse_y < 880
+				&& pos->PTrun == true)
+			{
+				r_f = true;
+			}
+		}
+		if (r_f == true)
+		{
+			if (m_l == true)
+			{
+				if (mou->m_mouse_x > 600 && mou->m_mouse_x < 672
+					&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
+				{
+					Scene::SetScene(new CSceneGameover());
+				}
+				else if (mou->m_mouse_x > 900 && mou->m_mouse_x < 972
+					&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
+				{
+					r_f = false;
+				}
+			}
+		}
 	}
 }
 
@@ -263,13 +302,13 @@ void CObjDekc::Draw()
 	RECT_F dst;
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = 128.0f;
+	src.m_bottom = 128.0f;
 
 	dst.m_top = 0.0f + y;
 	dst.m_left = 0.0f + x;
-	dst.m_right = 90.0f + x;
-	dst.m_bottom = 120.0f + y;
+	dst.m_right = 128.0f + x;
+	dst.m_bottom = 128.0f + y;
 
 	wchar_t str[128];
 
@@ -300,5 +339,26 @@ void CObjDekc::Draw()
 		//"降参"の表示
 		swprintf_s(str, L"リタイア");
 		Font::StrDraw(str, 28, 827, 30, d);
+	}
+	if (r_f == true)
+	{
+		src.m_top = 64.0f;
+		src.m_left = 0.0f;
+		src.m_right = 189.0f;
+		src.m_bottom = 121.0f;
+
+		dst.m_top = 300.0f;
+		dst.m_left = 500.0f;
+		dst.m_right = 1100.0f;
+		dst.m_bottom = 500.0f;
+
+		Draw::Draw(3, &src, &dst, c, 0);
+
+		swprintf_s(str, L"本当にリタイアしますか？");
+		Font::StrDraw(str, 595, 330, 36, c);
+		swprintf_s(str, L"はい");
+		Font::StrDraw(str, 600, 420, 36, c);
+		swprintf_s(str, L"いいえ");
+		Font::StrDraw(str, 900, 420, 36, c);
 	}
 }

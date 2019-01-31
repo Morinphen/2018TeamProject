@@ -51,6 +51,9 @@ void CObjPHero::Init()
 
 	m_f = false;
 
+	//リタイアフラグ
+	r_f = false;
+
 	Hits::SetHitBox(this, m_x, m_y, 108, 144, ELEMENT_GREEN, OBJ_FIELD_PLAYER, 1);
 }
 
@@ -82,20 +85,31 @@ void CObjPHero::Action()
 	Guard=pos->PCard[0][2];
 
 	//敗北条件・リタイア
-	if (m_l == true)
+	/*if (m_l == true)
 	{
 		if (mou->m_mouse_x > 19 && mou->m_mouse_x < 162
 			&& mou->m_mouse_y > 809 && mou->m_mouse_y < 880
 			&& pos->PTrun == true)
 		{
-			Scene::SetScene(new CSceneGameover());
-			//m_l = false;
+			r_f = true;
 		}
-		/*else
-		{
-			m_l = true;
-		}*/
 	}
+	if (r_f == true)
+	{
+		if (m_l == true)
+		{
+			if (mou->m_mouse_x > 600 && mou->m_mouse_x < 672
+				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
+			{
+				Scene::SetScene(new CSceneGameover());
+			}
+			else if (mou->m_mouse_x > 900 && mou->m_mouse_x < 972
+				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
+			{
+				r_f = false;
+			}
+		}
+	}*/
 
 	if (Hp == 0)
 	{
@@ -273,14 +287,14 @@ void CObjPHero::Draw()
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
 
-	src.m_top = 64.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
+	src.m_top = 0.0f;
+	src.m_left = 128.0f;
+	src.m_right = 128.0f*2;
 	src.m_bottom = 128.0f;
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
-	dst.m_right = 108.0f + m_x;
+	dst.m_right = 144.0f + m_x;
 	dst.m_bottom = 144.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
@@ -291,7 +305,7 @@ void CObjPHero::Draw()
 	{
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
-		dst.m_right = 281.0f;
+		dst.m_right = 371.0f;
 		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
@@ -315,10 +329,30 @@ void CObjPHero::Draw()
 
 		Draw::Draw(3, &src, &dst, c, Rotdraw);
 	}
-
-
-
 	wchar_t str[128];
 	swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
 	Font::StrDraw(str, m_x + 15, m_y + 115, 20, d);
+
+	//リタイア確認
+	/*if (r_f == true)
+	{
+		src.m_top = 64.0f;
+		src.m_left = 0.0f;
+		src.m_right = 189.0f;
+		src.m_bottom = 121.0f;
+
+		dst.m_top = 300.0f;
+		dst.m_left = 500.0f;
+		dst.m_right = 1100.0f;
+		dst.m_bottom = 500.0f;
+
+		Draw::Draw(3, &src, &dst, c, 0.0f);
+
+		swprintf_s(str, L"本当にリタイアしますか？");
+		Font::StrDraw(str, 595, 330, 36, c);
+		swprintf_s(str, L"はい");
+		Font::StrDraw(str, 600, 420, 36, c);
+		swprintf_s(str, L"いいえ");
+		Font::StrDraw(str, 900, 420, 36, c);
+	}*/
 }

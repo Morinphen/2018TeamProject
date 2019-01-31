@@ -30,11 +30,10 @@ void CSceneMain::InitScene()
 {
 	Font::SetStrTex(L"0123456789");
 
-	Draw::LoadImageW(L"image2a.png", 0, TEX_SIZE_512);
+	Draw::LoadImageW(L"Card.png", 0, TEX_SIZE_2048);
 	Draw::LoadImageW(L"sakura.png", 1, TEX_SIZE_512);
 	Draw::LoadImageW(L"BackGround.png", 2, TEX_SIZE_2048);
 	Draw::LoadImageW(L"image4.png", 3, TEX_SIZE_512);
-
 
 	CObjDekc*obj = new CObjDekc();
 	Objs::InsertObj(obj, OBJ_DEKC, 3);
