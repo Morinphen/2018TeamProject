@@ -50,6 +50,7 @@ private:
 
 	bool m_f;
 	bool m_f2;
+	bool m_f3; //ƒ}ƒEƒX‰Ÿ‚µ‚Á‚Ï‚È‚µ‚Ì‚Ü‚Ü”½‰‚µ‚È‚¢‚æ‚¤‚É§Œä‚·‚é•Ï”
 	bool m_flag_point;
 	bool r_f;
 };
