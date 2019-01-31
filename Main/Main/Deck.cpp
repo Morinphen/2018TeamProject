@@ -340,6 +340,8 @@ void CObjDekc::Draw()
 		dst.m_right = 1100.0f;
 		dst.m_bottom = 500.0f;
 
+		SetPrio(100);
+
 		Draw::Draw(3, &src, &dst, c, 0);
 
 		swprintf_s(str, L"本当にリタイアしますか？");
