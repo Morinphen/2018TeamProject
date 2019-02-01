@@ -42,6 +42,7 @@ private:
 	int x, y;
 	int m_x, m_y;
 	bool m_l; //マウスのクリック判定
+	bool m_c; //マウス押しっぱなしのまま反応しないように制御する変数
 	int Ctype;//カードの種類
 
 	int Cardcount;//引いたカードの合計
@@ -50,7 +51,6 @@ private:
 
 	bool m_f;
 	bool m_f2;
-	bool m_f3; //マウス押しっぱなしのまま反応しないように制御する変数
 	bool m_flag_point;
 	bool r_f;
 };
