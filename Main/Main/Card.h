@@ -93,7 +93,7 @@ private:
 
 	bool m_f;
 	bool m_l;
-	bool m_c; //クリック制御
+	bool m_c; //クリック長押し制御
 
 	int test;
 
