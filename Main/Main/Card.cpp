@@ -1036,14 +1036,26 @@ void CObjCard::Draw()
 
 	float e[4] = { 1.0f,1.0f,1.0f,1.0f };
 
+	//HP
+	float h[4] = { 0.0f,1.0f,0.0f,1.0f };
+	float h2[4] = { 0.7f,1.0f,0.0f,1.0f };
+
+	//Atack
+	float a[4] = { 1.0f,0.5f,0.7f,1.0f };
+	float a2[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//Guard
+	float g[4] = { 0.0f,1.0f,1.0f,1.0f };
+	float g2[4] = { 0.0f,0.0f,1.0f,1.0f };
+
 	//モンスターのステータスの色
-	float f[4] = { 1.0f,0.0f,0.0f,1.0f };
+	/*float f[4] = { 1.0f,0.0f,0.0f,1.0f };
 
 	//武具耐久地の色
 	float g[4] = { 1.0f,0.0f,0.0f,1.0f };
 
 	//武具強化値の色
-	float h[4] = { 1.0f,0.0f,0.0f,0.7f };
+	float h[4] = { 1.0f,0.0f,0.0f,0.7f };*/
 
 	RECT_F src;
 	RECT_F dst;
@@ -1088,20 +1100,20 @@ void CObjCard::Draw()
 		if (Type == 1)
 		{
 			swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
-			Font::StrDraw(str, 40, 600, 20, f);
+			Font::StrDraw(str, 40, 600, 20, d);
 			swprintf_s(str, L"攻撃力 : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
-			Font::StrDraw(str, 40, 620, 20, h);
+			Font::StrDraw(str, 40, 620, 20, d);
 			swprintf_s(str, L"防御力 : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
-			Font::StrDraw(str, 40, 640, 20, h);
+			Font::StrDraw(str, 40, 640, 20, d);
 		}
 		if (Type == 2 || Type == 3)
 		{
 			swprintf_s(str, L"耐久値 : %d/%d", Hp, Hp2);
-			Font::StrDraw(str, 40, 600, 20, f);
+			Font::StrDraw(str, 40, 600, 20, d);
 			swprintf_s(str, L"攻撃力 : %d", Atack);
-			Font::StrDraw(str, 40, 620, 20, h);
+			Font::StrDraw(str, 40, 620, 20, d);
 			swprintf_s(str, L"防御力 : %d", Guard);
-			Font::StrDraw(str, 40, 640, 20, h);
+			Font::StrDraw(str, 40, 640, 20, d);
 		}
 
 		Draw::Draw(0, &src, &dst, d, 0);
@@ -1188,18 +1200,80 @@ void CObjCard::Draw()
 	{
 		if (Type == 1)
 		{
-			swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-			Font::StrDraw(str, m_x + 10, m_y + 100, 20, f);
+			if (Atack == Atack2)
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, m_x + 15, m_y + 100, 20, a);
+			}
+			else if (Atack != Atack2)
+			{
+				if (Atack >= 10)
+				{
+					swprintf_s(str, L"%d", Atack);
+					Font::StrDraw(str, m_x + 10, m_y + 100, 20, a2);
+				}
+				else
+				{
+					swprintf_s(str, L"%d", Atack);
+					Font::StrDraw(str, m_x + 15, m_y + 100, 20, a2);
+				}
+			}
+			if (Hp == Hp2)
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, m_x + 43, m_y + 100, 20, h);
+			}
+			else if (Hp != Hp2)
+			{
+				if (Hp >= 10)
+				{
+					swprintf_s(str, L"%d", Hp);
+					Font::StrDraw(str, m_x + 38, m_y + 100, 20, h2);
+				}
+				else
+				{
+					swprintf_s(str, L"%d", Hp);
+					Font::StrDraw(str, m_x + 43, m_y + 100, 20, h2);
+				}
+			}
+			if (Guard == Guard2)
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, m_x + 72, m_y + 100, 20, g);
+			}
+			else if (Guard != Guard2)
+			{
+				if (Guard >= 10)
+				{
+					swprintf_s(str, L"%d", Guard);
+					Font::StrDraw(str, m_x + 67, m_y + 100, 20, g2);
+				}
+				else
+				{
+					swprintf_s(str, L"%d", Guard);
+					Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
+				}
+			}
 		}
 		if (Type == 2 || Type == 3)
 		{
-			swprintf_s(str, L"%d　  %d", Atack, Guard);
-			Font::StrDraw(str, m_x + 15, m_y + 100, 20, h);
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, m_x + 15, m_y + 100, 20, a2);
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
 		}
 		if (Type == 2 || Type == 3)
 		{
-			swprintf_s(str, L"　 %d", Hp);
-			Font::StrDraw(str, m_x + 10, m_y + 100, 20, g);
+			if (Hp == Hp2)
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, m_x + 43, m_y + 100, 20, h);
+			}
+			else if (Hp != Hp2)
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, m_x + 43, m_y + 100, 20, h2);
+			}
 		}
 	}
 }
