@@ -145,7 +145,13 @@ void CObjCard::Action()
 		Rotdraw = -3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 
-					//カードの名前とテキストを出現させる
+		CObjPlist* PList = new CObjPlist();//関数呼び出し
+		PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+		Hp2 = Hp;
+		Atack2 = Atack;
+		Guard2 = Guard;
+
+		//カードの名前とテキストを出現させる
 		Cardname();
 
 		if (m_l == true && m_c == true)
@@ -153,9 +159,7 @@ void CObjCard::Action()
 			if (pos->m_f == false && point->Cost > 0)
 			{
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
-				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
-				PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				Cadata = NTcard;
 
 				if (point->Cost > Ccost)
