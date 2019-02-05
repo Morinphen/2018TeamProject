@@ -13,6 +13,7 @@ public:
 	void Init();
 	void Action();
 	void Draw();
+	bool go;
 private:
 	bool m_key_flag;
 	bool m_l;

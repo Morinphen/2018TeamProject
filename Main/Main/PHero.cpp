@@ -66,6 +66,8 @@ void CObjPHero::Action()
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 
+
+
 	if (sc->Turn == true)
 	{
 		Pusave = false;
@@ -101,7 +103,7 @@ void CObjPHero::Action()
 			if (mou->m_mouse_x > 600 && mou->m_mouse_x < 672
 				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
 			{
-				Scene::SetScene(new CSceneGameover());
+				Scene::SetScene(new CSceneGameover());				
 			}
 			else if (mou->m_mouse_x > 900 && mou->m_mouse_x < 972
 				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)

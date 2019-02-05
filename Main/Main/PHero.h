@@ -16,6 +16,7 @@ public:
 	bool Punch;//ƒ‚ƒ“ƒXƒ^[‚ÌUŒ‚§Œä
 	bool Pusave;
 	bool Set;//•Ší‚Ì‘•”õ§Œä
+	bool GO;
 
 private:
 	bool start;

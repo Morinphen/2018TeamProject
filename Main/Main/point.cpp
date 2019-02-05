@@ -76,5 +76,5 @@ void CObjpoint::Draw()
 	{
 		swprintf_s(str, L"end");
 		Font::StrDraw(str, 90, 150, 20, d);
-	}
+	}*/
 };
