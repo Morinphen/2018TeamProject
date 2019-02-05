@@ -756,8 +756,7 @@ void CObjCard::Action()
 
 		if (m_l == true)
 		{
-			if (pos->m_f == false && point->Cost > 0) {
-
+			if (pos->m_f == false && point->Cost) {
 				CObjCardlist* List = new CObjCardlist();//ŠÖ”ŒÄ‚Ño‚µ
 				/*CObjPlist* PList = new CObjPlist();//ŠÖ”ŒÄ‚Ño‚µ
 
