@@ -931,6 +931,169 @@ void CObjCard::Action()
 		}
 	}
 
+	//手札のカードに触れたとき
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false && pos->Wtouch == false)
+	{
+		CardHitCheck = true; //"マウスがカードに触れている"状態にする
+		Rotdraw = -3;//カードを３℃回転
+		SetPrio(11);//カードの描画優先度変更
+
+		//カードの名前とテキストを出現させる
+		Cardname();
+
+		if (m_l == true)
+		{
+			if (pos->m_f == false && point->Cost > 0) {
+
+				CObjCardlist* List = new CObjCardlist();//関数呼び出し
+				CObjPlist* PList = new CObjPlist();//関数呼び出し
+
+				PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				Cadata = NTcard;
+
+				if (point->Cost > Ccost)
+				{
+					//モンスターの場合
+					if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1 && pos->PTrun == true && point->Cost > 0)
+					{
+						//左側のスペースが開いている場合
+						if (S_position == false && point->Cost > 0 && pos->PTrun == true) {
+							m_x = 543;
+							m_y = 589;
+							//Hitboxを更新し、フィールド内での処理ができるようにする
+							Hits::DeleteHitBox(this);
+							Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
+
+							//フィールドにカード情報を登録
+							pos->PCard[1][0] = Hp;
+							pos->PCard[1][1] = Atack;
+							pos->PCard[1][2] = Guard;
+							pos->PCard[1][3] = Number4;
+							//召喚された情報を登録
+							pos->S_position = true;
+							FSummon = true;
+							Summon = true;
+						}
+
+						//そうでない場合、右に召喚
+						else if (point->Cost > 0 && pos->PTrun == true) {
+							m_x = 951;
+							m_y = 589;
+							Hits::DeleteHitBox(this);
+							Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
+							pos->PCard[2][0] = Hp;
+							pos->PCard[2][1] = Atack;
+							pos->PCard[2][2] = Guard;
+							pos->PCard[2][3] = Number4;
+							pos->S_position2 = true;
+							FSummon2 = true;
+							Summon = true;
+						}
+
+						pos->m_f = true;
+						hit->SetPos(m_x, m_y);
+					}
+
+					//武器の場合
+					else if (Type == 2 && pos->Wtouch == false || Type == 3 && pos->Wtouch == false && pos->PTrun == true)
+					{
+						for (int i = 0; i < 6; i++) {
+
+							//武器を装備できる見方がいる場合、選択できるようにする
+							if (pos->WPosition[i] <= 0)
+							{
+								Wwindow(&Wset, 0);
+								test = 0;
+								Set = true;
+								pos->Wtouch = true;
+								break;
+							}
+
+						}
+					}
+
+					//道具の場合
+					else if (Type == 4 && pos->Wtouch == false && pos->PTrun == true)
+					{
+						Wwindow(&Wset, 0);
+						test = 0;
+						pos->Wtouch = true;
+						Set = true;
+					}
+
+					m_c = false; //クリック制御
+					delete PList;
+				}
+				else
+				{
+					m_c = true; //クリック制御
+				}
+			}
+			else
+			{
+				pos->m_f = false;
+			}
+		}
+	}
+
+		//ウィンドウが出ていない状態で、召喚されたモンスターに触れた場合
+		else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type == 1
+			&& pos->WiSummon == false)
+		{
+			//カードの名前とテキストを出現させる
+			Cardname();
+
+			CardHitCheck = true; //"マウスがカードに触れている"状態にする
+
+			if (Button == false) {
+				Rotdraw = -3;
+			}
+
+			SetPrio(11);
+
+			if (m_l == true && pos->WSummon == false && pos->PTrun == true)
+			{
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+				m_f = true;
+				BDraw = 1;
+				b_x = mou->m_mouse_x;
+				b_y = mou->m_mouse_y;
+			}
+		}
+
+		//ウィンドウが出ていない状態で、召喚された武器に触れた場合
+		else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2
+			&& pos->WiSummon == false)
+		{
+			//カードの名前とテキストを出現させる
+			Cardname();
+
+			CardHitCheck = true; //"マウスがカードに触れている"状態にする
+
+			if (Button == false) {
+				Rotdraw = -3;
+			}
+
+			SetPrio(11);
+
+			if (m_l == true && Button == false && pos->PTrun == true)
+			{
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+				m_f = true;
+				BDraw = 0;
+				b_x = mou->m_mouse_x;
+				b_y = mou->m_mouse_y;
+			}
+		}
+
+		else
+		{
+			CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+			Rotdraw = 0;
+			if (Button == false || Wset == false)
+				SetPrio(10);
+		}
+
 		if (Wset == true)
 		{
 			SetPrio(21);
@@ -1026,6 +1189,7 @@ void CObjCard::Action()
 							pos->PCard[i][6] = 0;
 							LWeapon = false;
 						}
+
 						for (int j = 0; j < 6; j++)
 						{
 							if (pos->WPosition[j] == WSetting)
@@ -1074,6 +1238,8 @@ void CObjCard::Draw()
 	RECT_F src;
 	RECT_F dst;
 
+	wchar_t str[128];
+
 	src.m_top = 0.0f+ (128.0f*Updraw);
 	src.m_left = 0.0f + (128.0f*Opdraw);
 	src.m_right = 128.0f + (128.0f*Opdraw);
@@ -1100,12 +1266,32 @@ void CObjCard::Draw()
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 40, 595, 20, d);//テキストを表示
+		Font::StrDraw(atr, 40, 575, 20, d);//テキストを表示
 
 		for (int i = 0; i * 30 < Tlong; i++)
 		{
 			mbstowcs(aatr[i], pos->text2[i], 64);
-			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
+			Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, e);
+		}
+
+		//作成中
+		if (Type == 1)
+		{
+			swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
+			Font::StrDraw(str, 40, 600, 20, f);
+			swprintf_s(str, L"攻撃力 : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+			Font::StrDraw(str, 40, 620, 20, h);
+			swprintf_s(str, L"防御力 : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+			Font::StrDraw(str, 40, 640, 20, h);
+		}
+		if (Type == 2 || Type == 3)
+		{
+			swprintf_s(str, L"耐久値 : %d/%d", Hp, Hp2);
+			Font::StrDraw(str, 40, 600, 20, f);
+			swprintf_s(str, L"攻撃力 : %d", Atack);
+			Font::StrDraw(str, 40, 620, 20, h);
+			swprintf_s(str, L"防御力 : %d", Guard);
+			Font::StrDraw(str, 40, 640, 20, h);
 		}
 
 		Draw::Draw(0, &src, &dst, d, 0);
@@ -1190,7 +1376,6 @@ void CObjCard::Draw()
 
 	if (Summon == true)
 	{
-		wchar_t str[128];
 		if (Type == 1)
 		{
 			swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
