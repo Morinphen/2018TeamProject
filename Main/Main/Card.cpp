@@ -744,6 +744,13 @@ void CObjCard::Action()
 		Rotdraw = -3;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 
+		CObjPlist* PList = new CObjPlist();//関数呼び出し
+
+		PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+		Hp2 = Hp;
+		Atack2 = Atack;
+		Guard2 = Guard;
+
 		//カードの名前とテキストを出現させる
 		Cardname();
 
@@ -752,9 +759,12 @@ void CObjCard::Action()
 			if (pos->m_f == false && point->Cost > 0) {
 
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
-				CObjPlist* PList = new CObjPlist();//関数呼び出し
+				/*CObjPlist* PList = new CObjPlist();//関数呼び出し
 
 				PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				Hp2 = Hp;
+				Atack2 = Atack;
+				Guard2 = Guard;*/
 				Cadata = NTcard;
 
 				if (point->Cost > Ccost)
@@ -906,7 +916,8 @@ void CObjCard::Action()
 		}
 
 		//カードが召喚されたとき
-		if (Summon == true && StopSm == false) {
+		if (Summon == true && StopSm == false)
+		{
 			han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除
 			han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
 			han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
@@ -966,7 +977,8 @@ void CObjCard::Action()
 			for (int i = 0; i < 3; i++)
 			{
 				//カードの情報を探し出し、該当した場合処理開始
-				if (pos->PCard[i][5] == WSetting || pos->PCard[i][7] == WSetting) {
+				if (pos->PCard[i][5] == WSetting || pos->PCard[i][7] == WSetting)
+				{
 					//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
 					if (RWeapon == true)
 						Hp = pos->PCard[i][4];
@@ -989,8 +1001,10 @@ void CObjCard::Action()
 							LWeapon = false;
 						}
 
-						for (int j = 0; j < 6; j++) {
-							if (pos->WPosition[j] == WSetting) {
+						for (int j = 0; j < 6; j++)
+						{
+							if (pos->WPosition[j] == WSetting)
+							{
 								pos->WPosition[j] = 0;
 								break;
 							}
@@ -1034,6 +1048,8 @@ void CObjCard::Draw()
 	RECT_F src;
 	RECT_F dst;
 
+	wchar_t str[128];
+
 	src.m_top = 0.0f+ (128.0f*Updraw);
 	src.m_left = 0.0f + (128.0f*Opdraw);
 	src.m_right = 128.0f + (128.0f*Opdraw);
@@ -1060,12 +1076,32 @@ void CObjCard::Draw()
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 40, 595, 20, d);//テキストを表示
+		Font::StrDraw(atr, 40, 575, 20, d);//テキストを表示
 
 		for (int i = 0; i * 30 < Tlong; i++)
 		{
 			mbstowcs(aatr[i], pos->text2[i], 64);
-			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
+			Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, e);
+		}
+
+		//作成中
+		if (Type == 1)
+		{
+			swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
+			Font::StrDraw(str, 40, 600, 20, f);
+			swprintf_s(str, L"攻撃力 : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+			Font::StrDraw(str, 40, 620, 20, h);
+			swprintf_s(str, L"防御力 : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+			Font::StrDraw(str, 40, 640, 20, h);
+		}
+		if (Type == 2 || Type == 3)
+		{
+			swprintf_s(str, L"耐久値 : %d/%d", Hp, Hp2);
+			Font::StrDraw(str, 40, 600, 20, f);
+			swprintf_s(str, L"攻撃力 : %d", Atack);
+			Font::StrDraw(str, 40, 620, 20, h);
+			swprintf_s(str, L"防御力 : %d", Guard);
+			Font::StrDraw(str, 40, 640, 20, h);
 		}
 
 		Draw::Draw(0, &src, &dst, d, 0);
@@ -1150,7 +1186,6 @@ void CObjCard::Draw()
 
 	if (Summon == true)
 	{
-		wchar_t str[128];
 		if (Type == 1)
 		{
 			swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
