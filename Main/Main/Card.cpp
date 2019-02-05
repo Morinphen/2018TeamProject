@@ -97,6 +97,8 @@ void CObjCard::Init()
 	Bat = 1;
 	Bat2 = 1;
 
+	m_c = true;
+
 	Opdraw--;
 	Opdraw = Opdraw / 10;
 
@@ -127,7 +129,7 @@ void CObjCard::Action()
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
-	CObjpoint* point=(CObjpoint*)Objs::GetObj(OBJ_POINT);
+	CObjpoint* point = (CObjpoint*)Objs::GetObj(OBJ_POINT);
 	CObjwindow* window = (CObjwindow*)Objs::GetObj(OBJ_WINDOW);
 
 	if (sc->Turn == true)
@@ -142,7 +144,7 @@ void CObjCard::Action()
 		//主人公を選択したとき
 		if (mou->m_mouse_x > 550 && mou->m_mouse_x < b_x + 640
 			&& mou->m_mouse_y > 400 && mou->m_mouse_y < 520
-			&& Wset==true && pos->PTrun == true && Set == true && point->Cost>0) {
+			&& Wset == true && pos->PTrun == true && Set == true && point->Cost>0) {
 
 			//カードが武具の時
 			if (Type == 2 || Type == 3)
@@ -172,7 +174,7 @@ void CObjCard::Action()
 										Wstop = true;
 									}
 								}
-								if(Wstop==true)
+								if (Wstop == true)
 								{
 									;
 								}
@@ -214,7 +216,7 @@ void CObjCard::Action()
 						}
 
 						//効果関数呼び出し
-						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 						Wwindow(&Wset, 1);
 
 						//色を元に戻す
@@ -239,7 +241,7 @@ void CObjCard::Action()
 			if (Type == 4)
 			{
 				//効果関数呼び出し
-				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,1);
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 1);
 				Wwindow(&Wset, 1);
 				//召喚した扱いにする
 				Summon = true;
@@ -254,7 +256,7 @@ void CObjCard::Action()
 			&& Wset == true && pos->PTrun == true && Set == true && point->Cost>0) {
 
 			//カードが武具の時
-			if (Type == 2 || Type == 3) 
+			if (Type == 2 || Type == 3)
 			{
 				for (int i = 2; i < 4; i++) {
 					if (pos->WPosition[i] <= 0 && i > 1 && Summon == false)
@@ -320,7 +322,7 @@ void CObjCard::Action()
 						}
 
 						//効果関数呼び出し
-						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 						Wwindow(&Wset, 1);
 
 						//色を元に戻す
@@ -424,7 +426,7 @@ void CObjCard::Action()
 						}
 
 						//効果関数呼び出し
-						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
+						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 						Wwindow(&Wset, 1);
 
 						test = 1;
@@ -456,8 +458,8 @@ void CObjCard::Action()
 
 		//武器が召喚されなかった場合元に戻す
 		if (Summon == false && mou->Touch == false && mou->Flee == true && Type == 2
-			|| Summon == false && mou->Touch == false && mou->Flee == true && Type == 3 
-			  || Summon == false && mou->Touch == false && mou->Flee == true && Type == 4)
+			|| Summon == false && mou->Touch == false && mou->Flee == true && Type == 3
+			|| Summon == false && mou->Touch == false && mou->Flee == true && Type == 4)
 		{
 			if (test == 0) {
 				Wwindow(&Wset, 1);
@@ -473,7 +475,7 @@ void CObjCard::Action()
 			{
 
 				//FSummon=右側の味方、違う場合は左側
-				if (FSummon == true && pos->PTrun == true&&Bat==1) {
+				if (FSummon == true && pos->PTrun == true && Bat == 1) {
 
 					//武器を所持していた場合、耐久度減少
 					if (pos->PCard[1][4] > 0)
@@ -489,7 +491,7 @@ void CObjCard::Action()
 
 					//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
 					if (pos->PCard[1][1] - pos->ECard[2] > 0)
-					{				
+					{
 						pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];
 					}
 
@@ -500,7 +502,7 @@ void CObjCard::Action()
 					Audio::Start(8);
 				}
 
-				else if (pos->PTrun == true&&Bat2==1)
+				else if (pos->PTrun == true && Bat2 == 1)
 				{
 					//武器を所持していた場合、耐久度減少
 					if (pos->PCard[2][4] > 0)
@@ -533,7 +535,7 @@ void CObjCard::Action()
 			else if (mou->EChoice2 == true && Punch == true && pos->PTrun == true)
 			{
 				//FSummon=左側の味方、違う場合は右側
-				if (FSummon == true&&Bat==1) {
+				if (FSummon == true && Bat == 1) {
 
 					//武器を所持していた場合、耐久度減少
 					if (pos->PCard[1][4] > 0)
@@ -559,7 +561,7 @@ void CObjCard::Action()
 					Bat = 0;
 
 				}
-				else if(Bat2==1)
+				else if (Bat2 == 1)
 				{
 					//武器を所持していた場合、耐久度減少
 					if (pos->PCard[2][4] > 0)
@@ -593,7 +595,7 @@ void CObjCard::Action()
 			//モンスターがカム男に攻撃したとき
 			else if (mou->EChoice3 == true && Punch == true && pos->PTrun == true)
 			{
-				if (FSummon == true&&Bat==1 ) {
+				if (FSummon == true && Bat == 1) {
 
 					//武器を所持していた場合、耐久度減少
 					if (pos->PCard[1][4] > 0)
@@ -619,7 +621,7 @@ void CObjCard::Action()
 					Bat = 0;
 					Audio::Start(8);
 				}
-				else if(Bat2==1)
+				else if (Bat2 == 1)
 				{
 					//武器を所持していた場合、耐久度減少
 					if (pos->PCard[2][4] > 0)
@@ -664,16 +666,16 @@ void CObjCard::Action()
 	if (Button == true)
 	{
 		SetPrio(12);
-		if(m_f == false){
+		if (m_f == false) {
 			if (m_l == true)
 			{
 				//ボタンがクリックされたとき
 				if (mou->m_mouse_x > b_x && mou->m_mouse_x < b_x + 64
 					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48
-					&& Type==1)
+					&& Type == 1)
 				{
 
-					Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe,0);
+					Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 					Button = false;
 					m_f = true;
 					if (Type == 1)
@@ -702,7 +704,7 @@ void CObjCard::Action()
 
 	Posicard = Setcard - Number;//カードの位置調整変更用２
 
-	if (Number3 - han->hensu3 > 0 && han->hensu>0)//現在の場所が出したカードよりも後の場合、ひとつずらす
+	if (Number3 - han->hensu3 > 0 && han->hensu > 0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
 		Number--;//番号を１ずらす
 		han->hensu2++;
@@ -713,8 +715,8 @@ void CObjCard::Action()
 	//モンスターの位置更新
 	S_position = pos->S_position;
 	S_position2 = pos->S_position2;
-	
-	if(Setcard <=5 && Summon == false)
+
+	if (Setcard <= 5 && Summon == false)
 	{
 		for (int i = 0; i < Setcard; i++)
 		{
@@ -725,7 +727,7 @@ void CObjCard::Action()
 		}
 	}
 
-	else if(Summon == false){
+	else if (Summon == false) {
 		for (int i = 0; i < Setcard; i++)
 		{
 			if (han->hand[i] == Number2)
@@ -747,266 +749,272 @@ void CObjCard::Action()
 
 		if (m_l == true)
 		{
-			if (pos->m_f == false && point->Cost>0) {
+			if (pos->m_f == false && point->Cost > 0) {
+
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
 				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
-				PList->Action(&Name, Number4, &Number, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+				PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				Cadata = NTcard;
 
-				//モンスターの場合
-				if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1&&pos->PTrun==true&&point->Cost>0)
+				if (point->Cost > Ccost)
 				{
-					//左側のスペースが開いている場合
-					if (S_position == false&&point->Cost>0&&pos->PTrun==true) {
-						m_x = 543;
-						m_y = 589;
-						//Hitboxを更新し、フィールド内での処理ができるようにする
-						Hits::DeleteHitBox(this);
-						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
+					//モンスターの場合
+					if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1 && pos->PTrun == true && point->Cost > 0)
+					{
+						//左側のスペースが開いている場合
+						if (S_position == false && point->Cost > 0 && pos->PTrun == true) {
+							m_x = 543;
+							m_y = 589;
+							//Hitboxを更新し、フィールド内での処理ができるようにする
+							Hits::DeleteHitBox(this);
+							Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER2, 1);
 
-						//フィールドにカード情報を登録
-						pos->PCard[1][0] = Hp;
-						pos->PCard[1][1] = Atack;
-						pos->PCard[1][2] = Guard;
-						pos->PCard[1][3] = Number4;
-						//召喚された情報を登録
-						pos->S_position = true;
-						FSummon = true;
-						Summon = true;
-					}
-
-					//そうでない場合、右に召喚
-					else if(point->Cost>0&&pos->PTrun==true){
-						m_x = 951;
-						m_y = 589;
-						Hits::DeleteHitBox(this);
-						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
-						pos->PCard[2][0] = Hp;
-						pos->PCard[2][1] = Atack;
-						pos->PCard[2][2] = Guard;
-						pos->PCard[2][3] = Number4;
-						pos->S_position2 = true;
-						FSummon2 = true;
-						Summon = true;
-					}
-
-					pos->m_f = true;
-					hit->SetPos(m_x, m_y);
-				}
-
-				//武器の場合
-				else if (Type==2 && pos->Wtouch==false || Type==3 && pos->Wtouch == false&&pos->PTrun==true)
-				{
-					for (int i = 0; i < 6; i++) {
-
-						//武器を装備できる見方がいる場合、選択できるようにする
-						if (pos->WPosition[i]<=0)
-						{
-							Wwindow(&Wset, 0);
-							test = 0;
-							Set = true;
-							pos->Wtouch = true;
-							break;
+							//フィールドにカード情報を登録
+							pos->PCard[1][0] = Hp;
+							pos->PCard[1][1] = Atack;
+							pos->PCard[1][2] = Guard;
+							pos->PCard[1][3] = Number4;
+							//召喚された情報を登録
+							pos->S_position = true;
+							FSummon = true;
+							Summon = true;
 						}
 
+						//そうでない場合、右に召喚
+						else if (point->Cost > 0 && pos->PTrun == true) {
+							m_x = 951;
+							m_y = 589;
+							Hits::DeleteHitBox(this);
+							Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_GREEN, OBJ_FIELD_PLAYER3, 1);
+							pos->PCard[2][0] = Hp;
+							pos->PCard[2][1] = Atack;
+							pos->PCard[2][2] = Guard;
+							pos->PCard[2][3] = Number4;
+							pos->S_position2 = true;
+							FSummon2 = true;
+							Summon = true;
+						}
+
+						pos->m_f = true;
+						hit->SetPos(m_x, m_y);
 					}
-				}
 
-				//道具の場合
-				else if (Type == 4 && pos->Wtouch == false && pos->PTrun == true)
+					//武器の場合
+					else if (Type == 2 && pos->Wtouch == false || Type == 3 && pos->Wtouch == false && pos->PTrun == true)
+					{
+						for (int i = 0; i < 6; i++) {
+
+							//武器を装備できる見方がいる場合、選択できるようにする
+							if (pos->WPosition[i] <= 0)
+							{
+								Wwindow(&Wset, 0);
+								test = 0;
+								Set = true;
+								pos->Wtouch = true;
+								break;
+							}
+
+						}
+					}
+
+					//道具の場合
+					else if (Type == 4 && pos->Wtouch == false && pos->PTrun == true)
+					{
+						Wwindow(&Wset, 0);
+						test = 0;
+						pos->Wtouch = true;
+						Set = true;
+					}
+
+					m_c = false; //クリック制御
+					delete PList;
+				}
+				else
 				{
-					Wwindow(&Wset, 0);
-					test = 0;
-					pos->Wtouch = true;
-					Set = true;
+					m_c = true; //クリック制御
 				}
-
-				delete PList;
-			}
-		}
-
-		else
-		{
-			pos->m_f = false;
-		}
-	}
-
-	//ウィンドウが出ていない状態で、召喚されたモンスターに触れた場合
-	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type==1
-		&& pos->WiSummon == false)
-	{
-		//カードの名前とテキストを出現させる
-		Cardname();
-
-		CardHitCheck = true; //"マウスがカードに触れている"状態にする
-
-		if (Button == false) {
-			Rotdraw = -3;
-		}
-
-		SetPrio(11);
-
-		if (m_l == true && pos->WSummon == false && pos->PTrun == true)
-		{
-			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
-			m_f = true;
-			BDraw = 1;
-			b_x = mou->m_mouse_x;
-			b_y = mou->m_mouse_y;
-		}
-	}
-
-	//ウィンドウが出ていない状態で、召喚された武器に触れた場合
-	else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2
-		&& pos->WiSummon == false)
-	{
-		//カードの名前とテキストを出現させる
-		Cardname();
-
-		CardHitCheck = true; //"マウスがカードに触れている"状態にする
-
-		if (Button == false) {
-			Rotdraw = -3;
-		}
-
-		SetPrio(11);
-
-		if (m_l == true && Button==false && pos->PTrun == true)
-		{
-			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
-			m_f = true;
-			BDraw = 0;
-			b_x = mou->m_mouse_x;
-			b_y = mou->m_mouse_y;
-		}
-	}
-
-	else
-	{
-		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
-		Rotdraw = 0;
-		if(Button==false||Wset==false)
-			SetPrio(10);
-	}
-
-	if (Wset == true)
-	{
-		SetPrio(21);
-	}
-
-
-	//カードが召喚されたとき
-	if (Summon == true && StopSm==false) {
-		han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除
-		han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
-		han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
-		han->hensu3 = Number3; //出したカードの場所を保存
-		sc->Cnanber -= 1; //カードの合計枚数を１減らす
-		pos->m_f = true;
-		StopSm = true;
-		Audio::Start(11);
-		point->Cost--;//コスト減少
-		if (Type == 4)
-		{
-			Hits::DeleteHitBox(this);
-			this->SetStatus(false);
-		}		
-		sc->m_point--; //コスト減少
-	}
-
-	//召喚されたモンスターの処理
-	if (Summon == true && Type==1)
-	{
-		//右側、左側のモンスターのステータス更新
-		if (FSummon == true)
-		{
-			Hp = pos->PCard[1][0];
-			Atack = pos->PCard[1][1];
-			Guard = pos->PCard[1][2];
-		}
-		else
-		{
-			Hp = pos->PCard[2][0];
-			Atack = pos->PCard[2][1];
-			Guard = pos->PCard[2][2];
-		}
-
-		//HPが０になった場合、位置情報を更新し、消去
-		if (Hp <= 0)
-		{
-			if (FSummon == true)
-			{
-				pos->S_position = false;
-				FSummon = false;
 			}
 			else
 			{
-				pos->S_position2 = false;
-				FSummon2 = false;
+				pos->m_f = false;
 			}
-
-			Hits::DeleteHitBox(this);
-			this->SetStatus(false);
-			Audio::Start(7);
 		}
 	}
 
-	//装備された武器の処理
-	if (Summon == true && Type == 2|| Summon == true && Type==3)
-	{
-		for (int i = 0; i < 3; i++)
+		//ウィンドウが出ていない状態で、召喚されたモンスターに触れた場合
+		else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type == 1
+			&& pos->WiSummon == false)
 		{
-			//カードの情報を探し出し、該当した場合処理開始
-			if (pos->PCard[i][5] == WSetting || pos->PCard[i][7] == WSetting) {
-				//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
-				if(RWeapon==true)
-					Hp = pos->PCard[i][4];
-				else
-					Hp = pos->PCard[i][6];
+			//カードの名前とテキストを出現させる
+			Cardname();
 
-				//装備モンスターがやられるか、武器の耐久が０になった場合消去
-				if (pos->PCard[i][0] <=0 || Hp<=0)
+			CardHitCheck = true; //"マウスがカードに触れている"状態にする
+
+			if (Button == false) {
+				Rotdraw = -3;
+			}
+
+			SetPrio(11);
+
+			if (m_l == true && pos->WSummon == false && pos->PTrun == true)
+			{
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+				m_f = true;
+				BDraw = 1;
+				b_x = mou->m_mouse_x;
+				b_y = mou->m_mouse_y;
+			}
+		}
+
+		//ウィンドウが出ていない状態で、召喚された武器に触れた場合
+		else if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true && Type >= 2
+			&& pos->WiSummon == false)
+		{
+			//カードの名前とテキストを出現させる
+			Cardname();
+
+			CardHitCheck = true; //"マウスがカードに触れている"状態にする
+
+			if (Button == false) {
+				Rotdraw = -3;
+			}
+
+			SetPrio(11);
+
+			if (m_l == true && Button == false && pos->PTrun == true)
+			{
+				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+				m_f = true;
+				BDraw = 0;
+				b_x = mou->m_mouse_x;
+				b_y = mou->m_mouse_y;
+			}
+		}
+
+		else
+		{
+			CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+			Rotdraw = 0;
+			if (Button == false || Wset == false)
+				SetPrio(10);
+		}
+
+		if (Wset == true)
+		{
+			SetPrio(21);
+		}
+
+		//カードが召喚されたとき
+		if (Summon == true && StopSm == false) {
+			han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除
+			han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
+			han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
+			han->hensu3 = Number3; //出したカードの場所を保存
+			sc->Cnanber -= 1; //カードの合計枚数を１減らす
+			pos->m_f = true;
+			StopSm = true;
+			Audio::Start(11);
+			point->Cost -= Ccost;//コスト減少
+			if (Type == 4)
+			{
+				Hits::DeleteHitBox(this);
+				this->SetStatus(false);
+			}
+		}
+
+		//召喚されたモンスターの処理
+		if (Summon == true && Type == 1)
+		{
+			//右側、左側のモンスターのステータス更新
+			if (FSummon == true)
+			{
+				Hp = pos->PCard[1][0];
+				Atack = pos->PCard[1][1];
+				Guard = pos->PCard[1][2];
+			}
+			else
+			{
+				Hp = pos->PCard[2][0];
+				Atack = pos->PCard[2][1];
+				Guard = pos->PCard[2][2];
+			}
+
+			//HPが０になった場合、位置情報を更新し、消去
+			if (Hp <= 0)
+			{
+				if (FSummon == true)
 				{
-					pos->PCard[i][1] -= Atack;
-					pos->PCard[i][2] -= Guard;
-					if (RWeapon == true)
-					{
-						pos->PCard[i][4] = 0;
-						RWeapon = false;
-					}
-					else
-					{
-						pos->PCard[i][6] = 0;
-						LWeapon = false;
-					}
+					pos->S_position = false;
+					FSummon = false;
+				}
+				else
+				{
+					pos->S_position2 = false;
+					FSummon2 = false;
+				}
 
-					for (int j = 0; j < 6; j++) {
-						if (pos->WPosition[j] == WSetting) {
-							pos->WPosition[j] = 0;
-							break;
+				Hits::DeleteHitBox(this);
+				this->SetStatus(false);
+				Audio::Start(7);
+			}
+		}
+
+		//装備された武器の処理
+		if (Summon == true && Type == 2 || Summon == true && Type == 3)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				//カードの情報を探し出し、該当した場合処理開始
+				if (pos->PCard[i][5] == WSetting || pos->PCard[i][7] == WSetting) {
+					//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
+					if (RWeapon == true)
+						Hp = pos->PCard[i][4];
+					else
+						Hp = pos->PCard[i][6];
+
+					//装備モンスターがやられるか、武器の耐久が０になった場合消去
+					if (pos->PCard[i][0] <= 0 || Hp <= 0)
+					{
+						pos->PCard[i][1] -= Atack;
+						pos->PCard[i][2] -= Guard;
+						if (RWeapon == true)
+						{
+							pos->PCard[i][4] = 0;
+							RWeapon = false;
 						}
+						else
+						{
+							pos->PCard[i][6] = 0;
+							LWeapon = false;
+						}
+
+						for (int j = 0; j < 6; j++) {
+							if (pos->WPosition[j] == WSetting) {
+								pos->WPosition[j] = 0;
+								break;
+							}
+						}
+						Hits::DeleteHitBox(this);
+						this->SetStatus(false);
 					}
-					Hits::DeleteHitBox(this);
-					this->SetStatus(false);
 				}
 			}
 		}
-	}
 
+		hit->SetPos(m_x, m_y);
+
+		if (sc->Turn == true)
+		{
+			Bat = 1;
+			Bat2 = 1;
+		}
 	hit->SetPos(m_x, m_y);
-
-	if (sc->Turn == true)
-	{
-		Bat = 1;
-		Bat2 = 1;
-	}
 }
 
 //ドロー
 void CObjCard::Draw()
 {
-
 	float c[4] = { 1.0f,test,1.0f,1.0f };
 
 	//左側のモンスター名、テキストの色
@@ -1054,7 +1062,8 @@ void CObjCard::Draw()
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
 		Font::StrDraw(atr, 40, 595, 20, d);//テキストを表示
 
-		for (int i = 0; i * 30 < Tlong; i++) {
+		for (int i = 0; i * 30 < Tlong; i++)
+		{
 			mbstowcs(aatr[i], pos->text2[i], 64);
 			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
 		}
@@ -1082,8 +1091,8 @@ void CObjCard::Draw()
 	}
 
 	//ウィンドウの表示
-	if (Wset == true) {
-
+	if (Wset == true)
+	{
 		src.m_top = 0.0f;
 		src.m_left = 128.0f;
 		src.m_right = 256.0f;
@@ -1139,7 +1148,8 @@ void CObjCard::Draw()
 		}
 	}
 
-	if (Summon == true) {
+	if (Summon == true)
+	{
 		wchar_t str[128];
 		if (Type == 1)
 		{
@@ -1195,7 +1205,8 @@ void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Po
 		pos->PCard[Position - 1][0]+=2;
 	}
 
-	if (Button == false && PlayEfe == false && Pusave == false) {
+	if (Button == false && PlayEfe == false && Pusave == false)
+	{
 		Button=true;
 	}
 }

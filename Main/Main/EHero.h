@@ -17,6 +17,13 @@ public:
 	bool Set;//武器の装備制御
 
 private:
+	//テキストデータ用変数
+	int Tlong;
+	int TextD;
+	char text[256];
+
+	void Cardname();
+
 	bool start;
 	int m_x, m_y;//カードの描画位置
 	int playertrun;
