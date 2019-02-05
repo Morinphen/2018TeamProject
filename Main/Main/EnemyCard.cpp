@@ -181,6 +181,7 @@ void CObjEnemyCard::Action()
 void CObjEnemyCard::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float d[4] = { 1.0f,0.0f,1.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
 
@@ -222,6 +223,6 @@ void CObjEnemyCard::Draw()
 	if (Summon == true) {
 		wchar_t str[128];
 		swprintf_s(str, L"%dÅ@%dÅ@%d", Atack, Hp, Guard);
-		Font::StrDraw(str, m_x + 10, m_y, 20, c);
+		Font::StrDraw(str, m_x + 10, m_y, 20, d);
 	}
 }
