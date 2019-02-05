@@ -747,14 +747,14 @@ void CObjCard::Action()
 
 		if (m_l == true)
 		{
-			if (pos->m_f == false && point->Cost) {
+			if (pos->m_f == false) {
 				CObjCardlist* List = new CObjCardlist();//関数呼び出し
 				CObjPlist* PList = new CObjPlist();//関数呼び出し
 
 				PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
 				Cadata = NTcard;
 
-				if (point->Cost > Ccost)
+				if (point->Cost >= Ccost)
 				{
 					//モンスターの場合
 					if (S_position == false && pos->Wtouch == false && Type == 1 || S_position2 == false && pos->Wtouch == false && Type == 1 && pos->PTrun == true && point->Cost > 0)
