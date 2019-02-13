@@ -935,125 +935,124 @@ void CObjCard::Action()
 		}
 	}
 
-	
-		if (Wset == true)
+	if (Wset == true)
+	{
+		SetPrio(21);
+	}
+
+	//カードが召喚されたとき
+	if (Summon == true && StopSm == false)
+	{
+		han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除
+		han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
+		han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
+		han->hensu3 = Number3; //出したカードの場所を保存
+		sc->Cnanber -= 1; //カードの合計枚数を１減らす
+		pos->m_f = true;
+		StopSm = true;
+		Audio::Start(11);
+		point->Cost -= Ccost;//コスト減少
+		if (Type == 4)
 		{
-			SetPrio(21);
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+		}
+	}
+
+	//召喚されたモンスターの処理
+	if (Summon == true && Type == 1)
+	{
+		//右側、左側のモンスターのステータス更新
+		if (FSummon == true)
+		{
+			Hp = pos->PCard[1][0];
+			Atack = pos->PCard[1][1];
+			Guard = pos->PCard[1][2];
+		}
+		else
+		{
+			Hp = pos->PCard[2][0];
+			Atack = pos->PCard[2][1];
+			Guard = pos->PCard[2][2];
 		}
 
-		//カードが召喚されたとき
-		if (Summon == true && StopSm == false)
+		//HPが０になった場合、位置情報を更新し、消去
+		if (Hp <= 0)
 		{
-			han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除
-			han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
-			han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
-			han->hensu3 = Number3; //出したカードの場所を保存
-			sc->Cnanber -= 1; //カードの合計枚数を１減らす
-			pos->m_f = true;
-			StopSm = true;
-			Audio::Start(11);
-			point->Cost -= Ccost;//コスト減少
-			if (Type == 4)
-			{
-				Hits::DeleteHitBox(this);
-				this->SetStatus(false);
-			}
-		}
-
-		//召喚されたモンスターの処理
-		if (Summon == true && Type == 1)
-		{
-			//右側、左側のモンスターのステータス更新
 			if (FSummon == true)
 			{
-				Hp = pos->PCard[1][0];
-				Atack = pos->PCard[1][1];
-				Guard = pos->PCard[1][2];
+				pos->S_position = false;
+				FSummon = false;
 			}
 			else
 			{
-				Hp = pos->PCard[2][0];
-				Atack = pos->PCard[2][1];
-				Guard = pos->PCard[2][2];
+				pos->S_position2 = false;
+				FSummon2 = false;
 			}
 
-			//HPが０になった場合、位置情報を更新し、消去
-			if (Hp <= 0)
+			Hits::DeleteHitBox(this);
+			this->SetStatus(false);
+			Audio::Start(7);
+		}
+	}
+
+	//装備された武器の処理
+	if (Summon == true && Type == 2 || Summon == true && Type == 3)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			//カードの情報を探し出し、該当した場合処理開始
+			if (pos->PCard[i][5] == WSetting || pos->PCard[i][7] == WSetting)
 			{
-				if (FSummon == true)
+				//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
+				if (RWeapon == true)
 				{
-					pos->S_position = false;
-					FSummon = false;
+					Hp = pos->PCard[i][4];
 				}
 				else
 				{
-					pos->S_position2 = false;
-					FSummon2 = false;
+					Hp = pos->PCard[i][6];
 				}
 
-				Hits::DeleteHitBox(this);
-				this->SetStatus(false);
-				Audio::Start(7);
-			}
-		}
-
-		//装備された武器の処理
-		if (Summon == true && Type == 2 || Summon == true && Type == 3)
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				//カードの情報を探し出し、該当した場合処理開始
-				if (pos->PCard[i][5] == WSetting || pos->PCard[i][7] == WSetting)
+				//装備モンスターがやられるか、武器の耐久が０になった場合消去
+				if (pos->PCard[i][0] <= 0 || Hp <= 0)
 				{
-					//右側の場合はPCard[i][4]の値を、左側の場合はPCard[i][6]のHPを参照し、更新する
+					pos->PCard[i][1] -= Atack;
+					pos->PCard[i][2] -= Guard;
+
 					if (RWeapon == true)
 					{
-						Hp = pos->PCard[i][4];
+						pos->PCard[i][4] = 0;
+						RWeapon = false;
 					}
 					else
 					{
-						Hp = pos->PCard[i][6];
+						pos->PCard[i][6] = 0;
+						LWeapon = false;
 					}
 
-					//装備モンスターがやられるか、武器の耐久が０になった場合消去
-					if (pos->PCard[i][0] <= 0 || Hp <= 0)
+					for (int j = 0; j < 6; j++)
 					{
-						pos->PCard[i][1] -= Atack;
-						pos->PCard[i][2] -= Guard;
-
-						if (RWeapon == true)
+						if (pos->WPosition[j] == WSetting)
 						{
-							pos->PCard[i][4] = 0;
-							RWeapon = false;
+							pos->WPosition[j] = 0;
+							break;
 						}
-						else
-						{
-							pos->PCard[i][6] = 0;
-							LWeapon = false;
-						}
-
-						for (int j = 0; j < 6; j++)
-						{
-							if (pos->WPosition[j] == WSetting)
-							{
-								pos->WPosition[j] = 0;
-								break;
-							}
-						}
-						Hits::DeleteHitBox(this);
-						this->SetStatus(false);
 					}
+					Hits::DeleteHitBox(this);
+					this->SetStatus(false);
 				}
 			}
 		}
+	}
 
-		hit->SetPos(m_x, m_y);
+	hit->SetPos(m_x, m_y);
 
-		if (sc->Turn == true)
-		{
-			Bat = 1;
-			Bat2 = 1;
-		}
+	if (sc->Turn == true)
+	{
+		Bat = 1;
+		Bat2 = 1;
+	}
 
 	hit->SetPos(m_x, m_y);
 }
@@ -1154,8 +1153,8 @@ void CObjCard::Draw()
 	//ボタンの表示
 	if (Button == true)
 	{
-		b_x = m_x - 20.0;
-		b_y = m_y + 10.0;
+		b_x = m_x +15.0/*- 20.0*/;
+		b_y = m_y -50.0/*+ 10.0*/;
 
 		src.m_top = 0.0f;
 		src.m_left = 0.0f + (BDraw * 64);
