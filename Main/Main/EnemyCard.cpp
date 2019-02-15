@@ -219,7 +219,7 @@ void CObjEnemyCard::Draw()
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
 	
-
+	//ステータスの表示
 	if (Summon == true) {
 		wchar_t str[128];
 		swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
