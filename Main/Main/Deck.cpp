@@ -9,14 +9,16 @@
 #include<stdlib.h>
 #include<time.h>
 
+extern bool PrecedingAttack; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
+
 //使用するネームスペース
 
 //イニシャライズ
 void CObjDekc::Init()
 {
 	//x.yデッキの位置
-	x = 1086;
-	y = 743;
+	x = 1082;
+	y = 739;
 	//m_x,m_y カードの出現位置調整
 	//m_x = 567;
 	m_y = 743;
@@ -63,6 +65,8 @@ void CObjDekc::Init()
 
 	//Cardcount 現在ドローした枚数　現在プログラム作成中
 	Cardcount = 0;
+
+	Deckcount = 40; //デッキの残り枚数
 
 	//Start最初の５枚ドローのための変数
 	Start = false;
@@ -249,6 +253,7 @@ void CObjDekc::Action()
 				m_f2 = false;
 				m_l = false;
 				Button2 = true;
+				PrecedingAttack = false;
 			}
 			else
 			{
@@ -324,6 +329,10 @@ void CObjDekc::Draw()
 	swprintf_s(str, L"%d", Cost);
 	Font::StrDraw(str, 10, 10, 20, c);
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+	//デッキの残り枚数表示
+	swprintf_s(str, L"%d", Deckcount - Cardcount);
+	Font::StrDraw(str, 1105, 780, 50, d);
 
 	if (Button2 == true)
 	{

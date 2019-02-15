@@ -18,6 +18,8 @@
 
 #include"GameL\DrawFont.h"
 
+extern bool PrecedingAttack; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
+
 //使用するネームスペース
 CObjCard::CObjCard(float x,float y,int z)
 {
@@ -658,7 +660,6 @@ void CObjCard::Action()
 				pos->Wtouch = false;
 			}
 		}
-
 		if (m_f == false)
 		{
 			//主人公以外のキャラが相手の主人公に攻撃した時の処理

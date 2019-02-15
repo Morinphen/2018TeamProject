@@ -14,6 +14,8 @@
 //使用するネームスペース
 using namespace GameL;
 
+bool PrecedingAttack = true; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
+
 //コンストラクタ
 CObjJadge::CObjJadge()
 {
@@ -64,12 +66,14 @@ void CObjJadge::Action()
 			sc->Turn = true;
 			sc->Button2 = false;
 			sc->StartG = true;
+			PrecedingAttack = true;
 		}
 		else
 		{
 			sc->Turn = false;
 			sc->Button2 = true;
 			sc->StartG = true;
+			PrecedingAttack = false;
 		}
 
 		Hits::DeleteHitBox(this);

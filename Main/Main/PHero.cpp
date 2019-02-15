@@ -9,6 +9,8 @@
 
 #include"GameL\DrawFont.h"
 
+extern bool PrecedingAttack; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
+
 //使用するネームスペース
 CObjPHero::CObjPHero()
 {
@@ -256,8 +258,8 @@ void CObjPHero::Action()
 	{
 		Rotdraw = -3;
 		SetPrio(11);
-		if (m_l == true && pos->WSummon == false && test!=0 && Pusave==false
-			&& pos->PTrun == true)
+		if (m_l == true && pos->WSummon == false && test != 0 && Pusave == false
+			&& pos->PTrun == true && PrecedingAttack == false)
 		{
 			Button = true;
 		}
@@ -339,8 +341,8 @@ void CObjPHero::Draw()
 	//ボタンの表示
 	if (Button == true)
 	{
-		b_x = m_x - 20.0;
-		b_y = m_y + 10.0;
+		b_x = m_x + 25.0;
+		b_y = m_y - 50.0;
 
 		src.m_top = 0.0f;
 		src.m_left = 0.0f + (BDraw * 64);
