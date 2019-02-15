@@ -78,6 +78,9 @@ void CObjPHero::Action()
 		pos->PCard[0][1] = Atack;
 		pos->PCard[0][2] = Guard;
 		pos->PCard[0][3] = 0;
+		Hp2 = Hp;
+		Atack2 = Atack;
+		Guard2 = Guard;
 	}
 
 	Hp=pos->PCard[0][0];
@@ -254,7 +257,7 @@ void CObjPHero::Action()
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && pos->Wtouch == false)
 	{
-		Rotdraw = -3;
+		Rotdraw = 0;
 		SetPrio(11);
 		if (m_l == true && pos->WSummon == false && test!=0 && Pusave==false
 			&& pos->PTrun == true)
@@ -262,7 +265,6 @@ void CObjPHero::Action()
 			Button = true;
 		}
 	}
-
 	else
 	{
 		//CardHitCheck = false; //"マウスがカードに触れていない"状態にする
@@ -323,17 +325,62 @@ void CObjPHero::Draw()
 		dst.m_right = 371.0f;
 		dst.m_bottom = 371.0f;
 
+		wchar_t str[128];
+
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 40, 595, 20, e);//テキストを表示
+		Font::StrDraw(atr, 40, 575, 20, e);//テキストを表示
 
 		for (int i = 0; i * 30 < Tlong; i++) {
 			mbstowcs(aatr[i], pos->text2[i], 64);
 			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
 		}
 
+		swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
+		Font::StrDraw(str, 40, 600, 20, e);
+		swprintf_s(str, L"攻撃力 : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+		Font::StrDraw(str, 40, 620, 20, e);
+		swprintf_s(str, L"防御力 : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+		Font::StrDraw(str, 40, 640, 20, e);
+
 		Draw::Draw(0, &src, &dst, c, 0);
+
+		//左上に主人公のステータスを表示させる
+		if (Atack >= 10)
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, 50, 295, 50, a2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, 60, 295, 50, a2);
+		}
+
+		if (Hp >= 10)
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, 115, 295, 50, h);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, 130, 295, 50, h);
+		}
+
+		if (Guard >= 10)
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, 185, 295, 50, g2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, 200, 295, 50, g2);
+		}
+
+		Draw::Draw(5, &src, &dst, e, 0);
 	}
 
 	//ボタンの表示
@@ -355,83 +402,40 @@ void CObjPHero::Draw()
 		Draw::Draw(3, &src, &dst, c, Rotdraw);
 	}
 	wchar_t str[128];
-	if (Atack == 1)
+
+	//カードの部分に主人公のステータスを表示する
+	if (Atack >= 10)
 	{
 		swprintf_s(str, L"%d", Atack);
-		Font::StrDraw(str, 753, 701, 24, a);
+		Font::StrDraw(str, 746, 701, 24, a2);
 	}
-	else if (Atack != 1)
+	else
 	{
-		if (Atack >= 10)
-		{
-			swprintf_s(str, L"%d", Atack);
-			Font::StrDraw(str, 746, 701, 24, a2);
-		}
-		else
-		{
-			swprintf_s(str, L"%d", Atack);
-			Font::StrDraw(str, 753, 701, 24, a2);
-		}
+		swprintf_s(str, L"%d", Atack);
+		Font::StrDraw(str, 753, 701, 24, a2);
 	}
-	if (Hp == 20)
+
+	if (Hp >= 10)
 	{
 		swprintf_s(str, L"%d", Hp);
 		Font::StrDraw(str, 779, 701, 24, h);
 	}
-	else if (Hp != 20)
+	else
 	{
-		if (Hp >= 10)
-		{
-			swprintf_s(str, L"%d", Hp);
-			Font::StrDraw(str, 779, 701, 24, h2);
-		}
-		else
-		{
-			swprintf_s(str, L"%d", Hp);
-			Font::StrDraw(str, 786, 701, 24, h2);
-		}
+		swprintf_s(str, L"%d", Hp);
+		Font::StrDraw(str, 786, 701, 24, h);
 	}
-	if (Guard == 0)
+
+	if (Guard >= 10)
 	{
 		swprintf_s(str, L"%d", Guard);
-		Font::StrDraw(str, 817, 701, 24, g);
+		Font::StrDraw(str, 810, 701, 24, g2);;
 	}
-	else if (Guard != 0)
+	else
 	{
-		if (Guard >= 10)
-		{
-			swprintf_s(str, L"%d", Guard);
-			Font::StrDraw(str, 810, 701, 24, g2);;
-		}
-		else
-		{
-			swprintf_s(str, L"%d", Guard);
-			Font::StrDraw(str, 817, 701, 24, g2);
-		}
+		swprintf_s(str, L"%d", Guard);
+		Font::StrDraw(str, 817, 701, 24, g2);
 	}
-
-	//リタイア確認
-	/*if (r_f == true)
-	{
-		src.m_top = 64.0f;
-		src.m_left = 0.0f;
-		src.m_right = 189.0f;
-		src.m_bottom = 121.0f;
-
-		dst.m_top = 300.0f;
-		dst.m_left = 500.0f;
-		dst.m_right = 1100.0f;
-		dst.m_bottom = 500.0f;
-
-		Draw::Draw(3, &src, &dst, c, 0.0f);
-
-		swprintf_s(str, L"本当にリタイアしますか？");
-		Font::StrDraw(str, 595, 330, 36, c);
-		swprintf_s(str, L"はい");
-		Font::StrDraw(str, 600, 420, 36, c);
-		swprintf_s(str, L"いいえ");
-		Font::StrDraw(str, 900, 420, 36, c);
-	}*/
 }
 
 //Cardname関数

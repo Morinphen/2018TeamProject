@@ -142,7 +142,7 @@ void CObjCard::Action()
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == false && pos->Wtouch == false)
 	{
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
-		Rotdraw = -3;//カードを３℃回転
+		Rotdraw = 0;//カードを３℃回転
 		SetPrio(11);//カードの描画優先度変更
 
 		CObjPlist* PList = new CObjPlist();//関数呼び出し
@@ -267,7 +267,7 @@ void CObjCard::Action()
 
 		if (Button == false)
 		{
-			Rotdraw = -3;
+			Rotdraw = 0;
 		}
 
 		SetPrio(11);
@@ -295,7 +295,7 @@ void CObjCard::Action()
 
 		if (Button == false)
 		{
-			Rotdraw = -3;
+			Rotdraw = 0;
 		}
 
 		SetPrio(11);
@@ -1070,7 +1070,7 @@ void CObjCard::Draw()
 
 	//HP
 	float h[4] = { 0.0f,1.0f,0.0f,1.0f };
-	float h2[4] = { 0.7f,1.0f,0.0f,1.0f };
+	float h2[4] = { 0.2f,0.7,0.0f,1.0f };
 
 	//Atack
 	float a[4] = { 1.0f,0.5f,0.7f,1.0f };
@@ -1080,14 +1080,8 @@ void CObjCard::Draw()
 	float g[4] = { 0.0f,1.0f,1.0f,1.0f };
 	float g2[4] = { 0.0f,0.0f,1.0f,1.0f };
 
-	//モンスターのステータスの色
-	/*float f[4] = { 1.0f,0.0f,0.0f,1.0f };
-
-	//武具耐久地の色
-	float g[4] = { 1.0f,0.0f,0.0f,1.0f };
-
-	//武具強化値の色
-	float h[4] = { 1.0f,0.0f,0.0f,0.7f };*/
+	//cost
+	float cost[4] = { 0.0f,0.0f,0.0f,1.0f };
 
 	RECT_F src;
 	RECT_F dst;
@@ -1128,7 +1122,7 @@ void CObjCard::Draw()
 			Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, e);
 		}
 
-		//作成中
+		//拡大した画像に表示するステータス
 		if (Type == 1)
 		{
 			swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
@@ -1137,6 +1131,8 @@ void CObjCard::Draw()
 			Font::StrDraw(str, 40, 620, 20, d);
 			swprintf_s(str, L"防御力 : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
 			Font::StrDraw(str, 40, 640, 20, d);
+			swprintf_s(str, L"コスト : %d", Ccost);
+			Font::StrDraw(str, 40, 660, 20, d);
 		}
 		if (Type == 2 || Type == 3)
 		{
@@ -1146,9 +1142,91 @@ void CObjCard::Draw()
 			Font::StrDraw(str, 40, 620, 20, d);
 			swprintf_s(str, L"防御力 : %d", Guard);
 			Font::StrDraw(str, 40, 640, 20, d);
+			swprintf_s(str, L"コスト : %d", Ccost);
+			Font::StrDraw(str, 40, 660, 20, d);
 		}
-
 		Draw::Draw(0, &src, &dst, d, 0);
+		if (Type == 1)
+		{
+			if (Atack >= 10)
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, 50, 295, 50, a2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, 60, 295, 50, a2);
+			}
+
+			if (Hp >= 10)
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, 125, 295, 50, h2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, 130, 295, 50, h2);
+			}
+
+			if (Guard >= 10)
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, 185, 295, 50, g2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, 200, 295, 50, g2);
+			}
+		}
+		if (Type == 2 || Type == 3)
+		{
+			if (Atack >= 10)
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, 50, 295, 50, a2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, 60, 295, 50, a2);
+			}
+
+			if (Hp >= 10)
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, 125, 295, 50, h2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, 130, 295, 50, h2);
+			}
+
+			if (Guard >= 10)
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, 185, 295, 50, g2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, 200, 295, 50, g2);
+			}
+		}
+		if (Ccost == 1000)
+		{
+			swprintf_s(str, L"%d", Ccost);
+			Font::StrDraw(str, 30, 25, 50, cost);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Ccost);
+			Font::StrDraw(str, 45, 25, 50, cost);
+		}
+		Draw::Draw(5, &src, &dst, d, 0);
 	}
 
 	//ボタンの表示
@@ -1232,59 +1310,37 @@ void CObjCard::Draw()
 	{
 		if (Type == 1)
 		{
-			if (Atack == Atack2)
+			if (Atack >= 10)
 			{
 				swprintf_s(str, L"%d", Atack);
-				Font::StrDraw(str, m_x + 15, m_y + 100, 20, a);
+				Font::StrDraw(str, m_x + 10, m_y + 100, 20, a2);
 			}
-			else if (Atack != Atack2)
+			else
 			{
-				if (Atack >= 10)
-				{
-					swprintf_s(str, L"%d", Atack);
-					Font::StrDraw(str, m_x + 10, m_y + 100, 20, a2);
-				}
-				else
-				{
-					swprintf_s(str, L"%d", Atack);
-					Font::StrDraw(str, m_x + 15, m_y + 100, 20, a2);
-				}
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, m_x + 15, m_y + 100, 20, a2);
 			}
-			if (Hp == Hp2)
+
+			if (Hp >= 10)
 			{
 				swprintf_s(str, L"%d", Hp);
-				Font::StrDraw(str, m_x + 43, m_y + 100, 20, h);
+				Font::StrDraw(str, m_x + 38, m_y + 100, 20, h);
 			}
-			else if (Hp != Hp2)
+			else
 			{
-				if (Hp >= 10)
-				{
-					swprintf_s(str, L"%d", Hp);
-					Font::StrDraw(str, m_x + 38, m_y + 100, 20, h2);
-				}
-				else
-				{
-					swprintf_s(str, L"%d", Hp);
-					Font::StrDraw(str, m_x + 43, m_y + 100, 20, h2);
-				}
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, m_x + 43, m_y + 100, 20, h2);
 			}
-			if (Guard == Guard2)
+
+			if (Guard >= 10)
 			{
 				swprintf_s(str, L"%d", Guard);
-				Font::StrDraw(str, m_x + 72, m_y + 100, 20, g);
+				Font::StrDraw(str, m_x + 67, m_y + 100, 20, g2);
 			}
-			else if (Guard != Guard2)
+			else
 			{
-				if (Guard >= 10)
-				{
-					swprintf_s(str, L"%d", Guard);
-					Font::StrDraw(str, m_x + 67, m_y + 100, 20, g2);
-				}
-				else
-				{
-					swprintf_s(str, L"%d", Guard);
-					Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
-				}
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
 			}
 		}
 		if (Type == 2 || Type == 3)
@@ -1293,19 +1349,19 @@ void CObjCard::Draw()
 			Font::StrDraw(str, m_x + 15, m_y + 100, 20, a2);
 			swprintf_s(str, L"%d", Guard);
 			Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, m_x + 43, m_y + 100, 20, h);
+			
 		}
-		if (Type == 2 || Type == 3)
+		if (Ccost == 1000)
 		{
-			if (Hp == Hp2)
-			{
-				swprintf_s(str, L"%d", Hp);
-				Font::StrDraw(str, m_x + 43, m_y + 100, 20, h);
-			}
-			else if (Hp != Hp2)
-			{
-				swprintf_s(str, L"%d", Hp);
-				Font::StrDraw(str, m_x + 43, m_y + 100, 20, h2);
-			}
+			swprintf_s(str, L"%d", Ccost);
+			Font::StrDraw(str, m_x + 4, m_y + 4, 20, cost);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Ccost);
+			Font::StrDraw(str, m_x + 10, m_y + 4, 20, cost);
 		}
 	}
 }
@@ -1348,7 +1404,10 @@ void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Po
 
 	if (Button == false && PlayEfe == false && Pusave == false)
 	{
-		Button=true;
+		if (Type == 1)
+		{
+			Button = true;
+		}
 	}
 }
 

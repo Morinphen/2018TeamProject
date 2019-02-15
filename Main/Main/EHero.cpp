@@ -55,6 +55,9 @@ void CObjEHero::Action()
 		pos->ECard[1] = Atack;
 		pos->ECard[2] = Guard;
 		pos->ECard[3] = 0;
+		Hp2 = Hp;
+		Atack2 = Atack;
+		Guard2 = Guard;
 	}
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
@@ -80,7 +83,6 @@ void CObjEHero::Action()
 	{
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 	}
-
 }
 
 //ドロー
@@ -90,6 +92,21 @@ void CObjEHero::Draw()
 	float c[4] = { 1.0f,test,1.0f,1.0f };
 	float d[4] = { 1.0f,0.0f,0.0f,1.0f };
 	float e[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+	//HP
+	float h[4] = { 0.0f,1.0f,0.0f,1.0f };
+	float h2[4] = { 0.7f,1.0f,0.0f,1.0f };
+
+	//Atack
+	float a[4] = { 1.0f,0.5f,0.7f,1.0f };
+	float a2[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//Guard
+	float g[4] = { 0.0f,1.0f,1.0f,1.0f };
+	float g2[4] = { 0.0f,0.0f,1.0f,1.0f };
+
+	wchar_t str[128];
+
 	RECT_F src;
 	RECT_F dst;
 	CHitBox*hit = Hits::GetHitBox(this);
@@ -121,12 +138,19 @@ void CObjEHero::Draw()
 		wchar_t atr[256];
 		wchar_t aatr[5][64];
 		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
-		Font::StrDraw(atr, 40, 595, 20, e);//テキストを表示
+		Font::StrDraw(atr, 40, 575, 20, e);//テキストを表示
 
 		for (int i = 0; i * 30 < Tlong; i++) {
 			mbstowcs(aatr[i], pos->text2[i], 64);
 			Font::StrDraw(aatr[i], 40, 640 + i * 20, 20, e);
 		}
+
+		swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
+		Font::StrDraw(str, 40, 600, 20, e);
+		swprintf_s(str, L"攻撃力 : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+		Font::StrDraw(str, 40, 620, 20, e);
+		swprintf_s(str, L"防御力 : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+		Font::StrDraw(str, 40, 640, 20, e);
 
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
@@ -134,26 +158,77 @@ void CObjEHero::Draw()
 		dst.m_bottom = 371.0f;
 
 		Draw::Draw(0, &src, &dst, c, 0);
+
+		//左上に敵主人公のステータスを表示させる
+		if (Atack >= 10)
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, 50, 295, 50, a2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, 60, 295, 50, a2);
+		}
+
+		if (Hp >= 10)
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, 115, 295, 50, h);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, 130, 295, 50, h);
+		}
+
+		if (Guard >= 10)
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, 185, 295, 50, g2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, 200, 295, 50, g2);
+		}
+
+		Draw::Draw(5, &src, &dst, e, 0);
 	}
-	/*else
+
+	//カードの部分に敵主人公のステータスを表示
+	if (Atack >= 10)
 	{
+		swprintf_s(str, L"%d", Atack);
+		Font::StrDraw(str, 746, 176, 24, a2);
+	}
+	else
+	{
+		swprintf_s(str, L"%d", Atack);
+		Font::StrDraw(str, 753, 176, 24, a2);
+	}
 
-		src.m_top = 0.0f;
-		src.m_left = 0.0f;
-		src.m_right = 64.0f;
-		src.m_bottom = 64.0f;
+	if (Hp >= 10)
+	{
+		swprintf_s(str, L"%d", Hp);
+		Font::StrDraw(str, 779, 176, 24, h);
+	}
+	else
+	{
+		swprintf_s(str, L"%d", Hp);
+		Font::StrDraw(str, 786, 176, 24, h);
+	}
 
-		dst.m_top = 12.0f;
-		dst.m_left = 13.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 491.0f;
-
-		Draw::Draw(0, &src, &dst, c, 0);
-	}*/
-
-	wchar_t str[128];
-	swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-	Font::StrDraw(str, m_x + 15, m_y + 120, 20, d);
+	if (Guard >= 10)
+	{
+		swprintf_s(str, L"%d", Guard);
+		Font::StrDraw(str, 810, 176, 24, g2);
+	}
+	else
+	{
+		swprintf_s(str, L"%d", Guard);
+		Font::StrDraw(str, 817, 176, 24, g2);
+	}
 }
 
 //Cardname関数
