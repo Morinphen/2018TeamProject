@@ -1233,7 +1233,7 @@ void CObjCard::Draw()
 	if (Button == true)
 	{
 		b_x = m_x +15.0/*- 20.0*/;
-		b_y = m_y -50.0/*+ 10.0*/;
+		b_y = m_y -10.0/*+ 10.0*/;
 
 		src.m_top = 0.0f;
 		src.m_left = 0.0f + (BDraw * 64);

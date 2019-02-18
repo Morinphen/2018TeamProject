@@ -212,7 +212,7 @@ void CObjPHero::Action()
 
 		}
 
-		else if (mou->Flee==true)
+		else if (mou->Flee == true && Button == true)
 		{
 			test = 1;
 			Punch = false;
@@ -226,12 +226,17 @@ void CObjPHero::Action()
 	if (Button == true)
 	{
 		SetPrio(12);
-		if (m_f == false) {
+
+		if (m_f == false)
+		{
 			if (m_l == true)
 			{
 				//ボタンがクリックされたとき
-				if (mou->m_mouse_x > b_x && mou->m_mouse_x < b_x + 64
-					&& mou->m_mouse_y > b_y + 16 && mou->m_mouse_y < b_y + 48)
+				if (mou->m_mouse_x > b_x &&
+					mou->m_mouse_x < b_x + 64 &&
+					mou->m_mouse_y > b_y + 16 &&
+					mou->m_mouse_y < b_y + 48
+					)
 				{
 
 					Button = false;
@@ -242,13 +247,13 @@ void CObjPHero::Action()
 
 					m_l = false;
 
-				}
 
+
+				}
 				else
 				{
 					Button = false;
 				}
-
 			}
 		}
 		else
@@ -389,7 +394,7 @@ void CObjPHero::Draw()
 	if (Button == true)
 	{
 		b_x = m_x + 25.0;
-		b_y = m_y - 50.0;
+		b_y = m_y - 10.0;
 
 		src.m_top = 0.0f;
 		src.m_left = 0.0f + (BDraw * 64);
@@ -431,7 +436,7 @@ void CObjPHero::Draw()
 	if (Guard >= 10)
 	{
 		swprintf_s(str, L"%d", Guard);
-		Font::StrDraw(str, 810, 701, 24, g2);;
+		Font::StrDraw(str, 810, 701, 24, g2);
 	}
 	else
 	{
