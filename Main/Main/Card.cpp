@@ -164,7 +164,7 @@ void CObjCard::Action()
 
 				Cadata = NTcard;
 
-				if (point->Cost > Ccost)
+				if (point->Cost >= Ccost)
 				{
 					//キャラの場合
 					if (S_position == false &&
@@ -274,7 +274,7 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true && pos->WSummon == false && pos->PTrun == true)
+		if (m_l == true && pos->WSummon == false && pos->PTrun == true && PrecedingAttack == false)
 		{
 			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
@@ -663,7 +663,7 @@ void CObjCard::Action()
 		if (m_f == false)
 		{
 			//主人公以外のキャラが相手の主人公に攻撃した時の処理
-			if (mou->EChoice == true && Punch == true && pos->PTrun == true)
+			if (mou->EChoice == true && Punch == true&& pos->PTrun == true)
 			{
 				//FSummon=右側の味方、違う場合は左側
 				if (FSummon == true && pos->PTrun == true && Bat == 1)
@@ -1146,6 +1146,7 @@ void CObjCard::Draw()
 			Font::StrDraw(str, 40, 660, 20, d);
 		}
 		Draw::Draw(0, &src, &dst, d, 0);
+		//拡大した画像に表示するステータス
 		if (Type == 1)
 		{
 			if (Atack >= 10)
@@ -1305,7 +1306,7 @@ void CObjCard::Draw()
 			Draw::Draw(0, &src, &dst, e, 0.0f);
 		}
 	}
-
+	//召喚されているときのステータス表示
 	if (Summon == true)
 	{
 		if (Type == 1)

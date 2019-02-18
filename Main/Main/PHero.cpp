@@ -241,14 +241,11 @@ void CObjPHero::Action()
 					Punch = true;
 
 					m_l = false;
-
 				}
-
 				else
 				{
 					Button = false;
 				}
-
 			}
 		}
 		else

@@ -93,12 +93,12 @@ void CObjDekc::Action()
 	if (StartG == true)
 	{
 		
-		Card = rand() % 21 + 1;//同じ番号のカード呼出
+		Card = rand() % 39 + 1;//同じ番号のカード呼出
 		stop = 1;
 
 		m_l = Input::GetMouButtonL();
 
-		if (Cardcount >= 22)
+		if (Cardcount >= 40)
 		{
 			Scene::SetScene(new CSceneGameover());
 		}
@@ -107,9 +107,9 @@ void CObjDekc::Action()
 		while (stop == 1) {
 
 			stop = 0;
-			Card = rand() % 21 + 1;
+			Card = rand() % 39 + 1;
 
-			if (Cardcount >= 21)
+			if (Cardcount >= 39)
 			{
 				break;
 			}
