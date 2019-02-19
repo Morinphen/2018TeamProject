@@ -132,6 +132,8 @@ void CObjEnemyCard::Action()
 			//ECard[0]=HP,ECard[1]=Atack,ECard[2]=Guard
 			pos->ECard2[0] = 1; pos->ECard2[1] = 1; pos->ECard2[2] = 0;
 			Hp = 1; Atack = 1; Guard = 0;
+			Hp2 = 1; Atack2 = 1; Guard2 = 0;
+			Ccost = 100;
 		}
 		/*if (Number == 2) {
 			m_x = 747;
@@ -148,6 +150,8 @@ void CObjEnemyCard::Action()
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 			pos->ECard3[0] = 5; pos->ECard3[1] = 4; pos->ECard3[2] = 2;
 			Hp = 5; Atack = 4; Guard = 2;
+			Hp2 = 5; Atack2 = 4; Guard2 = 2;
+			Ccost = 100;
 		}
 	}
 
@@ -181,9 +185,25 @@ void CObjEnemyCard::Action()
 void CObjEnemyCard::Draw()
 {
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
-	float d[4] = { 1.0f,0.0f,1.0f,1.0f };
+	float d[4] = { 1.0f,1.0f,1.0f,1.0f };
+	//HP
+	float h[4] = { 0.0f,1.0f,0.0f,1.0f };
+	float h2[4] = { 0.2f,0.7,0.0f,1.0f };
+
+	//Atack
+	float a[4] = { 1.0f,0.5f,0.7f,1.0f };
+	float a2[4] = { 1.0f,0.0f,0.0f,1.0f };
+
+	//Guard
+	float g[4] = { 0.0f,1.0f,1.0f,1.0f };
+	float g2[4] = { 0.0f,0.0f,1.0f,1.0f };
+
+	//cost
+	float cost[4] = { 0.0f,0.0f,0.0f,1.0f };
 	RECT_F src;
 	RECT_F dst;
+
+	wchar_t str[128];
 
 	if (Number < 4 && Number !=2) {
 		src.m_top = 0.0f + (Number + 1) * 128;
@@ -209,20 +229,156 @@ void CObjEnemyCard::Draw()
 
 	//画面左上に拡大画像を表示させる
 
-	if (CardHitCheck == true)
+	if (Summon == true)
 	{
-		dst.m_top = 12.0f;
-		dst.m_left = 12.0f;
-		dst.m_right = 371.0f;
-		dst.m_bottom = 371.0f;
+		if (CardHitCheck == true)
+		{
+			CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-		Draw::Draw(0, &src, &dst, c, 0);
+			dst.m_top = 12.0f;
+			dst.m_left = 12.0f;
+			dst.m_right = 371.0f;
+			dst.m_bottom = 371.0f;
+
+			wchar_t atr[256];
+			wchar_t aatr[5][64];
+			mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
+			Font::StrDraw(atr, 40, 575, 20, d);//テキストを表示
+
+			for (int i = 0; i * 30 < Tlong; i++)
+			{
+				mbstowcs(aatr[i], pos->text2[i], 64);
+				Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, d);
+			}
+
+			swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
+			Font::StrDraw(str, 40, 600, 20, d);
+			swprintf_s(str, L"攻撃力 : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+			Font::StrDraw(str, 40, 620, 20, d);
+			swprintf_s(str, L"防御力 : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+			Font::StrDraw(str, 40, 640, 20, d);
+			swprintf_s(str, L"コスト : %d", Ccost);
+			Font::StrDraw(str, 40, 660, 20, d);
+			Draw::Draw(0, &src, &dst, c, 0);
+
+			//if (Type == 1)
+			//{
+			if (Atack >= 10)
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, 50, 295, 50, a2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, 60, 295, 50, a2);
+			}
+
+			if (Hp >= 10)
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, 125, 295, 50, h2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, 130, 295, 50, h2);
+			}
+
+			if (Guard >= 10)
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, 185, 295, 50, g2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, 200, 295, 50, g2);
+			}
+			//}
+			/*if (Type == 2 || Type == 3)
+			{
+				if (Atack >= 10)
+				{
+					swprintf_s(str, L"%d", Atack);
+					Font::StrDraw(str, 50, 295, 50, a2);
+				}
+				else
+				{
+					swprintf_s(str, L"%d", Atack);
+					Font::StrDraw(str, 60, 295, 50, a2);
+				}
+
+				if (Hp >= 10)
+				{
+					swprintf_s(str, L"%d", Hp);
+					Font::StrDraw(str, 125, 295, 50, h2);
+				}
+				else
+				{
+					swprintf_s(str, L"%d", Hp);
+					Font::StrDraw(str, 130, 295, 50, h2);
+				}
+
+				if (Guard >= 10)
+				{
+					swprintf_s(str, L"%d", Guard);
+					Font::StrDraw(str, 185, 295, 50, g2);
+				}
+				else
+				{
+					swprintf_s(str, L"%d", Guard);
+					Font::StrDraw(str, 200, 295, 50, g2);
+				}
+			}*/
+			if (Ccost == 1000)
+			{
+				swprintf_s(str, L"%d", Ccost);
+				Font::StrDraw(str, 30, 25, 50, cost);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Ccost);
+				Font::StrDraw(str, 45, 25, 50, cost);
+			}
+			Draw::Draw(5, &src, &dst, c, 0);
+		}
 	}
 	
 	//ステータスの表示
-	if (Summon == true) {
-		wchar_t str[128];
-		swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
-		Font::StrDraw(str, m_x + 10, m_y, 20, d);
+	if (Summon == true)
+	{
+		if (Atack >= 10)
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, m_x + 5, m_y + 10, 20, a2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Atack);
+			Font::StrDraw(str, m_x + 10, m_y + 10, 20, a2);
+		}
+
+		if (Hp >= 10)
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, m_x + 33, m_y + 10, 20, h);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Hp);
+			Font::StrDraw(str, m_x + 38, m_y + 10, 20, h2);
+		}
+
+		if (Guard >= 10)
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, m_x + 62, m_y + 10, 20, g2);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Guard);
+			Font::StrDraw(str, m_x + 67, m_y + 10, 20, g2);
+		}
 	}
 }
