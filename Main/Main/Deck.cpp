@@ -80,6 +80,9 @@ void CObjDekc::Init()
 	Cost = 0;
 	m_flag_point = false;
 
+	DrawButton_y = 0;
+	DrawButton_time = 0;
+
 }
 
 //アクション
@@ -225,10 +228,10 @@ void CObjDekc::Action()
 		if (m_l == true)
 		{
 			//ターン開始時　デッキをクリックしてドロー 
-			if (mou->m_mouse_x > 1105.0f&&
-				mou->m_mouse_x<1168.0f&&
-				mou->m_mouse_y>700.0f&&
-				mou->m_mouse_y < 764.0f&&
+			if (mou->m_mouse_x > 1082.0f&&
+				mou->m_mouse_x < 1210.0f&&
+				mou->m_mouse_y > 739.0f&&
+				mou->m_mouse_y < 859.0f&&
 				pos->PTrun == false &&
 				m_l == true &&
 				m_c == true &&
@@ -301,6 +304,24 @@ void CObjDekc::Action()
 		{
 			m_c = true; //クリック制御
 		}
+		if (Button2 == true)
+		{
+			DrawButton_time++;
+			if (DrawButton_time < 30)
+				DrawButton_y++;
+			else if (DrawButton_time < 60)
+				DrawButton_y--;
+			else
+			{
+				DrawButton_time = 0;
+				DrawButton_y = 0;
+			}
+		}
+		else
+		{
+			DrawButton_time = 0;
+			DrawButton_y = 0;
+		}
 	}
 }
 
@@ -339,12 +360,12 @@ void CObjDekc::Draw()
 		src.m_top = 128.0f;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
-		src.m_bottom = 172.0f;
+		src.m_bottom = 201.0f;
 
-		dst.m_top = 700.0f;
-		dst.m_left = 1104.0f;
-		dst.m_right = 1170.0f;
-		dst.m_bottom = 764.0f;
+		dst.m_top = 690.0f - DrawButton_y;
+		dst.m_left = 1100.0f;
+		dst.m_right = 1160.0f;
+		dst.m_bottom = 763.0f - DrawButton_y;
 
 		Draw::Draw(3, &src, &dst, c, 0);
 	}	

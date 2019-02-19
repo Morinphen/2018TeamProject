@@ -54,4 +54,7 @@ private:
 	bool m_f2;
 	bool m_flag_point;
 	bool r_f;
+
+	int DrawButton_y; //ドローボタンのy軸座標
+	int DrawButton_time; //ドローボタンの時間制御
 };
