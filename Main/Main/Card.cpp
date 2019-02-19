@@ -276,7 +276,7 @@ void CObjCard::Action()
 
 		if (m_l == true && pos->WSummon == false && pos->PTrun == true && PrecedingAttack == false)
 		{
-			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+			//Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
 			BDraw = 1;
 			b_x = mou->m_mouse_x;
@@ -304,7 +304,7 @@ void CObjCard::Action()
 
 		if (m_l == true && Button == false && pos->PTrun == true)
 		{
-			Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+			//Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 			m_f = true;
 			BDraw = 0;
 			b_x = mou->m_mouse_x;
@@ -407,7 +407,7 @@ void CObjCard::Action()
 							LWeapon = true;
 						}
 						//効果関数呼び出し
-						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+						//Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 						Wwindow(&Wset, 1);
 						//色を元に戻す
 						test = 1;
@@ -425,7 +425,7 @@ void CObjCard::Action()
 				}
 			}
 			//道具の時
-			if (Type == 4)
+			/*if (Type == 4)
 			{
 				//効果関数呼び出し
 				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 1);
@@ -433,7 +433,7 @@ void CObjCard::Action()
 				//召喚した扱いにする
 				Summon = true;
 				Audio::Start(6);
-			}
+			}*/
 		}
 		//左側のモンスターにカードを使用する時の処理
 		if (mou->m_mouse_x > 700 &&
@@ -513,7 +513,7 @@ void CObjCard::Action()
 							LWeapon = true;
 						}
 						//効果関数呼び出し
-						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+						//Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 						Wwindow(&Wset, 1);
 						//色を元に戻す
 						test = 1;
@@ -531,7 +531,7 @@ void CObjCard::Action()
 				}
 			}
 			//道具の時
-			if (Type == 4)
+			/*if (Type == 4)
 			{
 				//効果関数呼び出し
 				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 2);
@@ -539,7 +539,7 @@ void CObjCard::Action()
 				//召喚した扱いにする
 				Summon = true;
 				Audio::Start(6);
-			}
+			}*/
 		}
 		//右側のモンスターにカードを使用する時の処理
 		if (mou->m_mouse_x > 850 &&
@@ -618,7 +618,7 @@ void CObjCard::Action()
 							LWeapon = true;
 						}
 						//効果関数呼び出し
-						Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+						//Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 						Wwindow(&Wset, 1);
 						test = 1;
 						Summon = true;
@@ -633,7 +633,7 @@ void CObjCard::Action()
 			}
 
 			//道具の時
-			if (Type == 4)
+			/*if (Type == 4)
 			{
 				//効果関数呼び出し
 				Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 3);
@@ -641,7 +641,7 @@ void CObjCard::Action()
 				//召喚した扱いにする
 				Summon = true;
 				Audio::Start(6);
-			}
+			}*/
 		}
 
 		//武器が召喚されなかった場合元に戻す
@@ -874,7 +874,7 @@ void CObjCard::Action()
 					mou->m_mouse_y < b_y + 48 &&
 					Type == 1)
 				{
-					Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+					//Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
 					Button = false;
 					m_f = true;
 
@@ -1024,11 +1024,13 @@ void CObjCard::Action()
 					if (RWeapon == true)
 					{
 						pos->PCard[i][4] = 0;
+						pos->PCard[i][5] = 0;
 						RWeapon = false;
 					}
 					else
 					{
 						pos->PCard[i][6] = 0;
+						pos->PCard[i][7] = 0;
 						LWeapon = false;
 					}
 
@@ -1371,7 +1373,7 @@ void CObjCard::Draw()
 //カードナンバー、召喚時効果、起動効果、誘発効果の変数をぶち込んで処理する
 //Positionは召喚されているカードの場所により、入れる数値が変わる
 //基本的に召喚されたモンスターなどに触れない場合は０を入れる
-void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Position)
+/*void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Position)
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjHand*han = (CObjHand*)Objs::GetObj(OBJ_HAND);
@@ -1410,7 +1412,7 @@ void CObjCard::Effect(float _Cnanber, bool *When, bool *Play, bool *Indu, int Po
 			Button = true;
 		}
 	}
-}
+}*/
 
 //Wwindow関数
 //_set Wsetを入れる。これでウィンドウのオンオフが決めることができる

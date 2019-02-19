@@ -22,7 +22,7 @@ public:
 	 
 private:
 	void Cardname();
-	void Effect(float _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
+	//void Effect(float _Cnanber,bool *When,bool *Play,bool *Indu,int Position);
 	void Wwindow(bool *_set,bool _delete);
 
 	int m_x, m_y;//カードの描画位置

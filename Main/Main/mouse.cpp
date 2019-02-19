@@ -108,12 +108,12 @@ void CObjmouse::Draw()
 
 	//----------------------------------------------------
 	//マウス座標の値描画(テスト用なのでのちに消す可能性)
-	wchar_t str[128];
+	/*wchar_t str[128];
 	swprintf_s(str, L"x:%f", m_mouse_x);
 	Font::StrDraw(str,100,100,20,c);
 
 	swprintf_s(str, L"y:%f", m_mouse_y);
-	Font::StrDraw(str, 100, 120, 20, c);
+	Font::StrDraw(str, 100, 120, 20, c);*/
 
 	//----------------------------------------------------
 

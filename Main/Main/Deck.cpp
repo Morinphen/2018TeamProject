@@ -47,7 +47,7 @@ void CObjDekc::Init()
 		else if (i<40)
 			Deck[i] = 1351;*/
 
-		Data = rand() % 1531 + 10;
+		Data = rand() % 1341 + 10;
 
 		Data = Data - (Data % 10);
 
@@ -326,8 +326,8 @@ void CObjDekc::Draw()
 
 	wchar_t str[128];
 
-	swprintf_s(str, L"%d", Cost);
-	Font::StrDraw(str, 10, 10, 20, c);
+	//swprintf_s(str, L"%d", Cost);
+	//Font::StrDraw(str, 10, 10, 20, c);
 	Draw::Draw(0, &src, &dst, c, 0.0f);
 
 	//デッキの残り枚数表示
@@ -351,8 +351,8 @@ void CObjDekc::Draw()
 	if (pos->PTrun == true)
 	{
 		//自ターン中Trun Endの文字を表示
-		swprintf_s(str, L"Trun End");
-		Font::StrDraw(str, 40, 425, 50, d);
+		swprintf_s(str, L"ターンエンド");
+		Font::StrDraw(str, 30, 430, 37, d);
 
 		//"降参"の表示
 		swprintf_s(str, L"リタイア");

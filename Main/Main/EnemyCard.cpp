@@ -130,6 +130,7 @@ void CObjEnemyCard::Action()
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
 
 			//ECard[0]=HP,ECard[1]=Atack,ECard[2]=Guard
+			//ステータス、コスト仮置き
 			pos->ECard2[0] = 1; pos->ECard2[1] = 1; pos->ECard2[2] = 0;
 			Hp = 1; Atack = 1; Guard = 0;
 			Hp2 = 1; Atack2 = 1; Guard2 = 0;
@@ -148,6 +149,7 @@ void CObjEnemyCard::Action()
 			m_y = 191;
 			Hits::DeleteHitBox(this);
 			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
+			//ステータス、コスト仮置き
 			pos->ECard3[0] = 5; pos->ECard3[1] = 4; pos->ECard3[2] = 2;
 			Hp = 5; Atack = 4; Guard = 2;
 			Hp2 = 5; Atack2 = 4; Guard2 = 2;
@@ -261,6 +263,7 @@ void CObjEnemyCard::Draw()
 			Font::StrDraw(str, 40, 660, 20, d);
 			Draw::Draw(0, &src, &dst, c, 0);
 
+			//敵モンスターのステータス表示
 			//if (Type == 1)
 			//{
 			if (Atack >= 10)
@@ -296,6 +299,7 @@ void CObjEnemyCard::Draw()
 				Font::StrDraw(str, 200, 295, 50, g2);
 			}
 			//}
+			//敵装備のステータス表示
 			/*if (Type == 2 || Type == 3)
 			{
 				if (Atack >= 10)

@@ -118,7 +118,7 @@ void CObjPHero::Action()
 		}
 	}*/
 
-	if (Hp == 0)
+	if (Hp <= 0)
 	{
 		Deadt--;
 		inviD = Deadt / 90;
