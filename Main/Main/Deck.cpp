@@ -9,14 +9,16 @@
 #include<stdlib.h>
 #include<time.h>
 
+extern bool PrecedingAttack; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
+
 //使用するネームスペース
 
 //イニシャライズ
 void CObjDekc::Init()
 {
 	//x.yデッキの位置
-	x = 1086;
-	y = 743;
+	x = 1082;
+	y = 739;
 	//m_x,m_y カードの出現位置調整
 	//m_x = 567;
 	m_y = 743;
@@ -46,7 +48,7 @@ void CObjDekc::Init()
 		else if (i<40)
 			Deck[i] = 1351;*/
 
-		Data = rand() % 1531 + 10;
+		Data = rand() % 1341 + 10;
 
 		Data = Data - (Data % 10);
 
@@ -65,6 +67,8 @@ void CObjDekc::Init()
 	//Cardcount 現在ドローした枚数　現在プログラム作成中
 	Cardcount = 0;
 
+	Deckcount = 40; //デッキの残り枚数
+
 	//Start最初の５枚ドローのための変数
 	Start = false;
 	Button2 = false;
@@ -76,6 +80,9 @@ void CObjDekc::Init()
 	m_point = 100;
 	Cost = 0;
 	m_flag_point = false;
+
+	DrawButton_y = 0;
+	DrawButton_time = 0;
 
 }
 
@@ -90,12 +97,12 @@ void CObjDekc::Action()
 	if (StartG == true)
 	{
 		
-		Card = rand() % 21 + 1;//同じ番号のカード呼出
+		Card = rand() % 39 + 1;//同じ番号のカード呼出
 		stop = 1;
 
 		m_l = Input::GetMouButtonL();
 
-		if (Cardcount >= 22)
+		if (Cardcount >= 40)
 		{
 			Scene::SetScene(new CSceneGameover());
 		}
@@ -104,9 +111,9 @@ void CObjDekc::Action()
 		while (stop == 1) {
 
 			stop = 0;
-			Card = rand() % 21 + 1;
+			Card = rand() % 39 + 1;
 
-			if (Cardcount >= 21)
+			if (Cardcount >= 39)
 			{
 				break;
 			}
@@ -222,10 +229,10 @@ void CObjDekc::Action()
 		if (m_l == true)
 		{
 			//ターン開始時　デッキをクリックしてドロー 
-			if (mou->m_mouse_x > 1105.0f&&
-				mou->m_mouse_x<1168.0f&&
-				mou->m_mouse_y>700.0f&&
-				mou->m_mouse_y < 764.0f&&
+			if (mou->m_mouse_x > 1082.0f&&
+				mou->m_mouse_x < 1210.0f&&
+				mou->m_mouse_y > 739.0f&&
+				mou->m_mouse_y < 859.0f&&
 				pos->PTrun == false &&
 				STurn == true &&
 				m_l == true &&
@@ -252,6 +259,7 @@ void CObjDekc::Action()
 				m_f2 = false;
 				m_l = false;
 				Button2 = true;
+				PrecedingAttack = false;
 				STurn = false;
 			}
 			else
@@ -300,6 +308,24 @@ void CObjDekc::Action()
 		{
 			m_c = true; //クリック制御
 		}
+		if (Button2 == true)
+		{
+			DrawButton_time++;
+			if (DrawButton_time < 30)
+				DrawButton_y++;
+			else if (DrawButton_time < 60)
+				DrawButton_y--;
+			else
+			{
+				DrawButton_time = 0;
+				DrawButton_y = 0;
+			}
+		}
+		else
+		{
+			DrawButton_time = 0;
+			DrawButton_y = 0;
+		}
 	}
 }
 
@@ -325,29 +351,34 @@ void CObjDekc::Draw()
 
 	wchar_t str[128];
 
-	swprintf_s(str, L"%d", Cost);
-	Font::StrDraw(str, 10, 10, 20, c);
+	//swprintf_s(str, L"%d", Cost);
+	//Font::StrDraw(str, 10, 10, 20, c);
 	Draw::Draw(0, &src, &dst, c, 0.0f);
+
+	//デッキの残り枚数表示
+	swprintf_s(str, L"%d", Deckcount - Cardcount);
+	Font::StrDraw(str, 1105, 780, 50, d);
+
 
 	if (STurn == true && Button2 == true)
 	{
 		src.m_top = 128.0f;
 		src.m_left = 0.0f;
 		src.m_right = 64.0f;
-		src.m_bottom = 172.0f;
+		src.m_bottom = 201.0f;
 
-		dst.m_top = 700.0f;
-		dst.m_left = 1104.0f;
-		dst.m_right = 1170.0f;
-		dst.m_bottom = 764.0f;
+		dst.m_top = 690.0f - DrawButton_y;
+		dst.m_left = 1100.0f;
+		dst.m_right = 1160.0f;
+		dst.m_bottom = 763.0f - DrawButton_y;
 
 		Draw::Draw(3, &src, &dst, c, 0);
 	}	
 	if (pos->PTrun == true)
 	{
 		//自ターン中Trun Endの文字を表示
-		swprintf_s(str, L"Trun End");
-		Font::StrDraw(str, 40, 425, 50, d);
+		swprintf_s(str, L"ターンエンド");
+		Font::StrDraw(str, 30, 430, 37, d);
 
 		//"降参"の表示
 		swprintf_s(str, L"リタイア");

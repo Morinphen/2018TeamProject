@@ -35,6 +35,12 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+	int Hp2;//カードの元々のhp
+	int Atack2;//カードの元々の攻撃力
+	int Guard2;//カードの元々の防御力
+	int Ccost;//カードのコスト
+
+	int Tlong;
 
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 
@@ -63,4 +69,6 @@ private:
 	bool L_position;
 	bool S_position;
 	bool R_position;
+
+	int Type;//カードの種類　1=キャラ,2=武器,3=防具
 };

@@ -33,6 +33,9 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+	int Hp2;//カードの元々のhp
+	int Atack2;//カードの元々の攻撃力
+	int Guard2;//カードの元々の防御力
 
 	bool Button;//ボタン用変数
 	int BDraw;//ボタンdraw用変数
@@ -68,4 +71,6 @@ private:
 	bool S_position2;
 
 	bool R_position;
+
+	int time; //クリック多重反応制御用変数
 };

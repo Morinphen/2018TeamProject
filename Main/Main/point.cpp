@@ -69,7 +69,7 @@ void CObjpoint::Draw()
 	else
 	{
 		swprintf_s(str, L"%d", Cost);
-		Font::StrDraw(str, 355, 420, 60, c);
+		Font::StrDraw(str, 370, 420, 60, c);
 	}
 
 	/*if (pos->PTrun==false)

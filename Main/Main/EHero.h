@@ -32,6 +32,9 @@ private:
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
+	int Hp2;//カードの元々のhp
+	int Atack2;//カードの元々の攻撃力
+	int Guard2;//カードの元々の防御力
 
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 	int Opdraw;//カードの切取り位置１

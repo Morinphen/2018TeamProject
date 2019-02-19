@@ -19,4 +19,6 @@ private:
 	bool GameStart;//ゲーム開始用変数
 	bool First;//1P側先攻
 	bool After;//1P側後攻
+
+	int C_y; //先行後攻コインのy座標
 };

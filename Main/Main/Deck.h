@@ -46,7 +46,8 @@ private:
 	bool m_c; //マウス押しっぱなしのまま反応しないように制御する変数
 	int Ctype;//カードの種類
 
-	int Cardcount;//引いたカードの合計
+	int Deckcount; //デッキの残り枚数を参照する変数
+	int Cardcount; //引いたカードの合計
 	int stop;
 	int Data;//デッキに登録するカードデータ
 
@@ -54,4 +55,7 @@ private:
 	bool m_f2;
 	bool m_flag_point;
 	bool r_f;
+
+	int DrawButton_y; //ドローボタンのy軸座標
+	int DrawButton_time; //ドローボタンの時間制御
 };
