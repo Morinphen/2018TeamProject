@@ -25,6 +25,7 @@ void CObjDekc::Init()
 	m_f2 = true;
 	//ターン開始時
 	Turn = false;
+	STurn = false;
 
 	//ゲーム開始時
 	StartG = false;
@@ -226,6 +227,7 @@ void CObjDekc::Action()
 				mou->m_mouse_y>700.0f&&
 				mou->m_mouse_y < 764.0f&&
 				pos->PTrun == false &&
+				STurn == true &&
 				m_l == true &&
 				m_c == true &&
 				m_f2 == true &&
@@ -235,6 +237,7 @@ void CObjDekc::Action()
 				m_f2 = false;
 				Button2 = false;
 			}
+
 			//ターン終了ボタン
 			else if (mou->m_mouse_x > 12 &&
 				mou->m_mouse_x < 275 &&
@@ -249,6 +252,7 @@ void CObjDekc::Action()
 				m_f2 = false;
 				m_l = false;
 				Button2 = true;
+				STurn = false;
 			}
 			else
 			{
@@ -325,7 +329,7 @@ void CObjDekc::Draw()
 	Font::StrDraw(str, 10, 10, 20, c);
 	Draw::Draw(0, &src, &dst, c, 0.0f);
 
-	if (Button2 == true)
+	if (STurn == true && Button2 == true)
 	{
 		src.m_top = 128.0f;
 		src.m_left = 0.0f;

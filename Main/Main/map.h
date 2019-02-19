@@ -18,6 +18,8 @@ class CObjMap : public CObj
 		//場にモンスターが出ているか判断する変数
 		bool S_position, S_position2;
 
+		bool ES_position, ES_position2;
+
 		bool L_position;
 		bool R_position;
 

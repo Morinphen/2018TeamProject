@@ -757,13 +757,7 @@ void CObjCard::Action()
 		if (m_l == true)
 		{
 			if (pos->m_f == false && point->Cost) {
-				CObjCardlist* List = new CObjCardlist();//関数呼び出し
-				/*CObjPlist* PList = new CObjPlist();//関数呼び出し
 
-				PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
-				Hp2 = Hp;
-				Atack2 = Atack;
-				Guard2 = Guard;*/
 				Cadata = NTcard;
 
 				if (point->Cost >= Ccost)

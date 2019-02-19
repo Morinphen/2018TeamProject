@@ -17,6 +17,8 @@ public:
 
 	int basyo[20];
 	int hensu;
+	int hensu2;
+	int hensu3;
 
 private:
 

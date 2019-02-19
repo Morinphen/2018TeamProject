@@ -21,19 +21,30 @@ void CObjEnemyCard::Init()
 	CObjEnemyHand*han = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
 	Number = sc->Cnanber;//bango 引いたカードの順番の固定
 	Number2 = han->hand[Number - 1];
-	Number3 = Number;
+	Number3 = han->basyo[Number - 1];
 
-	Opdraw = sc->e_Card;//test カード番号の保存
+	aaaa = sc->Cnanber;
+
+	Number4= sc->EnemyDeck[sc->e_Card - 1];
+
+	Opdraw = sc->EnemyDeck[sc->e_Card - 1];//test カード番号の保存
 	Updraw = 0;//taka カードの描画位置の調整
 	Rotdraw = 0;//test2 カードの回転描画調整
 
 	CardHitCheck = false;
 	Summon = false;
+	StopSm = false;
 	Shand = 0;
 
-	while (Opdraw>7)
+	R_Summon = false;
+	L_Summon = false;
+
+	Opdraw--;
+	Opdraw = Opdraw / 10;
+
+	while (Opdraw>15)
 	{
-		Opdraw -= 7;//x位置をずらす
+		Opdraw -= 15;//x位置をずらす
 		Updraw++;
 	}
 	m_f = false;
@@ -49,6 +60,7 @@ void CObjEnemyCard::Action()
 	Rotdraw = 180;//カードを180℃回転
 	CObjEnemyHand*han = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
 	CObjEnemyDeck*sc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
+	CObjDekc*pd = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 
 	CHitBox*hit = Hits::GetHitBox(this);
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
@@ -58,31 +70,19 @@ void CObjEnemyCard::Action()
 
 	Posicard = Setcard - Number;//Posicard カードの位置調整変更用２
 
-								/*if (Nanber - Reset > 0 && Reset != 0 && Reset > 0)
-								{
-								Reflag = true;
-								han->hensu -= 1;
-								}
-
-								if (Reflag == true)
-								{
-								Nanber3 = Nanber3;
-								Nanber--;
-								Reflag = false;
-								}*/
-
-	if (Number - han->hensu > 0)
+	/*if (Number - han->hensu > 0)
 	{
-		Number2 = han->basyo[Number - Shand];
-	}
+		Number2 = han->hand[Number - 1];
+	}*/
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
 	S_position = pos->S_position;
 	R_position = pos->R_position;
 
-	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr)
+	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && Summon == true)
 	{
+		Cardname();
 		CardHitCheck = true; //"マウスがカードに触れている"状態にする
 	}
 	else
@@ -90,13 +90,26 @@ void CObjEnemyCard::Action()
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 	}
 
+	Setcard = sc->Cnanber;//カードの位置調整変更用
+
+	Posicard = Setcard - Number;//カードの位置調整変更用２
+
+	if (Number3 - han->hensu3 > 0 && han->hensu > 0)//現在の場所が出したカードよりも後の場合、ひとつずらす
+	{
+		aaaa = aaaa;
+		Number--;//番号を１ずらす
+		han->hensu2++;
+	}
+
+	Number3 = han->basyo[Number - 1];//手札の場所を更新
+
 	if (Setcard <= 5 && Summon == false)
 	{
-		//m_x = 250+(90* Posicard);
 		for (int i = 0; i < Setcard; i++)
 		{
 			if (han->hand[i] == Number2)
 			{
+				aaaa = aaaa;
 				m_x = 927 - (90 * i);
 			}
 		}
@@ -107,65 +120,72 @@ void CObjEnemyCard::Action()
 		{
 			if (han->hand[i] == Number2)
 			{
+				aaaa = aaaa;
 				m_x = 567 + ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
 
-	if (Number < 4 && Number!=2 && Summon==false)
-	{
-		Summon = true;
-		//han->hand[Nanber3 - 1] = 0;//出したカードのカード番号を削除
-		//han->basyo[Nanber3 - 1] = 0;//出したカードの場所情報を削除
-		//han->hensu = Setcard - Nanber3;//手札の合計と出したカードの差分を保存
-		//han->hensu3 = Nanber3;//出したカードの場所を保存
-		//sc->Cnanber -= 1;//カードの合計枚数を１減らす
-		pos->m_f = true;
-		//仮置きの敵召喚　手札の順番が１，２，３のカードを召喚
-		if (Number == 1) {
-			m_x = 543;
-			m_y = 191;
-			//HitBoxの入れ替え　これで攻撃対象に選択できるように
-			Hits::DeleteHitBox(this);
-			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
+	if (pd->STurn == false && pd->Start == true) {
+		if (Summon == false && sc->Summon2 == false && sc->EDraw == true && aaaa == aaaa)
+		{
+			CObjPlist* PList = new CObjPlist();//関数呼び出し
 
-			//ECard[0]=HP,ECard[1]=Atack,ECard[2]=Guard
-			pos->ECard2[0] = 1; pos->ECard2[1] = 1; pos->ECard2[2] = 0;
-			Hp = 1; Atack = 1; Guard = 0;
+			PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+
+			pos->m_f = true;
+			//仮置きの敵召喚　手札の順番が１，２，３のカードを召喚
+			if (Number == 1 && pos->ES_position == false || Number == 1 && pos->ES_position2 == false) {
+				if (pos->ES_position == false)
+				{
+					m_x = 543;
+					m_y = 191;
+					pos->ECard2[0] = Hp; pos->ECard2[1] = Atack; pos->ECard2[2] = Guard;
+					pos->ES_position = true;
+					R_Summon = true;
+				}
+				else if (pos->ES_position2 == false)
+				{
+					m_x = 951;
+					m_y = 191;
+					pos->ECard3[0] = Hp; pos->ECard3[1] = Atack; pos->ECard3[2] = Guard;
+					pos->ES_position2 = true;
+					L_Summon = true;
+				}
+				//HitBoxの入れ替え　これで攻撃対象に選択できるように
+				Hits::DeleteHitBox(this);
+				Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
+
+				Summon = true;
+				sc->Summon2 = true;
+			}
 		}
-		/*if (Number == 2) {
-			m_x = 747;
-			m_y = 195;
-			Hits::DeleteHitBox(this);
-			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
-			pos->ECard2[0] = 3; pos->ECard2[1] = 2; pos->ECard2[2] = 0;
-			Hp = 3; Atack = 2; Guard = 0;
-		}*/
-		if (Number == 3) {
-			m_x = 951;
-			m_y = 191;
-			Hits::DeleteHitBox(this);
-			Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
-			pos->ECard3[0] = 5; pos->ECard3[1] = 4; pos->ECard3[2] = 2;
-			Hp = 5; Atack = 4; Guard = 2;
+
+		//カードが召喚されたとき
+		if (Summon == true && StopSm == false)
+		{
+			han->hand[Number3 - 1] = 0; //出したカードのカード番号を削除
+			han->basyo[Number3 - 1] = 0; //出したカードの場所情報を削除
+			han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
+			han->hensu3 = Number3; //出したカードの場所を保存
+			sc->Cnanber--; //カードの合計枚数を１減らす
+			pos->m_f = true;
+			StopSm = true;
 		}
 	}
 
 	if (Summon == true)
 	{
-		if (Number == 1)
+		if (R_Summon == true)
 		{
 			//Hpの更新
 			Hp = pos->ECard2[0];
 		}
-		/*if (Number == 2)
-		{
-			Hp = pos->ECard2[0];
-		}*/
-		if (Number == 3)
+		else if (L_Summon == true)
 		{
 			Hp = pos->ECard3[0];
 		}
+
 		if (Hp <= 0)
 		{
 			//HPが０なら消滅
@@ -185,11 +205,11 @@ void CObjEnemyCard::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	if (Number < 4 && Number !=2) {
-		src.m_top = 0.0f + (Number + 1) * 128;
-		src.m_left = 128.0f;
-		src.m_right = 256.0f;
-		src.m_bottom = 128.0f + (Number + 1) * 128;
+	if (Number < 4 && Number !=2 && Summon==true) {
+		src.m_top = 0.0f + (128.0f*Updraw);
+		src.m_left = 0.0f + (128.0f*Opdraw);
+		src.m_right = 128.0f + (128.0f*Opdraw);
+		src.m_bottom = 128.0f + (128.0f*Updraw);
 	}
 
 	else
@@ -211,10 +231,23 @@ void CObjEnemyCard::Draw()
 
 	if (CardHitCheck == true)
 	{
+		CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
 		dst.m_top = 12.0f;
 		dst.m_left = 12.0f;
 		dst.m_right = 371.0f;
 		dst.m_bottom = 371.0f;
+
+		wchar_t atr[256];
+		wchar_t aatr[5][64];
+		mbstowcs(atr, pos->name, 256);//マルチバイトをワイドに変換
+		Font::StrDraw(atr, 40, 575, 20, d);//テキストを表示
+
+		for (int i = 0; i * 30 < Tlong; i++)
+		{
+			mbstowcs(aatr[i], pos->text2[i], 64);
+			Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, c);
+		}
 
 		Draw::Draw(0, &src, &dst, c, 0);
 	}
@@ -225,4 +258,37 @@ void CObjEnemyCard::Draw()
 		swprintf_s(str, L"%d　%d　%d", Atack, Hp, Guard);
 		Font::StrDraw(str, m_x + 10, m_y, 20, d);
 	}
+}
+
+//Cardname関数
+//Cardname()を入力すれば、カードに名前とテキストが表示されるようになる
+void CObjEnemyCard::Cardname()
+{
+	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
+
+	FILE *fp;
+	char fname[] = "CardList.csv";
+	fp = fopen(fname, "r"); // ファイルを開く。失敗するとNULLを返す。
+	int ret;
+	int aaaa;//ダミーデータ
+
+	while ((ret = fscanf(fp, "%[^,],%d,%d,%d,%d,%d,%d,%[^\n] ,", pos->name, &aaaa, &TextD, &aaaa, &aaaa, &aaaa, &aaaa, text) != EOF))//名前、カード番号、テキストを入れる
+	{
+		if (TextD == Number4)//カード番号が一致したとき、処理開始
+		{
+			Tlong = strlen(text);//テキストの長さを求める
+			for (int j = 0; j < 6; j++)
+			{
+				pos->text2[j][0] = '\0';
+			}
+			for (int i = 0; i * 30 < Tlong; i++)//15文字づつ改行していく
+			{
+				strncpy(pos->text2[i], text + i * 30, 30);
+				pos->text2[i][30] = '\0';
+			}
+			break;
+		}
+	}
+
+	fclose(fp); // ファイルを閉じる
 }

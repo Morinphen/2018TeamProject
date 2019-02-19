@@ -38,6 +38,7 @@ void CObjJadge::Init()
 void CObjJadge::Action()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+	CObjEnemyDeck*ec = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
 
 	srand(time(NULL));
 	Random = rand() % 2;
@@ -62,14 +63,18 @@ void CObjJadge::Action()
 		if (First == true)
 		{
 			sc->Turn = true;
+			sc->STurn = true;
 			sc->Button2 = false;
 			sc->StartG = true;
+			ec->EStartG = true;
 		}
 		else
 		{
 			sc->Turn = false;
+			sc->STurn = false;
 			sc->Button2 = true;
 			sc->StartG = true;
+			ec->EStartG = true;
 		}
 
 		Hits::DeleteHitBox(this);

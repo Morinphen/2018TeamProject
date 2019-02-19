@@ -10,6 +10,9 @@ void CObjMap::Init()
 	S_position = false;
 	S_position2 = false;
 
+	ES_position = false;
+	ES_position2 = false;
+
 	L_position = true;
 	R_position = true;
 
