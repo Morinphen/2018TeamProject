@@ -71,4 +71,6 @@ private:
 	bool S_position2;
 
 	bool R_position;
+
+	int time; //クリック多重反応制御用変数
 };

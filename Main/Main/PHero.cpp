@@ -48,6 +48,8 @@ void CObjPHero::Init()
 
 	Bat3 = 1;
 
+	time = 60;
+
 	//UŒ‚ˆ—A‘•”õˆ—‰Šú‰»
 	Punch = false;
 
@@ -212,7 +214,7 @@ void CObjPHero::Action()
 
 		}
 
-		else if (mou->Flee == true && Button == true)
+		else if (mou->Flee == true && time >= 30)
 		{
 			test = 1;
 			Punch = false;
@@ -226,6 +228,7 @@ void CObjPHero::Action()
 	if (Button == true)
 	{
 		SetPrio(12);
+		time = 0;
 
 		if (m_f == false)
 		{
@@ -260,6 +263,12 @@ void CObjPHero::Action()
 		{
 			m_f = false;
 		}
+	}
+	else
+	{
+		time++;
+		if (time == 60)
+			time = 30;
 	}
 
 	if (hit->CheckObjNameHit(OBJ_PLAYER) != nullptr && pos->Wtouch == false)
@@ -394,7 +403,7 @@ void CObjPHero::Draw()
 	if (Button == true)
 	{
 		b_x = m_x + 25.0;
-		b_y = m_y - 10.0;
+		b_y = m_y - 50.0;
 
 		src.m_top = 0.0f;
 		src.m_left = 0.0f + (BDraw * 64);
