@@ -4,6 +4,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+enum type {
+	monster = 1,
+	weapon = 2,
+	shield = 3,
+};
+
 //オブジェクト　デッキ
 class CObjEnemyDeck :public CObj
 {
@@ -14,8 +20,17 @@ public:
 	void Action();
 	void Draw();
 
+	int EnemyDeck[40];
+	int Pullc[40];
+
 	int Cnanber;
 	int e_Card;
+
+	bool Summon2;
+
+	bool EDraw;
+
+	bool EStartG;
 
 	int e_point;
 	int e_Cost;
@@ -37,8 +52,7 @@ private:
 	int e_Deckcount; //デッキの残り枚数を参照する変数
 	int Rotdraw;
 
-	int EnemyDeck[40];
-	int EnemyPullc[40];
+	int ETruntime;
 
 	bool m_f;
 	bool Start;

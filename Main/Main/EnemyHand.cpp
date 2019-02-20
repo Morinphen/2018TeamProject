@@ -11,6 +11,8 @@
 void CObjEnemyHand::Init()
 {
 	hensu = 99;
+	hensu2 = 0;
+	hensu3 = 99;
 }
 
 //アクション
@@ -22,21 +24,27 @@ void CObjEnemyHand::Action()
 		if (hand[i] == NULL)
 		{
 			int hako = 0;
-			hako = hand[i] - 1;
+			hako = hand[i];
 			hand[i] = hand[i + 1];
 			hand[i + 1] = hako;
 		}
 	}
-	if (hensu == 0) {
-		for (int j = 0; j < sc->Cnanber; j++)
+
+	for (int j = 0; j < sc->Cnanber; j++)
+	{
+		if (basyo[j] == NULL)
 		{
-			if (basyo[j] == NULL)
-			{
-				int ka = 0;
-				basyo[j] = basyo[j + 1] - 1;
-				basyo[j + 1] = ka;
-			}
+			int ka = 0;
+			basyo[j] = basyo[j + 1] - 1;
+			basyo[j + 1] = ka;
 		}
+	}
+
+	if (hensu <= hensu2)//手札をずらし終えたら、初期値に戻す
+	{
+		hensu = 99;
+		hensu2 = 0;
+		hensu3 = 99;
 	}
 }
 

@@ -25,7 +25,7 @@ void CObjEHero::Init()
 
 	//ステータスの初期化
 	Hp = 20;
-	Atack = 2;
+	Atack = 1;
 	Guard = 0;
 
 	LWeapon = false;
@@ -45,6 +45,7 @@ void CObjEHero::Init()
 void CObjEHero::Action()
 {
 	CHitBox*hit = Hits::GetHitBox(this);
+	CObjDekc*pd = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
@@ -67,6 +68,57 @@ void CObjEHero::Action()
 	else
 	{
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
+	}
+
+	if (pd->STurn == false) {
+		//戦闘プログラム
+		if (Atacks == false)
+			pos->EAtackt++;
+
+		if (pos->EAtackt == 40 && Atacks == false)
+		{
+			for (int i = 0; i < 3; i++) {
+				if (pos->PCard[i][0] >= 0) {
+					Hpbox[i] = pos->PCard[i][0];
+					Guardbox[i] = pos->PCard[i][2];
+				}
+				else
+				{
+					Hpbox[i] = 0;
+					Guardbox[i] = 0;
+				}
+
+				if (Hpbox[i] != 0) {
+					if (Dameg < Atack - pos->PCard[i][2]) {
+						AtackUnit = i;
+						Dameg = Atack - pos->PCard[i][2];
+					}
+				}
+			}
+				//武器を所持していた場合、耐久度減少
+				if (pos->PCard[AtackUnit][4] > 0)
+					pos->PCard[AtackUnit][4] -= 1;
+
+				//２つ目の武器を所持していた場合、耐久度減少
+				if (pos->PCard[AtackUnit][6] > 0)
+					pos->PCard[AtackUnit][6] -= 1;
+
+				if (pos->ECard[1] - pos->PCard[AtackUnit][2] > 0)
+					pos->PCard[AtackUnit][0] -= pos->ECard[1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
+
+				if (pos->PCard[AtackUnit][1] - pos->ECard[2] > 0)
+					pos->ECard[0] -= pos->PCard[AtackUnit][1] - pos->ECard[2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+
+			pos->EAtackt++;
+			Atacks = true;
+		}
+	}
+
+	else {
+		pos->EAtackt = 0;
+		Atacks = false;
+		Dameg = 0;
+		AtackUnit = 0;
 	}
 
 	Hp = pos->ECard[0];

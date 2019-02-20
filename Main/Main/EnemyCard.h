@@ -7,22 +7,44 @@ using namespace GameL;
 class CObjEnemyCard :public CObj
 {
 public:
-	CObjEnemyCard(float x, float y);
+	CObjEnemyCard(float x, float y, float z);
 	~CObjEnemyCard() {};
 	void Init();
 	void Action();
 	void Draw();
 
 private:
+	void Cardname();
+
+	bool Atacks;//攻撃制御用変数
+	int Hpbox[3];
+	int Guardbox[3];
+	int AtackUnit;
+	int Dameg;
+
 	int m_x, m_y;
 	int Setcard;
 	int Number;
 	int Number2;
 	int Number3;
+	int Number4;
 	int Posicard;
 	int Reset;
 	int playertrun;
 	int enemytrun;
+
+	int Type;//カードのタイプを確認する変数
+
+	//カードの装備情報確認変数
+	bool R_soubi;
+	bool R_soubi2;
+	bool L_soubi;
+	bool L_soubi2;
+
+	bool R_Summon;
+	bool L_Summon;
+
+	int aaaa;
 
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
@@ -36,6 +58,14 @@ private:
 
 	bool CardHitCheck;//マウスがカードと触れているか参照する変数
 
+	//カードテキストの表示
+	char *Name;
+	char *Text;
+	char text[256];
+
+	int TextD;//テキストデータ保存用変数
+	int NTcard;//カードデータ番号
+
 	int Shand;
 
 	int Opdraw;
@@ -44,6 +74,7 @@ private:
 
 	bool m_r;
 	bool Summon;
+	bool StopSm;
 	bool m_f;
 	bool Reflag;
 
