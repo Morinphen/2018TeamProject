@@ -18,6 +18,8 @@ void CObjMap::Init()
 
 	WiSummon = false;
 
+	EAtackt = 0;
+
 	m_f = false;
 	Wtouch = false;
 	PTrun = false;
@@ -33,6 +35,14 @@ void CObjMap::Action()
 		if (Cooltime == 10){
 			Cooltime = 0;
 			WSummon = false;
+		}
+	}
+
+	if (EAtackt >= 41)
+	{
+		EAtackt++;
+		if (EAtackt >= 50) {
+			EAtackt = 0;
 		}
 	}
 }

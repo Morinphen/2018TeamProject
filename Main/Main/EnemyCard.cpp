@@ -36,8 +36,13 @@ void CObjEnemyCard::Init()
 	StopSm = false;
 	Shand = 0;
 
+	Atacks = false;
+
 	R_Summon = false;
 	L_Summon = false;
+
+	AtackUnit = 0;
+	Dameg = 0;
 
 	Opdraw--;
 	Opdraw = Opdraw / 10;
@@ -69,11 +74,6 @@ void CObjEnemyCard::Action()
 	Setcard = sc->Cnanber;//Setcard カードの位置調整変更用
 
 	Posicard = Setcard - Number;//Posicard カードの位置調整変更用２
-
-	/*if (Number - han->hensu > 0)
-	{
-		Number2 = han->hand[Number - 1];
-	}*/
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	L_position = pos->L_position;
@@ -132,6 +132,9 @@ void CObjEnemyCard::Action()
 			CObjPlist* PList = new CObjPlist();//関数呼び出し
 
 			PList->Action(&Name, Number4, &Ccost, &NTcard, &Hp, &Atack, &Guard, &Text);//カード番号に沿ってHP変動
+			Hp2 = Hp;
+			Atack2 = Atack;
+			Guard2 = Guard;
 
 			pos->m_f = true;
 			//仮置きの敵召喚　手札の順番が１，２，３のカードを召喚
@@ -143,6 +146,10 @@ void CObjEnemyCard::Action()
 					pos->ECard2[0] = Hp; pos->ECard2[1] = Atack; pos->ECard2[2] = Guard;
 					pos->ES_position = true;
 					R_Summon = true;
+
+					//HitBoxの入れ替え　これで攻撃対象に選択できるように
+					Hits::DeleteHitBox(this);
+					Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
 				}
 				else if (pos->ES_position2 == false)
 				{
@@ -151,10 +158,11 @@ void CObjEnemyCard::Action()
 					pos->ECard3[0] = Hp; pos->ECard3[1] = Atack; pos->ECard3[2] = Guard;
 					pos->ES_position2 = true;
 					L_Summon = true;
+
+					//HitBoxの入れ替え　これで攻撃対象に選択できるように
+					Hits::DeleteHitBox(this);
+					Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 				}
-				//HitBoxの入れ替え　これで攻撃対象に選択できるように
-				Hits::DeleteHitBox(this);
-				Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
 
 				Summon = true;
 				sc->Summon2 = true;
@@ -174,8 +182,77 @@ void CObjEnemyCard::Action()
 		}
 	}
 
+	else
+	{
+		pos->EAtackt = 0;
+		Atacks = false;
+		Dameg = 0;
+		AtackUnit = 0;
+	}
+
 	if (Summon == true)
 	{
+		if (pd->STurn == false) {
+			//戦闘プログラム
+			if (Atacks == false)
+				pos->EAtackt++;
+
+			if (pos->EAtackt == 40 && Atacks == false)
+			{
+				for (int i = 0; i < 3; i++) {
+					if (pos->PCard[i][0] >= 0) {
+						Hpbox[i] = pos->PCard[i][0];
+						Guardbox[i] = pos->PCard[i][2];
+					}
+					else
+					{
+						Hpbox[i] = 0;
+						Guardbox[i] = 0;
+					}
+
+					if (Hpbox[i] != 0) {
+						if (Dameg < Atack - pos->PCard[i][2]) {
+							AtackUnit = i;
+							Dameg = Atack - pos->PCard[i][2];
+						}
+					}
+				}
+				if (R_Summon == true) {
+					//武器を所持していた場合、耐久度減少
+					if (pos->PCard[AtackUnit][4] > 0)
+						pos->PCard[AtackUnit][4] -= 1;
+
+					//２つ目の武器を所持していた場合、耐久度減少
+					if (pos->PCard[AtackUnit][6] > 0)
+						pos->PCard[AtackUnit][6] -= 1;
+
+					if (pos->ECard2[1] - pos->PCard[AtackUnit][2] > 0)
+						pos->PCard[AtackUnit][0] -= pos->ECard2[1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
+
+					if (pos->PCard[AtackUnit][1] - pos->ECard2[2] > 0)
+						pos->ECard2[0] -= pos->PCard[AtackUnit][1] - pos->ECard2[2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+				}
+
+				else if (L_Summon == true) {
+					//武器を所持していた場合、耐久度減少
+					if (pos->PCard[AtackUnit][4] > 0)
+						pos->PCard[AtackUnit][4] -= 1;
+
+					//２つ目の武器を所持していた場合、耐久度減少
+					if (pos->PCard[AtackUnit][6] > 0)
+						pos->PCard[AtackUnit][6] -= 1;
+
+					if (pos->ECard3[1] - pos->PCard[AtackUnit][2] > 0)
+						pos->PCard[AtackUnit][0] -= pos->ECard3[1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
+
+					if (pos->PCard[AtackUnit][1] - pos->ECard3[2] > 0)
+						pos->ECard3[0] -= pos->PCard[AtackUnit][1] - pos->ECard3[2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+				}
+				pos->EAtackt++;
+				Atacks = true;
+			}
+		}
+
 		if (R_Summon == true)
 		{
 			//Hpの更新
@@ -188,6 +265,15 @@ void CObjEnemyCard::Action()
 
 		if (Hp <= 0)
 		{
+			if (R_Summon == true)
+			{
+				pos->ES_position = false;
+			}
+			else if (L_Summon == true)
+			{
+				pos->ES_position2 = false;
+			}
+
 			//HPが０なら消滅
 			this->SetStatus(false);
 			Hits::DeleteHitBox(this);

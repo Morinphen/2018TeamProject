@@ -49,6 +49,8 @@ class CObjMap : public CObj
 		int ECard[6];
 		int	ECard2[6];
 		int	ECard3[6];
+
+		int EAtackt;
 	private:
 
 };

@@ -54,7 +54,6 @@ void CObjEnemyDeck::Init()
 
 		Data++;
 
-
 		EnemyDeck[i] = Data;//同じ番号のカード呼出
 
 	}
@@ -124,7 +123,7 @@ void CObjEnemyDeck::Action()
 		if (pd->STurn == false && Start == true)
 		{
 			ETruntime++;
-			if (ETruntime == 100)
+			if (ETruntime == 200)
 			{
 				ETruntime = 0;
 				EDraw = false;

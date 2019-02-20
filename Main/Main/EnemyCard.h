@@ -16,6 +16,12 @@ public:
 private:
 	void Cardname();
 
+	bool Atacks;//攻撃制御用変数
+	int Hpbox[3];
+	int Guardbox[3];
+	int AtackUnit;
+	int Dameg;
+
 	int m_x, m_y;
 	int Setcard;
 	int Number;
@@ -48,10 +54,8 @@ private:
 	char *Name;
 	char *Text;
 	char text[256];
-	int Tlong;
 
 	int TextD;//テキストデータ保存用変数
-	int Ccost;//カードのコスト
 	int NTcard;//カードデータ番号
 
 	int Shand;
