@@ -274,9 +274,11 @@ void CObjCard::Action()
 
 		SetPrio(11);
 
-		if (m_l == true && pos->WSummon == false && pos->PTrun == true && PrecedingAttack == false)
+		if (m_l == true && pos->WSummon == false && pos->PTrun == true &&
+			PrecedingAttack == false && Pusave == false)
 		{
 			//Effect(Cadata, &WhenEfe, &PlayEfe, &InduEfe, 0);
+			Button = true;
 			m_f = true;
 			BDraw = 1;
 			b_x = mou->m_mouse_x;
