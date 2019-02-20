@@ -37,9 +37,10 @@ void CObjpoint::Action()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjEnemyDeck*pos = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
-	e_Cost = pos->e_point;
 	if(sc->Turn==true)
-	Cost = sc->m_point;
+		Cost = sc->m_point;
+	if (pos->EDraw == false)
+		e_Cost = pos->e_point;
 };
 
 //ƒhƒ[

@@ -46,9 +46,9 @@ class CObjMap : public CObj
 		int WPosition[6];//プレイヤーの武器の場所情報
 
 		//敵のカード情報（仮）
-		int ECard[6];
-		int	ECard2[6];
-		int	ECard3[6];
+		int ECard[8];
+		int	ECard2[8];
+		int	ECard3[8];
 
 		int EAtackt;
 	private:

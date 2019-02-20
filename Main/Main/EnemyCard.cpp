@@ -8,10 +8,11 @@
 #include"GameL\DrawFont.h"
 
 //使用するネームスペース
-CObjEnemyCard::CObjEnemyCard(float x, float y)
+CObjEnemyCard::CObjEnemyCard(float x, float y, float z)
 {
 	m_x = x;
 	m_y = y;
+	Type = z;
 }
 
 //イニシャライズ
@@ -41,6 +42,11 @@ void CObjEnemyCard::Init()
 	R_Summon = false;
 	L_Summon = false;
 
+	R_soubi = false;
+	R_soubi2 = false;
+	L_soubi = false;
+	L_soubi2 = false;
+
 	AtackUnit = 0;
 	Dameg = 0;
 
@@ -66,6 +72,7 @@ void CObjEnemyCard::Action()
 	CObjEnemyHand*han = (CObjEnemyHand*)Objs::GetObj(OBJ_ENEMY_HAND);
 	CObjEnemyDeck*sc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
 	CObjDekc*pd = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+	CObjpoint* point = (CObjpoint*)Objs::GetObj(OBJ_POINT);
 
 	CHitBox*hit = Hits::GetHitBox(this);
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
@@ -137,35 +144,41 @@ void CObjEnemyCard::Action()
 			Guard2 = Guard;
 
 			pos->m_f = true;
-			//仮置きの敵召喚　手札の順番が１，２，３のカードを召喚
-			if (Number == 1 && pos->ES_position == false || Number == 1 && pos->ES_position2 == false) {
-				if (pos->ES_position == false)
-				{
-					m_x = 543;
-					m_y = 191;
-					pos->ECard2[0] = Hp; pos->ECard2[1] = Atack; pos->ECard2[2] = Guard;
-					pos->ES_position = true;
-					R_Summon = true;
 
-					//HitBoxの入れ替え　これで攻撃対象に選択できるように
-					Hits::DeleteHitBox(this);
-					Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
+			if (Type == 1) {
+				if (pos->ES_position == false && point->e_Cost > Ccost || pos->ES_position2 == false && point->e_Cost > Ccost) {
+					if (pos->ES_position == false)
+					{
+						m_x = 543;
+						m_y = 191;
+						pos->ECard2[0] = Hp; pos->ECard2[1] = Atack; pos->ECard2[2] = Guard;
+						pos->ES_position = true;
+						R_Summon = true;
+
+						//HitBoxの入れ替え　これで攻撃対象に選択できるように
+						Hits::DeleteHitBox(this);
+						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY2, 1);
+					}
+					else if (pos->ES_position2 == false)
+					{
+						m_x = 951;
+						m_y = 191;
+						pos->ECard3[0] = Hp; pos->ECard3[1] = Atack; pos->ECard3[2] = Guard;
+						pos->ES_position2 = true;
+						L_Summon = true;
+
+						//HitBoxの入れ替え　これで攻撃対象に選択できるように
+						Hits::DeleteHitBox(this);
+						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
+					}
+
+					Summon = true;
+					sc->Summon2 = true;
 				}
-				else if (pos->ES_position2 == false)
-				{
-					m_x = 951;
-					m_y = 191;
-					pos->ECard3[0] = Hp; pos->ECard3[1] = Atack; pos->ECard3[2] = Guard;
-					pos->ES_position2 = true;
-					L_Summon = true;
+			}
 
-					//HitBoxの入れ替え　これで攻撃対象に選択できるように
-					Hits::DeleteHitBox(this);
-					Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
-				}
+			if (Type == 2) {
 
-				Summon = true;
-				sc->Summon2 = true;
 			}
 		}
 
@@ -177,6 +190,7 @@ void CObjEnemyCard::Action()
 			han->hensu = Setcard - Number3; //手札の合計と出したカードの差分を保存
 			han->hensu3 = Number3; //出したカードの場所を保存
 			sc->Cnanber--; //カードの合計枚数を１減らす
+			point->e_Cost -= Ccost;//コスト減少
 			pos->m_f = true;
 			StopSm = true;
 		}
@@ -305,7 +319,7 @@ void CObjEnemyCard::Draw()
 	RECT_F src;
 	RECT_F dst;
 	wchar_t str[128];
-	if (Number < 4 && Number !=2 && Summon==true) {
+	if (Summon==true) {
 		src.m_top = 0.0f + (128.0f*Updraw);
 		src.m_left = 0.0f + (128.0f*Opdraw);
 		src.m_right = 128.0f + (128.0f*Opdraw);

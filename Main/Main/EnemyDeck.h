@@ -4,6 +4,12 @@
 //使用するネームスペース
 using namespace GameL;
 
+enum type {
+	monster = 1,
+	weapon = 2,
+	shield = 3,
+};
+
 //オブジェクト　デッキ
 class CObjEnemyDeck :public CObj
 {
@@ -47,10 +53,6 @@ private:
 	int Rotdraw;
 
 	int ETruntime;
-
-	int Data;//デッキに登録するカードデータ
-	int EnemyDeck[40];
-	int EnemyPullc[40];
 
 	bool m_f;
 	bool Start;

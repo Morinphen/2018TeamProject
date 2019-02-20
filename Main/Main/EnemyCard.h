@@ -7,7 +7,7 @@ using namespace GameL;
 class CObjEnemyCard :public CObj
 {
 public:
-	CObjEnemyCard(float x, float y);
+	CObjEnemyCard(float x, float y, float z);
 	~CObjEnemyCard() {};
 	void Init();
 	void Action();
@@ -32,6 +32,14 @@ private:
 	int Reset;
 	int playertrun;
 	int enemytrun;
+
+	int Type;//カードのタイプを確認する変数
+
+	//カードの装備情報確認変数
+	bool R_soubi;
+	bool R_soubi2;
+	bool L_soubi;
+	bool L_soubi2;
 
 	bool R_Summon;
 	bool L_Summon;
