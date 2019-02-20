@@ -14,6 +14,7 @@
 //使用するネームスペース
 using namespace GameL;
 
+extern int TurnCount; //現在のターン数を表示するための変数
 bool PrecedingAttack = true; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
 
 //コンストラクタ
@@ -74,6 +75,7 @@ void CObjJadge::Action()
 			sc->Button2 = false;
 			sc->StartG = true;
 			PrecedingAttack = true;
+			TurnCount++;
 			ec->EStartG = true;
 		}
 		else
