@@ -29,15 +29,17 @@ void CObjpoint::Init()
 	m_flag_point = false;
 	m_p=true;
 	Cost = 100;
+	e_Cost = 0;
 };
 
 //アクション
 void CObjpoint::Action()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+	CObjEnemyDeck*pos = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
+	e_Cost = pos->e_point;
 	if(sc->Turn==true)
 	Cost = sc->m_point;
-
 };
 
 //ドロー
@@ -72,9 +74,25 @@ void CObjpoint::Draw()
 		Font::StrDraw(str, 370, 420, 60, c);
 	}
 
-	/*if (pos->PTrun==false)
+	//敵の所持しているマナ(ゴールド？)を表示
+	if (e_Cost >= 10000)
 	{
-		swprintf_s(str, L"end");
-		Font::StrDraw(str, 90, 150, 20, d);
-	}*/
+		swprintf_s(str, L"%d", e_Cost);
+		Font::StrDraw(str, 1082, 58, 35, c);
+	}
+	else if (e_Cost >= 1000)
+	{
+		swprintf_s(str, L"%d", e_Cost);
+		Font::StrDraw(str, 1085, 55, 40, c);
+	}
+	else if (e_Cost >= 100)
+	{
+		swprintf_s(str, L"%d", e_Cost);
+		Font::StrDraw(str, 1095, 55, 40, c);
+	}
+	else
+	{
+		swprintf_s(str, L"%d", e_Cost);
+		Font::StrDraw(str, 1116, 56, 40, c);
+	}
 };

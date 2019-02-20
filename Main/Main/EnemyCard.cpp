@@ -351,15 +351,29 @@ void CObjEnemyCard::Draw()
 				Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, d);
 			}
 
-			swprintf_s(str, L"Çg  Ço : %d/%d", Hp, Hp2);
-			Font::StrDraw(str, 40, 600, 20, d);
-			swprintf_s(str, L"çUåÇóÕ : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
-			Font::StrDraw(str, 40, 620, 20, d);
-			swprintf_s(str, L"ñhå‰óÕ : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
-			Font::StrDraw(str, 40, 640, 20, d);
-			swprintf_s(str, L"ÉRÉXÉg : %d", Ccost);
-			Font::StrDraw(str, 40, 660, 20, d);
-			Draw::Draw(0, &src, &dst, c, 0);
+			//if (Type == 1)
+			//{
+				swprintf_s(str, L"Çg  Ço : %d/%d", Hp, Hp2);
+				Font::StrDraw(str, 40, 600, 20, d);
+				swprintf_s(str, L"çUåÇóÕ : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+				Font::StrDraw(str, 40, 620, 20, d);
+				swprintf_s(str, L"ñhå‰óÕ : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+				Font::StrDraw(str, 40, 640, 20, d);
+				swprintf_s(str, L"ÉRÉXÉg : %d", Ccost);
+				Font::StrDraw(str, 40, 660, 20, d);
+				Draw::Draw(0, &src, &dst, c, 0);
+			/*}
+			if (Type == 2 || Type == 3)
+			{
+				swprintf_s(str, L"ëœãvíl : %d/%d", Hp, Hp2);
+				Font::StrDraw(str, 40, 600, 20, d);
+				swprintf_s(str, L"çUåÇóÕ : %d", Atack);
+				Font::StrDraw(str, 40, 620, 20, d);
+				swprintf_s(str, L"ñhå‰óÕ : %d", Guard);
+				Font::StrDraw(str, 40, 640, 20, d);
+				swprintf_s(str, L"ÉRÉXÉg : %d", Ccost);
+				Font::StrDraw(str, 40, 660, 20, d);
+			}*/
 
 			//ìGÉÇÉìÉXÉ^Å[ÇÃÉXÉeÅ[É^ÉXï\é¶
 			//if (Type == 1)
@@ -481,6 +495,17 @@ void CObjEnemyCard::Draw()
 		{
 			swprintf_s(str, L"%d", Guard);
 			Font::StrDraw(str, m_x + 67, m_y + 10, 20, g2);
+		}
+
+		if (Ccost == 1000)
+		{
+			swprintf_s(str, L"%d", Ccost);
+			Font::StrDraw(str, m_x + 47, m_y + 105, 20, cost);
+		}
+		else
+		{
+			swprintf_s(str, L"%d", Ccost);
+			Font::StrDraw(str, m_x + 52, m_y + 105, 20, cost);
 		}
 	}
 }
