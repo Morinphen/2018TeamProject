@@ -13,10 +13,12 @@ public:
 	void Action();
 	void Draw();
 	int Cost;	//カード使用のためのコスト
+	int e_Cost;
 
 	void SetpointFlag(bool b) { m_flag_point = b; }
 private:
 	int m_point;
+	int e_point;
 	bool m_flag_point;
 	bool m_p;
 };

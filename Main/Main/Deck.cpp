@@ -108,8 +108,8 @@ void CObjDekc::Action()
 		}
 
 		//別のカードが出るまでループ
-		while (stop == 1) {
-
+		while (stop == 1)
+		{
 			stop = 0;
 			Card = rand() % 39 + 1;
 
@@ -125,7 +125,6 @@ void CObjDekc::Action()
 					stop = 1;
 				}
 			}
-
 		}
 
 		if (Deck[Card - 1] <= 481)
@@ -186,7 +185,8 @@ void CObjDekc::Action()
 				m_f = false;
 				effect = false;
 
-				if (Turn == true) {
+				if (Turn == true)
+				{
 					//ドローしたらポイント増加
 					/*m_point++;
 					car->Bat = 1;
@@ -198,17 +198,17 @@ void CObjDekc::Action()
 				Turn = false;
 				pos->PTrun = true;
 				Audio::Start(2);
-
 			}
-
 		}
 
-		else {
+		else
+		{
 			m_f = true;
 		}
 
 		//スタート処理
-		if (Start == false) {
+		if (Start == false)
+		{
 			Pullc[Card - 1] = Deck[Card - 1];//デッキにドローしたカードを登録
 			sc->hand[Cnanber] = Card;//手札にドローしたカードを登録
 			sc->basyo[Cnanber] = Cnanber + 1;
@@ -354,8 +354,16 @@ void CObjDekc::Draw()
 	Draw::Draw(0, &src, &dst, c, 0.0f);
 
 	//デッキの残り枚数表示
-	swprintf_s(str, L"%d", Deckcount - Cardcount);
-	Font::StrDraw(str, 1105, 780, 50, d);
+	if (Deckcount - Cardcount >= 10)
+	{
+		swprintf_s(str, L"%d", Deckcount - Cardcount);
+		Font::StrDraw(str, 1105, 780, 50, d);
+	}
+	else
+	{
+		swprintf_s(str, L"%d", Deckcount - Cardcount);
+		Font::StrDraw(str, 1118, 780, 50, d);
+	}
 
 	if (Button2 == true)
 	{
