@@ -9,6 +9,7 @@
 #include<stdlib.h>
 #include<time.h>
 
+int TurnCount = 0; //現在のターン数を表示するための変数
 extern bool PrecedingAttack; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
 
 //使用するネームスペース
@@ -241,6 +242,7 @@ void CObjDekc::Action()
 				Turn = true;
 				m_f2 = false;
 				Button2 = false;
+				TurnCount++;
 			}
 			//ターン終了ボタン
 			else if (mou->m_mouse_x > 12 &&
@@ -378,6 +380,11 @@ void CObjDekc::Draw()
 		//"降参"の表示
 		swprintf_s(str, L"リタイア");
 		Font::StrDraw(str, 28, 827, 30, d);
+
+		//現在のターン数の表示
+		float a[4] = { 1.0f,1.0f,0.0f,1.0f };
+		swprintf_s(str, L"%dターン目", TurnCount);
+		Font::StrDraw(str, 200, 827, 30, a);
 	}
 	if (r_f == true)
 	{
