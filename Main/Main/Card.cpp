@@ -1127,11 +1127,11 @@ void CObjCard::Draw()
 		//ägëÂÇµÇΩâÊëúÇ…ï\é¶Ç∑ÇÈÉXÉeÅ[É^ÉX
 		if (Type == 1)
 		{
-			swprintf_s(str, L"Çg  Ço : %d/%d", Hp, Hp2);
+			swprintf_s(str, L"Çg  Ço : %d", Hp);
 			Font::StrDraw(str, 40, 600, 20, d);
-			swprintf_s(str, L"çUåÇóÕ : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+			swprintf_s(str, L"çUåÇóÕ : %d", Atack);
 			Font::StrDraw(str, 40, 620, 20, d);
-			swprintf_s(str, L"ñhå‰óÕ : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+			swprintf_s(str, L"ñhå‰óÕ : %d", Guard);
 			Font::StrDraw(str, 40, 640, 20, d);
 			swprintf_s(str, L"ÉRÉXÉg : %d", Ccost);
 			Font::StrDraw(str, 40, 660, 20, d);
@@ -1254,10 +1254,10 @@ void CObjCard::Draw()
 	//ÉEÉBÉìÉhÉEÇÃï\é¶
 	if (Wset == true)
 	{
-		src.m_top = 0.0f;
-		src.m_left = 128.0f;
-		src.m_right = 256.0f;
-		src.m_bottom = 128.0f;
+		src.m_top = 1280.0f;
+		src.m_left = 640.0f;
+		src.m_right = 767.0f;
+		src.m_bottom = 1407.0f;
 
 		dst.m_top = 0.0f + 400;
 		dst.m_left = 0.0f + 550;
@@ -1344,6 +1344,17 @@ void CObjCard::Draw()
 			{
 				swprintf_s(str, L"%d", Guard);
 				Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
+			}
+			if (CardHitCheck == true)
+			{
+				swprintf_s(str, L"Çg  Ço : %d/%d", Hp, Hp2);
+				Font::StrDraw(str, 40, 600, 20, d);
+				swprintf_s(str, L"çUåÇóÕ : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
+				Font::StrDraw(str, 40, 620, 20, d);
+				swprintf_s(str, L"ñhå‰óÕ : %d(%d+%d)", Guard, Guard2, Guard - Guard2);
+				Font::StrDraw(str, 40, 640, 20, d);
+				swprintf_s(str, L"ÉRÉXÉg : %d", Ccost);
+				Font::StrDraw(str, 40, 660, 20, d);
 			}
 		}
 		if (Type == 2 || Type == 3)
