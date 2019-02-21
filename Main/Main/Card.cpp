@@ -679,14 +679,14 @@ void CObjCard::Action()
 						pos->PCard[1][6] -= 1;
 					}
 					//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
-					if (pos->PCard[1][1] - pos->ECard[2] > 0)
+					if (pos->PCard[1][1] - pos->EECard[0][2] > 0)
 					{
-						pos->ECard[0] -= pos->PCard[1][1] - pos->ECard[2];
+						pos->EECard[0][0] -= pos->PCard[1][1] - pos->EECard[0][2];
 					}
 					//“G‚ÌUŒ‚—Í-Ž©g‚Ì–hŒä—Í‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
-					if (pos->ECard[1] - pos->PCard[1][2] > 0)
+					if (pos->EECard[0][1] - pos->PCard[1][2] > 0)
 					{
-						pos->PCard[1][0] -= pos->ECard[1] - pos->PCard[1][2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
+						pos->PCard[1][0] -= pos->EECard[0][1] - pos->PCard[1][2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
 					}
 					Bat = 0;
 					Audio::Start(8);
@@ -704,14 +704,14 @@ void CObjCard::Action()
 						pos->PCard[2][6] -= 1;
 					}
 					//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
-					if (pos->PCard[2][1] - pos->ECard[2] > 0)
+					if (pos->PCard[2][1] - pos->EECard[0][2] > 0)
 					{
-						pos->ECard[0] -= pos->PCard[2][1] - pos->ECard[2];
+						pos->EECard[0][0] -= pos->PCard[2][1] - pos->EECard[0][2];
 					}
 					//“G‚ÌUŒ‚—Í-Ž©g‚Ì–hŒä—Í‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
-					if (pos->ECard[1] - pos->PCard[2][2] > 0)
+					if (pos->EECard[0][1] - pos->PCard[2][2] > 0)
 					{
-						pos->PCard[2][0] -= pos->ECard[1] - pos->PCard[2][2];
+						pos->PCard[2][0] -= pos->EECard[0][1] - pos->PCard[2][2];
 					}
 					Audio::Start(8);
 					Bat2 = 0;
@@ -739,14 +739,14 @@ void CObjCard::Action()
 						pos->PCard[1][6] -= 1;
 					}
 					//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
-					if (pos->PCard[1][1] - pos->ECard2[2] > 0)
+					if (pos->PCard[1][1] - pos->EECard[1][2] > 0)
 					{
-						pos->ECard2[0] -= pos->PCard[1][1] - pos->ECard2[2];
+						pos->EECard[1][0] -= pos->PCard[1][1] - pos->EECard[1][2];
 					}
 					//“G‚ÌUŒ‚—Í-Ž©g‚Ì–hŒä—Í‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
-					if (pos->ECard2[1] - pos->PCard[1][2] > 0)
+					if (pos->EECard[1][1] - pos->PCard[1][2] > 0)
 					{
-						pos->PCard[1][0] -= pos->ECard2[1] - pos->PCard[1][2];
+						pos->PCard[1][0] -= pos->EECard[1][1] - pos->PCard[1][2];
 					}
 					Audio::Start(8);
 					Bat = 0;
@@ -764,14 +764,14 @@ void CObjCard::Action()
 						pos->PCard[2][6] -= 1;
 					}
 					//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
-					if (pos->PCard[2][1] - pos->ECard2[2] > 0)
+					if (pos->PCard[2][1] - pos->EECard[1][2] > 0)
 					{
-						pos->ECard2[0] -= pos->PCard[2][1] - pos->ECard2[2];
+						pos->EECard[1][0] -= pos->PCard[2][1] - pos->EECard[1][2];
 					}
 					//“G‚ÌUŒ‚—Í-Ž©g‚Ì–hŒä—Í‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
-					if (pos->ECard2[1] - pos->PCard[2][2] > 0)
+					if (pos->EECard[1][1] - pos->PCard[2][2] > 0)
 					{
-						pos->PCard[2][0] -= pos->ECard2[1] - pos->PCard[2][2];
+						pos->PCard[2][0] -= pos->EECard[1][1] - pos->PCard[2][2];
 					}
 					Audio::Start(8);
 					Bat2 = 0;
@@ -798,14 +798,14 @@ void CObjCard::Action()
 						pos->PCard[1][6] -= 1;
 					}
 					//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
-					if (pos->PCard[1][1] - pos->ECard3[2] > 0)
+					if (pos->PCard[1][1] - pos->EECard[2][2] > 0)
 					{
-						pos->ECard3[0] -= pos->PCard[1][1] - pos->ECard3[2];
+						pos->EECard[2][0] -= pos->PCard[1][1] - pos->EECard[2][2];
 					}
 					//“G‚ÌUŒ‚—Í-Ž©g‚Ì–hŒä—Í‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
-					if (pos->ECard3[1] - pos->PCard[1][2] > 0)
+					if (pos->EECard[2][1] - pos->PCard[1][2] > 0)
 					{
-						pos->PCard[1][0] -= pos->ECard3[1] - pos->PCard[1][2];
+						pos->PCard[1][0] -= pos->EECard[2][1] - pos->PCard[1][2];
 					}
 					Bat = 0;
 					Audio::Start(8);
@@ -823,14 +823,14 @@ void CObjCard::Action()
 						pos->PCard[2][6] -= 1;
 					}
 					//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
-					if (pos->PCard[2][1] - pos->ECard3[2] > 0)
+					if (pos->PCard[2][1] - pos->EECard[2][2] > 0)
 					{
-						pos->ECard3[0] -= pos->PCard[2][1] - pos->ECard3[2];
+						pos->EECard[2][0] -= pos->PCard[2][1] - pos->EECard[2][2];
 					}
 					//“G‚ÌUŒ‚—Í-Ž©g‚Ì–hŒä—Í‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
-					if (pos->ECard3[1] - pos->PCard[2][2] > 0)
+					if (pos->EECard[2][1] - pos->PCard[2][2] > 0)
 					{
-						pos->PCard[2][0] -= pos->ECard3[1] - pos->PCard[2][2];
+						pos->PCard[2][0] -= pos->EECard[2][1] - pos->PCard[2][2];
 					}
 					Bat2 = 0;
 					Audio::Start(8);

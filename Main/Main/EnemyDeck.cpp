@@ -50,7 +50,7 @@ void CObjEnemyDeck::Init()
 	for (int i = 0; i < 40; i++)
 	{
 
-		Data = rand() % 481 + 10;
+		Data = rand() % 1341 + 10;
 
 		Data = Data - (Data % 10);
 

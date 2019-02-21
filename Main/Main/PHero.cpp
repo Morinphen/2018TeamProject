@@ -27,7 +27,7 @@ void CObjPHero::Init()
 	start = false;
 
 	//ƒXƒe[ƒ^ƒX‚Ì‰Šú‰»
-	Hp = 99;
+	Hp = 1000;
 	Atack = 1;
 	Guard = 0;
 	Pusave = false;
@@ -145,11 +145,11 @@ void CObjPHero::Action()
 				pos->PCard[0][6] -= 1;
 			}
 
-			if (pos->PCard[0][1] - pos->ECard[2] > 0)
-				pos->ECard[0] -= pos->PCard[0][1] - pos->ECard[2];//“G‚ÌHP‚ğ©g‚ÌUŒ‚—Í-“G‚Ìç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ğ—^‚¦‚é
+			if (pos->PCard[0][1] - pos->EECard[0][2] > 0)
+				pos->EECard[0][0] -= pos->PCard[0][1] - pos->EECard[0][2];//“G‚ÌHP‚ğ©g‚ÌUŒ‚—Í-“G‚Ìç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ğ—^‚¦‚é
 
-			if (pos->ECard[1] - pos->PCard[0][2] > 0)
-				pos->PCard[0][0] -= pos->ECard[1] - pos->PCard[0][2];//“G‚ÌUŒ‚—Í-©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ğó‚¯‚é
+			if (pos->EECard[0][1] - pos->PCard[0][2] > 0)
+				pos->PCard[0][0] -= pos->EECard[0][1] - pos->PCard[0][2];//“G‚ÌUŒ‚—Í-©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ğó‚¯‚é
 
 			//‘I‘ğî•ñ‚ğŒ³‚É–ß‚·
 			test = 1;
@@ -173,11 +173,11 @@ void CObjPHero::Action()
 				pos->PCard[0][6] -= 1;
 			}
 
-			if (pos->PCard[0][1] - pos->ECard2[2]>0)
-				pos->ECard2[0] -= pos->PCard[0][1] - pos->ECard2[2];
+			if (pos->PCard[0][1] - pos->EECard[1][2]>0)
+				pos->EECard[1][0] -= pos->PCard[0][1] - pos->EECard[1][2];
 
-			if (pos->ECard2[1] - pos->PCard[0][2]>0)
-				pos->PCard[0][0] -= pos->ECard2[1] - pos->PCard[0][2];
+			if (pos->EECard[1][1] - pos->PCard[0][2]>0)
+				pos->PCard[0][0] -= pos->EECard[1][1] - pos->PCard[0][2];
 			test = 1;
 			Punch = false;
 			Pusave = true;
@@ -200,11 +200,11 @@ void CObjPHero::Action()
 				pos->PCard[0][6] -= 1;
 			}
 
-			if (pos->PCard[0][1] - pos->ECard3[2]>0)
-				pos->ECard3[0] -= pos->PCard[0][1] - pos->ECard3[2];
+			if (pos->PCard[0][1] - pos->EECard[2][2]>0)
+				pos->EECard[2][0] -= pos->PCard[0][1] - pos->EECard[2][2];
 
-			if (pos->ECard3[1] - pos->PCard[0][2]>0)
-				pos->PCard[0][0] -= pos->ECard3[1] - pos->PCard[0][2];
+			if (pos->EECard[2][1] - pos->PCard[0][2]>0)
+				pos->PCard[0][0] -= pos->EECard[2][1] - pos->PCard[0][2];
 
 			test = 1;
 			Punch = false;

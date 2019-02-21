@@ -49,6 +49,8 @@ void CObjEnemyCard::Init()
 
 	AtackUnit = 0;
 	Dameg = 0;
+	UpAtack = 0;
+	UpUnit = 0;
 
 	Opdraw--;
 	Opdraw = Opdraw / 10;
@@ -151,7 +153,7 @@ void CObjEnemyCard::Action()
 					{
 						m_x = 543;
 						m_y = 191;
-						pos->ECard2[0] = Hp; pos->ECard2[1] = Atack; pos->ECard2[2] = Guard;
+						pos->EECard[1][0] = Hp; pos->EECard[1][1] = Atack; pos->EECard[1][2] = Guard;
 						pos->ES_position = true;
 						R_Summon = true;
 
@@ -163,7 +165,7 @@ void CObjEnemyCard::Action()
 					{
 						m_x = 951;
 						m_y = 191;
-						pos->ECard3[0] = Hp; pos->ECard3[1] = Atack; pos->ECard3[2] = Guard;
+						pos->EECard[2][0] = Hp; pos->EECard[2][1] = Atack; pos->EECard[2][2] = Guard;
 						pos->ES_position2 = true;
 						L_Summon = true;
 
@@ -177,8 +179,206 @@ void CObjEnemyCard::Action()
 				}
 			}
 
-			if (Type == 2) {
+			if (Type == 2 && point->e_Cost > Ccost) {
+				//装備対象を選ぶ変数を初期化
+				UpUnit = 0;
+				UpAtack = 99;
+				for (int i = 0; i < 3; i++) {
+					//場のモンスターのステータス情報をいったんリセット
+					GetAtackbox[i] = 0;
 
+					if (pos->EECard[i][1] >= 0)
+						GetAtackbox[i] = pos->EECard[i][1];
+					else
+						GetAtackbox[i] = -1;
+
+					if (GetAtackbox[i] != -1) {
+						if (UpAtack > pos->EECard[i][1]) {
+							UpUnit = i;
+							UpAtack = pos->EECard[i][1];
+						}
+					}
+
+				}
+
+				if (UpUnit == 0)
+				{
+					if (pos->EECard[0][4] <= 0) {
+						pos->EECard[0][1] += Atack;
+						pos->EECard[0][2] += Guard;
+						pos->EECard[0][4] = Hp;
+						pos->EECard[0][5] = Number4;
+						m_x = 703;
+						m_y = 313;
+					}
+
+					else if (pos->EECard[0][6] <= 0) {
+						pos->EECard[0][1] += Atack;
+						pos->EECard[0][2] += Guard;
+						pos->EECard[0][6] = Hp;
+						pos->EECard[0][7] = Number4;
+						m_x = 793;
+						m_y = 313;
+					}
+
+					else {
+						UpUnit = 3;
+					}
+				}
+				else if (UpUnit == 1)
+				{
+					if (pos->EECard[1][4] <= 0) {
+						pos->EECard[1][1] += Atack;
+						pos->EECard[1][2] += Guard;
+						pos->EECard[1][4] = Hp;
+						pos->EECard[1][5] = Number4;
+						m_x = 498;
+						m_y = 313;
+					}
+
+					else if (pos->EECard[1][6] <= 0) {
+						pos->EECard[1][1] += Atack;
+						pos->EECard[1][2] += Guard;
+						pos->EECard[1][6] = Hp;
+						pos->EECard[1][7] = Number4;
+						m_x = 593;
+						m_y = 313;
+					}
+
+					else {
+						UpUnit = 3;
+					}
+				}
+				else if (UpUnit == 2)
+				{
+					if (pos->EECard[2][4] <= 0) {
+						pos->EECard[2][1] += Atack;
+						pos->EECard[2][2] += Guard;
+						pos->EECard[2][4] = Hp;
+						pos->EECard[2][5] = Number4;
+						m_x = 926;
+						m_y = 313;
+					}
+
+					else if (pos->EECard[2][6] <= 0) {
+						pos->EECard[2][1] += Atack;
+						pos->EECard[2][2] += Guard;
+						pos->EECard[2][6] = Hp;
+						pos->EECard[2][7] = Number4;
+						m_x = 1001;
+						m_y = 313;
+					}
+
+					else {
+						UpUnit = 3;
+					}
+				}
+				//すべてのモンスターが武器を装備していた場合、装備を無効にする
+				if (UpUnit != 3) {
+					Summon = true;
+					sc->Summon2 = true;
+				}
+			}
+
+			if (Type == 3 && point->e_Cost > Ccost) {
+				//装備対象を選ぶ変数を初期化
+				UpUnit = 0;
+				UpAtack = 99;
+				for (int i = 0; i < 3; i++) {
+					//場のモンスターのステータス情報をいったんリセット
+					GetGuardbox[i] = 0;
+
+					if (pos->EECard[i][2] >= 0)
+						GetGuardbox[i] = pos->EECard[i][2];
+					else
+						GetGuardbox[i] = -1;
+
+					if (GetGuardbox[i] != -1) {
+						if (UpAtack > pos->EECard[i][2]) {
+							UpUnit = i;
+							UpAtack = pos->EECard[i][2];
+						}
+					}
+
+				}
+
+				if (UpUnit == 0)
+				{
+					if (pos->EECard[0][4] <= 0) {
+						pos->EECard[0][1] += Atack;
+						pos->EECard[0][2] += Guard;
+						pos->EECard[0][4] = Hp;
+						pos->EECard[0][5] = Number4;
+						m_x = 703;
+						m_y = 313;
+					}
+
+					else if (pos->EECard[0][6] <= 0) {
+						pos->EECard[0][1] += Atack;
+						pos->EECard[0][2] += Guard;
+						pos->EECard[0][6] = Hp;
+						pos->EECard[0][7] = Number4;
+						m_x = 793;
+						m_y = 313;
+					}
+
+					else {
+						UpUnit = 3;
+					}
+				}
+				else if (UpUnit == 1)
+				{
+					if (pos->EECard[1][4] <= 0) {
+						pos->EECard[1][1] += Atack;
+						pos->EECard[1][2] += Guard;
+						pos->EECard[1][4] = Hp;
+						pos->EECard[1][5] = Number4;
+						m_x = 498;
+						m_y = 313;
+					}
+
+					else if (pos->EECard[1][6] <= 0) {
+						pos->EECard[1][1] += Atack;
+						pos->EECard[1][2] += Guard;
+						pos->EECard[1][6] = Hp;
+						pos->EECard[1][7] = Number4;
+						m_x = 593;
+						m_y = 313;
+					}
+
+					else {
+						UpUnit = 3;
+					}
+				}
+				else if (UpUnit == 2)
+				{
+					if (pos->EECard[2][4] <= 0) {
+						pos->EECard[2][1] += Atack;
+						pos->EECard[2][2] += Guard;
+						pos->EECard[2][4] = Hp;
+						pos->EECard[2][5] = Number4;
+						m_x = 926;
+						m_y = 313;
+					}
+
+					else if (pos->EECard[2][6] <= 0) {
+						pos->EECard[2][1] += Atack;
+						pos->EECard[2][2] += Guard;
+						pos->EECard[2][6] = Hp;
+						pos->EECard[2][7] = Number4;
+						m_x = 1011;
+						m_y = 313;
+					}
+
+					else {
+						UpUnit = 3;
+					}
+				}
+				//すべてのモンスターが武器を装備していた場合、装備を無効にする
+				if (UpUnit != 3) {
+					Summon = true;
+					sc->Summon2 = true;
+				}
 			}
 		}
 
@@ -240,11 +440,11 @@ void CObjEnemyCard::Action()
 					if (pos->PCard[AtackUnit][6] > 0)
 						pos->PCard[AtackUnit][6] -= 1;
 
-					if (pos->ECard2[1] - pos->PCard[AtackUnit][2] > 0)
-						pos->PCard[AtackUnit][0] -= pos->ECard2[1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
+					if (pos->EECard[1][1] - pos->PCard[AtackUnit][2] > 0)
+						pos->PCard[AtackUnit][0] -= pos->EECard[1][1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
 
-					if (pos->PCard[AtackUnit][1] - pos->ECard2[2] > 0)
-						pos->ECard2[0] -= pos->PCard[AtackUnit][1] - pos->ECard2[2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+					if (pos->PCard[AtackUnit][1] - pos->EECard[1][2] > 0)
+						pos->EECard[1][0] -= pos->PCard[AtackUnit][1] - pos->EECard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
 				}
 
 				else if (L_Summon == true) {
@@ -256,11 +456,11 @@ void CObjEnemyCard::Action()
 					if (pos->PCard[AtackUnit][6] > 0)
 						pos->PCard[AtackUnit][6] -= 1;
 
-					if (pos->ECard3[1] - pos->PCard[AtackUnit][2] > 0)
-						pos->PCard[AtackUnit][0] -= pos->ECard3[1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
+					if (pos->EECard[2][1] - pos->PCard[AtackUnit][2] > 0)
+						pos->PCard[AtackUnit][0] -= pos->EECard[2][1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
 
-					if (pos->PCard[AtackUnit][1] - pos->ECard3[2] > 0)
-						pos->ECard3[0] -= pos->PCard[AtackUnit][1] - pos->ECard3[2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+					if (pos->PCard[AtackUnit][1] - pos->EECard[2][2] > 0)
+						pos->EECard[2][0] -= pos->PCard[AtackUnit][1] - pos->EECard[2][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
 				}
 				pos->EAtackt++;
 				Atacks = true;
@@ -270,11 +470,11 @@ void CObjEnemyCard::Action()
 		if (R_Summon == true)
 		{
 			//Hpの更新
-			Hp = pos->ECard2[0];
+			Hp = pos->EECard[1][0];
 		}
 		else if (L_Summon == true)
 		{
-			Hp = pos->ECard3[0];
+			Hp = pos->EECard[2][0];
 		}
 
 		if (Hp <= 0)
@@ -365,8 +565,8 @@ void CObjEnemyCard::Draw()
 				Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, d);
 			}
 
-			//if (Type == 1)
-			//{
+			if (Type == 1)
+			{
 				swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
 				Font::StrDraw(str, 40, 600, 20, d);
 				swprintf_s(str, L"攻撃力 : %d(%d+%d)", Atack, Atack2, Atack - Atack2);
@@ -376,7 +576,7 @@ void CObjEnemyCard::Draw()
 				swprintf_s(str, L"コスト : %d", Ccost);
 				Font::StrDraw(str, 40, 660, 20, d);
 				Draw::Draw(0, &src, &dst, c, 0);
-			/*}
+			}
 			if (Type == 2 || Type == 3)
 			{
 				swprintf_s(str, L"耐久値 : %d/%d", Hp, Hp2);
@@ -387,46 +587,46 @@ void CObjEnemyCard::Draw()
 				Font::StrDraw(str, 40, 640, 20, d);
 				swprintf_s(str, L"コスト : %d", Ccost);
 				Font::StrDraw(str, 40, 660, 20, d);
-			}*/
+			}
 
 			//敵モンスターのステータス表示
-			//if (Type == 1)
-			//{
-			if (Atack >= 10)
-			{
-				swprintf_s(str, L"%d", Atack);
-				Font::StrDraw(str, 50, 295, 50, a2);
-			}
-			else
-			{
-				swprintf_s(str, L"%d", Atack);
-				Font::StrDraw(str, 60, 295, 50, a2);
-			}
+				if (Type == 1)
+				{
+					if (Atack >= 10)
+					{
+						swprintf_s(str, L"%d", Atack);
+						Font::StrDraw(str, 50, 295, 50, a2);
+					}
+					else
+					{
+						swprintf_s(str, L"%d", Atack);
+						Font::StrDraw(str, 60, 295, 50, a2);
+					}
 
-			if (Hp >= 10)
-			{
-				swprintf_s(str, L"%d", Hp);
-				Font::StrDraw(str, 125, 295, 50, h2);
-			}
-			else
-			{
-				swprintf_s(str, L"%d", Hp);
-				Font::StrDraw(str, 130, 295, 50, h2);
-			}
+					if (Hp >= 10)
+					{
+						swprintf_s(str, L"%d", Hp);
+						Font::StrDraw(str, 125, 295, 50, h2);
+					}
+					else
+					{
+						swprintf_s(str, L"%d", Hp);
+						Font::StrDraw(str, 130, 295, 50, h2);
+					}
 
-			if (Guard >= 10)
-			{
-				swprintf_s(str, L"%d", Guard);
-				Font::StrDraw(str, 185, 295, 50, g2);
-			}
-			else
-			{
-				swprintf_s(str, L"%d", Guard);
-				Font::StrDraw(str, 200, 295, 50, g2);
-			}
-			//}
+					if (Guard >= 10)
+					{
+						swprintf_s(str, L"%d", Guard);
+						Font::StrDraw(str, 185, 295, 50, g2);
+					}
+					else
+					{
+						swprintf_s(str, L"%d", Guard);
+						Font::StrDraw(str, 200, 295, 50, g2);
+					}
+				}
 			//敵装備のステータス表示
-			/*if (Type == 2 || Type == 3)
+			if (Type == 2 || Type == 3)
 			{
 				if (Atack >= 10)
 				{
@@ -460,7 +660,7 @@ void CObjEnemyCard::Draw()
 					swprintf_s(str, L"%d", Guard);
 					Font::StrDraw(str, 200, 295, 50, g2);
 				}
-			}*/
+			}
 			if (Ccost == 1000)
 			{
 				swprintf_s(str, L"%d", Ccost);

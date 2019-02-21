@@ -17,10 +17,16 @@ private:
 	void Cardname();
 
 	bool Atacks;//攻撃制御用変数
+	//状況によって敵、味方のステータスを格納する配列
 	int Hpbox[3];
+	int GetAtackbox[3];
+	int GetGuardbox[3];
 	int Guardbox[3];
-	int AtackUnit;
-	int Dameg;
+
+	int AtackUnit;//攻撃対象用変数
+	int Dameg;//与ダメージ用変数
+	int UpAtack;//あげる攻撃用変数
+	int UpUnit;//装備をさせるユニット変数
 
 	int m_x, m_y;
 	int Setcard;
@@ -81,6 +87,4 @@ private:
 	bool L_position;
 	bool S_position;
 	bool R_position;
-
-	int Type;//カードの種類　1=キャラ,2=武器,3=防具
 };

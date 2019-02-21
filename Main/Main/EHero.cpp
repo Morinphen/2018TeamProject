@@ -25,8 +25,8 @@ void CObjEHero::Init()
 
 	//ƒXƒe[ƒ^ƒX‚Ì‰Šú‰»
 	Hp = 20;
-	Atack = 1;
-	Guard = 0;
+	Atack = 10;
+	Guard = 10;
 
 	LWeapon = false;
 	RWeapon = false;
@@ -52,10 +52,10 @@ void CObjEHero::Action()
 	if (start == false)
 	{
 		start = true;
-		pos->ECard[0] = Hp;
-		pos->ECard[1] = Atack;
-		pos->ECard[2] = Guard;
-		pos->ECard[3] = 0;
+		pos->EECard[0][0] = Hp;
+		pos->EECard[0][1] = Atack;
+		pos->EECard[0][2] = Guard;
+		pos->EECard[0][3] = 0;
 		Hp2 = Hp;
 		Atack2 = Atack;
 		Guard2 = Guard;
@@ -103,11 +103,11 @@ void CObjEHero::Action()
 				if (pos->PCard[AtackUnit][6] > 0)
 					pos->PCard[AtackUnit][6] -= 1;
 
-				if (pos->ECard[1] - pos->PCard[AtackUnit][2] > 0)
-					pos->PCard[AtackUnit][0] -= pos->ECard[1] - pos->PCard[AtackUnit][2];//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
+				if (pos->EECard[0][1] - pos->PCard[AtackUnit][2] > 0)
+					pos->PCard[AtackUnit][0] -= pos->EECard[0][1] - pos->PCard[AtackUnit][2];//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
 
-				if (pos->PCard[AtackUnit][1] - pos->ECard[2] > 0)
-					pos->ECard[0] -= pos->PCard[AtackUnit][1] - pos->ECard[2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
+				if (pos->PCard[AtackUnit][1] - pos->EECard[0][2] > 0)
+					pos->EECard[0][0] -= pos->PCard[AtackUnit][1] - pos->EECard[0][2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
 
 			pos->EAtackt++;
 			Atacks = true;
@@ -121,7 +121,7 @@ void CObjEHero::Action()
 		AtackUnit = 0;
 	}
 
-	Hp = pos->ECard[0];
+	Hp = pos->EECard[0][0];
 	if (Hp <= 0)
 	{
 		Scene::SetScene(new CSceneClear());
