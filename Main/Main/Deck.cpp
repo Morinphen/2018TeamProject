@@ -79,12 +79,14 @@ void CObjDekc::Init()
 	//初期ポイント
 	//m_point = 1;
 	m_point = 100;
+	p_point = 0;
 	Cost = 0;
 	m_flag_point = false;
 
 	DrawButton_y = 0;
 	DrawButton_time = 0;
 
+	AddCostDisplay = false;
 }
 
 //アクション
@@ -192,7 +194,7 @@ void CObjDekc::Action()
 					/*m_point++;
 					car->Bat = 1;
 					car->Bat2 = 1;*/
-
+					p_point = m_point;
 					m_point = m_point + i * 100;
 					i++;
 				}
@@ -245,6 +247,7 @@ void CObjDekc::Action()
 				m_f2 = false;
 				Button2 = false;
 				TurnCount++;
+				AddCostDisplay = true;
 			}
 
 			//ターン終了ボタン

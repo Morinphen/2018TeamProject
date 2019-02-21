@@ -28,9 +28,11 @@ public:
 	int Pullc[40];
 
 	int m_point;
+	int p_point; //ターン終了時の所持ゴールドを一時保存する変数
 	int Cost;
 	bool Turn;
 	bool STurn;
+	bool AddCostDisplay; //ゴールド追加演出をする変数
 	bool Start;//初期手札補充用変数
 	bool StartG;//ゲーム開始用変数
 
