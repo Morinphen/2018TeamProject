@@ -13,6 +13,8 @@ public:
 	void Action();
 	void Draw();
 	int Cost;	//カード使用のためのコスト
+	int AddCost; //コスト加算表示用
+	int time;
 	int e_Cost;
 
 	void SetpointFlag(bool b) { m_flag_point = b; }

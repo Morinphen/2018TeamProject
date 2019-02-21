@@ -30,6 +30,8 @@ void CObjpoint::Init()
 	m_p=true;
 	Cost = 100;
 	e_Cost = 0;
+	AddCost = 0;
+	time = 0;
 };
 
 //アクション
@@ -40,6 +42,15 @@ void CObjpoint::Action()
 	e_Cost = pos->e_point;
 	if(sc->Turn==true)
 	Cost = sc->m_point;
+	AddCost = sc->i - 2;
+	if (sc->Turn == true)
+	{
+		time++;
+	}
+	else
+	{
+		time = 0;
+	}
 };
 
 //ドロー
@@ -73,6 +84,11 @@ void CObjpoint::Draw()
 		swprintf_s(str, L"%d", Cost);
 		Font::StrDraw(str, 370, 420, 60, c);
 	}
+
+
+
+	//swprintf_s(str, L"%d", 100 * AddCost);
+	//Font::StrDraw(str, 380, 200, 60, c);
 
 	//敵の所持しているマナ(ゴールド？)を表示
 	if (e_Cost >= 10000)
