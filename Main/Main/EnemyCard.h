@@ -39,8 +39,6 @@ private:
 	int playertrun;
 	int enemytrun;
 
-	int Type;//カードのタイプを確認する変数
-
 	//カードの装備情報確認変数
 	bool R_soubi;
 	bool R_soubi2;
