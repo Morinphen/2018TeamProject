@@ -18,6 +18,8 @@ class CObjMap : public CObj
 		//場にモンスターが出ているか判断する変数
 		bool S_position, S_position2;
 
+		bool ES_position, ES_position2;
+
 		bool L_position;
 		bool R_position;
 
@@ -44,9 +46,11 @@ class CObjMap : public CObj
 		int WPosition[6];//プレイヤーの武器の場所情報
 
 		//敵のカード情報（仮）
-		int ECard[6];
-		int	ECard2[6];
-		int	ECard3[6];
+		int ECard[8];
+		int	ECard2[8];
+		int	ECard3[8];
+
+		int EAtackt;
 	private:
 
 };
