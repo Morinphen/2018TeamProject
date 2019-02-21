@@ -329,7 +329,7 @@ void CObjCard::Action()
 		if (mou->m_mouse_x > 550 &&
 			mou->m_mouse_x < b_x + 640 &&
 			mou->m_mouse_y > 400 &&
-			mou->m_mouse_y < 520 && 
+			mou->m_mouse_y < 520 &&
 			Wset == true &&
 			pos->PTrun == true &&
 			Set == true &&
@@ -1138,7 +1138,7 @@ void CObjCard::Draw()
 			swprintf_s(str, L"コスト : %d", Ccost);
 			Font::StrDraw(str, 40, 660, 20, d);
 		}
-		if (Type == 2 || Type == 3)
+		else if (Type == 2 || Type == 3)
 		{
 			swprintf_s(str, L"耐久値 : %d/%d", Hp, Hp2);
 			Font::StrDraw(str, 40, 600, 20, d);
