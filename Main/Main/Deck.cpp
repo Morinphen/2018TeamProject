@@ -9,7 +9,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-int TurnCount = 0; //現在のターン数を表示するための変数
+int TurnCount; //現在のターン数を表示するための変数
 extern bool PrecedingAttack; //先行は攻撃できないのを参照する変数 true=攻撃可 false=攻撃不可
 
 //使用するネームスペース
@@ -85,6 +85,7 @@ void CObjDekc::Init()
 	DrawButton_y = 0;
 	DrawButton_time = 0;
 
+	TurnCount = 0; //現在のターン数を表示するための変数
 }
 
 //アクション

@@ -58,4 +58,5 @@ private:
 
 	int DrawButton_y; //ドローボタンのy軸座標
 	int DrawButton_time; //ドローボタンの時間制御
+	//int TurnCount; //現在のターン数を表示するための変数
 };

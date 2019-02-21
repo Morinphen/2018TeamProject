@@ -4,12 +4,6 @@
 //使用するネームスペース
 using namespace GameL;
 
-enum type {
-	monster = 1,
-	weapon = 2,
-	shield = 3,
-};
-
 //オブジェクト　デッキ
 class CObjEnemyDeck :public CObj
 {
