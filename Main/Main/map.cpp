@@ -10,12 +10,16 @@ void CObjMap::Init()
 	S_position = false;
 	S_position2 = false;
 
+	ES_position = false;
+	ES_position2 = false;
+
 	L_position = true;
 	R_position = true;
 
 	WiSummon = false;
 
-	GO = false;
+	ESummont = 0;
+	EAtackt = 0;
 
 	m_f = false;
 	Wtouch = false;
@@ -32,6 +36,22 @@ void CObjMap::Action()
 		if (Cooltime == 10){
 			Cooltime = 0;
 			WSummon = false;
+		}
+	}
+
+	if (EAtackt >= 41)
+	{
+		EAtackt++;
+		if (EAtackt >= 50) {
+			EAtackt = 0;
+		}
+	}
+
+	if (ESummont >= 11)
+	{
+		ESummont++;
+		if (ESummont >= 50) {
+			ESummont = 0;
 		}
 	}
 }

@@ -28,8 +28,11 @@ public:
 	int Pullc[40];
 
 	int m_point;
+	int p_point; //ターン終了時の所持ゴールドを一時保存する変数
 	int Cost;
 	bool Turn;
+	bool STurn;
+	bool AddCostDisplay; //ゴールド追加演出をする変数
 	bool Start;//初期手札補充用変数
 	bool StartG;//ゲーム開始用変数
 
@@ -46,7 +49,8 @@ private:
 	bool m_c; //マウス押しっぱなしのまま反応しないように制御する変数
 	int Ctype;//カードの種類
 
-	int Cardcount;//引いたカードの合計
+	int Deckcount; //デッキの残り枚数を参照する変数
+	int Cardcount; //引いたカードの合計
 	int stop;
 	int Data;//デッキに登録するカードデータ
 
@@ -54,4 +58,8 @@ private:
 	bool m_f2;
 	bool m_flag_point;
 	bool r_f;
+
+	int DrawButton_y; //ドローボタンのy軸座標
+	int DrawButton_time; //ドローボタンの時間制御
+	//int TurnCount; //現在のターン数を表示するための変数
 };
