@@ -21,6 +21,7 @@ void CObjClear::Init()
 	cou = 0;
 	i = 0;
 	j = 0;
+	m_c = true;
 
 
 	Audio::LoadAudio(10, L"Audio\\Ÿ—˜.wav", BACK_MUSIC);
@@ -42,10 +43,15 @@ void CObjClear::Action()
 	{
 		if (mou->m_mouse_x > 340 && mou->m_mouse_x < 970
 			&& mou->m_mouse_y > 500 && mou->m_mouse_y < 542
-			&& BGM == true)
+			&& BGM == true && m_c == true)
 		{
 			Scene::SetScene(new CSceneTitle());
 		}
+		m_c = false;
+	}
+	else
+	{
+		m_c = true;
 	}
 	if (t_t < 500 && t_b < 500)
 	{

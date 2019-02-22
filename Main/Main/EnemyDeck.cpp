@@ -14,7 +14,7 @@ void CObjEnemyDeck::Init()
 {
 	//x.yデッキの位置
 	x = 408;
-	y = 38;
+	y = 34;
 	//m_x,m_y カードの出現位置調整
 	m_x = 927;
 	m_y = 38;
@@ -198,7 +198,7 @@ void CObjEnemyDeck::Draw()
 	src.m_bottom = 128.0f;
 
 	dst.m_top = 128.0f + y;
-	dst.m_left = 128.0f + x - 36;
+	dst.m_left = 130.0f + x - 36;
 	dst.m_right = 0.0f + x - 36;
 	dst.m_bottom = 0.0f + y;
 	
