@@ -31,6 +31,8 @@ void CObjEHero::Init()
 	LWeapon = false;
 	RWeapon = false;
 
+	Cansel = false;
+
 	test = 1;
 
 	//UŒ‚ˆ—A‘•”õˆ—‰Šú‰»
@@ -95,19 +97,24 @@ void CObjEHero::Action()
 					}
 				}
 			}
-				//•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
-				if (pos->PCard[AtackUnit][4] > 0)
-					pos->PCard[AtackUnit][4] -= 1;
+			Cansel = false;
 
-				//‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
-				if (pos->PCard[AtackUnit][6] > 0)
-					pos->PCard[AtackUnit][6] -= 1;
+			//•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[AtackUnit][4] > 0)
+				pos->PCard[AtackUnit][4] -= 1;
 
+			//‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->PCard[AtackUnit][6] > 0)
+				pos->PCard[AtackUnit][6] -= 1;
+
+			if (pos->PCard[AtackUnit][1] - pos->EECard[0][2] > 0 && pos->EECard[0][0] - (pos->PCard[AtackUnit][1] - pos->EECard[0][2]) > 0)
+				pos->EECard[0][0] -= pos->PCard[AtackUnit][1] - pos->EECard[0][2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
+			else
+				Cansel = true;
+
+			if (Cansel == false) {
 				if (pos->EECard[0][1] - pos->PCard[AtackUnit][2] > 0)
 					pos->PCard[AtackUnit][0] -= pos->EECard[0][1] - pos->PCard[AtackUnit][2];//“G‚ÌHP‚ðŽ©g‚ÌUŒ‚—Í-“G‚ÌŽç”õ•ª‚¾‚¯ƒ_ƒ[ƒW‚ð—^‚¦‚é
-
-				if (pos->PCard[AtackUnit][1] - pos->EECard[0][2] > 0)
-					pos->EECard[0][0] -= pos->PCard[AtackUnit][1] - pos->EECard[0][2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
 
 				//Ž©•ª‚ª•Ší‚ðŠŽ‚µ‚Ä‚¢‚éê‡A‘Ï‹v“xŒ¸­
 				if (pos->EECard[0][4] > 0)
@@ -139,8 +146,9 @@ void CObjEHero::Action()
 
 				pos->ED_x = 768;
 
-			pos->EAtackt++;
-			Atacks = true;
+				pos->EAtackt++;
+				Atacks = true;
+			}
 		}
 	}
 
