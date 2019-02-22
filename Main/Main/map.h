@@ -54,6 +54,17 @@ class CObjMap : public CObj
 		//敵の行動した後のリキャストタイム
 		int EAtackt;
 		int ESummont;
+
+		int DamegT;//ダメージ量を表す変数
+		int EDamegT;//反撃で受けたダメージ量を表す変数
+
+		//ダメージテキスト用変数
+		int D_x;
+		int D_y;
+		int ED_x;
+		int ED_y;
+		float D_inbi;//ダメージテキストの透明度
+
 	private:
 
 };
