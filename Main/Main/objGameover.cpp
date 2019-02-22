@@ -42,8 +42,8 @@ void CObjGameover::Action()
 	//スペースキーを押すとシーン変更
 	if (m_l == true)
 	{
-		if (mou->m_mouse_x > 360 && mou->m_mouse_x < 770
-			&& mou->m_mouse_y > 500 && mou->m_mouse_y < 540
+		if (mou->m_mouse_x > 360 && mou->m_mouse_x < 970
+			&& mou->m_mouse_y > 500 && mou->m_mouse_y < 542
 			&&BGM==true)
 		{
 			Scene::SetScene(new CSceneTitle());
