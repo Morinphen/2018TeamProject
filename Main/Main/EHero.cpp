@@ -107,12 +107,13 @@ void CObjEHero::Action()
 			if (pos->PCard[AtackUnit][6] > 0)
 				pos->PCard[AtackUnit][6] -= 1;
 
-			if (pos->PCard[AtackUnit][1] - pos->EECard[0][2] > 0 && pos->EECard[0][0] - (pos->PCard[AtackUnit][1] - pos->EECard[0][2]) > 0)
-				pos->EECard[0][0] -= pos->PCard[AtackUnit][1] - pos->EECard[0][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
-			else
+			if (((pos->EECard[0][0] + pos->EECard[0][2]) - pos->PCard[AtackUnit][1]) < 0)
 				Cansel = true;
 
 			if (Cansel == false) {
+				if (pos->PCard[AtackUnit][1] - pos->EECard[0][2] > 0)
+					pos->EECard[0][0] -= pos->PCard[AtackUnit][1] - pos->EECard[0][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+
 				if (pos->EECard[0][1] - pos->PCard[AtackUnit][2] > 0)
 					pos->PCard[AtackUnit][0] -= pos->EECard[0][1] - pos->PCard[AtackUnit][2];//敵のHPを自身の攻撃力-敵の守備分だけダメージを与える
 

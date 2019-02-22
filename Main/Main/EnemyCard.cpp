@@ -144,7 +144,7 @@ void CObjEnemyCard::Action()
 
 			pos->m_f = true;
 
-			if (Type == 1) {
+			/*if (Type == 1) {
 
 				if (pos->ES_position == false && point->e_Cost > Ccost && pos->ESummont<=10 || pos->ES_position2 == false && point->e_Cost > Ccost && pos->ESummont <= 10) {
 					if (pos->ES_position == false)
@@ -177,7 +177,7 @@ void CObjEnemyCard::Action()
 					Summon = true;
 					sc->Summon2 = true;
 				}
-			}
+			}*/
 
 			if (Type == 2 && point->e_Cost > Ccost && pos->ESummont <= 10) {
 				//‘•”õ‘ÎÛ‚ð‘I‚Ô•Ï”‚ð‰Šú‰»

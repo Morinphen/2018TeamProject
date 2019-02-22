@@ -94,7 +94,7 @@ void CObjMap::Draw()
 		Font::StrDraw(str, D_x, D_y, 50, dameg);
 		swprintf_s(str, L"%d", DamegT);
 		Font::StrDraw(str, ED_x, ED_y, 50, dameg);
-		if (D_y == 469)
+		if (D_y == 539)
 		{
 			SetPrio(10);
 			D_x = 0;
