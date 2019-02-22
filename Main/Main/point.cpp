@@ -42,7 +42,7 @@ void CObjpoint::Action()
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
 	CObjEnemyDeck*esc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
 	if (sc->Turn == true)
-		Cost = sc->p_point;
+		Cost = sc->m_point;
 	if (esc->EDraw == false)
 		e_Cost = esc->e_point;
 
@@ -51,7 +51,7 @@ void CObjpoint::Action()
 	if (sc->AddCostDisplay == true && AddCost > 0)
 	{
 		time++;
-		if (time > 180)
+		if (time > 130)
 		{
 			sc->AddCostDisplay = false;
 			time = 0;
@@ -78,24 +78,24 @@ void CObjpoint::Draw()
 	//所持しているマナ(ゴールド？)を表示
 	if (time == 0)
 	{
-		if (sc->p_point >= 10000)
+		if (Cost >= 10000)
 		{
-			swprintf_s(str, L"%d", sc->p_point);
+			swprintf_s(str, L"%d", sc->m_point);
 			Font::StrDraw(str, 315, 425, 55, c);
 		}
-		else if (sc->p_point >= 1000)
+		else if (Cost >= 1000)
 		{
-			swprintf_s(str, L"%d", sc->p_point);
+			swprintf_s(str, L"%d", sc->m_point);
 			Font::StrDraw(str, 325, 420, 60, c);
 		}
-		else if (sc->p_point >= 100)
+		else if (Cost >= 100)
 		{
-			swprintf_s(str, L"%d", sc->p_point);
+			swprintf_s(str, L"%d", sc->m_point);
 			Font::StrDraw(str, 340, 420, 60, c);
 		}
 		else
 		{
-			swprintf_s(str, L"%d", sc->p_point);
+			swprintf_s(str, L"%d", sc->m_point);
 			Font::StrDraw(str, 370, 420, 60, c);
 		}
 	}
@@ -125,17 +125,17 @@ void CObjpoint::Draw()
 			Font::StrDraw(str, 340, 240 + time, 60, f);
 		}
 		
-		if (Cost >= 10000)
+		if (PreviousCost >= 10000)
 		{
 			swprintf_s(str, L"%d", PreviousCost);
 			Font::StrDraw(str, 315, 425, 55, c);
 		}
-		else if (Cost >= 1000)
+		else if (PreviousCost >= 1000)
 		{
 			swprintf_s(str, L"%d", PreviousCost);
 			Font::StrDraw(str, 325, 420, 60, c);
 		}
-		else if (Cost >= 100)
+		else if (PreviousCost >= 100)
 		{
 			swprintf_s(str, L"%d", PreviousCost);
 			Font::StrDraw(str, 340, 420, 60, c);

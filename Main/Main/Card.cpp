@@ -1038,7 +1038,7 @@ void CObjCard::Action()
 		Audio::Start(11);
 		//ƒRƒXƒgŒ¸­
 		point->Cost -= Ccost;
-		sc->p_point -= Ccost;
+		sc->m_point -= Ccost;
 
 		if (Type == 4)
 		{
