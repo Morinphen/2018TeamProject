@@ -81,10 +81,10 @@ void CObjClear::Draw()
 	RECT_F src;
 	RECT_F dst;
 
-	src.m_top = 172.0f;
-	src.m_left = 0.0f;
-	src.m_right = 172.0f;
-	src.m_bottom = 236.0f;
+	src.m_top = 130.0f;
+	src.m_left = 201.0f;
+	src.m_right = 388.0f;
+	src.m_bottom = 180.0f;
 
 	dst.m_top = t_t;
 	dst.m_left = 310.0f;
@@ -94,7 +94,7 @@ void CObjClear::Draw()
 	Draw::Draw(3, &src, &dst, c, 0);
 
 	if (BGM == true)
-		Font::StrDraw(L"ここをクリックでタイトルに戻る", 360, 500, 42, c);
+		Font::StrDraw(L"ここをクリックでタイトルに戻る", 340, 500, 42, c);
 
 
 }

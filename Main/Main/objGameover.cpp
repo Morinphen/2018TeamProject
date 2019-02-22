@@ -104,10 +104,10 @@ void CObjGameover::Draw()
 	//Draw::Draw(5, &src, &dst, c, 0.0f);
 
 
-		src.m_top = 172.0f;
-		src.m_left = 0.0f;
-		src.m_right = 172.0f;
-		src.m_bottom = 236.0f;
+		src.m_top = 67.0f;
+		src.m_left = 200.0f;
+		src.m_right = 388.0f;
+		src.m_bottom = 122.0f;
 
 		dst.m_top = t_t;
 		dst.m_left = 310.0f;
@@ -117,7 +117,7 @@ void CObjGameover::Draw()
 		Draw::Draw(3, &src, &dst, c, 0);
 
 		if(BGM==true)
-			Font::StrDraw(L"ここをクリックでタイトルに戻る", 360, 500, 42, c);
+			Font::StrDraw(L"ここをクリックでタイトルに戻る", 340, 500, 42, c);
 }
 
 //360.0f
