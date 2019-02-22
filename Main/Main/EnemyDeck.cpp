@@ -66,7 +66,7 @@ void CObjEnemyDeck::Init()
 	e_point = 100;
 	e_Cost = 0;
 
-	i = 1145140;
+	i = 0;
 
 	set = 0;
 	Recount = 0;

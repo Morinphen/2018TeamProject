@@ -63,7 +63,7 @@ void CObjDekc::Init()
 	//Cnanber カードの位置調整用
 	Cnanber = 0;
 
-	i = 114514;
+	i = 0;
 
 	//Cardcount 現在ドローした枚数　現在プログラム作成中
 	Cardcount = 0;
