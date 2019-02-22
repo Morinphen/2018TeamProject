@@ -15,6 +15,8 @@ void CObjMap::Init()
 
 	WiSummon = false;
 
+	GO = false;
+
 	m_f = false;
 	Wtouch = false;
 	PTrun = false;

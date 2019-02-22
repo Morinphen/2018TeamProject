@@ -7,7 +7,6 @@
 
 #include "GameHead.h"
 #include "ObjGameover.h"
-#include "PHero.h"
 
 //使用するネームスペース
 using namespace GameL;
@@ -18,43 +17,80 @@ void CObjGameover::Init()
 
 	m_key_flag = true;
 	go = false;
+	t_t = -500.0f;
+	t_b = -328.0f;
+	cou = 0;
+	i = 0;
+	j = 0;
 
 	Audio::LoadAudio(9, L"Audio\\敗北.wav", BACK_MUSIC);
-
+	Audio::LoadAudio(12, L"Audio\\ドン.wav", EFFECT);
 
 	Audio::Start(9);
+	
+
 }
 
 //アクション
 void CObjGameover::Action()
 {
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
-	CObjPHero*ph = (CObjPHero*)Objs::GetObj(OBJ_PHERO);
 
 	m_l = Input::GetMouButtonL();
 
 
 	//スペースキーを押すとシーン変更
-	/*if (m_l == true)
+	if (m_l == true)
 	{
-		if (mou->m_mouse_x > 700 && mou->m_mouse_x < 994
-			&& mou->m_mouse_y > 500 && mou->m_mouse_y < 542)
+		if (mou->m_mouse_x > 360 && mou->m_mouse_x < 770
+			&& mou->m_mouse_y > 500 && mou->m_mouse_y < 540
+			&&BGM==true)
 		{
 			Scene::SetScene(new CSceneTitle());
 		}
-	}*/
+	}
+	if (t_t < 500 && t_b < 500)
+	{
+		t_t += 4.0f;
+
+		t_b += 4.0f;
+		i++;
+	}
+
+	if (i == 207)
+	{
+		Audio::Start(12);
+		i++;
+		go = true;
+	}
+
+	if (go==true)
+	{
+		for (j = 0; j < 15000; j++)
+		{
+			if(j==14999)
+			BGM = true;
+		}	
+	}
+
+
+
+
+
 }
 
 //ドロー
 void CObjGameover::Draw()
 {
 
-	CObjPHero*ph = (CObjPHero*)Objs::GetObj(OBJ_PHERO);
-
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src;
 	RECT_F dst;
+
+
+
+	 
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 640.0f;
@@ -65,22 +101,24 @@ void CObjGameover::Draw()
 	dst.m_right = 1200.0f;
 	dst.m_bottom = 900.0f;
 
-	Draw::Draw(5, &src, &dst, c, 0.0f);
+	//Draw::Draw(5, &src, &dst, c, 0.0f);
 
-	if (ph->GO == true)
-	{
+
 		src.m_top = 172.0f;
 		src.m_left = 0.0f;
-		src.m_right = 64.0f;
+		src.m_right = 172.0f;
 		src.m_bottom = 236.0f;
 
-		dst.m_top = 310.0f;
-		dst.m_left = 360.0f;
-		dst.m_right = 1100.0f;
-		dst.m_bottom = 580.0f;
+		dst.m_top = t_t;
+		dst.m_left = 310.0f;
+		dst.m_right = 1010.0f;
+		dst.m_bottom =t_b;
 
 		Draw::Draw(3, &src, &dst, c, 0);
-	}
 
-	//Font::StrDraw(L"タイトルに戻る", 700, 500, 42, c);
+		if(BGM==true)
+			Font::StrDraw(L"ここをクリックでタイトルに戻る", 360, 500, 42, c);
 }
+
+//360.0f
+// 570.0f

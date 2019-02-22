@@ -13,8 +13,15 @@ public:
 	void Init();
 	void Action();
 	void Draw();
-	bool go;
+	
 private:
 	bool m_key_flag;
 	bool m_l;
+	int t_t;//topの値
+	int t_b;//bottomの値
+	int i,j;//音が鳴るまでのカウント・BGMが鳴るまでのカウント
+	int cou;
+	bool go;
+	bool BGM;
+
 };

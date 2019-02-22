@@ -54,6 +54,8 @@ void CObjPHero::Init()
 	//リタイアフラグ
 	r_f = false;
 
+	GO = false;
+
 	Hits::SetHitBox(this, m_x, m_y, 108, 144, ELEMENT_GREEN, OBJ_FIELD_PLAYER, 1);
 }
 

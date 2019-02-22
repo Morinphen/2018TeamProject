@@ -38,6 +38,7 @@ public:
 	int i;
 
 	bool effect;//ƒJ[ƒh‚ÌŒø‰Ê•Ï”
+	bool go;
 private:
 	int x, y;
 	int m_x, m_y;
