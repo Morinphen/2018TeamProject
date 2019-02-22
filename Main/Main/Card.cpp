@@ -1162,8 +1162,8 @@ void CObjCard::Draw()
 
 	dst.m_top = 0.0f + m_y;
 	dst.m_left = 0.0f + m_x;
-	dst.m_right = 128.0f + m_x;
-	dst.m_bottom = 128.0f + m_y;
+	dst.m_right = 120.0f + m_x;
+	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
@@ -1378,7 +1378,7 @@ void CObjCard::Draw()
 	{
 		if (Type == 1)
 		{
-			if (Atack >= 10)
+			/*if (Atack >= 10)
 			{
 				swprintf_s(str, L"%d", Atack);
 				Font::StrDraw(str, m_x + 10, m_y + 100, 20, a2);
@@ -1409,7 +1409,41 @@ void CObjCard::Draw()
 			{
 				swprintf_s(str, L"%d", Guard);
 				Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
+			}*/
+
+			if (Atack >= 10)
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, m_x + 6, m_y + 92, 20, a2);
 			}
+			else
+			{
+				swprintf_s(str, L"%d", Atack);
+				Font::StrDraw(str, m_x + 11, m_y + 92, 20, a2);
+			}
+
+			if (Hp >= 10)
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, m_x + 34, m_y + 92, 20, h);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Hp);
+				Font::StrDraw(str, m_x + 39, m_y + 92, 20, h2);
+			}
+
+			if (Guard >= 10)
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, m_x + 63, m_y + 92, 20, g2);
+			}
+			else
+			{
+				swprintf_s(str, L"%d", Guard);
+				Font::StrDraw(str, m_x + 68, m_y + 92, 20, g2);
+			}
+
 			if (CardHitCheck == true)
 			{
 				swprintf_s(str, L"‚g  ‚o : %d/%d", Hp, Hp2);
@@ -1425,22 +1459,22 @@ void CObjCard::Draw()
 		if (Type == 2 || Type == 3)
 		{
 			swprintf_s(str, L"%d", Atack);
-			Font::StrDraw(str, m_x + 15, m_y + 100, 20, a2);
+			Font::StrDraw(str, m_x + 11, m_y + 92, 20, a2);
 			swprintf_s(str, L"%d", Guard);
-			Font::StrDraw(str, m_x + 72, m_y + 100, 20, g2);
+			Font::StrDraw(str, m_x + 68, m_y + 92, 20, g2);
 			swprintf_s(str, L"%d", Hp);
-			Font::StrDraw(str, m_x + 43, m_y + 100, 20, h);
+			Font::StrDraw(str, m_x + 39, m_y + 92, 20, h);
 			
 		}
 		if (Ccost == 1000)
 		{
 			swprintf_s(str, L"%d", Ccost);
-			Font::StrDraw(str, m_x + 4, m_y + 4, 20, cost);
+			Font::StrDraw(str, m_x + 2, m_y + 3, 20, cost);
 		}
 		else
 		{
 			swprintf_s(str, L"%d", Ccost);
-			Font::StrDraw(str, m_x + 10, m_y + 4, 20, cost);
+			Font::StrDraw(str, m_x + 8, m_y + 3, 20, cost);
 		}
 	}
 }
