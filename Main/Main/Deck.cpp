@@ -78,8 +78,8 @@ void CObjDekc::Init()
 
 	//初期ポイント
 	//m_point = 1;
-	m_point = 0;
-	p_point = 100;
+	m_point = 100;
+	p_point = 0;
 	Cost = 0;
 	m_flag_point = false;
 
@@ -242,8 +242,8 @@ void CObjDekc::Action()
 				TurnCount++;
 				AddCostDisplay = true;
 				//コストを増やす
-				m_point = i * 100;
-				p_point += m_point;
+				m_point += i * 100;
+				//p_point += m_point;
 			}
 
 			//ターン終了ボタン
@@ -262,6 +262,7 @@ void CObjDekc::Action()
 				Button2 = true;
 				PrecedingAttack = false;
 				STurn = false;
+				p_point = m_point;
 			}
 			else
 			{
