@@ -161,6 +161,8 @@ void CObjEnemyDeck::Action()
 			else
 			{
 				StartED = false;
+				if(ETruntime==0)
+					i++;
 			}
 
 			ETruntime++;

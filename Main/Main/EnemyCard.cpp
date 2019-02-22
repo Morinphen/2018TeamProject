@@ -145,7 +145,8 @@ void CObjEnemyCard::Action()
 			pos->m_f = true;
 
 			if (Type == 1) {
-				if (pos->ES_position == false && point->e_Cost > Ccost || pos->ES_position2 == false && point->e_Cost > Ccost) {
+
+				if (pos->ES_position == false && point->e_Cost > Ccost && pos->ESummont<=10 || pos->ES_position2 == false && point->e_Cost > Ccost && pos->ESummont <= 10) {
 					if (pos->ES_position == false)
 					{
 						m_x = 543;
@@ -172,13 +173,13 @@ void CObjEnemyCard::Action()
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 					}
-
+					pos->ESummont += 11;
 					Summon = true;
 					sc->Summon2 = true;
 				}
 			}
 
-			if (Type == 2 && point->e_Cost > Ccost) {
+			if (Type == 2 && point->e_Cost > Ccost && pos->ESummont <= 10) {
 				//‘•”õ‘ÎÛ‚ð‘I‚Ô•Ï”‚ð‰Šú‰»
 				UpUnit = 0;
 				UpAtack = 99;
@@ -282,10 +283,11 @@ void CObjEnemyCard::Action()
 				if (UpUnit != 3) {
 					Summon = true;
 					sc->Summon2 = true;
+					pos->ESummont += 11;
 				}
 			}
 
-			if (Type == 3 && point->e_Cost > Ccost) {
+			if (Type == 3 && point->e_Cost > Ccost && pos->ESummont <= 10) {
 				//‘•”õ‘ÎÛ‚ð‘I‚Ô•Ï”‚ð‰Šú‰»
 				UpUnit = 0;
 				UpAtack = 99;
@@ -389,6 +391,7 @@ void CObjEnemyCard::Action()
 				if (UpUnit != 3) {
 					Summon = true;
 					sc->Summon2 = true;
+					pos->ESummont += 11;
 				}
 			}
 		}

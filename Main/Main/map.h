@@ -51,7 +51,9 @@ class CObjMap : public CObj
 		int	ECard2[8];
 		int	ECard3[8];*/
 
+		//敵の行動した後のリキャストタイム
 		int EAtackt;
+		int ESummont;
 	private:
 
 };
