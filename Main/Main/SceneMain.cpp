@@ -86,7 +86,6 @@ void CSceneMain::InitScene()
 	Audio::LoadAudio(8, L"Audio\\É_ÉÅÅ[ÉW.wav", EFFECT);
 	Audio::LoadAudio(11, L"Audio\\è¢ä´3.wav", EFFECT);
 
-
 	Audio::Start(5);
 }
 

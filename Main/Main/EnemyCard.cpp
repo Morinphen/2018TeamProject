@@ -471,6 +471,29 @@ void CObjEnemyCard::Action()
 
 					if (pos->PCard[AtackUnit][1] - pos->EECard[1][2] > 0)
 						pos->EECard[1][0] -= pos->PCard[AtackUnit][1] - pos->EECard[1][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+
+				    //ダメージ量を表す変数を更新
+					pos->EDamegT = pos->EECard[1][1] - pos->PCard[AtackUnit][2];
+					pos->DamegT = pos->PCard[AtackUnit][1] - pos->EECard[1][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = -pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = -pos->EDamegT;
+
+					if (AtackUnit == 0)
+						pos->D_x = 768;
+					else if (AtackUnit == 1)
+						pos->D_x = 573;
+					else if (AtackUnit == 2)
+						pos->D_x = 981;
+
+					pos->ED_x = 573;
 				}
 
 				else if (L_Summon == true) {
@@ -499,6 +522,29 @@ void CObjEnemyCard::Action()
 
 					if (pos->PCard[AtackUnit][1] - pos->EECard[2][2] > 0)
 						pos->EECard[2][0] -= pos->PCard[AtackUnit][1] - pos->EECard[2][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+
+					//ダメージ量を表す変数を更新
+					pos->EDamegT = pos->EECard[2][1] - pos->PCard[AtackUnit][2];
+					pos->DamegT = pos->PCard[AtackUnit][1] - pos->EECard[2][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = -pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = -pos->EDamegT;
+
+					if (AtackUnit == 0)
+						pos->D_x = 768;
+					else if (AtackUnit == 1)
+						pos->D_x = 573;
+					else if (AtackUnit == 2)
+						pos->D_x = 981;
+
+					pos->ED_x = 981;
 				}
 				pos->EAtackt++;
 				Atacks = true;

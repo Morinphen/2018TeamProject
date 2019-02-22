@@ -442,6 +442,7 @@ void CObjCard::Action()
 			mou->m_mouse_x < b_x + 790 &&
 			mou->m_mouse_y > 400 &&
 			mou->m_mouse_y < 520 &&
+			pos->S_position == true &&
 			Wset == true &&
 			pos->PTrun == true &&
 			Set == true &&
@@ -548,6 +549,7 @@ void CObjCard::Action()
 			mou->m_mouse_x < b_x + 940 &&
 			mou->m_mouse_y > 400 &&
 			mou->m_mouse_y < 520 &&
+			pos->S_position2 == true &&
 			Wset == true &&
 			pos->PTrun == true &&
 			Set == true &&
@@ -700,6 +702,23 @@ void CObjCard::Action()
 					{
 						pos->EECard[0][6] -= 1;
 					}
+					//ダメージ量を表す変数を更新
+					pos->DamegT = pos->PCard[1][1] - pos->EECard[0][2];
+					pos->EDamegT = pos->EECard[0][1] - pos->PCard[1][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = - pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = - pos->EDamegT;
+
+					pos->D_x = 573;
+					pos->ED_x = 768;
+
 					Bat = 0;
 					Audio::Start(8);
 				}
@@ -735,6 +754,23 @@ void CObjCard::Action()
 					{
 						pos->EECard[0][6] -= 1;
 					}
+					//ダメージ量を表す変数を更新
+					pos->DamegT = pos->PCard[2][1] - pos->EECard[0][2];
+					pos->EDamegT = pos->EECard[0][1] - pos->PCard[2][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = -pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = -pos->EDamegT;
+
+					pos->D_x = 981;
+					pos->ED_x = 768;
+
 					Audio::Start(8);
 					Bat2 = 0;
 				}
@@ -780,6 +816,24 @@ void CObjCard::Action()
 					{
 						pos->EECard[1][6] -= 1;
 					}
+
+					//ダメージ量を表す変数を更新
+					pos->DamegT = pos->PCard[1][1] - pos->EECard[1][2];
+					pos->EDamegT = pos->EECard[1][1] - pos->PCard[1][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = -pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = -pos->EDamegT;
+
+					pos->D_x = 573;
+					pos->ED_x = 573;
+
 					Audio::Start(8);
 					Bat = 0;
 				}
@@ -815,6 +869,24 @@ void CObjCard::Action()
 					{
 						pos->EECard[1][6] -= 1;
 					}
+
+					//ダメージ量を表す変数を更新
+					pos->DamegT = pos->PCard[2][1] - pos->EECard[1][2];
+					pos->EDamegT = pos->EECard[1][1] - pos->PCard[2][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = -pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = -pos->EDamegT;
+
+					pos->D_x = 981;
+					pos->ED_x = 573;
+
 					Audio::Start(8);
 					Bat2 = 0;
 				}
@@ -859,6 +931,24 @@ void CObjCard::Action()
 					{
 						pos->EECard[2][6] -= 1;
 					}
+
+					//ダメージ量を表す変数を更新
+					pos->DamegT = pos->PCard[1][1] - pos->EECard[2][2];
+					pos->EDamegT = pos->EECard[2][1] - pos->PCard[1][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = -pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = -pos->EDamegT;
+
+					pos->D_x = 573;
+					pos->ED_x = 981;
+
 					Bat = 0;
 					Audio::Start(8);
 				}
@@ -894,6 +984,24 @@ void CObjCard::Action()
 					{
 						pos->EECard[2][6] -= 1;
 					}
+
+					//ダメージ量を表す変数を更新
+					pos->DamegT = pos->PCard[2][1] - pos->EECard[2][2];
+					pos->EDamegT = pos->EECard[2][1] - pos->PCard[2][2];
+
+					if (pos->DamegT <= 0)
+						pos->DamegT = 0;
+					else
+						pos->DamegT = -pos->DamegT;
+
+					if (pos->EDamegT <= 0)
+						pos->EDamegT = 0;
+					else
+						pos->EDamegT = -pos->EDamegT;
+
+					pos->D_x = 981;
+					pos->ED_x = 981;
+
 					Bat2 = 0;
 					Audio::Start(8);
 				}

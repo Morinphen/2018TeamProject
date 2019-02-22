@@ -58,6 +58,8 @@ void CObjPHero::Init()
 	//リタイアフラグ
 	r_f = false;
 
+	GO = false;
+
 	Hits::SetHitBox(this, m_x, m_y, 108, 144, ELEMENT_GREEN, OBJ_FIELD_PLAYER, 1);
 }
 
@@ -69,6 +71,8 @@ void CObjPHero::Action()
 	CObjmouse*mou = (CObjmouse*)Objs::GetObj(OBJ_MAUSE);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+
+
 
 	if (sc->Turn == true)
 	{
@@ -108,7 +112,7 @@ void CObjPHero::Action()
 			if (mou->m_mouse_x > 600 && mou->m_mouse_x < 672
 				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
 			{
-				Scene::SetScene(new CSceneGameover());
+				Scene::SetScene(new CSceneGameover());				
 			}
 			else if (mou->m_mouse_x > 900 && mou->m_mouse_x < 972
 				&& mou->m_mouse_y > 420 && mou->m_mouse_y < 456)
@@ -161,6 +165,24 @@ void CObjPHero::Action()
 			{
 				pos->EECard[0][6] -= 1;
 			}
+
+			//ダメージ量を表す変数を更新
+			pos->DamegT = pos->PCard[0][1] - pos->EECard[0][2];
+			pos->EDamegT = pos->EECard[0][1] - pos->PCard[0][2];
+
+			if (pos->DamegT <= 0)
+				pos->DamegT = 0;
+			else
+				pos->DamegT = -pos->DamegT;
+
+			if (pos->EDamegT <= 0)
+				pos->EDamegT = 0;
+			else
+				pos->EDamegT = -pos->EDamegT;
+
+			pos->D_x = 768;
+			pos->ED_x = 768;
+
 			//選択情報を元に戻す
 			test = 1;
 			Punch = false;
@@ -199,6 +221,24 @@ void CObjPHero::Action()
 			{
 				pos->EECard[1][6] -= 1;
 			}
+
+			//ダメージ量を表す変数を更新
+			pos->DamegT = pos->PCard[0][1] - pos->EECard[1][2];
+			pos->EDamegT = pos->EECard[1][1] - pos->PCard[0][2];
+
+			if (pos->DamegT <= 0)
+				pos->DamegT = 0;
+			else
+				pos->DamegT = -pos->DamegT;
+
+			if (pos->EDamegT <= 0)
+				pos->EDamegT = 0;
+			else
+				pos->EDamegT = -pos->EDamegT;
+
+			pos->D_x = 768;
+			pos->ED_x = 573;
+
 			test = 1;
 			Punch = false;
 			Pusave = true;
@@ -237,6 +277,23 @@ void CObjPHero::Action()
 			{
 				pos->EECard[2][6] -= 1;
 			}
+
+			//ダメージ量を表す変数を更新
+			pos->DamegT = pos->PCard[0][1] - pos->EECard[2][2];
+			pos->EDamegT = pos->EECard[2][1] - pos->PCard[0][2];
+
+			if (pos->DamegT <= 0)
+				pos->DamegT = 0;
+			else
+				pos->DamegT = -pos->DamegT;
+
+			if (pos->EDamegT <= 0)
+				pos->EDamegT = 0;
+			else
+				pos->EDamegT = -pos->EDamegT;
+
+			pos->D_x = 768;
+			pos->ED_x = 981;
 
 			test = 1;
 			Punch = false;
