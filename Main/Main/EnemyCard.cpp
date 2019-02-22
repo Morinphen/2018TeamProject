@@ -44,8 +44,10 @@ void CObjEnemyCard::Init()
 
 	R_soubi = false;
 	R_soubi2 = false;
+	R_soubi3 = false;
 	L_soubi = false;
 	L_soubi2 = false;
+	L_soubi3 = false;
 
 	AtackUnit = 0;
 	Dameg = 0;
@@ -136,7 +138,7 @@ void CObjEnemyCard::Action()
 	}
 
 	if (pd->STurn == false && pd->Start == true) {
-		if (Summon == false && sc->Summon2 == false && sc->EDraw == true && aaaa == aaaa)
+		if (Summon == false && sc->EDraw == true && aaaa == aaaa)
 		{
 			CObjPlist* PList = new CObjPlist();//関数呼び出し
 
@@ -154,6 +156,7 @@ void CObjEnemyCard::Action()
 						m_x = 543;
 						m_y = 191;
 						pos->EECard[1][0] = Hp; pos->EECard[1][1] = Atack; pos->EECard[1][2] = Guard;
+						pos->EECard[1][3] = Number4;
 						pos->ES_position = true;
 						R_Summon = true;
 
@@ -166,6 +169,7 @@ void CObjEnemyCard::Action()
 						m_x = 951;
 						m_y = 191;
 						pos->EECard[2][0] = Hp; pos->EECard[2][1] = Atack; pos->EECard[2][2] = Guard;
+						pos->EECard[2][3] = Number4;
 						pos->ES_position2 = true;
 						L_Summon = true;
 
@@ -210,6 +214,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][5] = Number4;
 						m_x = 703;
 						m_y = 313;
+						R_soubi = true;
 					}
 
 					else if (pos->EECard[0][6] <= 0) {
@@ -219,6 +224,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][7] = Number4;
 						m_x = 793;
 						m_y = 313;
+						L_soubi = true;
 					}
 
 					else {
@@ -234,6 +240,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][5] = Number4;
 						m_x = 498;
 						m_y = 313;
+						R_soubi = true;
 					}
 
 					else if (pos->EECard[1][6] <= 0) {
@@ -243,6 +250,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][7] = Number4;
 						m_x = 593;
 						m_y = 313;
+						L_soubi = true;
 					}
 
 					else {
@@ -256,8 +264,9 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][2] += Guard;
 						pos->EECard[2][4] = Hp;
 						pos->EECard[2][5] = Number4;
-						m_x = 926;
+						m_x = 906;
 						m_y = 313;
+						R_soubi = true;
 					}
 
 					else if (pos->EECard[2][6] <= 0) {
@@ -267,6 +276,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][7] = Number4;
 						m_x = 1001;
 						m_y = 313;
+						L_soubi = true;
 					}
 
 					else {
@@ -311,6 +321,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][5] = Number4;
 						m_x = 703;
 						m_y = 313;
+						R_soubi = true;
 					}
 
 					else if (pos->EECard[0][6] <= 0) {
@@ -320,6 +331,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][7] = Number4;
 						m_x = 793;
 						m_y = 313;
+						L_soubi = true;
 					}
 
 					else {
@@ -335,6 +347,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][5] = Number4;
 						m_x = 498;
 						m_y = 313;
+						R_soubi = true;
 					}
 
 					else if (pos->EECard[1][6] <= 0) {
@@ -344,6 +357,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][7] = Number4;
 						m_x = 593;
 						m_y = 313;
+						L_soubi = true;
 					}
 
 					else {
@@ -357,8 +371,9 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][2] += Guard;
 						pos->EECard[2][4] = Hp;
 						pos->EECard[2][5] = Number4;
-						m_x = 926;
+						m_x = 906;
 						m_y = 313;
+						R_soubi = true;
 					}
 
 					else if (pos->EECard[2][6] <= 0) {
@@ -368,6 +383,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][7] = Number4;
 						m_x = 1011;
 						m_y = 313;
+						L_soubi = true;
 					}
 
 					else {
@@ -404,7 +420,7 @@ void CObjEnemyCard::Action()
 		AtackUnit = 0;
 	}
 
-	if (Summon == true)
+	if (Summon == true && Type == 1)
 	{
 		if (pd->STurn == false) {
 			//戦闘プログラム
@@ -432,11 +448,22 @@ void CObjEnemyCard::Action()
 					}
 				}
 				if (R_Summon == true) {
-					//武器を所持していた場合、耐久度減少
+					for (int i = 1; i < 3; i++) {
+						if (pos->EECard[i][3] == Number4) {
+							//自分が武器を所持している場合、耐久度減少
+							if (pos->EECard[i][4] > 0)
+								pos->EECard[i][4] -= 1;
+							//自分が2つ目の武器を所持している場合、耐久度減少
+							if (pos->EECard[i][6] > 0)
+								pos->EECard[i][6] -= 1;
+						}
+					}
+
+					//t敵が武器を所持していた場合、耐久度減少
 					if (pos->PCard[AtackUnit][4] > 0)
 						pos->PCard[AtackUnit][4] -= 1;
 
-					//２つ目の武器を所持していた場合、耐久度減少
+					//敵が２つ目の武器を所持していた場合、耐久度減少
 					if (pos->PCard[AtackUnit][6] > 0)
 						pos->PCard[AtackUnit][6] -= 1;
 
@@ -448,11 +475,23 @@ void CObjEnemyCard::Action()
 				}
 
 				else if (L_Summon == true) {
-					//武器を所持していた場合、耐久度減少
+
+					for (int i = 1; i < 3; i++) {
+						if (pos->EECard[i][3] == Number4) {
+							//自分が武器を所持している場合、耐久度減少
+							if (pos->EECard[i][4] > 0)
+								pos->EECard[i][4] -= 1;
+							//自分が2つ目の武器を所持している場合、耐久度減少
+							if (pos->EECard[i][6] > 0)
+								pos->EECard[i][6] -= 1;
+						}
+					}
+
+					//敵が武器を所持していた場合、耐久度減少
 					if (pos->PCard[AtackUnit][4] > 0)
 						pos->PCard[AtackUnit][4] -= 1;
 
-					//２つ目の武器を所持していた場合、耐久度減少
+					//敵が２つ目の武器を所持していた場合、耐久度減少
 					if (pos->PCard[AtackUnit][6] > 0)
 						pos->PCard[AtackUnit][6] -= 1;
 
@@ -491,6 +530,47 @@ void CObjEnemyCard::Action()
 			//HPが０なら消滅
 			this->SetStatus(false);
 			Hits::DeleteHitBox(this);
+		}
+	}
+
+	if (Summon == true && Type == 2 || Summon == true && Type == 3)
+	{
+		for (int i = 0; i < 3; i++) {
+			if (pos->EECard[i][5] == Number4 || pos->EECard[i][7] == Number4) {
+				//武器のHP更新
+				if (R_soubi == true)
+				{
+					Hp = pos->EECard[i][4];
+				}
+
+				else
+				{
+					Hp = pos->EECard[i][6];
+				}
+
+				//武器または装備したモンスターのHPが０になった場合
+				if (pos->EECard[i][0] <= 0 || Hp == 0)
+				{
+					pos->EECard[i][1]-= Atack;
+					pos->EECard[i][2]-= Guard;
+					if (R_soubi == true)
+					{
+						pos->EECard[i][4] = 0;
+						pos->EECard[i][5] = 0;
+						R_soubi = false;
+					}
+
+					else
+					{
+						pos->EECard[i][6] = 0;
+						pos->EECard[i][7] = 0;
+						L_soubi = false;
+					}
+					Hits::DeleteHitBox(this);
+					this->SetStatus(false);
+				}
+			}
+
 		}
 	}
 

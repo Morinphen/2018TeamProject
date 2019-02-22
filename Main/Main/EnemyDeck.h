@@ -31,6 +31,8 @@ public:
 	bool Turn;
 	bool StartG;//ゲーム開始用変数
 
+	bool StartED;//先行処理の変数
+
 	int i;
 
 	int set;
