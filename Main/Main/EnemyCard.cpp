@@ -24,8 +24,6 @@ void CObjEnemyCard::Init()
 	Number2 = han->hand[Number - 1];
 	Number3 = han->basyo[Number - 1];
 
-	aaaa = sc->Cnanber;
-
 	Number4= sc->EnemyDeck[sc->e_Card - 1];
 
 	Opdraw = sc->EnemyDeck[sc->e_Card - 1];//test カード番号の保存
@@ -107,7 +105,6 @@ void CObjEnemyCard::Action()
 
 	if (Number3 - han->hensu3 > 0 && han->hensu > 0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
-		aaaa = aaaa;
 		Number--;//番号を１ずらす
 		han->hensu2++;
 	}
@@ -120,7 +117,6 @@ void CObjEnemyCard::Action()
 		{
 			if (han->hand[i] == Number2)
 			{
-				aaaa = aaaa;
 				m_x = 927 - (90 * i);
 			}
 		}
@@ -131,14 +127,13 @@ void CObjEnemyCard::Action()
 		{
 			if (han->hand[i] == Number2)
 			{
-				aaaa = aaaa;
 				m_x = 567 + ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
 
 	if (pd->STurn == false && pd->Start == true) {
-		if (Summon == false && sc->EDraw == true && aaaa == aaaa)
+		if (Summon == false && sc->EDraw == true)
 		{
 			CObjPlist* PList = new CObjPlist();//関数呼び出し
 

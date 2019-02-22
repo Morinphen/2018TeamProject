@@ -50,8 +50,6 @@ private:
 	bool R_Summon;
 	bool L_Summon;
 
-	int aaaa;
-
 	int Hp;//カードのhp
 	int Atack;//カードの攻撃力
 	int Guard;//カードの防御力
