@@ -24,7 +24,7 @@ void CObjEHero::Init()
 	start = false;
 
 	//ステータスの初期化
-	Hp = 1;
+	Hp = 20;
 	Atack = 1;
 	Guard = 0;
 
@@ -137,7 +137,7 @@ void CObjEHero::Action()
 		Scene::SetScene(new CSceneClear());
 	}
 
-	if (pos->PCard[0][0] <= 0 && pd->StartG == true)
+	if (pos->PCard[0][0] <= 0 && pd->StartG == true && pd->STurn == false)
 	{
 		Scene::SetScene(new CSceneGameover());
 	}
