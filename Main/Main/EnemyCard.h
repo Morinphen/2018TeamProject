@@ -85,4 +85,6 @@ private:
 	bool L_position;
 	bool S_position;
 	bool R_position;
+
+	int Type;
 };

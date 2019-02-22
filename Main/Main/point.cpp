@@ -26,6 +26,7 @@ CObjpoint::~CObjpoint()
 void CObjpoint::Init()
 {
 	m_point = 0;
+	p_point = 0;
 	m_flag_point = false;
 	m_p=true;
 	Cost = 100;
@@ -39,13 +40,13 @@ void CObjpoint::Init()
 void CObjpoint::Action()
 {
 	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
-	CObjEnemyDeck*pos = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
+	CObjEnemyDeck*esc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
 	if (sc->Turn == true)
-		Cost = sc->m_point;
-	if (pos->EDraw == false)
-		e_Cost = pos->e_point;
+		Cost = sc->p_point;
+	if (esc->EDraw == false)
+		e_Cost = esc->e_point;
 
-	AddCost = sc->i - 2;
+	AddCost = sc->i - 1;
 	PreviousCost = sc->p_point;
 	if (sc->AddCostDisplay == true && AddCost > 0)
 	{
@@ -61,6 +62,8 @@ void CObjpoint::Action()
 //ドロー
 void CObjpoint::Draw()
 {
+	CObjDekc*sc = (CObjDekc*)Objs::GetObj(OBJ_DEKC);
+	CObjEnemyDeck*esc = (CObjEnemyDeck*)Objs::GetObj(OBJ_ENEMY_DECK);
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
 	float clear = 1.0 - time / 100.0;
@@ -75,24 +78,24 @@ void CObjpoint::Draw()
 	//所持しているマナ(ゴールド？)を表示
 	if (time == 0)
 	{
-		if (Cost >= 10000)
+		if (sc->p_point >= 10000)
 		{
-			swprintf_s(str, L"%d", Cost);
+			swprintf_s(str, L"%d", sc->p_point);
 			Font::StrDraw(str, 315, 425, 55, c);
 		}
-		else if (Cost >= 1000)
+		else if (sc->p_point >= 1000)
 		{
-			swprintf_s(str, L"%d", Cost);
+			swprintf_s(str, L"%d", sc->p_point);
 			Font::StrDraw(str, 325, 420, 60, c);
 		}
-		else if (Cost >= 100)
+		else if (sc->p_point >= 100)
 		{
-			swprintf_s(str, L"%d", Cost);
+			swprintf_s(str, L"%d", sc->p_point);
 			Font::StrDraw(str, 340, 420, 60, c);
 		}
 		else
 		{
-			swprintf_s(str, L"%d", Cost);
+			swprintf_s(str, L"%d", sc->p_point);
 			Font::StrDraw(str, 370, 420, 60, c);
 		}
 	}
@@ -146,22 +149,22 @@ void CObjpoint::Draw()
 	//敵の所持しているマナ(ゴールド？)を表示
 	if (e_Cost >= 10000)
 	{
-		swprintf_s(str, L"%d", e_Cost);
+		swprintf_s(str, L"%d", esc->e_point);
 		Font::StrDraw(str, 1082, 58, 35, c);
 	}
 	else if (e_Cost >= 1000)
 	{
-		swprintf_s(str, L"%d", e_Cost);
+		swprintf_s(str, L"%d", esc->e_point);
 		Font::StrDraw(str, 1085, 55, 40, c);
 	}
 	else if (e_Cost >= 100)
 	{
-		swprintf_s(str, L"%d", e_Cost);
+		swprintf_s(str, L"%d", esc->e_point);
 		Font::StrDraw(str, 1095, 55, 40, c);
 	}
 	else
 	{
-		swprintf_s(str, L"%d", e_Cost);
+		swprintf_s(str, L"%d", esc->e_point);
 		Font::StrDraw(str, 1116, 56, 40, c);
 	}
 }
