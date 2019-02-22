@@ -41,8 +41,8 @@ void CObjClear::Action()
 	//スペースキーを押すとシーン変更
 	if (m_l == true)
 	{
-		if (mou->m_mouse_x > 340 && mou->m_mouse_x < 970
-			&& mou->m_mouse_y > 500 && mou->m_mouse_y < 542
+		if (mou->m_mouse_x > 0 && mou->m_mouse_x < 1200
+			&& mou->m_mouse_y > 0 && mou->m_mouse_y < 900
 			&& BGM == true && m_c == true)
 		{
 			Scene::SetScene(new CSceneTitle());
@@ -99,7 +99,7 @@ void CObjClear::Draw()
 	Draw::Draw(3, &src, &dst, c, 0);
 
 	if (BGM == true)
-		Font::StrDraw(L"ここをクリックでタイトルに戻る", 340, 500, 42, c);
+		Font::StrDraw(L"クリックでタイトルに戻る", 420, 500, 42, c);
 
 
 }
