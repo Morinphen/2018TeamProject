@@ -23,6 +23,7 @@ enum OBJ_NAME
 	OBJ_LIST,
 	OBJ_WINDOW,
 	OBJ_JADGE,
+	OBJ_PHERO,
 
 
 	OBJ_FIELD_PLAYER,
@@ -115,5 +116,5 @@ struct UserData
 
 //シーンスタートクラス---------------------------
 //ゲーム開始時のシーンクラス登録
-#define SET_GAME_START CSceneMain
+#define SET_GAME_START CSceneClear
 //-----------------------------------------------

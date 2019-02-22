@@ -27,6 +27,8 @@ class CObjMap : public CObj
 
 		bool PTrun;
 
+		bool GO;//ゲームオーバー判定
+
 		//ウィンドウが出ているか判断する変数
 		bool WiSummon;
 

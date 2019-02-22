@@ -292,6 +292,7 @@ void CObjDekc::Action()
 					m_c == true)
 				{
 					Scene::SetScene(new CSceneGameover());
+					go = true;
 				}
 				//u‚¢‚¢‚¦v‚Ìê‡
 				else if (mou->m_mouse_x > 900 &&
