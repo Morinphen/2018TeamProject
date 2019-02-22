@@ -42,8 +42,10 @@ private:
 	//カードの装備情報確認変数
 	bool R_soubi;
 	bool R_soubi2;
+	bool R_soubi3;
 	bool L_soubi;
 	bool L_soubi2;
+	bool L_soubi3;
 
 	bool R_Summon;
 	bool L_Summon;

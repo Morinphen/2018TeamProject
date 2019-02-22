@@ -151,6 +151,16 @@ void CObjPHero::Action()
 			if (pos->EECard[0][1] - pos->PCard[0][2] > 0)
 				pos->PCard[0][0] -= pos->EECard[0][1] - pos->PCard[0][2];//“G‚ÌUŒ‚—Í-Ž©g‚ÌHP‚Ì•ª‚¾‚¯ƒ_ƒ[ƒW‚ðŽó‚¯‚é
 
+			//“G‚ª•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->EECard[0][4] > 0)
+			{
+				pos->EECard[0][4] -= 1;
+			}
+			//“G‚ª‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->EECard[0][6] > 0)
+			{
+				pos->EECard[0][6] -= 1;
+			}
 			//‘I‘ðî•ñ‚ðŒ³‚É–ß‚·
 			test = 1;
 			Punch = false;
@@ -178,6 +188,17 @@ void CObjPHero::Action()
 
 			if (pos->EECard[1][1] - pos->PCard[0][2]>0)
 				pos->PCard[0][0] -= pos->EECard[1][1] - pos->PCard[0][2];
+
+			//“G‚ª•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->EECard[1][4] > 0)
+			{
+				pos->EECard[1][4] -= 1;
+			}
+			//“G‚ª‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->EECard[1][6] > 0)
+			{
+				pos->EECard[1][6] -= 1;
+			}
 			test = 1;
 			Punch = false;
 			Pusave = true;
@@ -205,6 +226,17 @@ void CObjPHero::Action()
 
 			if (pos->EECard[2][1] - pos->PCard[0][2]>0)
 				pos->PCard[0][0] -= pos->EECard[2][1] - pos->PCard[0][2];
+
+			//“G‚ª•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->EECard[2][4] > 0)
+			{
+				pos->EECard[2][4] -= 1;
+			}
+			//“G‚ª‚Q‚Â–Ú‚Ì•Ší‚ðŠŽ‚µ‚Ä‚¢‚½ê‡A‘Ï‹v“xŒ¸­
+			if (pos->EECard[2][6] > 0)
+			{
+				pos->EECard[2][6] -= 1;
+			}
 
 			test = 1;
 			Punch = false;

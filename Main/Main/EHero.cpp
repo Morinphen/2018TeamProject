@@ -25,8 +25,8 @@ void CObjEHero::Init()
 
 	//ステータスの初期化
 	Hp = 20;
-	Atack = 10;
-	Guard = 10;
+	Atack = 1;
+	Guard = 0;
 
 	LWeapon = false;
 	RWeapon = false;
@@ -108,6 +108,13 @@ void CObjEHero::Action()
 
 				if (pos->PCard[AtackUnit][1] - pos->EECard[0][2] > 0)
 					pos->EECard[0][0] -= pos->PCard[AtackUnit][1] - pos->EECard[0][2];//敵の攻撃力-自身のHPの分だけダメージを受ける
+
+				//自分が武器を所持している場合、耐久度減少
+				if (pos->EECard[0][4] > 0)
+					pos->EECard[0][4] -= 1;
+				//自分が2つ目の武器を所持している場合、耐久度減少
+				if (pos->EECard[0][6] > 0)
+					pos->EECard[0][6] -= 1;
 
 			pos->EAtackt++;
 			Atacks = true;

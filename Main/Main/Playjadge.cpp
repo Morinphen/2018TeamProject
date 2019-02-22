@@ -86,6 +86,7 @@ void CObjJadge::Action()
 			sc->StartG = true;
 			PrecedingAttack = false;
 			ec->EStartG = true;
+			ec->StartED = true;
 		}
 
 		Hits::DeleteHitBox(this);

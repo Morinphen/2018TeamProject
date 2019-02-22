@@ -34,7 +34,7 @@ void CObjEnemyDeck::Init()
 	e_Cardcount = 0;
 
 	//EDraw ターン終了時、カードを一枚引く
-	EDraw = false;
+	EDraw = true;
 
 	e_Deckcount = 40; //デッキの残り枚数
 
@@ -43,6 +43,8 @@ void CObjEnemyDeck::Init()
 	EStartG = false;
 	//Summon2 １ターンの召喚制限
 	Summon2 = false;
+
+	StartED = false;
 
 	//ETruntime 仮の敵ターン経過時間
 	ETruntime = 0;
@@ -151,10 +153,14 @@ void CObjEnemyDeck::Action()
 
 		if (pd->STurn == false && Start == true)
 		{
-			if (ETruntime == 0)
+			if (ETruntime == 0 && StartED == false)
 			{
 				EDraw = false;
 				e_point += i * 100;
+			}
+			else
+			{
+				StartED = false;
 			}
 
 			ETruntime++;
