@@ -116,6 +116,29 @@ void CObjEHero::Action()
 				if (pos->EECard[0][6] > 0)
 					pos->EECard[0][6] -= 1;
 
+				//ダメージ量を表す変数を更新
+				pos->EDamegT = pos->EECard[0][1] - pos->PCard[AtackUnit][2];
+				pos->DamegT = pos->PCard[AtackUnit][1] - pos->EECard[0][2];
+
+				if (pos->DamegT <= 0)
+					pos->DamegT = 0;
+				else
+					pos->DamegT = -pos->DamegT;
+
+				if (pos->EDamegT <= 0)
+					pos->EDamegT = 0;
+				else
+					pos->EDamegT = -pos->EDamegT;
+
+				if (AtackUnit == 0)
+					pos->D_x = 768;
+				else if (AtackUnit == 1)
+					pos->D_x = 573;
+				else if (AtackUnit == 2)
+					pos->D_x = 981;
+
+				pos->ED_x = 768;
+
 			pos->EAtackt++;
 			Atacks = true;
 		}
@@ -137,7 +160,7 @@ void CObjEHero::Action()
 		Scene::SetScene(new CSceneClear());
 	}
 
-	if (pos->PCard[0][0] <= 0 && pd->StartG == true)
+	if (pos->PCard[0][0] <= 0 && pd->StartG == true && pd->STurn == false)
 	{
 		Scene::SetScene(new CSceneGameover());
 	}
