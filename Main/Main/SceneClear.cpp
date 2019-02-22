@@ -30,7 +30,7 @@ void CSceneClear::InitScene()
 {
 	//出力させる文字のグラフィックを作成
 	Font::SetStrTex(L"Arma Batlle");
-	Draw::LoadImageW(L"image2.png", 0, TEX_SIZE_512);
+	//Draw::LoadImageW(L"Clear.png", 6, TEX_SIZE_1024);
 
 	CObjClear* obj = new CObjClear();	//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_CLEAR, 10);//主人公オブジェクト登録

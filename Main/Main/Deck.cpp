@@ -262,6 +262,7 @@ void CObjDekc::Action()
 				Button2 = true;
 				PrecedingAttack = false;
 				STurn = false;
+				p_point = m_point;
 			}
 			else
 			{

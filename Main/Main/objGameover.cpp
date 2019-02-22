@@ -19,7 +19,6 @@ void CObjGameover::Init()
 
 	Audio::LoadAudio(9, L"Audio\\敗北.wav", BACK_MUSIC);
 
-
 	Audio::Start(9);
 }
 
@@ -30,11 +29,11 @@ void CObjGameover::Action()
 
 	m_l = Input::GetMouButtonL();
 
-	//スペースキーを押すとシーン変更
+	//クリックでシーン変更
 	if (m_l == true)
 	{
-		if (mou->m_mouse_x > 700 && mou->m_mouse_x < 994
-			&& mou->m_mouse_y > 500 && mou->m_mouse_y < 542)
+		if (mou->m_mouse_x > 564 && mou->m_mouse_x < 1014
+			&& mou->m_mouse_y > 550 && mou->m_mouse_y < 580)
 		{
 			Scene::SetScene(new CSceneTitle());
 		}
@@ -60,5 +59,5 @@ void CObjGameover::Draw()
 
 	Draw::Draw(5, &src, &dst, c, 0.0f);
 
-	Font::StrDraw(L"タイトルに戻る", 700, 500, 42, c);
+	Font::StrDraw(L"ここをクリックでタイトルに戻る", 564, 550, 30, c);
 }
