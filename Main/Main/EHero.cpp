@@ -8,6 +8,8 @@
 
 #include"GameL\DrawFont.h"
 
+extern bool EPrecedingAttack;
+
 //使用するネームスペース
 CObjEHero::CObjEHero()
 {
@@ -72,7 +74,7 @@ void CObjEHero::Action()
 		CardHitCheck = false; //"マウスがカードに触れていない"状態にする
 	}
 
-	if (pd->STurn == false) {
+	if (pd->STurn == false && pd->StartG==true && EPrecedingAttack==false) {
 		//戦闘プログラム
 		if (Atacks == false)
 			pos->EAtackt++;

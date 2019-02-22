@@ -9,6 +9,8 @@
 #include<time.h>
 //使用するネームスペース
 
+extern bool EPrecedingAttack;
+
 //イニシャライズ
 void CObjEnemyDeck::Init()
 {
@@ -171,6 +173,7 @@ void CObjEnemyDeck::Action()
 				ETruntime = 0;
 				Summon2 = false;
 				pd->STurn = true;
+				EPrecedingAttack = false;
 			}
 		}
 
