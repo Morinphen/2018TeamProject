@@ -24,7 +24,7 @@ void CObjEHero::Init()
 	start = false;
 
 	//ステータスの初期化
-	Hp = 21;
+	Hp = 20;
 	Atack = 1;
 	Guard = 0;
 
