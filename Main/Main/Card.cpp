@@ -1014,7 +1014,10 @@ void CObjCard::Action()
 		pos->m_f = true;
 		StopSm = true;
 		Audio::Start(11);
-		point->Cost -= Ccost;//コスト減少
+		//コスト減少
+		point->Cost -= Ccost;
+		sc->p_point -= Ccost;
+
 		if (Type == 4)
 		{
 			Hits::DeleteHitBox(this);

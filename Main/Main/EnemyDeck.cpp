@@ -66,7 +66,7 @@ void CObjEnemyDeck::Init()
 	e_point = 100;
 	e_Cost = 0;
 
-	i = 1;
+	i = 0;
 
 	set = 0;
 	Recount = 0;
@@ -130,7 +130,6 @@ void CObjEnemyDeck::Action()
 			Objs::InsertObj(obj_b, OBJ_ENEMY_CARD, 10);//作ったカードをオブジェクトマネージャーに登録
 			m_f = false;
 			//ドローしたらポイント増加
-			e_point = e_point + i * 100;
 			i++;
 			EDraw = true;
 		}
@@ -154,8 +153,11 @@ void CObjEnemyDeck::Action()
 
 		if (pd->STurn == false && Start == true)
 		{
-			if(ETruntime==0 && StartED==false)
+			if (ETruntime == 0 && StartED == false)
+			{
 				EDraw = false;
+				e_point += i * 100;
+			}
 			else
 			{
 				StartED = false;

@@ -402,6 +402,7 @@ void CObjEnemyCard::Action()
 			han->hensu3 = Number3; //出したカードの場所を保存
 			sc->Cnanber--; //カードの合計枚数を１減らす
 			point->e_Cost -= Ccost;//コスト減少
+			sc->e_point -= Ccost;
 			pos->m_f = true;
 			StopSm = true;
 		}
@@ -505,10 +506,15 @@ void CObjEnemyCard::Action()
 		{
 			//Hpの更新
 			Hp = pos->EECard[1][0];
+			Atack = pos->EECard[1][1];
+			Guard = pos->EECard[1][2];
+
 		}
 		else if (L_Summon == true)
 		{
 			Hp = pos->EECard[2][0];
+			Atack = pos->EECard[2][1];
+			Guard = pos->EECard[2][2];
 		}
 
 		if (Hp <= 0)
@@ -640,6 +646,8 @@ void CObjEnemyCard::Draw()
 				Font::StrDraw(aatr[i], 40, 670 + i * 20, 20, d);
 			}
 
+			Draw::Draw(0, &src, &dst, c, 0);
+
 			if (Type == 1)
 			{
 				swprintf_s(str, L"Ｈ  Ｐ : %d/%d", Hp, Hp2);
@@ -650,7 +658,6 @@ void CObjEnemyCard::Draw()
 				Font::StrDraw(str, 40, 640, 20, d);
 				swprintf_s(str, L"コスト : %d", Ccost);
 				Font::StrDraw(str, 40, 660, 20, d);
-				Draw::Draw(0, &src, &dst, c, 0);
 			}
 			if (Type == 2 || Type == 3)
 			{

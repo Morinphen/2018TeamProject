@@ -27,7 +27,7 @@ void CObjPHero::Init()
 	start = false;
 
 	//ステータスの初期化
-	Hp = 20;
+	Hp = 2000;
 	Atack = 1;
 	Guard = 0;
 	Pusave = false;

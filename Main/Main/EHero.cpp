@@ -129,6 +129,8 @@ void CObjEHero::Action()
 	}
 
 	Hp = pos->EECard[0][0];
+	Atack = pos->EECard[0][1];
+	Guard = pos->EECard[0][2];
 	if (Hp <= 0)
 	{
 		Scene::SetScene(new CSceneClear());
