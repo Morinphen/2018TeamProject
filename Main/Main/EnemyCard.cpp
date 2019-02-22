@@ -64,7 +64,7 @@ void CObjEnemyCard::Init()
 
 	CObjMap* pos = (CObjMap*)Objs::GetObj(OBJ_MAP);
 
-	Hits::SetHitBox(this, m_x, m_y, 128, 128, ELEMENT_CARD, OBJ_CARD, 1);
+	Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_CARD, OBJ_CARD, 1);
 }
 
 //ƒAƒNƒVƒ‡ƒ“
@@ -150,7 +150,7 @@ void CObjEnemyCard::Action()
 					if (pos->ES_position == false)
 					{
 						m_x = 543;
-						m_y = 191;
+						m_y = 190;
 						pos->EECard[1][0] = Hp; pos->EECard[1][1] = Atack; pos->EECard[1][2] = Guard;
 						pos->EECard[1][3] = Number4;
 						pos->ES_position = true;
@@ -163,7 +163,7 @@ void CObjEnemyCard::Action()
 					else if (pos->ES_position2 == false)
 					{
 						m_x = 951;
-						m_y = 191;
+						m_y = 190;
 						pos->EECard[2][0] = Hp; pos->EECard[2][1] = Atack; pos->EECard[2][2] = Guard;
 						pos->EECard[2][3] = Number4;
 						pos->ES_position2 = true;
@@ -208,8 +208,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][2] += Guard;
 						pos->EECard[0][4] = Hp;
 						pos->EECard[0][5] = Number4;
-						m_x = 703;
-						m_y = 313;
+						m_x = 700;
+						m_y = 317;
 						R_soubi = true;
 					}
 
@@ -218,8 +218,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][2] += Guard;
 						pos->EECard[0][6] = Hp;
 						pos->EECard[0][7] = Number4;
-						m_x = 793;
-						m_y = 313;
+						m_x = 797;
+						m_y = 317;
 						L_soubi = true;
 					}
 
@@ -234,8 +234,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][2] += Guard;
 						pos->EECard[1][4] = Hp;
 						pos->EECard[1][5] = Number4;
-						m_x = 498;
-						m_y = 313;
+						m_x = 496;
+						m_y = 317;
 						R_soubi = true;
 					}
 
@@ -245,7 +245,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][6] = Hp;
 						pos->EECard[1][7] = Number4;
 						m_x = 593;
-						m_y = 313;
+						m_y = 317;
 						L_soubi = true;
 					}
 
@@ -260,8 +260,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][2] += Guard;
 						pos->EECard[2][4] = Hp;
 						pos->EECard[2][5] = Number4;
-						m_x = 906;
-						m_y = 313;
+						m_x = 904;
+						m_y = 317;
 						R_soubi = true;
 					}
 
@@ -271,7 +271,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][6] = Hp;
 						pos->EECard[2][7] = Number4;
 						m_x = 1001;
-						m_y = 313;
+						m_y = 317;
 						L_soubi = true;
 					}
 
@@ -316,8 +316,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][2] += Guard;
 						pos->EECard[0][4] = Hp;
 						pos->EECard[0][5] = Number4;
-						m_x = 703;
-						m_y = 313;
+						m_x = 700;
+						m_y = 317;
 						R_soubi = true;
 					}
 
@@ -326,8 +326,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[0][2] += Guard;
 						pos->EECard[0][6] = Hp;
 						pos->EECard[0][7] = Number4;
-						m_x = 793;
-						m_y = 313;
+						m_x = 797;
+						m_y = 317;
 						L_soubi = true;
 					}
 
@@ -342,8 +342,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][2] += Guard;
 						pos->EECard[1][4] = Hp;
 						pos->EECard[1][5] = Number4;
-						m_x = 498;
-						m_y = 313;
+						m_x = 496;
+						m_y = 317;
 						R_soubi = true;
 					}
 
@@ -353,7 +353,7 @@ void CObjEnemyCard::Action()
 						pos->EECard[1][6] = Hp;
 						pos->EECard[1][7] = Number4;
 						m_x = 593;
-						m_y = 313;
+						m_y = 317;
 						L_soubi = true;
 					}
 
@@ -368,8 +368,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][2] += Guard;
 						pos->EECard[2][4] = Hp;
 						pos->EECard[2][5] = Number4;
-						m_x = 906;
-						m_y = 313;
+						m_x = 904;
+						m_y = 317;
 						R_soubi = true;
 					}
 
@@ -378,8 +378,8 @@ void CObjEnemyCard::Action()
 						pos->EECard[2][2] += Guard;
 						pos->EECard[2][6] = Hp;
 						pos->EECard[2][7] = Number4;
-						m_x = 1011;
-						m_y = 313;
+						m_x = 1001;
+						m_y = 317;
 						L_soubi = true;
 					}
 
@@ -665,9 +665,9 @@ void CObjEnemyCard::Draw()
 	}
 
 	dst.m_top = 0.0f + m_y;
-	dst.m_left = 0.0f + m_x - 36;
-	dst.m_right = 128.0f + m_x - 36;
-	dst.m_bottom = 128.0f + m_y;
+	dst.m_left = 0.0f + m_x - 30;
+	dst.m_right = 120.0f + m_x - 30;
+	dst.m_bottom = 120.0f + m_y;
 
 	Draw::Draw(0, &src, &dst, c, Rotdraw);
 
@@ -845,12 +845,12 @@ void CObjEnemyCard::Draw()
 		if (Ccost == 1000)
 		{
 			swprintf_s(str, L"%d", Ccost);
-			Font::StrDraw(str, m_x + 47, m_y + 105, 20, cost);
+			Font::StrDraw(str, m_x + 47, m_y + 98, 20, cost);
 		}
 		else
 		{
 			swprintf_s(str, L"%d", Ccost);
-			Font::StrDraw(str, m_x + 52, m_y + 105, 20, cost);
+			Font::StrDraw(str, m_x + 52, m_y + 98, 20, cost);
 		}
 	}
 }
