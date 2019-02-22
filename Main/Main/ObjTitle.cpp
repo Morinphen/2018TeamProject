@@ -21,6 +21,7 @@ void CObjTitle::Init()
 	Audio::Start(12);
 
 	m_l = true;
+	m_c = false;
 	m_f2 = true;
 }
 
@@ -36,16 +37,21 @@ void CObjTitle::Action()
 	{
 		//ゲーム画面に
 		if (mou->m_mouse_x > 495 && mou->m_mouse_x < 707
-			&& mou->m_mouse_y > 390 && mou->m_mouse_y < 458)
+			&& mou->m_mouse_y > 390 && mou->m_mouse_y < 458 && m_c == true)
 		{
 			Scene::SetScene(new CSceneMain());
 		}
 		//ゲーム終了
 		else if (mou->m_mouse_x > 495 && mou->m_mouse_x < 707
-			&& mou->m_mouse_y > 490 && mou->m_mouse_y < 558)
+			&& mou->m_mouse_y > 490 && mou->m_mouse_y < 558 && m_c == true)
 		{
 			exit(0);
 		}
+		m_c = false;
+	}
+	else
+	{
+		m_c = true;
 	}
 }
 //ドロー

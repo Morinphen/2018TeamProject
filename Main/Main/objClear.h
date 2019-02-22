@@ -16,6 +16,7 @@ public:
 private:
 	bool m_key_flag;
 	bool m_l;
+	bool m_c; //’·‰Ÿ‚µ§Œä—p
 	bool gc;
 	bool BGM;
 	int t_t;//top‚Ì’l

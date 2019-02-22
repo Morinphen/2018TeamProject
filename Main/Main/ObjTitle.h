@@ -16,5 +16,6 @@ public:
 private:
 	bool m_key_flag;//キーフラッグ
 	bool m_l;
+	bool m_c; //長押し制御用
 	bool m_f2;
 };
