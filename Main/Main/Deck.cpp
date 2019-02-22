@@ -49,7 +49,7 @@ void CObjDekc::Init()
 		else if (i<40)
 			Deck[i] = 1351;*/
 
-		Data = rand() % 1341 + 10;
+		Data = rand() % 1331 + 10;
 
 		Data = Data - (Data % 10);
 
@@ -78,8 +78,8 @@ void CObjDekc::Init()
 
 	//初期ポイント
 	//m_point = 1;
-	m_point = 0;
-	p_point = 100;
+	m_point = 100;
+	p_point = 0;
 	Cost = 0;
 	m_flag_point = false;
 
@@ -242,8 +242,8 @@ void CObjDekc::Action()
 				TurnCount++;
 				AddCostDisplay = true;
 				//コストを増やす
-				m_point = i * 100;
-				p_point += m_point;
+				m_point += i * 100;
+				//p_point += m_point;
 			}
 
 			//ターン終了ボタン
@@ -292,6 +292,7 @@ void CObjDekc::Action()
 					m_c == true)
 				{
 					Scene::SetScene(new CSceneGameover());
+					go = true;
 				}
 				//「いいえ」の場合
 				else if (mou->m_mouse_x > 900 &&

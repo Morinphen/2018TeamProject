@@ -24,8 +24,6 @@ void CObjEnemyCard::Init()
 	Number2 = han->hand[Number - 1];
 	Number3 = han->basyo[Number - 1];
 
-	aaaa = sc->Cnanber;
-
 	Number4= sc->EnemyDeck[sc->e_Card - 1];
 
 	Opdraw = sc->EnemyDeck[sc->e_Card - 1];//test カード番号の保存
@@ -107,7 +105,6 @@ void CObjEnemyCard::Action()
 
 	if (Number3 - han->hensu3 > 0 && han->hensu > 0)//現在の場所が出したカードよりも後の場合、ひとつずらす
 	{
-		aaaa = aaaa;
 		Number--;//番号を１ずらす
 		han->hensu2++;
 	}
@@ -120,7 +117,6 @@ void CObjEnemyCard::Action()
 		{
 			if (han->hand[i] == Number2)
 			{
-				aaaa = aaaa;
 				m_x = 927 - (90 * i);
 			}
 		}
@@ -131,14 +127,13 @@ void CObjEnemyCard::Action()
 		{
 			if (han->hand[i] == Number2)
 			{
-				aaaa = aaaa;
 				m_x = 567 + ((450 / (Setcard))*Posicard);
 			}
 		}
 	}
 
 	if (pd->STurn == false && pd->Start == true) {
-		if (Summon == false && sc->EDraw == true && aaaa == aaaa)
+		if (Summon == false && sc->EDraw == true)
 		{
 			CObjPlist* PList = new CObjPlist();//関数呼び出し
 
@@ -150,7 +145,8 @@ void CObjEnemyCard::Action()
 			pos->m_f = true;
 
 			if (Type == 1) {
-				if (pos->ES_position == false && point->e_Cost > Ccost || pos->ES_position2 == false && point->e_Cost > Ccost) {
+
+				if (pos->ES_position == false && point->e_Cost > Ccost && pos->ESummont<=10 || pos->ES_position2 == false && point->e_Cost > Ccost && pos->ESummont <= 10) {
 					if (pos->ES_position == false)
 					{
 						m_x = 543;
@@ -177,13 +173,13 @@ void CObjEnemyCard::Action()
 						Hits::DeleteHitBox(this);
 						Hits::SetHitBox(this, m_x, m_y, 90, 120, ELEMENT_ITEM, OBJ_FIELD_ENEMY3, 1);
 					}
-
+					pos->ESummont += 11;
 					Summon = true;
 					sc->Summon2 = true;
 				}
 			}
 
-			if (Type == 2 && point->e_Cost > Ccost) {
+			if (Type == 2 && point->e_Cost > Ccost && pos->ESummont <= 10) {
 				//装備対象を選ぶ変数を初期化
 				UpUnit = 0;
 				UpAtack = 99;
@@ -287,10 +283,11 @@ void CObjEnemyCard::Action()
 				if (UpUnit != 3) {
 					Summon = true;
 					sc->Summon2 = true;
+					pos->ESummont += 11;
 				}
 			}
 
-			if (Type == 3 && point->e_Cost > Ccost) {
+			if (Type == 3 && point->e_Cost > Ccost && pos->ESummont <= 10) {
 				//装備対象を選ぶ変数を初期化
 				UpUnit = 0;
 				UpAtack = 99;
@@ -394,6 +391,7 @@ void CObjEnemyCard::Action()
 				if (UpUnit != 3) {
 					Summon = true;
 					sc->Summon2 = true;
+					pos->ESummont += 11;
 				}
 			}
 		}

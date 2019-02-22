@@ -43,6 +43,15 @@ private:
 	bool Wstop;//武器の装備制御変数
 	int WSetting;//武器を装備した際に決める変数
 
+	int DamegT;//ダメージ量を表す変数
+	int EDamegT;//反撃で受けたダメージ量を表す変数
+
+	//ダメージ量を表記する場所用変数
+	int D_x;
+	int D_y;
+	int ED_x;
+	int ED_y;
+
 	int TextD;//テキストデータ保存用変数
 	int NTcard;//カードデータ番号
 	int Cadata;//データ番号保存用変数

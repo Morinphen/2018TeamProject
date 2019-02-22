@@ -30,7 +30,9 @@ void CSceneClear::InitScene()
 {
 	//出力させる文字のグラフィックを作成
 	Font::SetStrTex(L"Arma Batlle");
-	//Draw::LoadImageW(L"Clear.png", 6, TEX_SIZE_1024);
+	Draw::LoadImageW(L"image2.png", 0, TEX_SIZE_512);
+	Draw::LoadImageW(L"image4.png", 3, TEX_SIZE_512);
+
 
 	CObjClear* obj = new CObjClear();	//タイトルオブジェクト作成
 	Objs::InsertObj(obj, OBJ_CLEAR, 10);//主人公オブジェクト登録
@@ -38,6 +40,11 @@ void CSceneClear::InitScene()
 	//タイトルオブジェクト作成
 	//CObjTitle* obj = new CObjTitle();	//タイトルオブジェクト作成
 	//Objs::InsertObj(obj, OBJ_TITLE, 10);//主人公オブジェクト登録
+
+	//マウスオブジェクト作成
+	CObjmouse* obj_mouse = new CObjmouse();
+	Objs::InsertObj(obj_mouse, OBJ_MAUSE, 100);
+
 
 }
 

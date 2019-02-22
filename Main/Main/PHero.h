@@ -16,6 +16,7 @@ public:
 	bool Punch;//モンスターの攻撃制御
 	bool Pusave;
 	bool Set;//武器の装備制御
+	bool GO;
 
 private:
 	//テキストデータ用変数

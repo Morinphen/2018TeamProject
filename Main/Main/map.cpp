@@ -18,6 +18,7 @@ void CObjMap::Init()
 
 	WiSummon = false;
 
+	ESummont = 0;
 	EAtackt = 0;
 
 	m_f = false;
@@ -43,6 +44,14 @@ void CObjMap::Action()
 		EAtackt++;
 		if (EAtackt >= 50) {
 			EAtackt = 0;
+		}
+	}
+
+	if (ESummont >= 11)
+	{
+		ESummont++;
+		if (ESummont >= 50) {
+			ESummont = 0;
 		}
 	}
 }

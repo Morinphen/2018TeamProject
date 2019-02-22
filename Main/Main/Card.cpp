@@ -96,6 +96,14 @@ void CObjCard::Init()
 	Wstop = false;
 	WSetting = 0;
 
+	DamegT = 0;
+	EDamegT = 0;
+
+	D_x = 0;
+	ED_x = 0;
+	D_y = 589;
+	ED_y = 313;
+
 	Bat = 1;
 	Bat2 = 1;
 
@@ -442,6 +450,7 @@ void CObjCard::Action()
 			mou->m_mouse_x < b_x + 790 &&
 			mou->m_mouse_y > 400 &&
 			mou->m_mouse_y < 520 &&
+			pos->S_position == true &&
 			Wset == true &&
 			pos->PTrun == true &&
 			Set == true &&
@@ -548,6 +557,7 @@ void CObjCard::Action()
 			mou->m_mouse_x < b_x + 940 &&
 			mou->m_mouse_y > 400 &&
 			mou->m_mouse_y < 520 &&
+			pos->S_position2 == true &&
 			Wset == true &&
 			pos->PTrun == true &&
 			Set == true &&
@@ -700,6 +710,12 @@ void CObjCard::Action()
 					{
 						pos->EECard[0][6] -= 1;
 					}
+					//ダメージ量を表す変数を更新
+					DamegT = pos->PCard[1][1] - pos->EECard[0][2];
+					EDamegT = pos->EECard[0][1] - pos->PCard[1][2];
+					D_x = 573;
+					ED_x = 768;
+
 					Bat = 0;
 					Audio::Start(8);
 				}
@@ -735,6 +751,12 @@ void CObjCard::Action()
 					{
 						pos->EECard[0][6] -= 1;
 					}
+					//ダメージ量を表す変数を更新
+					DamegT = pos->PCard[2][1] - pos->EECard[0][2];
+					EDamegT = pos->EECard[0][1] - pos->PCard[2][2];
+					D_x = 981;
+					ED_x = 768;
+
 					Audio::Start(8);
 					Bat2 = 0;
 				}
@@ -1016,7 +1038,7 @@ void CObjCard::Action()
 		Audio::Start(11);
 		//コスト減少
 		point->Cost -= Ccost;
-		sc->p_point -= Ccost;
+		sc->m_point -= Ccost;
 
 		if (Type == 4)
 		{
@@ -1441,6 +1463,19 @@ void CObjCard::Draw()
 		{
 			swprintf_s(str, L"%d", Ccost);
 			Font::StrDraw(str, m_x + 10, m_y + 4, 20, cost);
+		}
+	}
+
+	if (D_x != 0)
+	{
+		D_y--;
+		ED_y++;
+		if (D_y == 539)
+		{
+			D_x = 0;
+			ED_x = 0;
+			D_y = 589;
+			ED_y = 313;
 		}
 	}
 }
