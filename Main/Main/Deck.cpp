@@ -49,7 +49,7 @@ void CObjDekc::Init()
 		else if (i<40)
 			Deck[i] = 1351;*/
 
-		Data = rand() % 1341 + 10;
+		Data = rand() % 1331 + 10;
 
 		Data = Data - (Data % 10);
 

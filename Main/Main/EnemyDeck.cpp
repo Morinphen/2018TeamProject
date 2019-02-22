@@ -52,7 +52,7 @@ void CObjEnemyDeck::Init()
 	for (int i = 0; i < 40; i++)
 	{
 
-		Data = rand() % 1341 + 10;
+		Data = rand() % 1331 + 10;
 
 		Data = Data - (Data % 10);
 
@@ -98,7 +98,7 @@ void CObjEnemyDeck::Action()
 
 			for (int i = 0; i < e_Cardcount; i++)
 			{
-				if (EnemyDeck[i] == e_Card)
+				if (EPullc[e_Card - 1] == EnemyDeck[e_Card - 1])
 				{
 					stop = 1;
 				}
@@ -120,7 +120,7 @@ void CObjEnemyDeck::Action()
 
 		if (EDraw == false && pd->STurn == false && Start == true)
 		{
-			EnemyDeck[e_Cardcount] = e_Card;//デッキにドローしたカードを登録
+			EPullc[e_Card - 1] = EnemyDeck[e_Card - 1];//デッキにドローしたカードを登録
 			sc->hand[Cnanber] = e_Card;//手札にドローしたカードを登録
 			sc->basyo[Cnanber] = Cnanber + 1;
 			Cnanber++;
@@ -137,7 +137,7 @@ void CObjEnemyDeck::Action()
 		//スタート処理
 		if (Start == false)
 		{
-			EnemyDeck[e_Cardcount] = e_Card;//デッキにドローしたカードを登録
+			EPullc[e_Card - 1] = EnemyDeck[e_Card - 1];//デッキにドローしたカードを登録
 			sc->hand[Cnanber] = e_Card;//手札にドローしたカードを登録
 			sc->basyo[Cnanber] = Cnanber + 1;
 			Cnanber++;

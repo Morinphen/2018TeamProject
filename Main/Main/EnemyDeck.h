@@ -15,7 +15,7 @@ public:
 	void Draw();
 
 	int EnemyDeck[40];
-	int Pullc[40];
+	int EPullc[40];
 
 	int Cnanber;
 	int e_Card;
