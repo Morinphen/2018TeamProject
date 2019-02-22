@@ -51,6 +51,8 @@ private:
 	int Updraw;//カードの切取り位置２
 	int Rotdraw;//カードの角度調整
 
+	bool Cansel;
+
 	bool m_f;
 	bool m_l;
 
