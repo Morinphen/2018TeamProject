@@ -31,7 +31,7 @@ void CObjpoint::Init()
 	m_p=true;
 	Cost = 100;
 	PreviousCost = 0;
-	e_Cost = 0;
+	e_Cost = 100;
 	AddCost = 0;
 	time = 0;
 };
